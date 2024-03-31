@@ -13,7 +13,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component(value = "springIoCAndDI")
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // default
 public class SpringIoCAndDI implements CommandLineRunner {
     static Logger log = LoggerFactory.getLogger(SpringIoCAndDI.class);
@@ -66,7 +66,7 @@ public class SpringIoCAndDI implements CommandLineRunner {
         log.info(String.valueOf(store));
         log.info(String.valueOf(store.getItem11().hashCode()));
 
-        loadIaC(IoCcontract_1.class); //  <<<<<<< comment/uncomment
+       // loadIaC(IoCcontract_1.class); //  <<<<<<< comment/uncomment
     }
 }
 

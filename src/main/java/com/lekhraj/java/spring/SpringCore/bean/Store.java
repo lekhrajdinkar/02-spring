@@ -35,9 +35,9 @@ public class Store {
     }
 
     @Autowired // DI Auto : 3.3 - It will override to item2
-    public void setItem( @Qualifier("item2") Item item2){ // <<< arrg name , if Qualifier not mentioned
-        log.info("Store :: Setter(Item) :: name-item2, hashcode:{}", item2.hashCode());
-        this.item11 = item2;
+    public void setItem( @Qualifier("item2") Item i){ // <<< arg name , if Qualifier not mentioned
+        log.info("Store :: Setter(Item) :: name-item2, hashcode:{}", i.hashCode());
+        this.item11 = i;
     }
 
     @Override

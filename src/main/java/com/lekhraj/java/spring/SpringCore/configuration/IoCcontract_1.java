@@ -17,6 +17,8 @@ B. DI
 
 @Configuration
 @ComponentScan("com.lekhraj.java.spring.SpringCore.bean") //perform a context scan for additional beans.
+//@ComponentScan(basePackages = "pkg-1,pkg-2")
+//@ComponentScan(basePackageClasses = "c1.class, c2.class")
 public class IoCcontract_1 {
     @Bean()
     // @Bean(Autowire=Autowire.BY_TYPE)
@@ -37,7 +39,7 @@ public class IoCcontract_1 {
     }
 
     @Bean
-    @Primary
+    //@Primary
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // default
     public static Item item1(){
         Item bean = new ItemImpl_1();

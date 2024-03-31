@@ -17,7 +17,7 @@ public class IoCcontract_2 {
     @Bean
     @Qualifier("IoCcontract_2_item2")
     public static Item item2(){
-        Item bean = new ItemImpl_1();
+        Item bean = new ItemImpl_2();
         System.out.println("IoCcontract_2 : Bean Created, type-Item, name-item2, hashcode-"+bean.hashCode());
         return  bean;
     }

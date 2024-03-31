@@ -1,0 +1,25 @@
+https://www.baeldung.com/spring-tutorial
+https://chat.openai.com/c/33d0d06d-0aaa-4791-bce9-da8ea3f5dd53
+
+1. IoC, DI, AOP Core concept.
+1.1. Custom Annotation
+2. DI is pattern/design for IoC.
+3. IoC container - Bean + LifeCycle.
+3.1. Bean Pre/Post Processor
+3.2. Bean Scopes.
+4. DI
+4.1.manual - Setter and Construtor.
+4.2.Autowire (3 places). https://www.baeldung.com/spring-autowire
+4.2.1. Resolve - Type, @Qualifier, Custom Qualifier,  Beanname,
+5. @Bean, @Component, @Configuration, @R, @S, @C
+5. @primary, @Qaulifier
+6. @value - Property Injection.
+7. Spring profile.
+8. AOP program.
+
+10.  @SpringBootApplication  --> @Configuration, @EnableAutoConfiguration, and @ComponentScan.
+
+======
+1. prototype bean instances are not managed by the container after they are created.
+2. In general, it's recommended to avoid injecting prototype beans into singleton beans
+if the prototype bean's lifecycle is not managed correctly, as it can lead to unexpected behavior and memory leaks.
