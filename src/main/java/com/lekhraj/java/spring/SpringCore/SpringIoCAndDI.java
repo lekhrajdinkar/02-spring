@@ -39,7 +39,7 @@ public class SpringIoCAndDI implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info(String.valueOf(store));
-        log.info(String.valueOf(store.getItem1_again().hashCode()));
+        log.info(String.valueOf(store.getItem1().hashCode()));
     }
 }
 

@@ -24,7 +24,7 @@ public class IoCcontract_1 {
     public static Store store1() // Notice : static
     {
         //A. --- Setter injection ---
-        Store bean = new Store();
+        Store bean = new Store(); //default Constructor
         //bean.setItem1(item1());
         //bean.setItem1(IoCcontract_2.item2());
         System.out.println("IoCcontract_1 : Bean Created, Type-Store, name-store1, hashcode-"+bean.hashCode() );
