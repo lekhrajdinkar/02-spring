@@ -1,4 +1,4 @@
-package com.lekhraj.java.spring.SpringCore.bean;
+package com.lekhraj.java.spring.SpringRest;
 
 import org.springframework.stereotype.Controller;
 
