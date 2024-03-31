@@ -11,7 +11,14 @@ public class IoCcontract {
     @Bean
     public Store store1(){
         System.out.println("IoCcontract : Create Store1");
-        return new Store(item1());
+        //A. --- Constructor injection ---
+        //return new Store(item1());
+
+        //B. --- Setter injection ---
+        Store bean = new Store();
+        bean.setStoreName("target Super market");
+        bean.setItem1(item1()); //setter
+        return bean;
     }
 
     @Bean

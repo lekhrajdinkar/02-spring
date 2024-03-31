@@ -12,10 +12,12 @@ import org.springframework.stereotype.Component;
 public class SpringIoCAndDI implements CommandLineRunner {
     static Logger log = LoggerFactory.getLogger(SpringIoCAndDI.class);
 
-    Store store;
+    @Autowired Store store; // 3. Injection by reflection
+
     SpringIoCAndDI(){
         log.info("Main :: default construtor");
     }
+
     SpringIoCAndDI(Store store){
         log.info("Main :: construtor-1");
         this.store = store;
@@ -23,6 +25,6 @@ public class SpringIoCAndDI implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info(store.toString());
+        log.info(String.valueOf(store));
     }
 }
