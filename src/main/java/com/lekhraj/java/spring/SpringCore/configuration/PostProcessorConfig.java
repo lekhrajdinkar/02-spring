@@ -7,7 +7,7 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 @Configuration
 public class PostProcessorConfig {
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+    public static PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 }
