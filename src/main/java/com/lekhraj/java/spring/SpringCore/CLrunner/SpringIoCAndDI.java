@@ -1,21 +1,34 @@
 package com.lekhraj.java.spring.SpringCore.CLrunner;
 
+import com.lekhraj.java.spring.SpringCore.bean.Item;
 import com.lekhraj.java.spring.SpringCore.bean.Store;
+import com.lekhraj.java.spring.SpringCore.configuration.IoCcontract_1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // default
 public class SpringIoCAndDI implements CommandLineRunner {
     static Logger log = LoggerFactory.getLogger(SpringIoCAndDI.class);
-
-    // 1. DI - Injection by Construtor
-    // 2. DI - Injection by Setter
-
-    // 3.1 DI - Auto (feild injection uses reflection)
-    @Autowired(required = true)
+    //========================================
+    // Step-1 :: Load bean with default contructor
+    // Step-2 :: Resolve dependencies - Manual or Auto.
+    // or
+    // Step-1/2 :: Load bean with argument-contructor, which injects while creation
+    // This is preferred, it keeps object Immutable.
+    //
+    // 1. DI(Manual) - Injection by Construtor
+    // 2. DI(Manual) - Injection by Setter
+    // 3. DI(Auto) - Type >> if 2+ >> @primary >> @Qualifier("beanName")
+    //========================================
+    @Autowired(required = true) // 3.1 DI - Auto (feild injection uses reflection)
     Store store;
 
     SpringIoCAndDI(){
@@ -36,35 +49,24 @@ public class SpringIoCAndDI implements CommandLineRunner {
         this.store.setStoreName("target Super market");
     }
 
+    public void loadIaC(Class configClass){
+        log.info("\n\n======= Loading Another Container  with IoCcontract_1 config only =======");
+        ApplicationContext context = new AnnotationConfigApplicationContext(configClass);
+
+        Item itemByName = (Item) context.getBean("item1");
+        log.info(String.valueOf(itemByName.hashCode()));
+
+        Item itemByType = (Item) context.getBean(Item.class); //NoUniqueBeanDefinitionException - use @primary
+        log.info(String.valueOf(itemByType.hashCode()));
+    }
+    // ======= Runner ========
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) throws Exception
+    {
         log.info(String.valueOf(store));
-        log.info(String.valueOf(store.getItem1().hashCode()));
+        log.info(String.valueOf(store.getItem11().hashCode()));
+
+        loadIaC(IoCcontract_1.class); //  <<<<<<< comment/uncomment
     }
 }
 
-/*
-@Autowired types::
-=================
-1. no:
-------
-the default value – this means no autowiring is used for the bean
-and we have to explicitly name the dependencies.
-
-2. byName:
----------
-autowiring is done based on the name of the property,
-therefore Spring will look for a bean with the same name
-as the property that needs to be set.
-
-3. byType:
----------
-similar to the byName autowiring, only based on the type of the property.
-This means Spring will look for a bean with the same type of the property to set.
-If there’s more than one bean of that type, the framework throws an exception.
-
-4. constructor: <<<<
----------------
-autowiring is done based on constructor arguments, meaning Spring will
-look for beans with the same type as the constructor arguments.
- */
