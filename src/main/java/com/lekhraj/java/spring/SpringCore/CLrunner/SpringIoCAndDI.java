@@ -1,4 +1,4 @@
-package com.lekhraj.java.spring.SpringCore;
+package com.lekhraj.java.spring.SpringCore.CLrunner;
 
 import com.lekhraj.java.spring.SpringCore.bean.Store;
 import org.slf4j.Logger;
