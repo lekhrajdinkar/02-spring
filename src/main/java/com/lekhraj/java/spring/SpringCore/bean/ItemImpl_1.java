@@ -15,7 +15,7 @@ public class ItemImpl_1 implements Item{
 
     @Override
     public Long getCode() {
-        return 100L;
+        return 1L;
     }
 
     @Override

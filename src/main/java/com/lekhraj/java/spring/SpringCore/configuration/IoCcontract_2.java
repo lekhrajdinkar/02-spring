@@ -11,7 +11,8 @@ import org.springframework.context.annotation.Configuration;
 public class IoCcontract_2 {
     @Bean
     public static Item item2(){
-        System.out.println("IoCcontract-2 : Create Item2");
-        return new ItemImpl_2();
+        Item bean = new ItemImpl_1();
+        System.out.println("IoCcontract_2 : Bean Created, type-Item, name-item2, hascode-"+bean.hashCode());
+        return  bean;
     }
 }

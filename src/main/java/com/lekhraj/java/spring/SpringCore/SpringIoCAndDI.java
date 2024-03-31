@@ -5,7 +5,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,21 +13,33 @@ public class SpringIoCAndDI implements CommandLineRunner {
 
     // 1. DI - Injection by Construtor
     // 2. DI - Injection by Setter
+
+    // 3.1 DI - Auto (feild injection uses reflection)
     @Autowired(required = true)
-    Store store; // 3. DI - Injection by Feild (uses reflection)
+    Store store;
 
     SpringIoCAndDI(){
         log.info("Main :: default construtor");
     }
 
+    //@Autowired(required = true) // 3.2 DI - Auto
     SpringIoCAndDI(Store store){
-        log.info("Main :: construtor-1");
+        log.info("SpringIoCAndDI :: construtor(Store) :: store:{}", store);
         this.store = store;
+        this.store.setStoreName("target Super market");
+    }
+
+    //@Autowired(required = true)  // 3.3 DI - Auto
+    public void setStore(Store store){
+        log.info("SpringIoCAndDI :: setStore :: store:{}", store);
+        this.store = store;
+        this.store.setStoreName("target Super market");
     }
 
     @Override
     public void run(String... args) throws Exception {
         log.info(String.valueOf(store));
+        log.info(String.valueOf(store.getItem1_again().hashCode()));
     }
 }
 
