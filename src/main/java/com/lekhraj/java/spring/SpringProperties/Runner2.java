@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-
+import java.util.Arrays;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Value;
 
 @Component(value="runner_2")
 public class Runner2 implements CommandLineRunner {
@@ -22,12 +24,22 @@ public class Runner2 implements CommandLineRunner {
     @Autowired
     Environment env; //preferred.
 
+    // ==== SpEL ====
+    @Value("#{${valuesMap}}")
+    Map<String, Integer> valuesMap;
+    @Value("#{'${listOfValues}'.split(',')}")
+    private String[] valuesArray;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("\n\n============= runner_2 (Spring properties) ============== START");
 
         log.info("\n --- DATABASE CONFIG MAP ---\n{}, \n --- RABBIT CONFIG MAP ---\n{}",dbmap, rabbitMap );
         log.info("ENV API :: db.url - {}",env.getProperty("db.url"));
+
+        // Spel
+        log.info("valuesMap : {}", valuesMap);
+        log.info("valuesArray : {} {} {}",valuesArray); //has 3 values
 
         System.out.println("\n============= runner_2 (Spring properties) ============== END\n\n");
 
