@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
-//@Component(value = "springIoCAndDI")
+@Component(value = "Runner1")
 //@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // default
 public class Runner1 implements CommandLineRunner {
     static Logger log = LoggerFactory.getLogger(Runner1.class);

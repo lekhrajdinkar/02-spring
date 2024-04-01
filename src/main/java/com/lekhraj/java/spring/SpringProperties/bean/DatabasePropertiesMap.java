@@ -2,8 +2,10 @@ package com.lekhraj.java.spring.SpringProperties.bean;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @ToString
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "db") // <<<<
 public class DatabasePropertiesMap{
 
+    // ----- Properties -----
     // 2 ways:
 
     // keep property name matching with prop file  <<<
@@ -23,6 +26,29 @@ public class DatabasePropertiesMap{
     @Value("${db.url}") String url2;
     @Value("${db.username}") String username2;
     @Value("${db.password}") String password2;
+
+    // ----- beanByProfile -----
+    @Autowired MyBean beanByProfile;
+}
+
+// ========== Bean Profile =========
+interface MyBean{
+    String getName();
+}
+@Component
+@ToString
+@Profile(value = {"dev1"})
+class DevBean implements MyBean{
+    String name="DEV-1 BEAN";
+    @Override
+    public String getName() {return name;}
+}
+@Component
+@ToString
+@Profile(value = {"dev2"})
+class ProdBean implements MyBean{
+    String name="DEV-2 BEAN";
+    public String getName() {return name;}
 }
 
 /*

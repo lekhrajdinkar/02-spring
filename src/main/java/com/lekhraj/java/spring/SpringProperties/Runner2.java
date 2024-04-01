@@ -29,6 +29,8 @@ public class Runner2 implements CommandLineRunner {
     Map<String, Integer> valuesMap;
     @Value("#{'${listOfValues}'.split(',')}")
     private String[] valuesArray;
+    @Value("${spring.profiles.active}")
+    private String activeProfile;
 
     @Override
     public void run(String... args) throws Exception {
@@ -40,6 +42,10 @@ public class Runner2 implements CommandLineRunner {
         // Spel
         log.info("valuesMap : {}", valuesMap);
         log.info("valuesArray : {} {} {}",valuesArray); //has 3 values
+
+        //Print Active Profiles
+        log.info("activeProfile : {}", activeProfile);
+        Arrays.stream(env.getActiveProfiles()).forEach(System.out::println);
 
         System.out.println("\n============= runner_2 (Spring properties) ============== END\n\n");
 

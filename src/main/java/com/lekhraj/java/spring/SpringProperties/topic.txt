@@ -22,3 +22,5 @@ application-<profile/env>.properties
     "src/main/resources" already added by SB in classpath for project resources lookup.
 
 10. PropertySourcesPlaceholderConfigurer
+11. @value - SpEL
+12. Load bean By profile

@@ -19,6 +19,8 @@ https://chat.openai.com/c/33d0d06d-0aaa-4791-bce9-da8ea3f5dd53
 
 10.  @SpringBootApplication  --> @Configuration, @EnableAutoConfiguration, and @ComponentScan.
 
+--- More ---
+11. sceduled task
 ======
 1. prototype bean instances are not managed by the container after they are created.
 2. In general, it's recommended to avoid injecting prototype beans into singleton beans
