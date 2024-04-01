@@ -9,7 +9,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 
-@Component("runner_2")
+@Component(value="runner_2")
 public class Runner2 implements CommandLineRunner {
     static Logger log = LoggerFactory.getLogger(Runner2.class);
 
@@ -27,3 +27,22 @@ public class Runner2 implements CommandLineRunner {
 
     }
 }
+
+/*
+ref: https://chat.openai.com/c/e3baac20-b7a8-4cf8-8ffe-b84c8d83cfc0
+
+Notes:
+
+1. When the same property is defined in multiple property files in a Spring Boot project,
+Spring resolves the value based on the order in which the property sources are loaded.
+
+2. property outside jar::
+export SPRING_CONFIG_LOCATION=/path/to/your/config/myprops.properties
+java -jar your-application.jar
+
+2. Load order:
+    - Default properties
+    - Profile-specific properties:
+    - Additional property sources: You can use the @PropertySource.
+    - Environment variables and command-line arguments:
+ */

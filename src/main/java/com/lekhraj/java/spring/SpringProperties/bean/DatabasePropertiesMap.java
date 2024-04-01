@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "db") // <<<<
 public class DatabasePropertiesMap{
 
+    // 2 ways:
+
     // keep property name matching with prop file  <<<
     // Notice : getter/setter must present.
     String url;  //db.url

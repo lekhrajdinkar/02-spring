@@ -6,7 +6,14 @@ import org.springframework.context.annotation.PropertySources;
 
 // database-dev1/2.property
 
-@Configuration
-@PropertySource(value = "classpath:database-{spring.profiles.active}.properties")
+// @Configuration  // un-comment/Comment  <<<< NOT WORKING...PATH is wrong
+
+@PropertySource("classpath:com/lekhraj/java/spring/SpringProperties/resources/database-${spring.profiles.active}.properties")
 public class DatabaseConfig {
 }
+
+
+/*
+/Users/lekhrajdinkar/github/02-spring/src/main/java/
+com/lekhraj/java/spring/SpringProperties/resources/database-dev1.properties
+ */

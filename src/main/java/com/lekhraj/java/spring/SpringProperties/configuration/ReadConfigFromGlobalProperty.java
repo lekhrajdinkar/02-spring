@@ -8,10 +8,10 @@ import org.springframework.context.annotation.PropertySources;
 // - global-database-dev1/2.property
 // - global-rabbit-mq-dev1/2.property
 
-@Configuration
+@Configuration  // un-comment/Comment  <<<<
 @PropertySources(value = {
-        @PropertySource(value = "classpath:global-database-{spring.profiles.active}.properties"),
-        @PropertySource(value = "classpath:global-rabbit-mq-{spring.profiles.active}.properties")
+        @PropertySource(value = "classpath:global-database-${spring.profiles.active}.properties"),
+        @PropertySource(value = "classpath:global-rabbit-mq-${spring.profiles.active}.properties") // order matter <<<
 })
 public class ReadConfigFromGlobalProperty {
 }
