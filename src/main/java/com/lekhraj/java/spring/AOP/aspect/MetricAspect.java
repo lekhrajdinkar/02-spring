@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class MetricAspect {
 
-    //2. pointcut@Around("execution(* com.lekhraj.java.spring.AOP.*.*(..))")
+    //2. pointcut
+    // @Around("execution(* com.lekhraj.java.spring.AOP.*.*(..))")
     @Around("@annotation(com.lekhraj.java.spring.AOP.annotation.MyAopMetric)")
     //4. logPerformance method/code - Advise
     public Object logPerformance(ProceedingJoinPoint joinPoint) throws Throwable {

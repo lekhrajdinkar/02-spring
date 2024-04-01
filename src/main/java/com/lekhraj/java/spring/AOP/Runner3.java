@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class Runner3 implements CommandLineRunner {
     static Logger log = LoggerFactory.getLogger(Runner1.class);
     @Override @MyAopMetric
