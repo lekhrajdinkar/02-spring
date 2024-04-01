@@ -33,10 +33,7 @@ Aspects
 ------------
 - It defines the criteria for matching join points.
 - Pointcuts use expressions to specify which methods or join points are affected.
-- Expression
-    - if annotation present
-    - for all class inside in this package.
-    - etc
+- Expression examples : point-cut.txt. A and D are comnon.
 
 - Types:
     2.1. Before:
