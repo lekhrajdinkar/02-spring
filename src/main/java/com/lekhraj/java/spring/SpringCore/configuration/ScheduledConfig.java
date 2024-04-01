@@ -13,7 +13,7 @@ public class ScheduledConfig {
         System.out.println("schedule task-1, using cron jobs - " + now);
     }
 
-    @Scheduled(fixedRate = 5000)
+    //@Scheduled(fixedRate = 5000)
     public void task2() {
         long now = System.currentTimeMillis() / 1000;
         System.out.println("Fixed rate task - " + System.currentTimeMillis() / 1000);

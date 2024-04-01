@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 
-@Component(value="runner_2")
+// @Component(value="runner_2")
 public class Runner2 implements CommandLineRunner {
     static Logger log = LoggerFactory.getLogger(Runner2.class);
 
