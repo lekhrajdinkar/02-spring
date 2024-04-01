@@ -1,4 +1,4 @@
-package com.lekhraj.java.spring.SpringCore.CLrunner;
+package com.lekhraj.java.spring.SpringCore;
 
 import com.lekhraj.java.spring.SpringCore.Annotation.MyAnnotation;
 import com.lekhraj.java.spring.SpringCore.bean.Item;
@@ -7,19 +7,17 @@ import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
-@Component(value = "springIoCAndDI")
-@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // default
-public class SpringIoCAndDI implements CommandLineRunner {
-    static Logger log = LoggerFactory.getLogger(SpringIoCAndDI.class);
+//@Component(value = "springIoCAndDI")
+//@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // default
+public class Runner1 implements CommandLineRunner {
+    static Logger log = LoggerFactory.getLogger(Runner1.class);
+
     //========================================
     // Step-1 :: Load bean with default contructor
     // Step-2 :: Resolve dependencies - Manual or Auto.
@@ -34,12 +32,12 @@ public class SpringIoCAndDI implements CommandLineRunner {
     @Autowired(required = true) // 3.1 DI - Auto (feild injection uses reflection)
     Store store;
 
-    SpringIoCAndDI(){
+    Runner1(){
         log.info("Main :: default construtor");
     }
 
     //@Autowired(required = true) // 3.2 DI - Auto
-    SpringIoCAndDI(Store store){
+    Runner1(Store store){
         log.info("SpringIoCAndDI :: construtor(Store) :: store:{}", store);
         this.store = store;
         this.store.setStoreName("target Super market");
@@ -67,7 +65,7 @@ public class SpringIoCAndDI implements CommandLineRunner {
     @MyAnnotation(value = "newValue", count = 100) public void testMethod1(){}
     @SneakyThrows
     public void CustomAnnotationTest(){
-        Method method = SpringIoCAndDI.class.getMethod("testMethod1");
+        Method method = Runner1.class.getMethod("testMethod1");
         MyAnnotation annotation = method.getAnnotation(MyAnnotation.class);
 
         if (annotation != null) {
@@ -80,12 +78,14 @@ public class SpringIoCAndDI implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception
     {
+        System.out.println("\n\n============= runner_1 (Spring Core - DI, lifeCycle, etc) ============== START");
         log.info(String.valueOf(store));
         log.info(String.valueOf(store.getItem11().hashCode()));
 
         // CustomAnnotationTest();
 
        // loadIaC(IoCcontract_1.class); //  <<<<<<< comment/uncomment
+        System.out.println("============= runner_1 (Spring Core - DI, lifeCycle, etc) ============== END\n\n");
     }
 }
 

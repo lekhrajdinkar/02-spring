@@ -56,11 +56,11 @@ public class Store implements
 
     @Override
     public String toString() {
-        return "\n ###### " + storeName + " ##### " +
+        return "\n -------" + storeName + " ------" +
                 "\n\tName : "+ item11.getName()+
                 "\n\tCode : "+ item11.getCode()+
                 "\n\tdetail : "+ item11.getDetail()+
-                "\n=========================================";
+                "\n--------------------------------";
     }
 
     // =====================================
