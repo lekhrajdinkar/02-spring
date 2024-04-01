@@ -33,26 +33,37 @@ Aspects
 ------------
 - It defines the criteria for matching join points.
 - Pointcuts use expressions to specify which methods or join points are affected.
+- Expression
+    - if annotation present
+    - for all class inside in this package.
+    - etc
+
 - Types:
     2.1. Before:
     advice runs, before the join point and does not have the ability to
     prevent the execution of the join point's method.
+    @Before("@annotation(org.springframework.security.access.annotation.Secured)")
 
     2.2. After:
     advice runs, after the join point, regardless of whether the join point
     completes normally or by throwing an exception.
+    @After("execution(* com.example.service.*.*(..))")
 
         ** After returning:
         advice runs, after the join point completes normally.
         (without throwing an exception).
+        @AfterReturning("execution(* com.example.service.*.*(..))")
 
         ** After throwing :
         advice runs, if the join point exits by throwing an exception.
+        @AfterThrowing(pointcut = "execution(* com.example.service.*.*(..))", throwing = "ex")
+
 
     2.3. Around:
     advice surrounds the join point, allowing you to run custom code
     before and after the join point's execution.
     It has the most power and flexibility among the advice types.
+    @Around("execution(* com.example.service.*.*(..))")
 
 3. Advice
 ----------
