@@ -11,9 +11,14 @@ application-<profile/env>.properties
 2. create and register in multiple property file
 3. create env specific
 4. property file outside jar
-5 @propertySource,  @ConfigurationProperties
+5 @propertySource,
 6. Properties From Command Line Arguments
 7. Properties From Environment Variables
 8. Load property by Prefix.
+   Hierarchical Properties
+    - @ConfigurationProperties(prefix="")
+    - propertyname must match
 9. change location of property file.
     "src/main/resources" already added by SB in classpath for project resources lookup.
+
+10. PropertySourcesPlaceholderConfigurer

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 
@@ -17,11 +18,16 @@ public class Runner2 implements CommandLineRunner {
     DatabasePropertiesMap dbmap;
     @Autowired
     RabbitPropertiesMap rabbitMap;
+
+    @Autowired
+    Environment env; //preferred.
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("\n\n============= runner_2 (Spring properties) ============== START");
 
         log.info("\n --- DATABASE CONFIG MAP ---\n{}, \n --- RABBIT CONFIG MAP ---\n{}",dbmap, rabbitMap );
+        log.info("ENV API :: db.url - {}",env.getProperty("db.url"));
 
         System.out.println("\n============= runner_2 (Spring properties) ============== END\n\n");
 

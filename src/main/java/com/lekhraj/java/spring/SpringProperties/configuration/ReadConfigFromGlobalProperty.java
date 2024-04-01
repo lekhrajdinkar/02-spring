@@ -14,4 +14,8 @@ import org.springframework.context.annotation.PropertySources;
         @PropertySource(value = "classpath:global-rabbit-mq-${spring.profiles.active}.properties") // order matter <<<
 })
 public class ReadConfigFromGlobalProperty {
+
+    ReadConfigFromGlobalProperty(){
+        System.out.println(" ===== RooT of classpath ==== "+getClass().getResource("/").getPath());
+    }
 }
