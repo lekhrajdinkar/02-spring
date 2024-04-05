@@ -3,6 +3,7 @@ package com.lekhraj.java.spring.SpringCore;
 import com.lekhraj.java.spring.SpringCore.Annotation.MyAnnotation;
 import com.lekhraj.java.spring.SpringCore.bean.Item;
 import com.lekhraj.java.spring.SpringCore.bean.Store;
+import com.lekhraj.java.spring.util.Print;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,14 +81,21 @@ public class Runner1 implements CommandLineRunner {
     public void run(String... args) throws Exception
     {
         System.out.println("\n\n============= runner_1 (Spring Core - DI, lifeCycle, etc) ============== START");
-        log.info(String.valueOf(store));
-        store.printItems();
-        log.info(String.valueOf(store.getItem11().hashCode()));
+        // A. DI
+        Print.print(" -- A. DI -- ", String.valueOf(store));
+        Print.print(" -- A. DI -- ",String.valueOf(store.getItem11().hashCode()));
 
+        // B. DI -Advance - inject Collection with order, etc
+        Print.print( "-- B. Advance DI - Injecting Collection ");
+        store.printItems(); // collection
 
-        // CustomAnnotationTest();
+        // C. DI -Advance - Inject generic bean
+        Print.print("-- C. Advance DI - Injecting Generic bean -1 (@Bean) ", store.getGbean1() );
+        Print.print("-- C. Advance DI - Injecting Generic bean -2 (@Component)", store.getGbean2() );
 
-       // loadIaC(IoCcontract_1.class); //  <<<<<<< comment/uncomment
+        // 99. CustomAnnotationTest();
+
+        // 100. loadIaC(IoCcontract_1.class); //  <<<<<<< comment/uncomment
         System.out.println("============= runner_1 (Spring Core - DI, lifeCycle, etc) ============== END\n\n");
     }
 }

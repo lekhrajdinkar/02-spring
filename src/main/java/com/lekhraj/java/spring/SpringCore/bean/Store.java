@@ -1,5 +1,6 @@
 package com.lekhraj.java.spring.SpringCore.bean;
 
+import com.lekhraj.java.spring.util.Print;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import lombok.Data;
@@ -58,21 +59,12 @@ public class Store implements
 
     @Override
     public String toString() {
-        return "\n -------" + storeName + " ------" +
+        return "*****" + storeName!=null?"MyStore":storeName + "*****" +
                 "\n\tName : "+ item11.getName()+
                 "\n\tCode : "+ item11.getCode()+
-                "\n\tdetail : "+ item11.getDetail()+
-                "\n--------------------------------";
+                "\n\tdetail : "+ item11.getDetail();
     }
-    public void printItems(){
-        System.out.println("Items");
-        this.items.stream().forEach(System.out::println);
-        System.out.println("--------------------------------");
 
-        System.out.println("allItems");
-        this.allItems.stream().forEach(System.out::println);
-        System.out.println("--------------------------------");
-    }
 
     // =====================================
     //          Life Cycle
@@ -111,14 +103,32 @@ public class Store implements
 
     //============ Advance DI ===========
 
-    // A. Injecting List
-    // A.1 all individual Item bean are inserted in this collection by @order.
+    // B. Injecting List
+    // B.1 all individual Item bean are inserted in this collection by @order.
     @Autowired
     List<Item> items;
 
-    // A.2. check : IoCcontract_2 - collection is already create by Spring with given @Bean method
+    // B.2. check : IoCcontract_2 - collection is already create by Spring with given @Bean method
     // can do same with Set and Map.
     // Directly create whole Set or map usinf @Bean anno.
     @Autowired @Qualifier("IoCcontract_2_allItems")
     List<Item> allItems;
+
+    public void printItems(){
+
+        System.out.println("Items");
+        this.items.stream().forEach(Print::print);
+
+        System.out.println("allItems");
+        this.allItems.stream().forEach(Print::print);
+    }
+
+    // C. Generic Bean
+    @Autowired
+    @Qualifier("myGenericBean")
+    MyGenericBean<Integer,Item> gbean2; // created by @Component
+
+    @Autowired
+    @Qualifier("gbean_1")
+    MyGenericBean<Integer,Item> gbean1; // created by @Bean
 }
