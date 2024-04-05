@@ -5,14 +5,16 @@ import com.lekhraj.java.spring.SpringCore.bean.ItemImpl_1;
 import com.lekhraj.java.spring.SpringCore.bean.Store;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.*;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 /*
 A. Container -
 @Bean, @Component // each has name and type. //DefaultScope - Singleton(early-loaded)
 
 B. DI
-- manual0 - Setter + Constructor
-- Auto ( @Autowited - apply at 3 places) - Automatically resolves >> type >> found 2+ >> @Primary >> @Qualifier("beanName")
+- manual0 - Setter + Constructor (for mandatory dependency)
+- For additional dependency : Auto ( @Autowited - apply at 3 places) - Automatically resolves >> type >> found 2+ >> @Primary >> @Qualifier("beanName")
  */
 
 @Configuration
@@ -39,16 +41,17 @@ public class IoCcontract_1 {
     }
 
     @Bean
+    @Order()
     //@Primary
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // default
-    public static Item item1(){
+    public static Item item1(){ // Type : Item, name: item1
         Item bean = new ItemImpl_1();
         System.out.println("IoCcontract_1 : Bean Created, type-Item, name-item1, hascode-"+bean.hashCode());
         return  bean;
     }
 
     @Bean
-    public static Item item1_again(){
+    public static Item item1_again(){ // Type : Item, name: item1_againß
         Item bean = new ItemImpl_1();
         System.out.println("IoCcontract_1 : Bean Created, type-Item, name-item1_again, hascode-"+bean.hashCode());
         return  bean;

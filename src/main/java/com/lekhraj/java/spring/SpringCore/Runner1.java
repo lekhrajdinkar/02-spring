@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
 
-//@Component(value = "Runner1")
+@Component(value = "Runner1")
 //@Scope(ConfigurableBeanFactory.SCOPE_SINGLETON) // default
 public class Runner1 implements CommandLineRunner {
     static Logger log = LoggerFactory.getLogger(Runner1.class);
@@ -81,7 +81,9 @@ public class Runner1 implements CommandLineRunner {
     {
         System.out.println("\n\n============= runner_1 (Spring Core - DI, lifeCycle, etc) ============== START");
         log.info(String.valueOf(store));
+        store.printItems();
         log.info(String.valueOf(store.getItem11().hashCode()));
+
 
         // CustomAnnotationTest();
 

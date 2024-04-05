@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import java.util.List;
+
 @Data
 @Setter
 @Getter
@@ -62,6 +64,15 @@ public class Store implements
                 "\n\tdetail : "+ item11.getDetail()+
                 "\n--------------------------------";
     }
+    public void printItems(){
+        System.out.println("Items");
+        this.items.stream().forEach(System.out::println);
+        System.out.println("--------------------------------");
+
+        System.out.println("allItems");
+        this.allItems.stream().forEach(System.out::println);
+        System.out.println("--------------------------------");
+    }
 
     // =====================================
     //          Life Cycle
@@ -97,4 +108,17 @@ public class Store implements
 
     @Override
     public void destroy() throws Exception { log.info("Store :: LifeCycle :: DisposableBean.destroy()");}
+
+    //============ Advance DI ===========
+
+    // A. Injecting List
+    // A.1 all individual Item bean are inserted in this collection by @order.
+    @Autowired
+    List<Item> items;
+
+    // A.2. check : IoCcontract_2 - collection is already create by Spring with given @Bean method
+    // can do same with Set and Map.
+    // Directly create whole Set or map usinf @Bean anno.
+    @Autowired @Qualifier("IoCcontract_2_allItems")
+    List<Item> allItems;
 }

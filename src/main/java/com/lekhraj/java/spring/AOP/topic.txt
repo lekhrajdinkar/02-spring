@@ -1,7 +1,7 @@
 In brief/short
-# Aspect (Cross cutting concept) P J A
-   - P point-cut ( expression to define jointpoint)
+# Aspect (Cross cutting concept)  J P A
    - J join-point (points in the execution)
+   - P point-cut ( expression to define jointpoint)
    - A Advice ( code )
 
 ===================

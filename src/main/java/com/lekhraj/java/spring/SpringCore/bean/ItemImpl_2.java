@@ -1,9 +1,11 @@
 package com.lekhraj.java.spring.SpringCore.bean;
 
 
+import lombok.ToString;
 
-
+@ToString
 public class ItemImpl_2 implements Item{
+    String barcode = "barcode_2";
     @Override
     public String getDetail() {
         return "Nice product for skin";
