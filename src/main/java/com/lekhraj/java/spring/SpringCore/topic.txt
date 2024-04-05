@@ -1,4 +1,5 @@
 https://www.baeldung.com/spring-tutorial
+https://www.baeldung.com/spring-dependency-injection
 https://chat.openai.com/c/33d0d06d-0aaa-4791-bce9-da8ea3f5dd53
 
 1. IoC, DI, AOP Core concept.

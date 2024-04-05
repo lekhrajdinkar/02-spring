@@ -1,4 +1,4 @@
-package com.lekhraj.java.spring.SpringRest;
+package com.lekhraj.java.spring.SpringRest.SpringData;
 
 import org.springframework.stereotype.Repository;
 
