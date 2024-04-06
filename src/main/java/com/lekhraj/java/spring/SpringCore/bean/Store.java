@@ -3,10 +3,7 @@ package com.lekhraj.java.spring.SpringCore.bean;
 import com.lekhraj.java.spring.util.Print;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -14,6 +11,7 @@ import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Lookup;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -24,45 +22,37 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
+@ToString
 public class Store implements
         BeanNameAware, ApplicationContextAware,
         InitializingBean, DisposableBean
 {
     static Logger log = LoggerFactory.getLogger(Store.class);
     String beanName;
-    ApplicationContext context;
-    @Autowired ApplicationContext contextAgain; //better
+    String storeName;
+    @ToString.Exclude ApplicationContext context;
+    @ToString.Exclude @Autowired ApplicationContext contextAgain; //better
 
     //=======================================================
     // DI-Auto :: here found 3 same Bean,
     // same type but 3 diff names -item1,item2,item1_again
     //=======================================================
+    // DI Auto : 3.1
+    @Autowired  @Qualifier("item1") public Item item; // <<< name imp
 
-    @Autowired // DI Auto : 3.1
-    @Qualifier("item1")
-    public Item item11; // <<< name imp
-    public String storeName;
 
     @Autowired
     // DI Auto : 3.2 - never invoked.
     // Because Store is already created with Default constructor.
     public Store(@Qualifier("item1_again") Item item1_again){ // <<< arg name , if Qualifier not mentioned
         log.info("Store :: constructor-1(Item) :: name-item1_again, hashcode-{}", item1_again.hashCode());
-        this.item11 = item1_again;
+        this.item = item1_again;
     }
 
     @Autowired // DI Auto : 3.3 - It will override to item2
     public void setItem( @Qualifier("item2") Item i){ // <<< arg name , if Qualifier not mentioned
         log.info("Store :: Setter(Item) :: name-item2, hashcode:{}", i.hashCode());
-        this.item11 = i;
-    }
-
-    @Override
-    public String toString() {
-        return "*****" + storeName!=null?"MyStore":storeName + "*****" +
-                "\n\tName : "+ item11.getName()+
-                "\n\tCode : "+ item11.getCode()+
-                "\n\tdetail : "+ item11.getDetail();
+        this.item = i;
     }
 
 
@@ -80,6 +70,7 @@ public class Store implements
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        Print.print("---- Store :: AWARE --- setApplicationContext ---");
         this.context = applicationContext;
     }
 
@@ -131,4 +122,6 @@ public class Store implements
     @Autowired
     @Qualifier("gbean_1")
     MyGenericBean<Integer,Item> gbean1; // created by @Bean
+
+
 }

@@ -10,11 +10,14 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class IoCcontract_3_gbean
 {
+    // 1 generic bean eg
+    // 1.1
     // @Bean MyGenericBean gbean_1(){ return new MyGenericBean<Integer, ItemImpl_2>();}
-    @Autowired
-    ItemImpl_2 item2;
-    @Bean
-    MyGenericBean gbean_1(){
+    @Autowired ItemImpl_2 item2; // <<< Notice, wired in config file...
+    //1.2.2.
+    @Bean MyGenericBean gbean_1(){
         return new MyGenericBean<Integer, ItemImpl_2>(100, item2);
     }
+
+
 }

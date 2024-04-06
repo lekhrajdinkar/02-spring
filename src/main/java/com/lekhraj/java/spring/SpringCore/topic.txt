@@ -1,6 +1,7 @@
 https://www.baeldung.com/spring-tutorial
 https://www.baeldung.com/spring-dependency-injection
 https://chat.openai.com/c/33d0d06d-0aaa-4791-bce9-da8ea3f5dd53
+==================================================================
 
 1. IoC, DI, AOP Core concept.
 1.1. Custom Annotation
@@ -22,6 +23,18 @@ https://chat.openai.com/c/33d0d06d-0aaa-4791-bce9-da8ea3f5dd53
 9. Autowire more
     - map, list, set
     - ResolvableType class for  superclass, interface, generic types.
+10. @lookup - handle scope mismatch.
+    Singlebean <-- inject prototype bean.
+    Spring does not maintain that prototype bean. create memeory leak if not cleaned by manually.
+
+    @Component
+    public class MySingletonBean {
+        @Lookup
+        public MyPrototypeBean getPrototypeBean() {
+            // This method body will be ignored
+            return null;
+        }
+    }
 
 
 10.  @SpringBootApplication  --> @Configuration, @EnableAutoConfiguration, and @ComponentScan.

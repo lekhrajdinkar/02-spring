@@ -2,6 +2,7 @@ package com.lekhraj.java.spring.SpringCore;
 
 import com.lekhraj.java.spring.SpringCore.Annotation.MyAnnotation;
 import com.lekhraj.java.spring.SpringCore.bean.Item;
+import com.lekhraj.java.spring.SpringCore.bean.SingletonBean;
 import com.lekhraj.java.spring.SpringCore.bean.Store;
 import com.lekhraj.java.spring.util.Print;
 import lombok.SneakyThrows;
@@ -31,8 +32,9 @@ public class Runner1 implements CommandLineRunner {
     // 2. DI(Manual) - Injection by Setter
     // 3. DI(Auto) - Type >> if 2+ >> @primary >> @Qualifier("beanName")
     //========================================
-    @Autowired(required = true) // 3.1 DI - Auto (feild injection uses reflection)
-    Store store;
+    // 3.1 DI - Auto (feild injection uses reflection)
+    @Autowired(required = true) Store store;
+
 
     Runner1(){
         log.info("Main :: default construtor");
@@ -77,13 +79,16 @@ public class Runner1 implements CommandLineRunner {
     }
 
     // ======= Runner ========  <<<<<
+
+    @Autowired SingletonBean sbean;
+
     @Override
     public void run(String... args) throws Exception
     {
         System.out.println("\n\n============= runner_1 (Spring Core - DI, lifeCycle, etc) ============== START");
         // A. DI
-        Print.print(" -- A. DI -- ", String.valueOf(store));
-        Print.print(" -- A. DI -- ",String.valueOf(store.getItem11().hashCode()));
+        Print.print(" -- A. DI -- ", store);
+        Print.print(" -- A. DI -- ", store.getItem().hashCode());
 
         // B. DI -Advance - inject Collection with order, etc
         Print.print( "-- B. Advance DI - Injecting Collection ");
@@ -92,6 +97,9 @@ public class Runner1 implements CommandLineRunner {
         // C. DI -Advance - Inject generic bean
         Print.print("-- C. Advance DI - Injecting Generic bean -1 (@Bean) ", store.getGbean1() );
         Print.print("-- C. Advance DI - Injecting Generic bean -2 (@Component)", store.getGbean2() );
+        Print.print("-- D. Advance DI - proto into Singleton (Did not work): ",
+                "proto hashcode : ", sbean.getPbean().hashCode(),
+                "proto hashcode : ", sbean.getPbean().hashCode());
 
         // 99. CustomAnnotationTest();
 
