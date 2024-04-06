@@ -7,12 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 public class SingletonBean {
-    //ProtoypeBean pbean;
+    ProtoypeBean pbean;
 
     // Everytime call getPbean(), Spring will  create and return new object.
-    @Lookup
+    @Lookup // Method Injection
     public ProtoypeBean getPbean() {
-        //return pbean;
-        return null;
+        // return pbean;
+        // if not using @lookup, then write custom code to create new object from ApplicationContext.getbean()
+        return null; // <<< notice. spring wont return null :)
     }
 }
