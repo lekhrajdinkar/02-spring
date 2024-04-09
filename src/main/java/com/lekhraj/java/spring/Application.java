@@ -1,17 +1,12 @@
 package com.lekhraj.java.spring;
 
+import com.lekhraj.java.spring.SpringProperties.bean.Prop2Map;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 @SpringBootApplication
-/*
-@PropertySources(value = {
-		@PropertySource(value = "classpath:database-{spring.profiles.active}.properties"),
-		@PropertySource(value = "classpath:rabbit-mq-{spring.profiles.active}.properties")
-})
- */
+@EnableConfigurationProperties({Prop2Map.class})
 public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

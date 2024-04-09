@@ -2,17 +2,20 @@ package com.lekhraj.java.spring.SpringProperties;
 
 import com.lekhraj.java.spring.SpringProperties.bean.DatabasePropertiesMap;
 import com.lekhraj.java.spring.SpringProperties.bean.RabbitPropertiesMap;
+import com.lekhraj.java.spring.SpringProperties.bean.Prop2Map;
+import com.lekhraj.java.spring.util.Print;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
-// @Component(value="runner_2")
+@Component(value="runner_2")
 public class Runner2 implements CommandLineRunner {
     static Logger log = LoggerFactory.getLogger(Runner2.class);
 
@@ -32,6 +35,9 @@ public class Runner2 implements CommandLineRunner {
     @Value("${spring.profiles.active}")
     private String activeProfile;
 
+    @Autowired
+    Prop2Map myMapsFromProprty;
+
     @Override
     public void run(String... args) throws Exception {
         System.out.println("\n\n============= runner_2 (Spring properties) ============== START");
@@ -46,6 +52,14 @@ public class Runner2 implements CommandLineRunner {
         //Print Active Profiles
         log.info("activeProfile : {}", activeProfile);
         Arrays.stream(env.getActiveProfiles()).forEach(System.out::println);
+
+        Print.print(myMapsFromProprty);
+        Map configmap = myMapsFromProprty.getConfig();
+        Map applicationmap = myMapsFromProprty.getApplication();
+        Map usermap = myMapsFromProprty.getUsers();
+        /*configmap.forEach((k,v)->{Print.print(k,v);});
+        applicationmap.forEach((k,v)->{Print.print(k,v);});
+        usermap.forEach((k,v)->{Print.print(k,v);});*/
 
         System.out.println("\n============= runner_2 (Spring properties) ============== END\n\n");
 
