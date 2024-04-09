@@ -1,7 +1,0 @@
-// references
-https://www.baeldung.com/spring-boot
-https://www.baeldung.com/spring-boot-annotations
-https://www.baeldung.com/spring-boot-starters
-
-=========
-

@@ -1,0 +1,15 @@
+#1 Error handling in web.
+-  BasicErrorController
+- /error
+-  WebServerFactoryCustomizer
+
+2. Register a New Servlet
+3. Change from Tomcat to jetty.
+4. remove Tomcat from jar/war
+
+
+
+===== references ======
+https://www.baeldung.com/spring-boot
+https://www.baeldung.com/spring-boot-annotations
+https://www.baeldung.com/spring-boot-starters
