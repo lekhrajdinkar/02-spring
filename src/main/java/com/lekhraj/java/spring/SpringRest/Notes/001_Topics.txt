@@ -1,11 +1,30 @@
-#1 Error handling in web.
--  BasicErrorController
-- /error
--  WebServerFactoryCustomizer
+-- SB --
+1. Overview, bootstarp simple App
+2. spring vs SB
+3. @SpringBootApplication
+4. starter project overview - web, jpa, test, okta, etc.
+5. Actuator
+6. load intial Data in SB.
+7. validation in SB.
 
+---- WEB / REST------
+https://chat.openai.com/c/831f36a0-bce4-4372-87d4-9ab6528babc5
+1 Error handling in web.
+-  BasicErrorController (already) + create custom one with ErrorAttribute.
+-  WebServerFactoryCustomizer *
+- @ExceptionHandler
 2. Register a New Servlet
 3. Change from Tomcat to jetty.
-4. remove Tomcat from jar/war
+4. Remove Tomcat from jar/war *
+5.
+
+---- Data ----
+https://chat.openai.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009
+1. Bean/Entity Validation
+2. init: data.sql + schema.sql.
+3. @sql, @sqlConfig - Load test data @test
+4. @EnableJpaRepositories("example.baeldung.com.repo")
+   @EntityScan("example.baeldung.com.entity")
 
 
 

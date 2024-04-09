@@ -1,3 +1,0 @@
-@SpringBootApplication(scanBasePackages = "example.baeldung.com.services")
-@EnableJpaRepositories("example.baeldung.com.repo")
-@EntityScan("example.baeldung.com.entity")
