@@ -16,7 +16,7 @@ application-<profile/env>.properties
 7. Properties From Environment Variables
 8. Load property by Prefix.
    Hierarchical Properties
-    - @ConfigurationProperties(prefix="")
+    - @ConfigurationProperties(prefix=""), register them also put @Component.
     - propertyname must match
 9. change location of property file.
     "src/main/resources" already added by SB in classpath for project resources lookup.
@@ -24,3 +24,14 @@ application-<profile/env>.properties
 10. PropertySourcesPlaceholderConfigurer
 11. @value - SpEL
 12. Load bean By profile
+
+13. more config
+// c1 and c2 are annotated with @ConfigurationProperties.
+- @ConfigurationPropertiesScan --> this annotation is particularly useful when you have multiple
+classes annotated with @ConfigurationProperties and let us avoid explicitly registering them in your configuration.
+- @EnableConfigurationProperties({c1.class, c2.class})
+-
+
+
+=====
+https://chat.openai.com/c/d75560a0-1c06-4195-80fc-563ec8449bc5
