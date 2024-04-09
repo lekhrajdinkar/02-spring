@@ -5,7 +5,7 @@
 4. starter project overview - web, jpa, test, okta, etc.
 5. Actuator
 6. load intial Data in SB.
-7. validation in SB.
+7. Validation in SB - on DTO (Validator Interface, @email, @size, etc, @valid)
 
 ---- WEB / REST------
 https://chat.openai.com/c/831f36a0-bce4-4372-87d4-9ab6528babc5
