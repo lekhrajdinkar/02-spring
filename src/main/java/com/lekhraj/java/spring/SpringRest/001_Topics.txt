@@ -1,11 +1,17 @@
 -- SB --
 1. Overview, bootstarp simple App
 2. spring vs SB
-3. @SpringBootApplication
-4. starter project overview - web, jpa, test, okta, etc.
+3. @SpringBootApplication --> @EnableAutoConfiguration, @Configuration, @ComponentScan
+4. starter project overview --> web, jpa, test, okta, etc.
 5. Actuator
-6. load intial Data in SB.
-7. Validation in SB - on DTO (Validator Interface, @email, @size, etc, @valid)
+6. Auto Configuration  in SB :
+    - default
+    - customize :
+       * create youe own class with @Configuration - new bean + Override Method.
+       * Apply then conditionally - @ConditionalOnProperty, etc
+       * properties.
+"we write our custom auto-configurations, we want Spring to use them conditionally"
+
 
 ---- WEB / REST------
 https://chat.openai.com/c/831f36a0-bce4-4372-87d4-9ab6528babc5
@@ -16,7 +22,7 @@ https://chat.openai.com/c/831f36a0-bce4-4372-87d4-9ab6528babc5
 2. Register a New Servlet
 3. Change from Tomcat to jetty.
 4. Remove Tomcat from jar/war *
-5.
+5. Validation in SB - on DTO (Validator Interface, @email, @size, etc, @valid)
 
 ---- Data ----
 https://chat.openai.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009

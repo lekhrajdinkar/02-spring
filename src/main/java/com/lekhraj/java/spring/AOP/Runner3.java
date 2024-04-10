@@ -6,16 +6,15 @@ import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-//@Component
-public class Runner3 implements CommandLineRunner {
+@Component
+// @Order(3)
+public class Runner3 implements CommandLineRunner
+{
+
     static Logger log = LoggerFactory.getLogger(Runner1.class);
-    @Override @MyAopMetric
-    public void run(String... args) throws Exception {
-        task1();
-        task2();
-    }
 
     @SneakyThrows  //@MyAopMetric
     public void task1(){
@@ -26,4 +25,14 @@ public class Runner3 implements CommandLineRunner {
     public void task2(){
         Thread.sleep(3000);
     }
+
+    @Override @MyAopMetric
+    public void run(String... args) throws Exception {
+        System.out.println("\n\n============= runner_3_AOP  ============== START");
+        task1();
+        task2();
+        System.out.println("\n\n============= runner_3_AOP  ============== END");
+    }
+
+
 }
