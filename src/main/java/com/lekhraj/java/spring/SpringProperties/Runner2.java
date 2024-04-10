@@ -1,5 +1,6 @@
 package com.lekhraj.java.spring.SpringProperties;
 
+import com.lekhraj.java.spring.SpringProperties.bean.ConfigurationPropertiesByPrefixBean;
 import com.lekhraj.java.spring.SpringProperties.bean.DatabasePropertiesMap;
 import com.lekhraj.java.spring.SpringProperties.bean.RabbitPropertiesMap;
 import com.lekhraj.java.spring.SpringProperties.bean.Prop2Map;
@@ -27,6 +28,7 @@ public class Runner2 implements CommandLineRunner {
     @Autowired
     Environment env; //preferred.
 
+
     // ==== SpEL ====
     @Value("#{${valuesMap}}")
     Map<String, Integer> valuesMap;
@@ -35,8 +37,8 @@ public class Runner2 implements CommandLineRunner {
     @Value("${spring.profiles.active}")
     private String activeProfile;
 
-    @Autowired
-    Prop2Map myMapsFromProprty;
+    @Autowired Prop2Map myMapsFromProprty;
+    @Autowired ConfigurationPropertiesByPrefixBean cp;
 
     @Override
     public void run(String... args) throws Exception {
@@ -60,6 +62,8 @@ public class Runner2 implements CommandLineRunner {
         /*configmap.forEach((k,v)->{Print.print(k,v);});
         applicationmap.forEach((k,v)->{Print.print(k,v);});
         usermap.forEach((k,v)->{Print.print(k,v);});*/
+
+        Print.print("onfigurationPropertiesByPrefixBean , prefix-mail : ",cp);
 
         System.out.println("\n============= runner_2 (Spring properties) ============== END\n\n");
 

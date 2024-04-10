@@ -7,8 +7,8 @@
 6. Auto Configuration  in SB :
     - default
     - customize :
-       * create youe own class with @Configuration - new bean + Override Method.
-       * Apply then conditionally - @ConditionalOnProperty, etc
+       * create your own class with @Configuration - new bean + Override Method. eg:WebSecurity, Datasource,etc
+       * Apply then conditionally - @ConditionalOnProperty, etc.
        * properties.
 "we write our custom auto-configurations, we want Spring to use them conditionally"
 

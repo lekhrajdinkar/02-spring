@@ -1,0 +1,9 @@
+https://www.baeldung.com/spring-boot-annotations
+
+4.1. @ConditionalOnClass and @ConditionalOnMissingClass
+4.2. @ConditionalOnBean and @ConditionalOnMissingBean
+4.3. @ConditionalOnProperty
+4.4. @ConditionalOnResource
+4.5. @ConditionalOnWebApplication and @ConditionalOnNotWebApplication
+4.6. @ConditionalExpression
+4.7. @Conditional

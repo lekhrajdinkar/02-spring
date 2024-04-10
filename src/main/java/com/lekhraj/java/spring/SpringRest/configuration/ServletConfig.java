@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ServletConfig {
+    // ServletRegistrationBean - generic Type Class
     @Bean
     public ServletRegistrationBean<MyServlet> myServletRegistrationBean() {
         ServletRegistrationBean<MyServlet> registrationBean =new ServletRegistrationBean<>(new MyServlet(), "/custom");

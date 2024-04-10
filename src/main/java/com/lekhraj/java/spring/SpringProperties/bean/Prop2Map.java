@@ -21,14 +21,9 @@ public class Prop2Map
 {
     private Map<String, String> application;
     private Map<String, List<String>> config;
-    private Map<String, Credential> users;
+    private Map<String, Credentials> users;
 
-    @Getter
-    @Setter
-    public static class Credential {
-        private String username;
-        private String password;
-    }
+
 }
 
 /*

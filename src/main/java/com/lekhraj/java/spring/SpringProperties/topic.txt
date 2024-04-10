@@ -16,8 +16,15 @@ application-<profile/env>.properties
 7. Properties From Environment Variables
 8. Load property by Prefix.
    Hierarchical Properties
-    - @ConfigurationProperties(prefix=""), register them also put @Component.
+    - @ConfigurationProperties(prefix="")
+            Also register them also put @Component, @Configuration, @ConfigurationPropertiesScan (Preferred)
     - propertyname must match
+    - eg:
+    mail.hostName
+    mail.hostname
+    mail.host_name
+    mail.host-name
+    mail.HOST_NAME all these works.
 9. change location of property file.
     "src/main/resources" already added by SB in classpath for project resources lookup.
 
@@ -35,3 +42,4 @@ classes annotated with @ConfigurationProperties and let us avoid explicitly regi
 
 =====
 https://chat.openai.com/c/d75560a0-1c06-4195-80fc-563ec8449bc5
+https://www.baeldung.com/configuration-properties-in-spring-boot
