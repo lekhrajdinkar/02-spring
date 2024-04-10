@@ -25,6 +25,9 @@ application-<profile/env>.properties
     mail.host_name
     mail.host-name
     mail.HOST_NAME all these works.
+
+8. Using @ConfigurationProperties on a @Bean Method.
+
 9. change location of property file.
     "src/main/resources" already added by SB in classpath for project resources lookup.
 

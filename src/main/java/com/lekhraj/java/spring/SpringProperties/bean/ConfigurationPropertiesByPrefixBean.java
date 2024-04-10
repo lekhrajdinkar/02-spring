@@ -1,5 +1,6 @@
 package com.lekhraj.java.spring.SpringProperties.bean;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,10 +18,20 @@ import java.util.Map;
 @ConfigurationPropertiesScan
 @Component
 public class ConfigurationPropertiesByPrefixBean {
-    private String hostname;
+    @NotBlank private String hostname;
     private int port;
     private String from;
     private List<String> defaultRecipients;
     private Map<String, String> additionalHeaders;
     private Credentials credentials;
 }
+
+// validation (JSR-380 format)
+/*
+@NotBlank
+@length(min,max)
+@Max(1025)
+@Min(1025)
+@Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")
+ */
+
