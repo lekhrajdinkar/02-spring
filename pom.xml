@@ -72,6 +72,17 @@
 			<version>6.1.5.Final</version>
 		</dependency>
 
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version> <!-- Or the version compatible with your servlet container -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
