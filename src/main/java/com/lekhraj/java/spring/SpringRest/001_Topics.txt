@@ -1,4 +1,5 @@
 -- SB --
+can Change Custom Banners
 1. Overview, bootstarp simple App
 2. spring vs SB
 3. @SpringBootApplication --> @EnableAutoConfiguration, @Configuration, @ComponentScan

@@ -25,6 +25,14 @@ public class ConfigurationPropertiesByPrefixBean {
     private Map<String, String> additionalHeaders;
     private Credentials credentials1; // inbuilt binder
     private Credentials credentials2; // my binder/converter
+
+    // --- inbuilt - Conversion for Duration,DataSize,etc ---
+
+    // @DurationUnit(ChronoUnit.DAYS)
+    // private Duration timeInDays;
+
+    // @DataSizeUnit(DataUnit.TERABYTES)
+    // private DataSize sizeInTB;
 }
 
 /*
@@ -37,9 +45,7 @@ public class ConfigurationPropertiesByPrefixBean {
 @Min(1025)
 @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")
 
-// --- Conversion ---
+https://www.baeldung.com/configuration-properties-in-spring-boot ,at bottom
 
-@DurationUnit(ChronoUnit.DAYS) private Duration timeInDays;
-@DataSizeUnit(DataUnit.TERABYTES) private DataSize sizeInTB;
  */
 

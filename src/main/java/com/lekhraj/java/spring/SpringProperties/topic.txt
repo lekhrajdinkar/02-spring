@@ -17,7 +17,9 @@ application-<profile/env>.properties
 8. Load property by Prefix.
    Hierarchical Properties
     - @ConfigurationProperties(prefix="")
-            Also register them also put @Component, @Configuration, @ConfigurationPropertiesScan (Preferred)
+            Also register them also put : @Component, @Configuration, @ConfigurationPropertiesScan (Preferred)
+            ,@EnableConfigurationProperties({c1.class, c2.class})
+
     - propertyname must match
     - eg:
     mail.hostName
@@ -30,6 +32,10 @@ application-<profile/env>.properties
     https://www.baeldung.com/configuration-properties-in-spring-boot
 
 8. Using @ConfigurationProperties on a @Bean Method.
+
+8. @ConfigurationPropertiesBinding. Custom Binder.
+    check this: mail.credentials2=john2,password2 to ConfigurationPropertiesByPrefixBean
+
 
 9. change location of property file.
     "src/main/resources" already added by SB in classpath for project resources lookup.
