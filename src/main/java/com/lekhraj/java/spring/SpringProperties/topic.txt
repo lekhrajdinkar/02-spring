@@ -26,6 +26,9 @@ application-<profile/env>.properties
     mail.host-name
     mail.HOST_NAME all these works.
 
+    - @ConfigurationPropertiesBinding **  custom creator, while Binding convert.
+    https://www.baeldung.com/configuration-properties-in-spring-boot
+
 8. Using @ConfigurationProperties on a @Bean Method.
 
 9. change location of property file.

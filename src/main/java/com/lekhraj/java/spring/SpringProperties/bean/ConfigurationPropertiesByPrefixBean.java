@@ -23,15 +23,23 @@ public class ConfigurationPropertiesByPrefixBean {
     private String from;
     private List<String> defaultRecipients;
     private Map<String, String> additionalHeaders;
-    private Credentials credentials;
+    private Credentials credentials1; // inbuilt binder
+    private Credentials credentials2; // my binder/converter
 }
 
-// validation (JSR-380 format)
 /*
+
+// -- validation (JSR-380 format) ---
+
 @NotBlank
 @length(min,max)
 @Max(1025)
 @Min(1025)
 @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")
+
+// --- Conversion ---
+
+@DurationUnit(ChronoUnit.DAYS) private Duration timeInDays;
+@DataSizeUnit(DataUnit.TERABYTES) private DataSize sizeInTB;
  */
 
