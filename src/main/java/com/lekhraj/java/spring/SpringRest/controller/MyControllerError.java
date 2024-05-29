@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -13,13 +15,15 @@ public class MyControllerError implements ErrorController {
     @Autowired
     ErrorAttributes errors; // <<< inject
 
+    // For API, return ResponseEntity<?>
+    // For Web App, return Error page/Html -
     @RequestMapping("/error-controller")
-    public String handleError(WebRequest req){ // notice web request
+    public ResponseEntity<String> handleError(WebRequest req){ // notice web request
         ErrorAttributeOptions options = ErrorAttributeOptions.defaults();
         // ErrorAttributeOptions.of(ErrorAttributeOptions.Include.MESSAGE, ErrorAttributeOptions.Include.EXCEPTION));
         this.errors.getError(req);
         this.errors.getErrorAttributes(req,options);
-        return "Error occured";
+        return new ResponseEntity<>(HttpStatusCode.valueOf(200));
     }
 
      //@RequestMapping("/error/404")
@@ -27,7 +31,9 @@ public class MyControllerError implements ErrorController {
 
      //@RequestMapping("/error/403")
      //public void handleError403(WebRequest req){}
+
 }
+//  BasicErrorController bean if you don’t specify any custom implementation
 
 // BasicErrorController --> /error --> Already done.
 // server.error.path=/error
