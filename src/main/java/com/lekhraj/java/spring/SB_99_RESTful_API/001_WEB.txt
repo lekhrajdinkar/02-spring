@@ -32,17 +32,23 @@ https://chatgpt.com/c/a04dc001-e879-43e0-a39d-acd01b9ef2c7
 - optional : inject BindingResult.
 - Custom validator : check com.lekhraj.java.spring.SB_99_RESTful_API.validator;
 
+6. REST Documentation (Not Working *)
+- springfox-boot-starter + @EnableSwagger2WebMvc + com.lekhraj.java.spring.SB_99_RESTful_API.configuration.SwaggerDocConfig - @Bean Docket
+- Springdoc OpenAPI+ @EnableSwagger2 + com.lekhraj.java.spring.SB_99_RESTful_API.configuration.SpringDocOpenApiCopnfig - @Bean Docket
 
----- WEB / REST------  Customization Example/s program/s ----
 
-1. Spring Boot: Customize Whitelabel Error Page
+---- WEB / REST------  "Customization" Example----
+
+1. Whitelabel-ErrorPage
     * @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class}) --> show Tomcat page then.
     * server.error.whitelabel.enabled=false --> show Tomcat page then.
     * @Controller MyErrorController class >> @RequestMapping("/error")m(){ my page code} --> custom my page.
 
 2. ObjectMapper
-       - include only not-null feilds in json.
-       - Serialize LocalDateTime in custom format.
+    @Configuration JacksonConfig >> @Bean ObjectMapper
+       - setSerializationInclusion(JsonInclude.Include.NON_NULL)
+       - Serialize LocalDateTime in custom Serializer.
+         com.lekhraj.java.spring.SB_99_RESTful_API."Serializer".LocalDateTimeSerializer
 
 
 

@@ -11,6 +11,7 @@ import java.util.Collections;
 
 @SpringBootApplication
 @EnableConfigurationProperties({Prop2Map.class})
+
 public class Application {
 	public static void main(String[] args)
 	{

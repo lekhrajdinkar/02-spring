@@ -9,10 +9,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import com.lekhraj.java.spring.SB_99_RESTful_API.Serializer.LocalDateTimeSerializer;
 
 @Configuration
 public class JacksonConfig {
@@ -36,17 +33,7 @@ public class JacksonConfig {
     }
 }
 
-class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime>  {
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
-    @Override
-    public void serialize(LocalDateTime localDateTime, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
-        jsonGenerator.writeString(formatter.format(localDateTime));
-    }
-    @Override
-    public Class<LocalDateTime> handledType() {
-        return LocalDateTime.class;
-    }
-}
+
 
 /*
 spring.jackson.serialization.write-dates-as-timestamps=false
