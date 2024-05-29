@@ -1,10 +1,9 @@
 package com.lekhraj.java.spring;
 
-import com.lekhraj.java.spring.SpringProperties.bean.Prop2Map;
+import com.lekhraj.java.spring.Spring_03_Properties.bean.Prop2Map;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 import java.util.Collections;
 

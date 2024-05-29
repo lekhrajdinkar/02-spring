@@ -1,0 +1,35 @@
+
+
+
+---- WEB / REST------
+https://chat.openai.com/c/831f36a0-bce4-4372-87d4-9ab6528babc5
+
+1 Error handling in web.
+-  BasicErrorController (already) + create custom one with ErrorAttribute.
+-  WebServerFactoryCustomizer *
+- @ExceptionHandler
+2. Register a New Servlet : ServletRegistrationBean<MyServlet>
+3. Change from Tomcat to jetty.
+   XXXXEmbeddedServletContainerFactory - UndertowEmbeddedServletContainerFactory, JettyEmbeddedServletContainerFactory
+4. Remove Tomcat from jar/war *
+5. Validation in SB - on DTO (Validator Interface, @email, @size, etc, @valid)
+6. ObjectMapper
+    - include not null in json.
+    - Serialize LocalDateTime in custom format.
+
+---- WEB / REST------
+Customization Example/s program/s:
+- Spring Boot: Customize Whitelabel Error Page
+    * @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class}) --> show Tomcat page then.
+    * server.error.whitelabel.enabled=false --> show Tomcat page then.
+    * @Controller MyErrorController class >> @RequestMapping("/error")m(){ my page code} --> custom my page.
+
+- Customize the Jackson ObjectMapper
+  Data Format, include not null, etc.
+
+Spring Boot Filter
+
+
+
+
+

@@ -1,0 +1,13 @@
+https://www.baeldung.com/spring-boot-annotations
+
+- Conditionally Apply AutoConfiguration
+1. @ConditionalOnClass and @ConditionalOnMissingClass
+2. @ConditionalOnBean and @ConditionalOnMissingBean
+3. @ConditionalOnProperty
+4. @ConditionalOnResource
+5. @ConditionalOnWebApplication and @ConditionalOnNotWebApplication
+6. @ConditionalExpression
+7. @Conditional
+8. etc ,more
+
+
