@@ -45,9 +45,9 @@ java -jar app.jar --server.servlet.context-path=/spring
 Java Config way-1
 Command Line Arguments way-2
 Java System Properties way-3
-OS Environment Variables way-4
-application.properties in Current Directory on server
-application.properties in the classpath (src/main/resources or the packaged jar file)
+Env Variables way-4
+application.properties (ext) in Current Directory on server
+application.properties (int) in the classpath (src/main/resources or the packaged jar file)
 
  */
 

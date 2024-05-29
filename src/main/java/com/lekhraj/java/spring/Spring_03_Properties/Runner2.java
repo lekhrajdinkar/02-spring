@@ -29,7 +29,7 @@ public class Runner2 implements CommandLineRunner {
     Environment env; //preferred.
 
 
-    // ==== SpEL ====
+    // ==== SpEL ==== #{}
     @Value("#{${valuesMap}}")
     Map<String, Integer> valuesMap;
     @Value("#{'${listOfValues}'.split(',')}")

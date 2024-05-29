@@ -1,26 +1,37 @@
--- SB --
-application.property - default file
-application-<profile/env>.properties
-- Automatically registered.
-- use:
-    @value inject to java property
+1.  application.property - default file / Automatically registered.
+    application-<profile/env>.properties
+
+    use:
+    @value inject to java property, @value - SpEL
     @Autowired Environmnet env. env-API
 
--- More --
-1. create and register in a property file
-2. create and register in multiple property file
-3. create env specific
-4. property file outside jar
-5 @propertySource,
-6. Properties From Command Line Arguments
-7. Properties From Environment Variables
-8. Load property by Prefix.
-   Hierarchical Properties
-    - @ConfigurationProperties(prefix="")
-            Also register them also put : @Component, @Configuration, @ConfigurationPropertiesScan (Preferred)
-            ,@EnableConfigurationProperties({c1.class, c2.class})
+2. @propertySource / @propertySources - custom property file/s
+    - create env specific custom prop file using active profile.
+    - change location of property file, other than "src/main/resources".
 
-    - propertyname must match
+3. Feed External property file / outside jar.
+
+4. Feed External property
+   - Properties From Command Line Arguments
+   - Properties From Environment Variables
+
+5.  concept [ property --> bind --> java-Object ]
+    ** check auto binding example in code.
+
+    @ConfigurationProperties(prefix="") on class c1, Load property by Prefix
+        - Using @ConfigurationProperties on a @Bean Method.
+
+    @EnableConfigurationProperties({c1.class, c2.class}) --> enable/register explicitly
+        or @ConfigurationPropertiesScan Apply on class c1/c2.
+        or @Component, @Configuration
+
+    @ConfigurationPropertiesBinding, custom binding rule/code.
+        - https://www.baeldung.com/configuration-properties-in-spring-boot
+        - check this: mail.credentials2=john2,password2 to ConfigurationPropertiesByPrefixBean
+        - validation (JSR-380 format) while binding.
+
+
+   Note: propertyname must match
     - eg:
     mail.hostName
     mail.hostname
@@ -28,28 +39,8 @@ application-<profile/env>.properties
     mail.host-name
     mail.HOST_NAME all these works.
 
-    - @ConfigurationPropertiesBinding **  custom creator, while Binding convert.
-    https://www.baeldung.com/configuration-properties-in-spring-boot
 
-8. Using @ConfigurationProperties on a @Bean Method.
-
-8. @ConfigurationPropertiesBinding. Custom Binder.
-    check this: mail.credentials2=john2,password2 to ConfigurationPropertiesByPrefixBean
-
-
-9. change location of property file.
-    "src/main/resources" already added by SB in classpath for project resources lookup.
-
-10. PropertySourcesPlaceholderConfigurer
-11. @value - SpEL
-12. Load bean By profile
-
-13. more config
-// c1 and c2 are annotated with @ConfigurationProperties.
-- @ConfigurationPropertiesScan --> this annotation is particularly useful when you have multiple
-classes annotated with @ConfigurationProperties and let us avoid explicitly registering them in your configuration.
-- @EnableConfigurationProperties({c1.class, c2.class})
--
+6. PropertySourcesPlaceholderConfigurer
 
 
 =====

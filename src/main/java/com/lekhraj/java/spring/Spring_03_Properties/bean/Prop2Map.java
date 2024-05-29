@@ -11,18 +11,21 @@ import java.util.Map;
 @Getter
 @Setter
 @ToString
-@ConfigurationProperties(prefix = "server")
+@ConfigurationProperties(prefix = "server") // from yml file. good choice for hiriecal.
 // we tell Spring to map all the properties with the specified prefix to an object of Prop2Map.
-// Also, make this class as bean :
+
+// Also, register it as bean :
 // - @Component, or
 // - @EnableConfigurationProperties(Prop2Map.class)
+
+// Note: Explicitly register in Application.java
+
 public class Prop2Map
 {
+
     private Map<String, String> application;
     private Map<String, List<String>> config;
     private Map<String, Credentials> users;
-
-
 }
 
 /*
@@ -30,6 +33,5 @@ public class Prop2Map
 allows us to directly inject a particular property value by its key.
 
 @ConfigurationProperties
-annotation binds multiple properties to a particular object,
-and provides access to the properties through the mapped object.
+annotation binds multiple properties to a particular object (ReferenceType,Collection,Map)+PrimitiveType.,
  */

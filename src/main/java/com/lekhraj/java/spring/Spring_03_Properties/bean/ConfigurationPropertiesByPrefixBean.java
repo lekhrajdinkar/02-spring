@@ -15,9 +15,10 @@ import java.util.Map;
 @Getter
 @ToString
 @ConfigurationProperties(prefix = "mail")
-@ConfigurationPropertiesScan
-@Component
-public class ConfigurationPropertiesByPrefixBean {
+@ConfigurationPropertiesScan // register bean
+@Component // not needed
+public class ConfigurationPropertiesByPrefixBean
+{
     @NotBlank private String hostname;
     private int port;
     private String from;
@@ -37,7 +38,7 @@ public class ConfigurationPropertiesByPrefixBean {
 
 /*
 
-// -- validation (JSR-380 format) ---
+// -- validation (JSR-380 format) while binding---
 
 @NotBlank
 @length(min,max)
