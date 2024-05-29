@@ -1,9 +1,11 @@
 package com.lekhraj.java.spring;
 
 import com.lekhraj.java.spring.Spring_03_Properties.bean.Prop2Map;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 
 import java.util.Collections;
 
@@ -22,6 +24,12 @@ public class Application {
 		app.setDefaultProperties(Collections.singletonMap("server.port", "8083")); //way-1
 		app.run(args);
 
+	}
+
+	// Another Nice way to write CommandLineRunner (Functional interface)
+	@Bean
+	public CommandLineRunner runnerBean1() throws Exception {
+		return (String[] args) -> { System.out.println(" --- runnerBean1 --- ");};
 	}
 }
 /*
