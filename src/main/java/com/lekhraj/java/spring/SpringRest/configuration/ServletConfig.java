@@ -14,4 +14,22 @@ public class ServletConfig {
         registrationBean.setLoadOnStartup(1);
         return registrationBean;
     }
+
+    /*
+    ==============================
+    Change from Tomcat to jetty.
+    ==============================
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-jetty</artifactId>
+    </dependency>
+
+    @Bean
+    public JettyEmbeddedServletContainerFactory  jettyEmbeddedServletContainerFactory() {
+        JettyEmbeddedServletContainerFactory jettyContainer = new JettyEmbeddedServletContainerFactory();
+        jettyContainer.setPort(9000);
+        jettyContainer.setContextPath("/springbootapp");
+        return jettyContainer;
+    }
+    */
 }
