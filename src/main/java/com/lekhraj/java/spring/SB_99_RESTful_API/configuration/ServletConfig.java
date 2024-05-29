@@ -1,6 +1,6 @@
-package com.lekhraj.java.spring.SpringRest.configuration;
+package com.lekhraj.java.spring.SB_99_RESTful_API.configuration;
 
-import com.lekhraj.java.spring.SpringRest.servlet.MyServlet;
+import com.lekhraj.java.spring.SB_99_RESTful_API.servlet.MyServlet;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.lekhraj.java.spring.SpringRest.controller;
+package com.lekhraj.java.spring.SB_99_RESTful_API.controller;
 
 // Global Error handling
 public class ControllerAdvise {
