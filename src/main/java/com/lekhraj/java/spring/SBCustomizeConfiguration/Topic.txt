@@ -10,12 +10,13 @@ https://www.baeldung.com/spring-boot-annotations
 7. @Conditional
 8. etc ,more
 
-Customization Example/s:
+Customization Example/s program/s:
 - Spring Boot: Customize Whitelabel Error Page
     * @EnableAutoConfiguration(exclude = {ErrorMvcAutoConfiguration.class}) --> show Tomcat page then.
     * server.error.whitelabel.enabled=false --> show Tomcat page then.
     * @Controller MyErrorController class >> @RequestMapping("/error")m(){ my page code} --> custom my page.
 
 - Customize the Jackson ObjectMapper
+  Data Format, include not null, etc.
 
 Spring Boot Filter
