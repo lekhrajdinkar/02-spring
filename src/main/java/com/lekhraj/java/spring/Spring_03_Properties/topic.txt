@@ -26,6 +26,7 @@
         or @Component, @Configuration
 
     @ConfigurationPropertiesBinding, custom binding rule/code.
+        - implement Converter<S,T> --> @override T convert(S)
         - https://www.baeldung.com/configuration-properties-in-spring-boot
         - check this: mail.credentials2=john2,password2 to ConfigurationPropertiesByPrefixBean
         - validation (JSR-380 format) while binding.

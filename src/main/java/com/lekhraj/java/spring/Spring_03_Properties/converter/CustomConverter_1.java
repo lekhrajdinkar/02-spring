@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationPropertiesBinding
-public class CustomConverter_1 implements Converter<String, Credentials> {
+public class CustomConverter_1 implements Converter<String, Credentials> { // generic : from,to
     @Override
     public Credentials convert(String source) {
 
