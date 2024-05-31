@@ -10,6 +10,8 @@
     - change location of property file, other than "src/main/resources".
 
 3. Feed External property file / outside jar.
+    java -jar my-app.jar --spring.config.location=<path>/application.properties
+    or, env var :: export SPRING_CONFIG_LOCATION=/config/external/application.properties
 
 4. Feed External property
    - Properties From Command Line Arguments

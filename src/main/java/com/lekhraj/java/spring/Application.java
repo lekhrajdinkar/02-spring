@@ -20,11 +20,10 @@ public class Application {
 		System.setProperty("server.servlet.context-path", "/spring"); //way-3
 		System.setProperty("server.error.whitelabel.enabled=", "false"); //way-3
 
-
 		SpringApplication app = new SpringApplication(Application.class);
 		app.setDefaultProperties(Collections.singletonMap("server.port", "8083")); //way-1
+		//app.setDefaultProperties(Collections.singletonMap("spring.config.additional-location", "file:/application.properties"));
 		app.run(args);
-
 	}
 
 	// Another Nice way to write CommandLineRunner (Functional interface)
@@ -48,6 +47,5 @@ Java System Properties way-3
 Env Variables way-4
 application.properties (ext) in Current Directory on server
 application.properties (int) in the classpath (src/main/resources or the packaged jar file)
-
  */
 
