@@ -1,18 +1,23 @@
 package com.lekhraj.java.spring;
 
 import com.lekhraj.java.spring.Spring_03_Properties.bean.Prop2Map;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Collections;
 
 @SpringBootApplication
 @EnableConfigurationProperties({Prop2Map.class})
-
-public class Application {
+public class Application implements ApplicationContextAware {
+	//@Autowired  // didnot work
+	private ApplicationContext applicationContext;
 	public static void main(String[] args)
 	{
 		//SpringApplication.run(Application.class, args);
@@ -29,7 +34,19 @@ public class Application {
 	// Another Nice way to write CommandLineRunner (Functional interface)
 	@Bean
 	public CommandLineRunner runnerBean1() throws Exception {
-		return (String[] args) -> { System.out.println(" --- runnerBean1 --- ");};
+		return args -> {
+			System.out.println(" --- runnerBean1 : print All Spring managed Bean names --- ");
+
+			String[] allBeanNames = applicationContext.getBeanDefinitionNames();
+			for(String beanName : allBeanNames) {
+				// System.out.println(beanName);
+			}
+		};
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		this.applicationContext = applicationContext;
 	}
 }
 /*

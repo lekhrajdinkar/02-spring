@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @RestController
 public class CoffeeController {
 
-    @GetMapping("/api/get-sample-coffee")
+    @GetMapping("api/get-sample-coffee")
     public CoffeeDTO getSampleCoffee(){
         //return CoffeeDTO.builder().name("Lek-Coffee").size(2).createTime(LocalDateTime.now()).build();
         return CoffeeDTO.builder().name("Special").size(2).createTime(LocalDateTime.now()).build();
