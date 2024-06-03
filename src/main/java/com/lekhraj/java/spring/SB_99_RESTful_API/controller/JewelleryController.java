@@ -23,7 +23,7 @@ import java.util.Map;
 @Tag(name = "Jewellery API for My-Store", description = "Custom API for demonstrating Jewellery APIs")
 public class JewelleryController {
 
-    @GetMapping("get-one")
+    @GetMapping(value={"get-one"})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
 
@@ -57,16 +57,25 @@ public class JewelleryController {
      * @return : new ResponseEntity<JewelleryDTO>() - 3 constructor             <<<<
      * @throws Exception
      */
-    @GetMapping("get-one-2/{pathVariable1}")
+    // Optional Path Variable
+    @GetMapping(value = {
+             "get-one-2/{pathVariable1}"
+            ,"get-one-2/{pathVariable1}/{pathVariable2}"
+    })
     ResponseEntity<JewelleryDTO> getJewelleryRE(
             HttpServletResponse response,
             //@RequestBody JewelleryDTO body,
             @PathVariable("pathVariable1") String pathVariable1,
+            @PathVariable(value="pathVariable2", required = false) String pathVariable2_optional,
+            @PathVariable Map<String,String> allPathVariables,
 
             @RequestHeader("h1") String h1,
             @RequestHeader(value="h2",required = false, defaultValue = "v2-default") String h2_Optional,
             @RequestHeader Map<String,String> allHeader,
-            @RequestHeader HttpHeaders httpHeaders
+            @RequestHeader HttpHeaders httpHeaders,
+
+            @RequestParam(value = "ReqParam1", defaultValue = "defaultValue", required = false) String reqParam1,
+            @RequestParam Map<String,String> allRequestParams
     ) throws Exception
     {
         JewelleryDTO dto =  JewelleryDTO.builder()
@@ -76,8 +85,10 @@ public class JewelleryController {
                 .createTime(LocalDateTime.now())
                 .build();
 
-        log.info(" \n\n >>> pathVariable1 : {}, header-1|2: {}|{} \n", pathVariable1, h1,h2_Optional);
+        log.info(" \n\n >>> pathVariable1|2 : {}|{}, header-1|2: {}|{} \n", pathVariable1,pathVariable2_optional, h1,h2_Optional);
         allHeader.forEach((k,v)-> System.out.println(k+":"+v));
+        allPathVariables.forEach((k,v)-> System.out.println(k+"::"+v));
+        allRequestParams.forEach((k,v)-> System.out.println(k+":::"+v));
 
         // Way-1
         // response.setHeader("h1","v1");
