@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 public class JewelleryDTO
 {
     // Bean/dto Validation
+    // @NameCheckAnnotation
     @JsonProperty("jewelleryName")
     @NotBlank(message = "Name not given")
     String name;
