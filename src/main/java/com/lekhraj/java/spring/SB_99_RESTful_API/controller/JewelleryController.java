@@ -8,12 +8,16 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.websocket.server.PathParam;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
+import java.util.Map;
 
+@Slf4j
 @RestController
 @RequestMapping("api/v1/jewellery")
 @Tag(name = "Jewellery API for My-Store", description = "Custom API for demonstrating Jewellery APIs")
@@ -53,8 +57,17 @@ public class JewelleryController {
      * @return : new ResponseEntity<JewelleryDTO>() - 3 constructor             <<<<
      * @throws Exception
      */
-    @GetMapping("get-one-2")
-    ResponseEntity<JewelleryDTO> getJewelleryRE( HttpServletResponse response) throws Exception
+    @GetMapping("get-one-2/{pathVariable1}")
+    ResponseEntity<JewelleryDTO> getJewelleryRE(
+            HttpServletResponse response,
+            //@RequestBody JewelleryDTO body,
+            @PathVariable("pathVariable1") String pathVariable1,
+
+            @RequestHeader("h1") String h1,
+            @RequestHeader(value="h2",required = false, defaultValue = "v2-default") String h2_Optional,
+            @RequestHeader Map<String,String> allHeader,
+            @RequestHeader HttpHeaders httpHeaders
+    ) throws Exception
     {
         JewelleryDTO dto =  JewelleryDTO.builder()
                 .name("Jewellery-2")
@@ -62,6 +75,9 @@ public class JewelleryController {
                 .price(200)
                 .createTime(LocalDateTime.now())
                 .build();
+
+        log.info(" \n\n >>> pathVariable1 : {}, header-1|2: {}|{} \n", pathVariable1, h1,h2_Optional);
+        allHeader.forEach((k,v)-> System.out.println(k+":"+v));
 
         // Way-1
         // response.setHeader("h1","v1");
