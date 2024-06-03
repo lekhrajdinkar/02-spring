@@ -6,7 +6,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class webMvcConfiguration {
+//@EnableWebMvc
+//@ComponentScan(basePackages = "com.lekhraj.java.spring.SB_99_RESTful_API.configuration.controller")
+public class WebConfig {
 
     @Bean
     WebMvcConfigurer webMvcConfigurerForApp(){

@@ -10,13 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 
-@Controller // Notice - Not RestContoller
-public class MyControllerError implements ErrorController {
+//@Controller // Notice - Not RestContoller
+public class MyBasicErrorController implements ErrorController {
     @Autowired
     ErrorAttributes errors; // <<< inject
 
     // For API, return ResponseEntity<?>
     // For Web App, return Error page/Html -
+
     @RequestMapping("/error-controller")
     public ResponseEntity<String> handleError(WebRequest req){ // notice web request
         ErrorAttributeOptions options = ErrorAttributeOptions.defaults();
