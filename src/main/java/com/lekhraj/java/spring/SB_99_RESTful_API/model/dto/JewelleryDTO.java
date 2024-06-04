@@ -1,6 +1,8 @@
 package com.lekhraj.java.spring.SB_99_RESTful_API.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -12,7 +14,8 @@ import java.time.LocalDateTime;
 @Builder
 @Setter
 @Getter
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class JewelleryDTO
 {
     // Bean/dto Validation
@@ -22,11 +25,12 @@ public class JewelleryDTO
     String name;
 
     @JsonProperty("jewelleryId")
-    @NotBlank(message = "Id not given")
+    @Min(value = 1, message ="Id missing")
     int id;
 
     @JsonProperty("jewelleryPrice")
-    @Size(min = 10, max = 1000, message = "Must be between 100 and 1000")
+    //@Size(min = 10, max = 1000, message = "Must be between 100 and 1000")
+    @Max(value = 1000, message = "maximum value is 1000.")
     double price;
 
     @DateTimeFormat

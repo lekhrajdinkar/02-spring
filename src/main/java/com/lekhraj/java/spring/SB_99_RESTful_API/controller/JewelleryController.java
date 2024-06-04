@@ -4,29 +4,32 @@ import com.lekhraj.java.spring.SB_99_RESTful_API.model.dto.JewelleryDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.websocket.server.PathParam;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/jewellery")
+@RequestMapping("api/jewellery")
 @Tag(name = "Jewellery API for My-Store", description = "Custom API for demonstrating Jewellery APIs")
+@Validated
 public class JewelleryController {
 
-    @GetMapping(value={"get-one"})
+    //====================
+    // 1. SWAGGER API Doc
+    //====================
+    @GetMapping(value={"v1/get-one"})
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-
     @Operation(
             summary = "Get random jewellery",
             description = "Gives hardcoded object",
@@ -41,6 +44,13 @@ public class JewelleryController {
                     @ApiResponse(responseCode = "404", description = "Item not found")
             }
     )
+    /*
+        method arg : @Parameter(
+                name =  "firstName",
+                description  = "First Name of the user",
+                example = "Vatsal",
+                required = true)
+    */
     JewelleryDTO getJewellery() throws Exception
     {
         JewelleryDTO dto =  JewelleryDTO.builder()
@@ -53,18 +63,21 @@ public class JewelleryController {
         return dto;
     }
 
-    /**
-     * @return : new ResponseEntity<JewelleryDTO>() - 3 constructor             <<<<
-     * @throws Exception
-     */
-    // Optional Path Variable
+
+
+    //====================
+    // 2. BINDING
+    //====================
     @GetMapping(value = {
-             "get-one-2/{pathVariable1}"
-            ,"get-one-2/{pathVariable1}/{pathVariable2}"
+             "v2/get-one/{pathVariable1}"
+            ,"v2/get-one/{pathVariable1}/{pathVariable2}"
     })
     ResponseEntity<JewelleryDTO> getJewelleryRE(
             HttpServletResponse response,
-            //@RequestBody JewelleryDTO body,
+
+            @RequestParam(value = "ReqParam1", defaultValue = "defaultValue", required = false) String reqParam1,
+            @RequestParam Map<String,String> allRequestParams,
+
             @PathVariable("pathVariable1") String pathVariable1,
             @PathVariable(value="pathVariable2", required = false) String pathVariable2_optional,
             @PathVariable Map<String,String> allPathVariables,
@@ -72,16 +85,15 @@ public class JewelleryController {
             @RequestHeader("h1") String h1,
             @RequestHeader(value="h2",required = false, defaultValue = "v2-default") String h2_Optional,
             @RequestHeader Map<String,String> allHeader,
-            @RequestHeader HttpHeaders httpHeaders,
+            @RequestHeader HttpHeaders httpHeaders
 
-            @RequestParam(value = "ReqParam1", defaultValue = "defaultValue", required = false) String reqParam1,
-            @RequestParam Map<String,String> allRequestParams
+            //, @RequestBody JewelleryDTO dto_input
     ) throws Exception
     {
         JewelleryDTO dto =  JewelleryDTO.builder()
                 .name("Jewellery-2")
                 .id(2)
-                .price(200)
+                .price(2000)
                 .createTime(LocalDateTime.now())
                 .build();
 
@@ -107,5 +119,23 @@ public class JewelleryController {
                 .body(dto);
 
         return httpResponse2;
+    }
+
+    //=====================================
+    // 3. Validator - Request and response
+    //=====================================
+    @Valid
+    @PostMapping("v3/get-one")
+    ResponseEntity<JewelleryDTO> getJewellery3(@RequestBody JewelleryDTO dtoInput) throws Exception
+    {
+        log.info("dtoInput : {}", dtoInput);
+        JewelleryDTO dto =  JewelleryDTO.builder()
+                .name("Jewellery-3")
+                .id(dtoInput.getId())
+                .price(30000)
+                .createTime(LocalDateTime.now())
+                .build();
+        //return dto;
+        return new ResponseEntity<>(dto,HttpStatus.OK);
     }
 }

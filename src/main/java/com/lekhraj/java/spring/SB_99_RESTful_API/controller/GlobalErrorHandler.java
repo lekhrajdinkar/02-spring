@@ -16,8 +16,9 @@ import java.time.LocalDateTime;
 
 //@RestControllerAdvice
 @ControllerAdvice
-public class GlobalErrorHandler extends ResponseEntityExceptionHandler {
-    @ExceptionHandler(Exception.class)
+public class GlobalErrorHandler extends ResponseEntityExceptionHandler
+{
+    //@ExceptionHandler(Exception.class)
     ResponseEntity<CustomErrorResponse> handleAllExceptions(Exception ex, WebRequest request){ // << inject
         CustomErrorResponse errorResponse = new CustomErrorResponse(
                 LocalDateTime.now(),
