@@ -87,7 +87,7 @@ public class JewelleryController {
             @RequestHeader Map<String,String> allHeader,
             @RequestHeader HttpHeaders httpHeaders
 
-            //, @RequestBody JewelleryDTO dto_input
+            , @RequestBody JewelleryDTO dto_input
     ) throws Exception
     {
         JewelleryDTO dto =  JewelleryDTO.builder()
@@ -123,10 +123,11 @@ public class JewelleryController {
 
     //=====================================
     // 3. Validator - Request and response
+    // cannot valid ResponseEntity.
     //=====================================
     @Valid
     @PostMapping("v3/get-one")
-    ResponseEntity<JewelleryDTO> getJewellery3(@RequestBody JewelleryDTO dtoInput) throws Exception
+    JewelleryDTO getJewellery3(@Valid @RequestBody JewelleryDTO dtoInput) throws Exception
     {
         log.info("dtoInput : {}", dtoInput);
         JewelleryDTO dto =  JewelleryDTO.builder()
@@ -135,7 +136,7 @@ public class JewelleryController {
                 .price(30000)
                 .createTime(LocalDateTime.now())
                 .build();
-        //return dto;
-        return new ResponseEntity<>(dto,HttpStatus.OK);
+        return dto;
+        //return new ResponseEntity<>(dto,HttpStatus.OK);
     }
 }
