@@ -10,7 +10,8 @@ import java.time.format.DateTimeFormatter;
 public class LocalDateTimeSerializer extends JsonSerializer<LocalDateTime> {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss");
     @Override
-    public void serialize(LocalDateTime localDateTime, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+    public void serialize(LocalDateTime localDateTime, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
+            throws IOException {
         jsonGenerator.writeString(formatter.format(localDateTime));
     }
     @Override

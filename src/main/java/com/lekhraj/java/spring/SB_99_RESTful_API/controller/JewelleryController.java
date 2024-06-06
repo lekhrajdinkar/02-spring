@@ -1,5 +1,9 @@
 package com.lekhraj.java.spring.SB_99_RESTful_API.controller;
 
+import com.fasterxml.jackson.databind.InjectableValues;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lekhraj.java.spring.SB_99_RESTful_API.model.StatusEnum;
+//import com.lekhraj.java.spring.SB_99_RESTful_API.model.dto.Config2Inject;
 import com.lekhraj.java.spring.SB_99_RESTful_API.model.dto.JewelleryDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -127,16 +131,45 @@ public class JewelleryController {
     //=====================================
     @Valid
     @PostMapping("v3/get-one")
+    // JSON --> dtoInput
     JewelleryDTO getJewellery3(@Valid @RequestBody JewelleryDTO dtoInput) throws Exception
     {
         log.info("dtoInput : {}", dtoInput);
-        JewelleryDTO dto =  JewelleryDTO.builder()
+
+        /*JewelleryDTO dto =  JewelleryDTO.builder()
                 .name("Jewellery-3")
                 .id(dtoInput.getId())
-                .price(30000)
+                .price(300) // change to fail
                 .createTime(LocalDateTime.now())
                 .build();
-        return dto;
-        //return new ResponseEntity<>(dto,HttpStatus.OK);
+        return dto;*/
+
+        /*ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(dtoInput);
+        JewelleryDTO dto2 = mapper.readValue(json, JewelleryDTO.class);*/
+
+         dtoInput.setStockStatus(StatusEnum.IN_STOCK); // <<<
+         return dtoInput;
+    }
+
+    // ============= MAIN ==========
+    public static void main(String... a){
+
+    }
+
+    // 1. Deserialize JSON with injected values
+    void deserialize(){
+        ObjectMapper mapper = new ObjectMapper();
+
+        // Example JSON
+        String json = "{\n" +
+                "    \"jewelleryNameAlias2\": \"Jewellery-3\",\n" +
+                "    \"jewelleryId\": 34,\n" +
+                "    \"jewelleryPrice\": 300,\n" +
+                "    \"derive\": \"XXXXXX\",\n" +
+                "    \"category\": {\n" +
+                "        \"type\": \"BRACLET\"\n" +
+                "    }\n" +
+                "}";
     }
 }
