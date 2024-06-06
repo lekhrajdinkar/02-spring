@@ -6,7 +6,6 @@ import com.lekhraj.java.spring.SB_99_RESTful_API.model.StatusEnum;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -55,15 +54,17 @@ public class JewelleryDTO
         this.derivedFeild = value+"--"+value;
     }
 
-    private Map<String, Object> properties = new HashMap<>();
-    @JsonAnySetter  // ?
-    public Map<String, Object> getProperties() {
-        return properties;
+    private Map<String, Object> unknownFeildMap = new HashMap<>();
+    @JsonAnyGetter
+    //On serialization, the properties from MAP will simply be added to JSON
+    public Map<String, Object> getUnknownFeildMap() {
+        return unknownFeildMap;
     }
 
-    @JsonAnyGetter // ?
+    @JsonAnySetter
+    //On deserialization, the "additional" properties from JSON will simply be added to the map.
     public void setProperty(String key, Object value) {
-        properties.put(key, value);
+        unknownFeildMap.put(key, value);
     }
     // =========
     Category category;
