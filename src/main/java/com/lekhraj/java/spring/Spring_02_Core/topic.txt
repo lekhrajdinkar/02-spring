@@ -39,6 +39,7 @@ https://chat.openai.com/c/33d0d06d-0aaa-4791-bce9-da8ea3f5dd53
 
 10.  @SpringBootApplication  --> @Configuration, @EnableAutoConfiguration, and @ComponentScan.
 11. Load bean By profile
+12. @Singleton
 
 --- More ---
 11. sceduled task
