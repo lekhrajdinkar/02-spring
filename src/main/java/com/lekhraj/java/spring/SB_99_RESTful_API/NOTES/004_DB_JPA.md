@@ -1,5 +1,6 @@
-https://www.baeldung.com/learn-jpa-hibernate
-https://chatgpt.com/c/9a8dd8ab-71b5-49d6-bcfe-8d9b0aa31971
+- https://www.baeldung.com/learn-jpa-hibernate
+- https://chatgpt.com/c/9a8dd8ab-71b5-49d6-bcfe-8d9b0aa31971
+- 
 
 ### JPA
 - JPA Specification --> ORM layer (focus)
@@ -37,12 +38,12 @@ https://chatgpt.com/c/9a8dd8ab-71b5-49d6-bcfe-8d9b0aa31971
 
 
 ### SB JPA Data
-Provide Abstractions
+Provide Abstractions : https://chatgpt.com/c/8ace7914-f8cc-465e-873a-7b45974bb7b2
 1. @PersistenceContext - txn-scoped.
 2. @Transactional 
    - Create Reliable transaction with ACID.
    - provides abstraction, no to write start and commit/rollback.
-3. ACID (reliable transaction)
+3. ACID (reliable transaction) : https://chatgpt.com/c/22d9f577-17f2-4d43-9013-401b18ca58e0
     - A tomicity : SB - @Transactional
     - C onsistency : underlying DB sol - constraints, Fk, etc
     - I solated : underlying DB  sol.  
