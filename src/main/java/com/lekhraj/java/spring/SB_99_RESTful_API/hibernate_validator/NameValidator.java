@@ -1,4 +1,4 @@
-package com.lekhraj.java.spring.SB_99_RESTful_API.validator;
+package com.lekhraj.java.spring.SB_99_RESTful_API.hibernate_validator;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
