@@ -15,3 +15,6 @@ public class PasswordConverter implements AttributeConverter<String,String> {
         return new String(Base64.getDecoder().decode(s));
     }
 }
+
+//Apply::
+//@Convert(covert="PasswordConverter")
