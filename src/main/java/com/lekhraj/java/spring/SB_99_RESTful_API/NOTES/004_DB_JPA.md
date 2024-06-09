@@ -44,13 +44,14 @@
 
 ### 2. JPA Entity Lifecycle Events
 
-- First Apply these on ListenerClass/pojo Methods
-  - @PrePersist, @PostPersist,
-  - @PreRemove, @PostRemove,
-  - @PreUpdate, @PostUpdate,
-  - @PostLoad
-- then @EntityListeners(MyListener.class) @Entity class
+- First Apply these on MyListener class's Methods
+  - @PrePersist m(), @PostPersist m(),
+  - @PreRemove m(), @PostRemove m(),
+  - @PreUpdate m(), @PostUpdate m(),
+  - @PostLoad m()
+- then @EntityListeners(MyListener.class) @Entity MyEntity class
 - fact : @GeneratedValue - expect key to available in @PostPersist.
+- Like we seperaely, write bean process / life-cycle-hook fpr Spring bean.
 
 ---
 
@@ -93,9 +94,10 @@ ISOLATION :: wait for the other txn to commit/rollback before proceeding.
 - http req2 --> thread-2 --> txn-2 --> PC-2 --> commit --> flush to same DB. (override)
 - Summary:
   - Each HTTP request typically runs in its own thread and transaction.
-  - Transactions are isolated from each other, but concurrency control mechanisms ensure data consistency.
+  - Transactions are isolated from each other, but "concurrency-control-mechanisms"/isolation ensure data consistency.
   - Persistence contexts are tied to transactions and are independent for each request, ensuring that changes made in one request do not affect others until committed.
-  - Careful design and configuration are necessary to handle concurrency and transaction management effectively in a multi-request environment.
+  - Careful design and configuration are necessary to handle concurrency and transaction management effectively in a multi-request environment. 
+  - Developer has to write thread-safe code/ concurrent access code, etc
 
 ---
 
