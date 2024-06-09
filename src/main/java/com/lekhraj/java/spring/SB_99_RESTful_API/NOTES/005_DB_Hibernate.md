@@ -21,18 +21,34 @@
 
 - `@MappedSuperclass`
 - `@Inheritance(strategy = InheritanceType.SINGLE_TABLE)` : on parentClass
-- `@DiscriminatorColumn(name="value-1",discriminatorType = DiscriminatorType.INTEGER)` : on parentClass
+- `@DiscriminatorColumn(name="columnName",discriminatorType = DiscriminatorType.INTEGER)` : on parentClass
 - `@DiscriminatorValue("1")` : on ChildClass
 - https://www.baeldung.com/hibernate-inheritance
 
+- `@EnableTransactionManagement` : from SBJpaData-starter
 
 ### Advance
-- `@Convert`
+#### Conversion Related
+- `@Convert (converter=abc.class)` 
+  - more like binder - which jackson for JSON<-->Object.
+  - converter for DB::table<-->Object/Entity
+  - use case : performing encryption/decryption, data transformations, that are NOT directly supported by JPA, etc
 - `@Lob` byte[]
-- @Temporal(TemporalType.DATE) private Date birthDate; //java.util.Date
+- `@Temporal(TemporalType.DATE)` private Date birthDate;
+  - temporal, meaning relating to time.
+  - java has seperate set of API(Java.sql.*), to deal with DB Date/time eg: connection code, etc
+  - `java.util.*` and `java.time.*`  <--convert-->  `Java.sql.*`
 - `@Enumerated`(EnumType.STRING/ORDINAL) MyEnum
   - enums to their ordinal values or names
   - hibernate automatically converts to enum value, if not mentioned.
+- Automatic/inbuilt conversion by Hibernate :
+  - Boolean to int (t-1, f-0)
+  - Boolean to String(t-"true")
+  - java.time.LocalDate to java.sql.Date  <<<
+  - java.time.LocalDateTime to java.sql.Timestamp <<<
+  - enum to string/ordinal. String/int var1
+
+#### Other
 - `@embedded and @embeddable`
   - define a class whose instances can be embedded in an entity. 
   - This class does not have its own table but shares the table of the owning entity.
@@ -44,7 +60,6 @@
         @AttributeOverride(name = "city", column = @Column(name = "home_city")), ...
     })
   ```
-
 ---
 
 ## B.1 Entity Relationships
@@ -92,8 +107,10 @@
 ```
 List<Vehicle> vehicles = session.createQuery("FROM Vehicle", Vehicle.class).getResultList();
 // Implicit polymorphism: vehicles list will contain instances of both Car and Bike
+
 List<Car> cars = session.createQuery("FROM Car", Car.class).getResultList();
 // Explicit polymorphism: cars list will contain only instances of Car
+
 List<Vehicle> vehicles = session.createQuery("FROM Vehicle v WHERE TREAT(v AS Car).numberOfDoors > 3", Vehicle.class) .getResultList();
 ```
 ---
@@ -120,17 +137,7 @@ List<Vehicle> vehicles = session.createQuery("FROM Vehicle v WHERE TREAT(v AS Ca
 - <artifactId>spring-boot-starter-validation</artifactId>
 - @Size(min = 3, max = 15) : on String
 - @length(min = 3, max = 15) : on Collectoin
-
-## E.Converter
-- usecase:performing encryption/decryption, data transformations that are NOT directly supported by JPA, etc
-- @Convert(converter=abc.class)
-- Automatic/inbuilt
-  - Boolean to int (t-1, f-0)
-  - Boolean to String(t-"true")
-  - java.time.LocalDate to java.sql.Date  <<< 
-  - java.time.LocalDateTime to java.sql.Timestamp <<<
-  - enum to string. String f1
-  - enum to ordinal, int f1
+- @NotNull
 
 ---
 ## Z.More

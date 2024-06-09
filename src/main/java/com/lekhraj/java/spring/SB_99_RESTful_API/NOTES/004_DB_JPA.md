@@ -3,11 +3,14 @@
 -
 
 ## A. JPA
-
 - JPA Specification --> ORM layer (focus)
 - interact with a "relational" database without any SQL.
 - Hibernate framework.
-- Entity, relationships, EntityManager(CRUD) / Session in Hibernate
+- Entity, relationships, EntityManager(CRUD) / `Session` in Hibernate.
+- key components
+  - SessionFactory(heavy, Created at startup) : in SB project, rename bean : @Bean(name = "entityManagerFactory") LocalSessionFactoryBean m(){...}
+  - TransactionManager : `PlatformTransactionManager` --impl--> HibernateTransactionManager, JpaTransactionManager
+  - Datasource (database connections pool): hikari, javax.sql.DataSource, DataSourceBuilder from SP,...
 
 ### 1. persistenceContext :
 
@@ -25,6 +28,7 @@
     ```
     tied to the transaction.
     It is created when the transaction starts and is closed when the transaction ends.
+    eg: Spring-boot-jpa default behaviour. @@EnableTransactionManagement
     ```
   - Extended. workflows where a sequence of operations spans multiple transactions / stateful App. @PersistenceContext(type = PersistenceContextType.EXTENDED)
 
@@ -34,7 +38,6 @@
   provide shipping details, and make a payment. Each step might be handled by separate transactions,
   but the cart and order entities need to be kept consistent throughout the process.
   ```
-
       Downsides:
       - can introduce complexity in handling concurrency and transaction boundaries.
       - Increased Memory Usage.
@@ -87,9 +90,8 @@ ISOLATION :: wait for the other txn to commit/rollback before proceeding.
 ---
 
 ## C. Scenarios
-
-1. multi-Http request environment (in ||)
-
+### multi-Http request environment (in ||)
+1. PC per request
 - http req1 --> thread-1 --> txn-1 --> PC-1 --> commit --> flush to DB
 - http req2 --> thread-2 --> txn-2 --> PC-2 --> commit --> flush to same DB. (override)
 - Summary:
@@ -99,15 +101,18 @@ ISOLATION :: wait for the other txn to commit/rollback before proceeding.
   - Careful design and configuration are necessary to handle concurrency and transaction management effectively in a multi-request environment. 
   - Developer has to write thread-safe code/ concurrent access code, etc
 
+2. PC shared by multiple request.
+    - Service class > @PC(Extended) Session/Em > @T m1() + @T m2() + ...
+    - PROS : less DB call, fast | CONS : handle concurrency
+
+3. Global PC
+   - use second level cache.
+   - PROS : very less DB call, faster | CONS : handle global concurrency
 ---
 
 ## Z. Extra
-
-- check multiple em possiblities example : https://chatgpt.com/c/9a8dd8ab-71b5-49d6-bcfe-8d9b0aa31971
+- check multiple session/em possiblities example : https://chatgpt.com/c/9a8dd8ab-71b5-49d6-bcfe-8d9b0aa31971
 - EntityManager(Not Thread safe), meaning C R U D methods does not have sync and lock code.
 
----
 
-pending:
 
-1. Real example of Extended-PC
