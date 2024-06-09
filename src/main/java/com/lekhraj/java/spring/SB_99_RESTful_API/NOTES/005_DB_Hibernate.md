@@ -45,20 +45,20 @@
 - uni or bi directional : both has references of each other.
 - 1-2-1 
   - any class can be owner
-  - other class : @mapperBy=propertyName mentioned in owner-class
+  - other class : mapperBy=propertyName mentioned in owner-class
 - C1:1-2-M and C2:M-2-1(owner)
-  - C1:@mapperBy=propertyName mentioned in owner-class
-  - C1:M-2-M and C2:M-2-M
+  - C1:mapperBy=propertyName mentioned in owner-class
+- C1:M-2-M and C2:M-2-M
     -  no one is owner.
     - create @JoinTable.
-    ```
+```
     @ManyToMany
     @JoinTable(
       name = "student_course",
       joinColumns = @JoinColumn(name = "student_id"),
       inverseJoinColumns = @JoinColumn(name = "course_id")
     )
-    ```
+ ```
 
 ---
 
