@@ -19,10 +19,14 @@ public class StudentRepository {
 
     public Student getStudent(String name){
         EntityManager em = session.createEntityManager();
-        //EntityTransaction txn = em.getTransaction();
+
         TypedQuery<Student> q = em.createQuery("select s from Student s where s.name=:sname", Student.class);
         q.setParameter("sname",name);
-        Student result =  q.getSingleResult();
+
+        TypedQuery<Student> nq = em.createNamedQuery("Student.findStudentByName", Student.class);
+        nq.setParameter("sname",name);
+
+        Student result =  nq.getSingleResult();
         em.close();
         return result;
     }

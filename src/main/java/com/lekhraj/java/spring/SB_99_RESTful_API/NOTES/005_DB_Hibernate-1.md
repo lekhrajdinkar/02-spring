@@ -2,7 +2,7 @@
 - https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
 ### Common Annotation
 - @Entity(name="new_entityname")
-- @Basic(fetch=EAGER,optional=true).
+- @Basic(fetch=FetchType.EAGER,optional=true).
   - this is already added by default on all column.
   - basic mapping, field to a db column.
   
@@ -23,7 +23,20 @@
 - `@DiscriminatorValue("1")` : on ChildClass
 - https://www.baeldung.com/hibernate-inheritance
 
+### Transaction
 - `@EnableTransactionManagement` : from SBJpaData-starter
+
+### Performance
+- `@Fetch`(value = FetchMode.SELECT) : https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
+  - fetch associated entities lazily, to avoid loading unnecessary data upfront.
+  - optimizing performance when dealing with large collections.
+  - FetchMode.Join : load early
+
+- `@BatchSize`
+  - @OneToMany(mappedBy = "order")  @BatchSize(size = 10) private List<OrderItem> items; 
+  - optimize the loading of collections.
+  - instead of issuing separate SELECT queries for each item, Hibernate will fetch 10 items at a time, reducing the number of queries executed.
+  - but may increase memory usage, if batch size is big.
 
 ### Advance
 #### Conversion Related
@@ -45,6 +58,7 @@
   - java.time.LocalDate to java.sql.Date  <<<
   - java.time.LocalDateTime to java.sql.Timestamp <<<
   - enum to string/ordinal. String/int var1
+- `@fetchMode` - H-specific.
 
 #### Other
 - `@embedded and @embeddable`
@@ -82,6 +96,14 @@
       inverseJoinColumns = @JoinColumn(name = "course_id")
     )
  ```
+- FetchType : eg - @OneToMany(fetch = FetchType.LAZY/EAGER)
+- @fetchMode : defines `how` the associated entities are fetched from the database. meaning `SQS queries`.
+  - @Fetch(FetchMode.SELECT/JOIN/SUBSELECT)
+  - FetchMode is a Hibernate-specific concept that defines how associated entities.
+  - SELECT: Specifies that associated entities should be fetched lazily, using a separate SELECT statement.
+  - JOIN: Specifies that associated entities should be fetched eagerly using a single JOIN query.
+  - SUBSELECT: Specifies that associated entities should be fetched lazily using a single SELECT query with a subselect.
+
 ---
 ## B.2 Inheritance mapping
 - https://www.baeldung.com/hibernate-inheritance
@@ -225,4 +247,5 @@ eg:
  
 ---
 ### pending
-1. 
+1. program on inheritance 
+2. program on relationship
