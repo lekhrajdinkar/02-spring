@@ -96,6 +96,7 @@
     - Like table per class, but child table will have only prop defined in entity, not from parent.
       - parent class table - 2 col
       - Child-1/2 class table - 2 col + FK to parent table.
+    - `@wherejointable` - https://www.baeldung.com/hibernate-wherejointable
   4. `MappedSuperclass` – the parent classes, can’t be entities.
 
 - Polymorphic queries. https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
@@ -124,14 +125,14 @@ List<Vehicle> vehicles = session.createQuery("FROM Vehicle v WHERE TREAT(v AS Ca
 
 3. unique Contraint
 - @Column(unique=t/f) : Single column
-- @UniqueConstraint : single/composite column
+- `@UniqueConstraint` : single/composite column
   ```
   @Table(uniqueConstraints = {
      @UniqueConstraint(columnNames = { "personNumber", "isActive" }) 
    }, ...)
   ```
 ---
-## D. Sequence generator / Identifier
+## D. Identifier : auto,identity,sequence,table,generic | composite
 `@GeneratedValue(Strategy="XXXXX")`
   - AUTO : hibernate will choose based on dialect.
     - Oracle, PostgreSQL    : Uses `SEQUENCE` because Oracle supports sequences.
@@ -169,7 +170,7 @@ List<Vehicle> vehicles = session.createQuery("FROM Vehicle v WHERE TREAT(v AS Ca
   allocationSize -  number of sequence values to allocate at a time
   ```
 
-5. Random Sequence 
+5. Random Sequence + generic generator
 - avoid predictable sequences for security
 - Random values can lead to fragmented indexes, which can affect performance.
 eg:
@@ -187,6 +188,8 @@ eg:
     - java.util.UUID id ;
     - class ABC `implements IdentifierGenerator` >> generator() >> `@GenericGenerator(name = "UUID",strategy = "ABC")`
     - generator(){  return UUID.randomUUID().toString(); }
+    - @GenericGenerator >> parameters = @Parameter(name = "prefix", value = "prod")
+    - Check : com.lekhraj.java.spring.SB_99_RESTful_API.entities.CustomIdentifier
     
 - NanoID
   - unique IDs that are shorter and more URL-friendly.
@@ -201,6 +204,10 @@ eg:
         return timestamp + "-" + random;
     }
 ```
+6. Composite Identifiers
+- https://www.baeldung.com/hibernate-identifiers
+- @Embeddable Class ABC : Also public no-agr const, define equal and hashcode
+- then inject @EmbeddedId ABC id;
 
 ## D. Validator 
 - <artifactId>spring-boot-starter-validation</artifactId>

@@ -113,5 +113,8 @@ ISOLATION :: wait for the other txn to commit/rollback before proceeding.
 - check multiple session/em possiblities example : https://chatgpt.com/c/9a8dd8ab-71b5-49d6-bcfe-8d9b0aa31971
 - EntityManager(Not Thread safe), meaning C R U D methods does not have sync and lock code.
 
+### Pending
+1. Second level Cache.
+
 
 
