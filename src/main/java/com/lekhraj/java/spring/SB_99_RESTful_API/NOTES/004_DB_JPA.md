@@ -13,7 +13,6 @@
   - Datasource (database connections pool): hikari, javax.sql.DataSource, DataSourceBuilder from SP,...
 
 ### 1. persistenceContext :
-
 - runtime environment in which entity instances are managed and tracked by the EntityManager(Not Thread safe)
 - heap(entity) <> PC <> Database :: sync/consistency
 - acts as a first-level cache. reduce no. Db call.

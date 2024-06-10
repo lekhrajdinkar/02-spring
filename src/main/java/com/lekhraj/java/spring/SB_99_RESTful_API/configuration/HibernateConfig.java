@@ -35,7 +35,14 @@ public class HibernateConfig {
         return sessionFactory;
     }
 
-    @Bean //  2. javax.sql.DataSource
+    @Bean // 2. HibernateTransactionManager
+    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(sessionFactory);
+        return transactionManager;
+    }
+
+    @Bean //  3. javax.sql.DataSource
     public DataSource dataSource() {
         return DataSourceBuilder.create()
                 .driverClassName(env.getProperty("spring.datasource.driverClassName"))
@@ -43,13 +50,6 @@ public class HibernateConfig {
                 .username(env.getProperty("spring.datasource.username"))
                 .password(env.getProperty("spring.datasource.password"))
                 .build();
-    }
-
-    @Bean // 3. HibernateTransactionManager
-    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory);
-        return transactionManager;
     }
 
     // ========= Other =======
