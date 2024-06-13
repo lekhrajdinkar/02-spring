@@ -26,7 +26,7 @@ public class StudentRepository {
         TypedQuery<Student> nq = em.createNamedQuery("Student.findStudentByName", Student.class);
         nq.setParameter("sname",name);
 
-        Student result =  nq.getSingleResult();
+        Student result =  nq.getSingleResult(); //getResultList()/Set()
         em.close();
         return result;
     }

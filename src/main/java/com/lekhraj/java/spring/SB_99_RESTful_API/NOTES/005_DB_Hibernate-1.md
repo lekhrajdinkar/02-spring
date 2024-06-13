@@ -33,6 +33,7 @@
   - FetchMode.Join : load early
 
 - `@BatchSize`
+  - Use along with @Fetch.
   - @OneToMany(mappedBy = "order")  @BatchSize(size = 10) private List<OrderItem> items; 
   - optimize the loading of collections.
   - instead of issuing separate SELECT queries for each item, Hibernate will fetch 10 items at a time, reducing the number of queries executed.
