@@ -59,6 +59,11 @@ https://www.baeldung.com/learn-jpa-hibernate
 
 2. DYNAMIC : Criteria API (exclude)
 
+# result
+- use Tuple / List<Tuple> : <artifactId>javatuples</artifactId> 
+- Object[] === Tuple, save hetrogeneous
+- Im-mutable : Pair, triplet - hence maintain data integrity.
+- `implements ResultTransformer` >> @override transformTuple(,) | q.setResultTransformer()
 ---
 ## pending:
 1. ScrollableResults program - when processing large dataset, (not sending large Dataset in batches to UI)

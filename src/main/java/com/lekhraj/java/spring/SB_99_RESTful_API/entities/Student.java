@@ -16,7 +16,10 @@ import java.util.UUID;
 @ToString
 
 @Entity
-@NamedQuery(name = "Student.findStudentByName", query = "select s from Student s where s.name=:sname")
+@NamedQueries({
+        @NamedQuery(name = "Student.findStudentByName", query = "select s from Student s where s.name=:sname"),
+        @NamedQuery(name = "Student.findStudentTuple", query = "select s.name, s.birthDate as dob, s.gender as gender from Student s")
+})
 public class Student {
     @Id
     @GeneratedValue(generator = "myUUID")

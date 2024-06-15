@@ -26,7 +26,7 @@
 - https://www.baeldung.com/hibernate-inheritance
 
 - SB JPA DATA annotations
-  - `@Query` 
+  - `@Query` and `@Param` 
   - `@QueryHints`({@QueryHint(name = "org.hibernate.fetchSize", value = "10")})
 
 ### Transaction
