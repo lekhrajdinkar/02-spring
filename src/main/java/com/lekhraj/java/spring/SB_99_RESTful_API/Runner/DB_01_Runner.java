@@ -7,9 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @Slf4j
@@ -28,11 +26,9 @@ public class DB_01_Runner implements CommandLineRunner {
         Print.print("DB_01_Runner" , "03-StudentRepo.getTuple()");
         List<Tuple> studentTuples  = StudentRepo.getTuple();
         for(Tuple t : studentTuples){
-           log.info(" tuple - {}, name-{}, bod-{}, gender-{}",t, t.get(0), t.get(1), t.get("gender"));
+           log.info(" tuple - {}, name-{}, bod-{}, gender-{}",t, t.get(0), t.get(1), t.get("gender", String.class));
             // "select s.name, s.birthDate as dob, s.gender as gender from Student s"
             // notice alias : s.gender as gender
         }
-
-
     }
 }

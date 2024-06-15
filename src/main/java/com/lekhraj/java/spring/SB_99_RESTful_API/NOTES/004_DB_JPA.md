@@ -76,7 +76,10 @@ Provide Abstractions : https://chatgpt.com/c/8ace7914-f8cc-465e-873a-7b45974bb7b
      - Non-R (dirty fixed, non-R fixed, but still phantom)
      - Serializable ( All fixed )
    - D urable : underlying DB sol - permanent after commit.
-
+   
+5. optimistic Locks : read TS, Write TS, etc (TS=timestampe and version)
+- add in entity @Version private long version;
+- ObjectOptimisticLockingFailureException
 ```
 ISOLATION :: wait for the other txn to commit/rollback before proceeding.
 ```

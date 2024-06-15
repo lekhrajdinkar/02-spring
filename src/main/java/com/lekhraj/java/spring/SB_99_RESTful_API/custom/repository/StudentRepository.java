@@ -47,7 +47,7 @@ public class StudentRepository {
 
     public List<Tuple> getTuple(){
         EntityManager em = sessionFactory.createEntityManager();
-
+        // Tuple === Object[]
         TypedQuery<Tuple> nq = em.createNamedQuery("Student.findStudentTuple", Tuple.class);
         List<Tuple> result =  nq.getResultList();
         em.close();

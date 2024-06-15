@@ -1,7 +1,7 @@
 ## A. Hibernate Annotation
 - https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
 ### Common Annotation
-- @Entity(name="new_entityname")
+- @Entity(name="new_entityname"),  @version feild
 - @Basic(fetch=FetchType.EAGER,optional=true).
   - this is already added by default on all column.
   - basic mapping, field to a db column.
@@ -25,6 +25,8 @@
 - `@DiscriminatorValue("1")` : on ChildClass
 - https://www.baeldung.com/hibernate-inheritance
 
+- `@SqlResultSetMapping`
+
 - SB JPA DATA annotations
   - `@Query` and `@Param` 
   - `@QueryHints`({@QueryHint(name = "org.hibernate.fetchSize", value = "10")})
@@ -34,6 +36,9 @@
 
 ### Performance
 - q.setFetchSize(10)
+- @BatchSize(size = 20) at Entity level for All operations.
+- custom code to achieve batch behaviour :
+  - for loop >> on iteration 20, perform flush amd clear em/session.
 - Small Fetch Size: May lead to more frequent database calls, increasing network latency and overhead.
 - Large Fetch Size: Reduces the number of database calls but consumes more memory as more rows are loaded into memory at once.
 
@@ -50,6 +55,7 @@
     - optimize the loading of collections.
     - instead of issuing separate SELECT queries for each item, Hibernate will fetch 10 items at a time, reducing the number of queries executed.
     - but may increase memory usage, if batch size is big.
+    - 
 
 ### Advance
 #### Conversion Related
@@ -249,7 +255,6 @@ eg:
 - @Size(min = 3, max = 15) : on String
 - @length(min = 3, max = 15) : on Collectoin
 - @NotNull
-
 ---
 ## Z.More
 

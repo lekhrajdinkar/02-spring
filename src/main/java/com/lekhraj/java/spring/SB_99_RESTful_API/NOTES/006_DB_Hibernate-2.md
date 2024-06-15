@@ -59,11 +59,23 @@ https://www.baeldung.com/learn-jpa-hibernate
 
 2. DYNAMIC : Criteria API (exclude)
 
-# result
+## C. Manipulate result Set
+- https://chatgpt.com/c/7a6449ba-dede-478f-9778-1c7a9a5d5d9d
 - use Tuple / List<Tuple> : <artifactId>javatuples</artifactId> 
 - Object[] === Tuple, save hetrogeneous
 - Im-mutable : Pair, triplet - hence maintain data integrity.
-- `implements ResultTransformer` >> @override transformTuple(,) | q.setResultTransformer()
+- `implements ResultTransformer` >> @override transformTuple(,) | q.setResultTransformer(rt)
+- inbuilt rt : Transformers.TO_ARRAY, TO_LIST, ALIAS_TO_ENTITY_CLASS
+- `@SqlResultSetMapping` :: columns from @NamedNativeSQL --> map to target -->  EntityClass or Tuple/Object[]
+
+## D. Write/Update
+- Batch 
+  - Custom batch code. for>flush/clear after 20.
+  - hibernate.jdbc.batch_size=20
+  - spring.jpa.properties.hibernate.jdbc.batch_size=20
+  - @BatchSize(size = 20) at Entity level for all Operations (CRUD)
+  - @GeneratedValue(strategy = GenerationType.IDENTITY ) will disable batch-INSERT Silently. USE SEQUENCE.
+  
 ---
 ## pending:
 1. ScrollableResults program - when processing large dataset, (not sending large Dataset in batches to UI)
