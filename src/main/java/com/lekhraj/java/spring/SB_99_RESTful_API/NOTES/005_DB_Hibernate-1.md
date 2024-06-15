@@ -13,9 +13,11 @@
 
 - @Transient
 
-- @OneToOne, @OneToMany, @ManyToOne, @ManyToMany.
+- @OneToOne, @OneToMany, @ManyToOne, @ManyToMany. : Add FK and create JoinTable bts.
 - `@JoinTable and @JoinColumn()`
 - `@WhereJoinTable(clause = "columnInJoinTable='value-1'")` https://www.baeldung.com/hibernate-wherejointable
+- `@OrderBy("colInManySide ASC")` Sorting Children within Each Parent
+- `@Fetch @batchSize` - use together in relation : 1-2-M,etc
 
 - `@MappedSuperclass`
 - `@Inheritance(strategy = InheritanceType.SINGLE_TABLE)` : on parentClass
@@ -23,21 +25,31 @@
 - `@DiscriminatorValue("1")` : on ChildClass
 - https://www.baeldung.com/hibernate-inheritance
 
+- SB JPA DATA annotations
+  - `@Query` 
+  - `@QueryHints`({@QueryHint(name = "org.hibernate.fetchSize", value = "10")})
+
 ### Transaction
 - `@EnableTransactionManagement` : from SBJpaData-starter
 
 ### Performance
-- `@Fetch`(value = FetchMode.SELECT) : https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
-  - fetch associated entities lazily, to avoid loading unnecessary data upfront.
-  - optimizing performance when dealing with large collections.
-  - FetchMode.Join : load early
+- q.setFetchSize(10)
+- Small Fetch Size: May lead to more frequent database calls, increasing network latency and overhead.
+- Large Fetch Size: Reduces the number of database calls but consumes more memory as more rows are loaded into memory at once.
 
-- `@BatchSize`
-  - Use along with @Fetch.
-  - @OneToMany(mappedBy = "order")  @BatchSize(size = 10) private List<OrderItem> items; 
-  - optimize the loading of collections.
-  - instead of issuing separate SELECT queries for each item, Hibernate will fetch 10 items at a time, reducing the number of queries executed.
-  - but may increase memory usage, if batch size is big.
+- option for relation:
+  - `@Fetch` 
+    - (FetchMode.SELECT) : https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
+      - fetch associated entities lazily, to avoid loading unnecessary data upfront.
+      - optimizing performance when dealing with large collections.
+    - (FetchMode.Join) : load early
+
+  - `@BatchSize` 
+    - Use along with @Fetch.
+    - @OneToMany(mappedBy = "order")  @BatchSize(size = 10) private List<OrderItem> items; 
+    - optimize the loading of collections.
+    - instead of issuing separate SELECT queries for each item, Hibernate will fetch 10 items at a time, reducing the number of queries executed.
+    - but may increase memory usage, if batch size is big.
 
 ### Advance
 #### Conversion Related

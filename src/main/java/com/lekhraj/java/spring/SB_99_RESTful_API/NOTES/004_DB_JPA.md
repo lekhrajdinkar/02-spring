@@ -19,7 +19,7 @@
 - lifecycle of entity instances : New/Transient > managed > detached > removed/Deleted(markedForDelete).
 - Transient - POJO which has no representation in the PC.
 - keeps track of changes made to managed entities/ flush dirty entities to DB, on txn::commit.
-- operations: persist,merge,detach,find,remove,refresh
+- operations: persist,merge,detach,find,remove,refresh / Flush and close
 - utility: view allManagedEntity, dirtyEntity,etc
 - Types(based on Life-cycle)
 
