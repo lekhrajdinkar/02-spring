@@ -263,9 +263,9 @@ eg:
 - @Min / @Max / @DecimalMin/MAX / @Range- on numbetypes
 - @Size(min = 3, max = 15) : on String
 - @length(min = 3, max = 15) : on Collection
-- @NotNull / @NotEmpty / @NotBlank
+- @Null/ @NotNull / @NotEmpty / @NotBlank
 - @AssertTrue / @AssertFalse
-- @Pattern - regex
+- @Pattern(regexp = "^[0-9]{10}$") String phoneNo
 - Date:
   - @Past
   - @PastOrPresent

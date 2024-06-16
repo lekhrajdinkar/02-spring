@@ -54,27 +54,35 @@ https://www.baeldung.com/learn-jpa-hibernate
 - Positional parameters ?1,2,etc vs named parameters (preferred)
 - Sorting :: order by  e.feild1, e.feild2
 - sorting entities in a 1-2-M relation, meaning list on many side `@OrderBy("childName ASC")` List<T> children. // Parent has many Children
-- Sorting : NULLS LAST, NULLS FIRST
+- Sorting : in JPQL/HQPL itself :  NULLS LAST, NULLS FIRST at the end.
 - Sorting Query Results with Spring Data : https://www.baeldung.com/spring-data-sorting#sorting-with-spring-data
 
 2. DYNAMIC : Criteria API (exclude)
 
 ## C. Manipulate result Set
-- https://chatgpt.com/c/7a6449ba-dede-478f-9778-1c7a9a5d5d9d
-- use Tuple / List<Tuple> : <artifactId>javatuples</artifactId> 
-- Object[] === Tuple, save hetrogeneous
-- Im-mutable : Pair, triplet - hence maintain data integrity.
-- `implements ResultTransformer` >> @override transformTuple(,) | q.setResultTransformer(rt)
-- inbuilt rt : Transformers.TO_ARRAY, TO_LIST, ALIAS_TO_ENTITY_CLASS
-- `@SqlResultSetMapping` :: columns from @NamedNativeSQL --> map to target -->  EntityClass or Tuple/Object[]
+1. Tuple (more like Object[],hetrogeneous)
+   - https://chatgpt.com/c/7a6449ba-dede-478f-9778-1c7a9a5d5d9d
+   - use Tuple / List<Tuple> : for single ot mutlipe result
+   - add <artifactId>javatuples</artifactId> 
+     - Im-mutable : Pair, triplet - hence maintain data integrity.
+2. `class RT implements ResultTransformer` 
+   - First @override transformTuple(,) 
+   - then use it on any query , q.setResultTransformer(RT rt)
+   - inbuilt ResultTransformer.
+     - Transformers.TO_ARRAY
+     - Transformers.TO_LIST 
+     - Transformers.ALIAS_TO_ENTITY_CLASS
+3. `@SqlResultSetMapping`
+   - columns from @NamedNativeSQL --> map to target -->  EntityClass or Tuple/Object[]
+4. pagination/sorting
 
 ## D. Write/Update
 - Batch 
   - Custom batch code. for>flush/clear after 20.
-  - hibernate.jdbc.batch_size=20
-  - spring.jpa.properties.hibernate.jdbc.batch_size=20
+  - `hibernate.jdbc.batch_size`=20
+  - `spring.jpa.properties.hibernate.jdbc.batch_size`=20
   - @BatchSize(size = 20) at Entity level for all Operations (CRUD)
-  - @GeneratedValue(strategy = GenerationType.IDENTITY ) will disable batch-INSERT Silently. USE SEQUENCE.
+  - fact:@GeneratedValue(strategy = GenerationType.IDENTITY ) will disable batch-INSERT Silently. USE SEQUENCE.
   
 ---
 ## pending:
