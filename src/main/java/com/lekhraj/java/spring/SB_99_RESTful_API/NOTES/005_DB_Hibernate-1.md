@@ -25,14 +25,13 @@
 - `@DiscriminatorValue("1")` : on ChildClass
 - https://www.baeldung.com/hibernate-inheritance
 
-- `@SqlResultSetMapping`
+- `@SqlResultSetMapping` : Map @NamedNativeQuery result to target(Entity/Tuple)
 
-- SB JPA DATA annotations
-  - `@Query` and `@Param` 
-  - `@QueryHints`({@QueryHint(name = "org.hibernate.fetchSize", value = "10")})
-
-### Transaction
-- `@EnableTransactionManagement` : from SBJpaData-starter
+### Annotation from SBJpaData-starter
+- `@EnableTransactionManagement` 
+- `@Transactional`
+- `@Query` and `@Param`
+- `@QueryHints`({@QueryHint(name = "org.hibernate.fetchSize", value = "10")})
 
 ### Performance
 - q.setFetchSize(10)
@@ -41,8 +40,9 @@
   - for loop >> on iteration 20, perform flush amd clear em/session.
 - Small Fetch Size: May lead to more frequent database calls, increasing network latency and overhead.
 - Large Fetch Size: Reduces the number of database calls but consumes more memory as more rows are loaded into memory at once.
+- `@BatchSize` on Entity level
 
-- option for relation:
+- option for relation/many-side:
   - `@Fetch` 
     - (FetchMode.SELECT) : https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
       - fetch associated entities lazily, to avoid loading unnecessary data upfront.
@@ -55,7 +55,9 @@
     - optimize the loading of collections.
     - instead of issuing separate SELECT queries for each item, Hibernate will fetch 10 items at a time, reducing the number of queries executed.
     - but may increase memory usage, if batch size is big.
-    - 
+    
+  - @OneToMany(`fetch` = FetchType.LAZY/EAGER), etc
+  - @Basic(fetch=FetchType.EAGER)
 
 ### Advance
 #### Conversion Related
@@ -63,6 +65,9 @@
   - more like binder - which jackson for JSON<-->Object.
   - converter for DB::table<-->Object/Entity
   - use case : performing encryption/decryption, data transformations, that are NOT directly supported by JPA, etc
+  - implement `AttributeConverter<entityType, dbType>`
+    - dbType convertToDatabaseColumn(entityType)
+    - entityType convertToEntityAttribute(dbType)
 - `@Lob` byte[]
 - `@Temporal(TemporalType.DATE)` private Date birthDate;
   - temporal, meaning relating to time.
@@ -77,7 +82,7 @@
   - java.time.LocalDate to java.sql.Date  <<<
   - java.time.LocalDateTime to java.sql.Timestamp <<<
   - enum to string/ordinal. String/int var1
-- `@fetchMode` - H-specific.
+
 
 #### Other
 - `@embedded and @embeddable`
@@ -116,7 +121,7 @@
     )
  ```
 - FetchType : eg - @OneToMany(fetch = FetchType.LAZY/EAGER)
-- @fetchMode : defines `how` the associated entities are fetched from the database. meaning `SQS queries`.
+- @fetch : defines `how` the associated entities are fetched from the database. meaning `SQS queries`.
   - @Fetch(FetchMode.SELECT/JOIN/SUBSELECT)
   - FetchMode is a Hibernate-specific concept that defines how associated entities.
   - SELECT: Specifies that associated entities should be fetched lazily, using a separate SELECT statement.
@@ -166,12 +171,13 @@ List<Vehicle> vehicles = session.createQuery("FROM Vehicle v WHERE TREAT(v AS Ca
 
 3. unique Contraint
 - @Column(unique=t/f) : Single column
-- `@UniqueConstraint` : single/composite column
-  ```
-  @Table(uniqueConstraints = {
-     @UniqueConstraint(columnNames = { "personNumber", "isActive" }) 
-   }, ...)
-  ```
+  - `@UniqueConstraint` : single/composite column
+    ```
+    @Table(uniqueConstraints = {
+       @UniqueConstraint(columnNames = { "personNumber", "isActive" }) ,
+       @UniqueConstraint(columnNames = { "personNumber" }) 
+     }, ...)
+    ```
 ---
 ## D. Identifier : auto,identity,sequence,table,generic | composite
 `@GeneratedValue(Strategy="XXXXX")`
@@ -248,16 +254,31 @@ eg:
 6. Composite Identifiers
 - https://www.baeldung.com/hibernate-identifiers
 - @Embeddable Class ABC : Also public no-agr const, define equal and hashcode
-- then inject @EmbeddedId ABC id;
+- then inject `@EmbeddedId` ABC id;
+
+---
 
 ## D. Validator 
 - <artifactId>spring-boot-starter-validation</artifactId>
+- @Min / @Max / @DecimalMin/MAX / @Range- on numbetypes
 - @Size(min = 3, max = 15) : on String
-- @length(min = 3, max = 15) : on Collectoin
-- @NotNull
+- @length(min = 3, max = 15) : on Collection
+- @NotNull / @NotEmpty / @NotBlank
+- @AssertTrue / @AssertFalse
+- @Pattern - regex
+- Date:
+  - @Past
+  - @PastOrPresent
+  - @Future
+  - @FutureOrPresent
+- More (H-specific) : @URL, @email, @CreditCardNumber, @Currency, @UUID
+- ### Custom validator:
+  - create custom Annotation1 and annotate with `@Constraint(validatedBy = Validator1.class)`
+  - class Validator1 implements `ConstraintValidator`<Annotation1, String> // string:: TypeOfvalueBeingValidate 
+  - Apply @Annotation1
+
 ---
 ## Z.More
-
 - Scenario-1::
   - t1::pk=id has (1toM) t2,
   - t2::pk=id,fk=t1_id. 
