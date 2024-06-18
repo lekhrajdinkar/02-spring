@@ -52,3 +52,6 @@ if the prototype bean's lifecycle is not managed correctly, as it can lead to un
 - collection - insertion order.
 - multiple Aspect - Apply order.
 - load order in container.
+
+## Pending
+https://www.baeldung.com/spring-exceptions

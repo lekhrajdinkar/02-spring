@@ -2,6 +2,7 @@
 - https://www.baeldung.com/persistence-with-spring-series
 - DB-06-SpringJpaData-1 : https://chatgpt.com/c/a874b751-9880-4225-a96c-9052773037fa
 - DB-06-SpringJpaData-2 : https://chatgpt.com/c/8ace7914-f8cc-465e-873a-7b45974bb7b2
+- DB-06-SpringJpaData-3 : https://chat.openai.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009
 
 ## A. Annotations/general Notes
 -  data.sql, schema.sql, JPA-buddy-PlugIn
@@ -10,11 +11,11 @@
 - `@EnableTransactionManagement`
 - `@Query` - if having indexed/named parameter then bind using `@Param` on arg.
 - `@Modifying` - method should run inside Transaction , ReturnTypes - int,void
-- testing : @Sql, @SqlConfig, @SqlGroup - https://chat.openai.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009
+- testing : @Sql, @SqlConfig, @SqlGroup - 
 
 ---
 ## B. Multiple DataSource : 
-  - https://chatgpt.com/c/7c2da8f5-3f44-4e71-b4f9-4cdadacf0ec5
+  - DBP_01_Multiple Data Sources : https://chatgpt.com/c/7c2da8f5-3f44-4e71-b4f9-4cdadacf0ec5
   - Create 2 beans - Ds1() and Ds2(), Apply ConfigurationProperties on method -> binds returnType(DataSource).
   - create 2 beans - emF1 , emF2
   - Create 2 beans - Txm1 , Txm2
