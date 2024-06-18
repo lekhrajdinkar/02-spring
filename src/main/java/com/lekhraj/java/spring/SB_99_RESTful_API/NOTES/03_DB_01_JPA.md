@@ -51,9 +51,9 @@
   - @PreRemove m(), @PostRemove m(),
   - @PreUpdate m(), @PostUpdate m(),
   - @PostLoad m()
-- then @EntityListeners(MyListener.class) @Entity MyEntity class
+- then`@EntityListeners`(MyListener.class) @Entity MyEntity class
 - fact : @GeneratedValue - expect key to available in @PostPersist.
-- Like we seperaely, write bean process / life-cycle-hook fpr Spring bean.
+- Like we seperately, write bean process / life-cycle-hook fpr Spring bean.
 
 ---
 

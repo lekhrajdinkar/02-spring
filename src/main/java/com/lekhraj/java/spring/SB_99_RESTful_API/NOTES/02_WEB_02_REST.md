@@ -14,13 +14,13 @@
 ---
 
 ## 1 Error handling in web.
-https://chatgpt.com/c/7d23b0fe-a7a5-43d5-9ced-69d4a344e31a
+- https://chatgpt.com/c/7d23b0fe-a7a5-43d5-9ced-69d4a344e31a
+- @Component public class CustomErrorAttributes extends `DefaultErrorAttributes`
 
 case:1 : incoming request failed, then:
 
 -  /error + BasicErrorController (already).
--  /my-error + MyBasicErrorController (custom) + inject ErrorAttribute.
--  WebServerFactoryCustomizer *
+-  /my-error + MyBasicErrorController (custom) + inject ErrorAttribute. //server.error.path
 
 case-2 : incoming requested success, but business code failed with Exception.
 
@@ -83,7 +83,9 @@ Global Exception Handling
        - Serialize LocalDateTime in custom Serializer.
          com.lekhraj.java.spring.SB_99_RESTful_API."Serializer".LocalDateTimeSerializer
 
-
+### 5. WebServerFactoryCustomizer 
+- implement and override customize method.
+- customise webserver - port, rootContect, SSL, etc
 ---
 ## https://www.baeldung.com/rest-with-spring-series
 - PUT : C & U Idempotent (no impact, if run multiple times).
