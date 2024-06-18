@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -61,6 +62,11 @@ public class HibernateConfig {
                 .build();
     }
 
+    @Bean
+    public TransactionTemplate transactionTemplate(PlatformTransactionManager transactionManager) {
+        return new TransactionTemplate(transactionManager);
+    }
+
     // ========= Other =======
     private Properties hibernateProperties() {
         Properties properties = new Properties();
@@ -92,6 +98,7 @@ public class HibernateConfig {
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
     }
+
 
 }
 

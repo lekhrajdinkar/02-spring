@@ -59,6 +59,7 @@ https://www.baeldung.com/learn-jpa-hibernate
 
 2. DYNAMIC : Criteria API (exclude)
 
+---
 ## C. Manipulate result Set
 1. Tuple (more like Object[],hetrogeneous)
    - https://chatgpt.com/c/7a6449ba-dede-478f-9778-1c7a9a5d5d9d
@@ -76,6 +77,7 @@ https://www.baeldung.com/learn-jpa-hibernate
    - columns from @NamedNativeSQL --> map to target -->  EntityClass or Tuple/Object[]
 4. pagination/sorting
 
+---
 ## D. Write/Update
 - Batch 
   - Custom batch code. for>flush/clear after 20.
@@ -83,12 +85,53 @@ https://www.baeldung.com/learn-jpa-hibernate
   - `spring.jpa.properties.hibernate.jdbc.batch_size`=20
   - @BatchSize(size = 20) at Entity level for all Operations (CRUD)
   - fact:@GeneratedValue(strategy = GenerationType.IDENTITY ) will disable batch-INSERT Silently. USE SEQUENCE.
+
+---
+## E. Transaction management
+- https://www.baeldung.com/transaction-configuration-with-jpa-and-spring
+- @Bean PlatformTransactionManager
+- Enable  :: @EnableTransactionManagement, or add spring-data-* dependencies
+- Enable logging::org.springframework.transaction=DEBUG
+- 2 ways : 
+  - Declarative : @Transactional 
+  - programmatic : `AOP + TransactionTemplate`
+
+- `Nested transaction` is also possible
+  - Propagation.NESTED
+  - inner txn :  independent transaction within the context of an existing/outer transaction.
+  - if inner transaction rolls back, it only rolls back the nested transaction, not the outer transaction.
+  - Not all databases and transaction managers provide full support for nested transactions.
+  - `transactionManager.setNestedTransactionAllowed(true);`
+  - it uses Savepoints.
   
+- way-1 : @Transactional : 
+  - manage transaction boundaries in a declarative way.
+  - This means that all database operations within that scope, are part of a single transaction.
+  - Spring creates proxies, to inject transactional-logic, before and after the running method.
+  - its Java Dynamic Proxy :: Any self-invocation calls will not start any transaction.
+  - only public methods.
+  - Attributes:
+    -  `propagation` - requires_new-->AlwaysNewT , Required -> t1 else t2new, mandatory->t1 else ex , nested->t1->inner-t1, SUPPORTS->t1,none , never->none
+    -  `isolation` to define fix-level for `concurrency side effects` :  Dirty-read, Non-repeatable read, Phantom read. 
+      - READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ, and SERIALIZABLE.
+    -  `timeout` 
+    -  `readOnly` flag – a hint for the persistence provider that the transaction should be read only. // optimize performance.
+    -  `rollbackFor / noRollbackFor` 
+      - Rule-1:Rollback on Checked-Exception-1, etc
+      - if we don't mention any rule, rollback happens on unchecked-exceptions/RuntimeException
+      - @Transactional(`rollbackFor` = {Exception.class, SpecificException.class})
+      - @Transactional(`rollbackForClassName` = {"java.lang.Exception", "com.example.SpecificException"})
+   - For SUPPORTS, if an active transaction exists,then use it. Else gets executed non-transactional:
+
+- Way-2 (pending) : :
+  - why? : Mixing the database I/O with other types of I/O in a transactional context isn’t a great idea.
+  - https://chatgpt.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009
+  - check com.lekhraj.java.spring.SB_99_RESTful_API.service.`StudentServiceImpl`
+
 ---
 ## pending:
-1. ScrollableResults program - when processing large dataset, (not sending large Dataset in batches to UI)
-2. Program : JPQL - Query Class, em.createQuery(), q,getSingleResult() 
-2. Custom repository
+1. TransactionTemplate prg
+2. ScrollableResults program - when processing large dataset, (not sending large Dataset in batches to UI)
 3. Query Plan Cache
 4. @NamedQuery More attribute
    - cacheMode=GET, IGNORE, NORMAL, PUT, or REFRESH
