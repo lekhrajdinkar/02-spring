@@ -1,0 +1,36 @@
+## Customization Examples:
+
+### Group-1
+1. Register a New Servlet
+ - @Bean `ServletRegistrationBean<MyServlet>`
+
+2. Change from Tomcat to jetty/undertow servers.
+   - Add/remove Dependencies
+   - Add @Bean to modify ServletContainer(port,etc) - UndertowEmbeddedServletContainerFactory, JettyEmbeddedServletContainerFactory.
+
+3. Remove any embedded Server / Deploy on external Server
+- https://chatgpt.com/c/f4a0c9cd-c6cb-414e-888c-605c2d50340c
+- remove dependencies.
+- <packaging>war</packaging>
+- extend `SpringBootServletInitializer` -> override Configure.
+   ```
+   protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(DemoApplication.class);
+   }
+   ```
+4. Customize Whitelabel-ErrorPage
+    - @EnableAutoConfiguration(exclude = {`ErrorMvcAutoConfiguration.class`}) --> show Tomcat page then.
+    - server.error.whitelabel.enabled=false --> show Tomcat page then.
+    - /error --> map it myController and return custom ResponseEntity.
+      - Default :: /error is mapped to `BasicErrorController`
+      - @Controller MyErrorController class >> @RequestMapping("/error")m(){ return RE }
+      - inject ErrorAttribute, which will help to fill RE.
+
+---
+### Group-2
+
+1. `WebServerFactoryCustomizer` 
+- implement and override customize method.
+- customise webserver - port, rootContect, SSL, etc
+
+2. `WebApplicationInitializer`

@@ -1,29 +1,41 @@
-https://www.baeldung.com/spring-boot-annotations
-
-- Conditionally Apply AutoConfiguration
+## Auto-Config
+- https://www.baeldung.com/spring-boot-annotations
+  - Starter project > `spring.factories` = listOfConfigClasses (which can be applied conditionally)
+- SpringApplication.run() > create AC, Loads:
+  - Standard beans
+  - Conditional-1(Is webApp)--> beans-1
+  - Conditional-2 : beans-2
+- 
+### Conditions
 1. @ConditionalOnClass and @ConditionalOnMissingClass
 2. @ConditionalOnBean and @ConditionalOnMissingBean
 3. @ConditionalOnProperty
 4. @ConditionalOnResource
 5. @ConditionalOnWebApplication and @ConditionalOnNotWebApplication
 6. @ConditionalExpression
-7. @Conditional
-8. etc ,more
+7. `@Conditional` : Custom condition
 
 Apply these on
-- @Configuation class
+- @Configuration class
 - @Bean method
 
-Starter project > spring.factories=listOfClass (which can be applied conditioncally)
-SpringApplication.run() > load AC,all bean, if webApp then ...
+---
 
-Create Custom starter project
-=============================
-1. create new Spring project.
-2. Create @Configuration  Auto-Configuration Class --> with Bean with conditions ,to enable/disable
-    auto-configuration which we were doing manually before
-3. Register  Auto-Configuration Class
-    resource/META-INF/spring.factories with configuration class list.
-4. package : mvn clean package/install --> local Maven repo.
-4. use it other project.
+## Custom starter project
+1. create new Spring project, call it your starter.
+2. Create Auto-configuration/s:
+   - @Configuration Class-1 --> with Bean with conditions ,to enable/disable,
+   - @Configuration Class-2 --> with Bean with conditions ,to enable/disable, ...
+   - @Configuration Class-N --> with Bean with conditions ,to enable/disable
+       
+3. Register Auto-Configuration Classes
+   - resource/META-INF/spring.factories=Class-1, Class-2, ... Class-N
+   
+4. DONE
+
+5. Now package it and use it other project : 
+   > `mvn clean package/install` --> local Maven repo.
+
+4. If want to exclude to Class-1:
+   - @SpringBootApplication(exclude={Class-1})
 

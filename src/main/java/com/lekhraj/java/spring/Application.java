@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -13,7 +14,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.Collections;
 
-@SpringBootApplication
+@SpringBootApplication //(exclude = { SecurityAutoConfiguration.class })
 @EnableConfigurationProperties({Prop2Map.class})
 public class Application implements ApplicationContextAware {
 	//@Autowired  // didnot work
@@ -36,7 +37,6 @@ public class Application implements ApplicationContextAware {
 	public CommandLineRunner runnerBean1() throws Exception {
 		return args -> {
 			System.out.println(" --- runnerBean1 : print All Spring managed Bean names --- ");
-
 			String[] allBeanNames = applicationContext.getBeanDefinitionNames();
 			for(String beanName : allBeanNames) {
 				// System.out.println(beanName);
