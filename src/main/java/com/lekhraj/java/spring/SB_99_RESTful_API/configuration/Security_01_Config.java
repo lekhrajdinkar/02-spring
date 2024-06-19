@@ -6,8 +6,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
+
+import java.util.Arrays;
 
 
 @ConditionalOnProperty(havingValue = "security_01", name = "sb.customize.security")
@@ -40,11 +44,11 @@ public class Security_01_Config
                 .build();
         return new InMemoryUserDetailsManager(user1, user2, admin);
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 
     @ConditionalOnProperty(havingValue = "SecurityFilterChain_01", name = "sb.customize.SecurityFilterChain")
     @Bean
@@ -61,7 +65,10 @@ public class Security_01_Config
                 )
                 .csrf(csrf->csrf.disable())
                 .httpBasic(Customizer.withDefaults())
-                //.sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                // addFilterAfter/Before()
+                // httpBasic -> httpBasic.authenticationEntryPoint(new DigestAuthenticationEntryPoint()
+                // .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 ;
 
         return http.build();
@@ -74,4 +81,22 @@ public class Security_01_Config
         //Todo
         return null;
     }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/ignore1", "/ignore2");
+    }
+
+
+    /*@Bean // LDAP
+    AuthenticationManagerBuilder authenticationManagerBuilder(AuthenticationManagerBuilder auth) throws Exception {
+        return auth
+                .ldapAuthentication()
+                .userDnPatterns("uid={0},ou=people")
+                .groupSearchBase("ou=groups")
+                .contextSource(new DefaultSpringSecurityContextSource(Arrays.asList("ldap://localhost:389/"), "dc=example,dc=com"))
+                .passwordCompare()
+                .passwordAttribute("userPassword");
+    }*/
+
 }

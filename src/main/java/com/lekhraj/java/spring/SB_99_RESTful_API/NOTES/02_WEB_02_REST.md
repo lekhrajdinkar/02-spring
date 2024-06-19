@@ -103,7 +103,9 @@ case-2 : incoming requested success, but business code failed with Exception.
 ## Y. REST : More
 - https://www.baeldung.com/rest-with-spring-series
 - PUT : C & U Idempotent (no impact, if run multiple times).
-
+- Consume ::
+  1. RestTemplate - with basicAuth and token
+  2. webClient
 
 ---
 ## Z. REST : Exception and Error 
