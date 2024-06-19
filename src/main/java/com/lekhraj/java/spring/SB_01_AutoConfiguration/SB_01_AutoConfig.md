@@ -5,7 +5,10 @@
   - Standard beans
   - Conditional-1(Is webApp)--> beans-1
   - Conditional-2 : beans-2
-- 
+  
+- Notice this pattern :: @Configuration Class-1 implements interface-1 >> Override
+  - eg: public class MyWebConfig implements WebApplicationInitializer {onStartup(ServletContext servletContext) {...}}
+
 ### Conditions
 1. @ConditionalOnClass and @ConditionalOnMissingClass
 2. @ConditionalOnBean and @ConditionalOnMissingBean

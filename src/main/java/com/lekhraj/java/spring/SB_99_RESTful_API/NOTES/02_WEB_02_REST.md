@@ -75,8 +75,12 @@ case-2 : incoming requested success, but business code failed with Exception.
   - @Configuration JacksonConfig >> @Bean ObjectMapper (global)
   - setSerializationInclusion(JsonInclude.Include.NON_NULL)
   - Serialize LocalDateTime in custom Serializer.
-    > com.lekhraj.java.spring.SB_99_RESTful_API."Serializer".LocalDateTimeSerializer
-
+    > - create : com.lekhraj.java.spring.SB_99_RESTful_API."Serializer".LocalDateTimeSerializer
+    > - then, register it with ObjectMapper.
+    > - @ResponseBody use Global Objectmapper, check `jacksonConfig`
+  
+- HttpMessageConverter
+  - new MappingJackson2HttpMessageConverter()
 ---
 ## E. REST API Version
 - https://chatgpt.com/c/7fa2c12d-eada-4991-944f-cfad8d084805
@@ -117,7 +121,7 @@ case-2 : incoming requested success, but business code failed with Exception.
 # Pending
 - SetTimeouts API
 - API to download file.
-- Filters and Interceptors
+- Filters and Interceptors / `InterceptorRegistry`
 - webClient and RestTemplate
 - custom Binder
 - ResponseBodyAdvice program

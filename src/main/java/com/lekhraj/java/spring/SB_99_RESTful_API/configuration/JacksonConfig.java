@@ -14,7 +14,7 @@ public class JacksonConfig {
     @Bean
     public ObjectMapper objectMapper() {
         JavaTimeModule module = new JavaTimeModule();
-        module.addSerializer(new LocalDateTimeSerializer());
+        module.addSerializer(new LocalDateTimeSerializer());  // notice : new
 
         ObjectMapper objectMapper =  new ObjectMapper()
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)

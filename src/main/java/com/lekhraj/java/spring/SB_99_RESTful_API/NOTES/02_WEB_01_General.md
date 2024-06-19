@@ -76,3 +76,30 @@
 - MultipartFile: Use MultipartFile to handle file uploads.
 - Streaming Responses: Stream large files to clients to manage memory efficiently.
 - By customizing these aspects, you can create a robust, secure, and scalable REST API tailored to your specific needs.
+
+---
+
+## Servlet 3.0+
+- @WebServlet(urlPatterns = "/asyncServlet", asyncSupported = true)
+- Servlet 3.0 allows for `asynchronous request processing`, enabling servlets to handle long-running tasks without blocking the request thread.
+  ```
+    AsyncContext asyncContext = request.startAsync();
+    asyncContext.start( () -> { 
+      // longRunningTask
+      // rsponse.write(...)
+      asyncContext.complete(); 
+    })'
+  ```
+  
+- `ServletContext` (like AC, PC)
+  - Register Servlet/filter/listeners dynamically.
+  - set/get InitParameters
+  - set/get/remove Attributes
+  
+- `@WebListener` - Listeners are used to perform actions in response to various events in a web application.
+  - ServletContextListener
+  - ServletContextAttributeListener
+  - HttpSessionListener
+  - HttpSessionAttributeListener
+  - ** Create implementations for above interfaces.
+```

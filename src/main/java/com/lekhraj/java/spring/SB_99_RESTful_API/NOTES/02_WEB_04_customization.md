@@ -27,10 +27,16 @@
       - inject ErrorAttribute, which will help to fill RE.
 
 ---
-### Group-2
+### Group-2 
+> com.lekhraj.java.spring.SB_99_RESTful_API.configuration.webconfig
 
-1. `WebServerFactoryCustomizer` 
-- implement and override customize method.
-- customise webserver - port, rootContect, SSL, etc
+1. org.springframework.web.`WebServerFactoryCustomizer<WS>` 
+  - FunctionalInterface :)
+  - implement and override : `customize(XXXXXWebServerFactory factory)`
+  - customize the configuration of `embedded-web-servers` like port, rootContext, SSL, etc
 
-2. `WebApplicationInitializer`
+2. org.springframework.web`WebApplicationInitializer` 
+   - Implement and override : `onStartup(ServletContext servletContext)`
+   - basically to configure a `ServletContext` programmatically.
+
+3. org.springframework.web.`WebMvcConfigurer`
