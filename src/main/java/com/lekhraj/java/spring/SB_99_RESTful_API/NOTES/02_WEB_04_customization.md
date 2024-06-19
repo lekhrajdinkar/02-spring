@@ -1,8 +1,13 @@
 ## Customization Examples:
 
 ### Group-1
-1. Register a New Servlet
+1. Register Servlet/ filter
  - @Bean `ServletRegistrationBean<MyServlet>`
+ - @Bean `FilterRegistrationBean<MyFilter>`
+```
+    registrationBean.setFilter/Servlet(new MyFilter()/MyServlet());
+    registrationBean.addUrlPatterns("/*");
+```
 
 2. Change from Tomcat to jetty/undertow servers.
    - Add/remove Dependencies
@@ -40,3 +45,4 @@
    - basically to configure a `ServletContext` programmatically.
 
 3. org.springframework.web.`WebMvcConfigurer`
+   - CORS, etc

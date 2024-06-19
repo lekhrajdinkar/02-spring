@@ -80,7 +80,18 @@
 ---
 
 ## Servlet 3.0+
-- @WebServlet(urlPatterns = "/asyncServlet", asyncSupported = true)
+- WEB_01_Servlet 3.0+ : https://chatgpt.com/c/d7dba5ab-7f7a-4c1c-a443-f67f15ca09a2
+
+```
+  @WebServlet(urlPatterns = "/asyncServlet", asyncSupported = true)
+  
+  @WebFilter(urlPatterns = "/*" ,  initParams = {
+      @WebInitParam(name = "paramName", value = "paramValue")
+  })
+  - init(FilterConfig filterConfig)
+  - doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+``` 
+
 - Servlet 3.0 allows for `asynchronous request processing`, enabling servlets to handle long-running tasks without blocking the request thread.
   ```
     AsyncContext asyncContext = request.startAsync();
@@ -102,4 +113,4 @@
   - HttpSessionListener
   - HttpSessionAttributeListener
   - ** Create implementations for above interfaces.
-```
+
