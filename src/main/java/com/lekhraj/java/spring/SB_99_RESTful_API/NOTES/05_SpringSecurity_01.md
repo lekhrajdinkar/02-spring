@@ -10,11 +10,12 @@
 
 ---
 ```
- CG pattern/s
+ CCGG pattern/s
    - App <--> Authenticating users against an LDAP directory, directly. (old)
    - App <--> OKTA <--> LDAP Authentication
    - Using SAML for single sign-on (SSO) with external identity providers/Okta.
    - SSL
+   
 ```
 
 > com.lekhraj.java.spring.SB_99_RESTful_API.configuration.Security_01_Config
@@ -24,6 +25,7 @@
 - key term : 
   - `UserDetail` (name,pass,role,etc), 
   - `UserDetailsService`
+  - `Authentication`
   - `AuthenticationManager` and `AuthenticationManagerBuilder`
     - central point for authentication logic
     - `AuthenticationProviders`  
@@ -31,6 +33,8 @@
 
 1. `Form-based Authentication` (not for REST api) // http.loginForm()...
 2. `Basic Authentication` / Digest Authentication (old,hashed credentials)
+    - hide credential: Authorization header :: Base64-encoded string username:password.
+    - it’s possible to hide the key using SSL.
 3. `LDAP` - springs helps to integrating with LDAP and perform authentication.
    
 4. `OpenID Connect/OAuth2.0` ( PREFERRED )

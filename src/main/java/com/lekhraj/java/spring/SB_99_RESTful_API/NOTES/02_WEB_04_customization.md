@@ -1,9 +1,10 @@
 ## Customization Examples:
 
 ### Group-1
-1. Register Servlet/ filter
+1. Register Global Servlet/ filter
  - @Bean `ServletRegistrationBean<MyServlet>`
- - @Bean `FilterRegistrationBean<MyFilter>`
+ - @Bean `FilterRegistrationBean<MyFilter>` 
+ - or, MyFilter extends org.springframework.web.filter.`GenericFilterBean` then add it SecurityFilterChain bean, using `addFilterBefore/After()`.
 ```
     registrationBean.setFilter/Servlet(new MyFilter()/MyServlet());
     registrationBean.addUrlPatterns("/*");

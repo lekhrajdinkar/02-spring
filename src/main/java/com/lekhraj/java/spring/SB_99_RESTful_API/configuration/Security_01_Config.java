@@ -1,5 +1,6 @@
 package com.lekhraj.java.spring.SB_99_RESTful_API.configuration;
 
+import com.lekhraj.java.spring.SB_99_RESTful_API.servlet.CustomFilter_1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -65,6 +66,7 @@ public class Security_01_Config
                 )
                 .csrf(csrf->csrf.disable())
                 .httpBasic(Customizer.withDefaults())
+                //.addFilter(new CustomFilter_1())
 
                 // addFilterAfter/Before()
                 // httpBasic -> httpBasic.authenticationEntryPoint(new DigestAuthenticationEntryPoint()

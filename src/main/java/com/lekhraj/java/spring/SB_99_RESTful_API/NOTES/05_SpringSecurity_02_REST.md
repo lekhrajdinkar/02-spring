@@ -15,6 +15,13 @@
 
 ### 2. API Keys
 - https://www.baeldung.com/spring-boot-api-key-secret
+- Some REST APIs use API keys for authentication.
+- An API-key is like `token`, that identifies the - `API-client to the API without referencing an actual user`.
+- API-key can be sent in the queryString/header.
+- it’s possible to hide the key using SSL.
+- Create `Custom Filter` to Check API-Check
+- eg: CCGG MuleSoft API
+
 
 ### 3. OAuth 2.0 JWT / Authorization (Preferred)
  - OAuth2 : https://dev-16206041-admin.okta.com/admin/apps/active
