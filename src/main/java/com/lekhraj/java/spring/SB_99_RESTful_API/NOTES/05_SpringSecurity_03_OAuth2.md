@@ -1,3 +1,5 @@
+- OAuth2 : https://dev-16206041-admin.okta.com/admin/apps/active
+
 ## Application types and Flow
 - handle this on 3 type on architecture/flows:
     - server-side web applications (SpringMVC, JSP) :
@@ -23,6 +25,7 @@
   - format : JWT. 
   - token/s with multiple scope. (roles)
   - received on callback URI
+  - OAuth 2.0 doesn’t define a specific format for Access Tokens
 - http-redirection (header-`location:url-2`, responseCode - `302`)
 - client must identify/authenticate itself, when requesting an Access Token.
 - Resource server must validate JWT and has role-based access code.
@@ -32,7 +35,10 @@
       - Eg: photoPrint-App <--> Google-Drive
   - `Scopes`
     - specify exactly the `reason`, for which access to resources may be granted.
-    - dependent on the Resource Server
+    - dependent on the Resource Server.
+    - while making Auth request mention `scopes`. eg: openid, profile, email, offline_access
+    - returned token will have `claims`.
+    
   - `Authorization Code`
     - OAuth 2 Authorization server may not directly return an Access Token.
     - Instead, and for better security, an Authorization Code may be returned, which is then exchanged for an Access Token.
@@ -68,6 +74,14 @@ D. `Refresh Token` Grant
 
 ## Flows:
 ![oAuth](https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/resources/img/oAuth2.jpeg)
+
+## More
+- https://jwt.io/introduction/
+- JWT body : claims (statement about user and additional info)
+- Registered claims:  iss (issuer), exp (expiration time), sub (subject), aud (audience), 
+  - https://datatracker.ietf.org/doc/html/rfc7519#section-4.1
+- public claims : https://www.iana.org/assignments/jwt/jwt.xhtml
+- private claims
 
 
 
