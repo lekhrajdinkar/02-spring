@@ -73,7 +73,9 @@
    -  CSRF : enabled by default, 
    -  create custom filter for further CSRF protection
 5. Logging and Monitoring
-6. 
+6.` @EnableGlobalMethodSecurity(prePostEnabled = true)`
+   - `@PreAuthorize`("hasAuthority('SCOPE_my.spring.app.scope')")
+   - 
  
 ---
 ## Extra

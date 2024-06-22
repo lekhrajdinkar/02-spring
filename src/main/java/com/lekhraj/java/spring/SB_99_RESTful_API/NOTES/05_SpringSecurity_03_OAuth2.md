@@ -68,6 +68,7 @@ C. `client-credential` Grant
 - First client acquire its own credentials(client id, client secret) from the Authorization Server,
 - Access Token is returned against these credential. (basically AuthServer validate identity.)
 - use-case : lambda, micro services.
+- https://developer.okta.com/blog/2021/05/05/client-credentials-spring-security
 
 D. `Refresh Token` Grant
 - involves the exchange of a Refresh Token for a new Access Token.

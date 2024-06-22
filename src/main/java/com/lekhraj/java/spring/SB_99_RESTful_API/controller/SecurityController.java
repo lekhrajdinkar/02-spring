@@ -1,5 +1,7 @@
 package com.lekhraj.java.spring.SB_99_RESTful_API.controller;
 
+import com.lekhraj.java.spring.SB_99_RESTful_API.service.OAuth2TokenServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/security")
 public class SecurityController
 {
+    @Autowired OAuth2TokenServiceImpl OAuth2Srv;
     @GetMapping("/admin/secured-api-1")
     public String m1() { return "ADMIN :: secured-api-1";}
 
@@ -23,6 +26,13 @@ public class SecurityController
                 .body("redirect");
         return httpResponse2;
     }
+
+    @GetMapping("/oauth/resource/api-1")
+    public String m4() {return " processed :: /oauth/resource/api-1";}
+
+    @GetMapping("/getAccessToken")
+    public String m5() {return OAuth2Srv.getAccessToken();}
+
 }
 
 // Role : Admin, user

@@ -63,7 +63,8 @@ public class Security_01_Config
     @Bean
     public SecurityFilterChain filterChainBasicAuth(HttpSecurity http) throws Exception
     {
-        http.authorizeHttpRequests(
+        http.
+                authorizeHttpRequests(
                 registry -> registry
                         .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                         .requestMatchers("/security/admin/**").hasRole("ADMIN")
@@ -74,6 +75,7 @@ public class Security_01_Config
                 )
                 .csrf(csrf->csrf.disable())
                 .httpBasic(Customizer.withDefaults())
+                //.exceptionHandling()
                 //.addFilter(new CustomFilter_1())
 
                 // addFilterAfter/Before()
@@ -88,7 +90,10 @@ public class Security_01_Config
     @Bean // de-active by condition
     public SecurityFilterChain filterChainToken(HttpSecurity http) throws Exception
     {
-        http.oauth2ResourceServer(resourceServer -> resourceServer.jwt(Customizer.withDefaults()));
+        http
+                .oauth2ResourceServer(resourceServer -> resourceServer.jwt(Customizer.withDefaults()))
+                //.oauth2Login(); - deprecated
+        ;
         return http.build();
     }
 

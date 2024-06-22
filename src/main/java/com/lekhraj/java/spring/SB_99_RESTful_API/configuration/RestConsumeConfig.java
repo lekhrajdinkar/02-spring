@@ -11,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.http.client.ClientHttpResponse;
 
 import java.io.IOException;
+import java.util.Base64;
 
 @Configuration
 public class RestConsumeConfig {
@@ -32,14 +33,18 @@ public class RestConsumeConfig {
         return new BasicAuthenticationInterceptor("admin", "adminPass");
     }
 
-    @Bean
+    // @Bean
     public ClientHttpRequestInterceptor bearerTokenInterceptor() {
         return new ClientHttpRequestInterceptor() {
             @Override
             public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
-                    throws IOException {
+                    throws IOException
+            {
+                String token1 = Base64.getEncoder().encodeToString("user1:user1Pass".getBytes());
+                String token2 = Base64.getEncoder().encodeToString("admin:adminPass".getBytes());
+
                 HttpHeaders headers = request.getHeaders();
-                headers.add("Authorization", "Bearer your_token");
+                headers.add("Authorization", "Bearer "+ token2);
                 return execution.execute(request, body);
             }
         };
