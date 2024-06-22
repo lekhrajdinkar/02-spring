@@ -25,6 +25,9 @@
 
 ### 3. OAuth 2.0 JWT / Authorization (Preferred)
  - OAuth2 : https://dev-16206041-admin.okta.com/admin/apps/active
+ - auth0 : https://manage.auth0.com/dashboard/us/dev-gpg8k3i38lkcqtkw/onboarding 
+   - signed up with Github
+   - dev-gpg8k3i38lkcqtkw
 
 
 ---

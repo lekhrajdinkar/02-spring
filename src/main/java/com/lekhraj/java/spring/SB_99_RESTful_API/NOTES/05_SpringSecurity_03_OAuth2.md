@@ -38,17 +38,37 @@
     - Instead, and for better security, an Authorization Code may be returned, which is then exchanged for an Access Token.
 
 ###  OAuth2 : Grant Types
-- grants are the set of steps a Client has to perform to get resource access authorization.
+- grants are the "set of steps" a Client has to perform to get "resource-access-authorization".
 
-A. `Authorization Code` Grant
-- AuthServer return single-use Authorization Code to the Client, which is then exchanged for an Access Token.
-- for traditional web apps where the exchange can securely happen on the server side.
+A. `Authorization Code` Grant  with/without PKCE
+- After validating client identity,
+- AuthServer return single-use Authorization-Code to the Client via callback URI
+- which is then exchanged for an Access Token.
+- use-case : Traditional web apps where the exchange can `securely` happen on the server side. // back-channel.
+- > `PKCE` : additional steps that make it more secure for mobile/native apps and SPAs.
+  - ```
+    1. Client : GET /authorize?response_type=code&client_id=`CLIENT_ID`&redirect_uri=`REDIRECT_URI`&scope=read&state=xyz
+    2. OKTA : HTTP/1.1 302 Found Location: https://client-app.com/callback?code=`AUTHORIZATION_CODE`&state=xyz
+    3. Client : POST /token 
+       Content-Type: application/x-www-form-urlencoded
+       grant_type=authorization_code&code=AUTHORIZATION_CODE&redirect_uri=REDIRECT_URI&client_id=CLIENT_ID&client_secret=CLIENT_SECRET
+    ```
 
 B. `Implicit` Grant
-
+- A simplified flow where the Access Token is returned "directly" to the Client.
+- use-case : SPA.
 
 C. `client-credential` Grant
-- Client acquire its own credentials(client id, client secret) from the Authorization Server, identify itself when requesting an Access Token.
+- First client acquire its own credentials(client id, client secret) from the Authorization Server,
+- Access Token is returned against these credential. (basically AuthServer validate identity.)
+- use-case : lambda, micro services.
+
+D. `Refresh Token` Grant
+- involves the exchange of a Refresh Token for a new Access Token.
+
+## Flows:
+![oAuth](https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/resources/img/oAuth2.jpeg)
+
 
 
 
