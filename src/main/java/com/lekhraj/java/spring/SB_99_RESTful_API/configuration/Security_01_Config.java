@@ -28,6 +28,11 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class Security_01_Config
 {
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/ignore1", "/ignore2");
+    }
+
     //@Autowired private BasicAuthenticationEntryPoint authenticationEntryPoint;
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
@@ -51,6 +56,9 @@ public class Security_01_Config
         return new BCryptPasswordEncoder();
     }
 
+    //========================
+    // SecurityFilterChain
+    // ====================
     @ConditionalOnProperty(havingValue = "SecurityFilterChain_01", name = "sb.customize.SecurityFilterChain")
     @Bean
     public SecurityFilterChain filterChainBasicAuth(HttpSecurity http) throws Exception
@@ -77,28 +85,11 @@ public class Security_01_Config
     }
 
     @ConditionalOnProperty(havingValue = "SecurityFilterChain_02", name = "sb.customize.SecurityFilterChain")
-    @Bean
+    @Bean // de-active by condition
     public SecurityFilterChain filterChainToken(HttpSecurity http) throws Exception
     {
-        //Todo
-        return null;
+        http.oauth2ResourceServer(resourceServer -> resourceServer.jwt(Customizer.withDefaults()));
+        return http.build();
     }
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/ignore1", "/ignore2");
-    }
-
-
-    /*@Bean // LDAP
-    AuthenticationManagerBuilder authenticationManagerBuilder(AuthenticationManagerBuilder auth) throws Exception {
-        return auth
-                .ldapAuthentication()
-                .userDnPatterns("uid={0},ou=people")
-                .groupSearchBase("ou=groups")
-                .contextSource(new DefaultSpringSecurityContextSource(Arrays.asList("ldap://localhost:389/"), "dc=example,dc=com"))
-                .passwordCompare()
-                .passwordAttribute("userPassword");
-    }*/
 
 }
