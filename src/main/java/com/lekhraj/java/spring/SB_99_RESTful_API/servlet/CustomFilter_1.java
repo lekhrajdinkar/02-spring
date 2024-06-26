@@ -13,7 +13,7 @@ import org.springframework.web.filter.GenericFilterBean;
 
 import java.io.IOException;
 @Slf4j
-@Component
+//@Component
 public class CustomFilter_1 extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
