@@ -1,0 +1,8 @@
+environment:
+  name: dev1
+  identifier: dev1
+  description: develop environment
+  tags: {}
+  type: PreProduction
+  orgIdentifier: default
+  projectIdentifier: frontendproject
