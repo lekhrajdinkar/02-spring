@@ -9,20 +9,25 @@
     - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/banzai-dev_api-driven
     - org > project > workspace(cli/api driven)
     - store state, run history, workspace Variable, long running plan
-
-3. Commands :
+---
+## Commands :
    - `fmt` , `validate`
    - `plan` , `apply` , `destroy`
-   - `login` - to connect to  [ HCP-cluser >org >project > workspace ]
+   - `login` - to connect to  [ HCP-cluser > org >project > workspace ]
    - `show`, `state` [ list, etc ]
    - `output`
-   
-4. `HCL` (HashiCorp Configuration Language)
-  - String interpolation : eg `web-sg-${var.resource_tags["project"]}-${var.resource_tags["environment"]}`
-  - Terraform configurations can also be written in `JSON`
-  - `state file` - keep it secure and encrypted.
 
-  - can make declaration anywhere. But its good practice to have seperate files:
+---   
+## HCL (HashiCorp Configuration Language)
+  - facts:  
+    - String interpolation : eg `web-sg-${var.resource_tags["project"]}-${var.resource_tags["environment"]}`
+    - Terraform configurations can also be written in `JSON`
+    - `state file` - keep it secure and encrypted.
+
+  - configuration-1: 
+    - can make declaration anywhere. But its good practice to have seperate files.
+    - keep them in same folder.
+  ```
     - main.tf
     - backend.tf - org, `TF_CLOUD_ORGANIZATION`=org1
     - variable.tf
@@ -30,11 +35,12 @@
     - dev.qa,prod.`tfvars`
     - s3-resource.tf, sqs-resource.tf, etc
     - output.tf
-  
+  ```
+
   - `provider` :
     - aws : https://registry.terraform.io/providers/hashicorp/aws/latest
   
-  - `variable`  (32 char)
+  - `variable`  (32 char max)
      - types  - number, string, list, map, bool, tuple, object 
      - use : var.*
      - replace default value:  
@@ -55,9 +61,7 @@
     - sensitive = true : will not be printed on logs.
     - use : local.*
 
-  - `modules`
-    - source  = `terraform-aws-modules/vpc/aws`
-    - source     = "./modules/aws-instance"
+
 
   - `resource`
     - `attribute` : (optional, mandatory)
@@ -71,7 +75,7 @@
     - `count`
       - Manage `similar resources` with count.
       - `replicates` the given resource with given count.
-      - ``` 
+      ``` 
         eg: resource "aws_instance" "app" { count = 4 }
           - length(aws_instance.app) : 4
           - aws_instance.app : list of all instances.
@@ -91,15 +95,23 @@
 
   - `Functions`
     - merge(), join(), count(), length(), sort(), key(), value()
+
+---
+
+## modules
+ - source  = `terraform-aws-modules/vpc/aws`
+ - source     = "./modules/aws-instance"
+
 --- 
 
-##  Tutorial
-- https://developer.hashicorp.com/terraform/tutorials/aws-get-started/
-- https://developer.hashicorp.com/terraform/tutorials/configuration-language
-- https://developer.hashicorp.com/terraform/tutorials/cli
-- https://developer.hashicorp.com/terraform/tutorials/modules/module
-- https://developer.hashicorp.com/terraform/tutorials/provision
-- https://developer.hashicorp.com/terraform/tutorials/state/state-import
+## References:
+- Tutorial links:
+  - https://developer.hashicorp.com/terraform/tutorials/aws-get-started/
+  - https://developer.hashicorp.com/terraform/tutorials/configuration-language
+  - https://developer.hashicorp.com/terraform/tutorials/cli
+  - https://developer.hashicorp.com/terraform/tutorials/modules/module
+  - https://developer.hashicorp.com/terraform/tutorials/provision
+  - https://developer.hashicorp.com/terraform/tutorials/state/state-import
 
 ---
 
