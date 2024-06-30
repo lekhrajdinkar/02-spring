@@ -26,6 +26,7 @@
 ## DevOps
 ### terraform
 - https://github.com/lekhrajdinkar/02-spring/blob/main/terraform/terraform.md
+- https://chatgpt.com/c/2f328724-50e4-427d-8c04-0a17e9747150
 
 ### harness.io
 - 

@@ -22,23 +22,36 @@
   - facts:  
     - String interpolation : eg `web-sg-${var.resource_tags["project"]}-${var.resource_tags["environment"]}`
     - Terraform configurations can also be written in `JSON`
-    - `state file` - keep it secure and encrypted.
+    - `state file` - keep it secure and encrypted. - `terraform.tfstate`
 
   - configuration-1: 
+    - `terraform { ... required_version="", required_provider={} }`
     - can make declaration anywhere. But its good practice to have seperate files.
-    - keep them in same folder.
+    - keep them in same-folder (`root-module`)
+    - every Terraform configuration is part of a module
   ```
-    - main.tf
-    - backend.tf - org, `TF_CLOUD_ORGANIZATION`=org1
-    - variable.tf
-    - provider.tf
-    - dev.qa,prod.`tfvars`
-    - s3-resource.tf, sqs-resource.tf, etc
-    - output.tf
+    - root module:
+        - main.tf
+        - backend.tf - org, `TF_CLOUD_ORGANIZATION`=org1
+        - variable.tf
+        - provider.tf
+        - dev.qa,prod.`tfvars`
+        - s3-resource.tf, sqs-resource.tf, etc
+        - output.tf
+        - /directory-1/
+                child-module-1/
+                ├── main.tf
+                ├── variables.tf
+                ├── outputs.tf
+        - /directory-2/child-module-2.tf
+        
+        ** root-module can use other module's config file
   ```
 
   - `provider` :
     - aws : https://registry.terraform.io/providers/hashicorp/aws/latest
+    - aws_`key_pair`
+    - aws_`security_group`
   
   - `variable`  (32 char max)
      - types  - number, string, list, map, bool, tuple, object 
@@ -60,8 +73,6 @@
     - making your configuration easier to read and maintain.
     - sensitive = true : will not be printed on logs.
     - use : local.*
-
-
 
   - `resource`
     - `attribute` : (optional, mandatory)
@@ -95,12 +106,37 @@
 
   - `Functions`
     - merge(), join(), count(), length(), sort(), key(), value()
+    - `templatefile`(tftpl-file-1, map), `file`(file-1)
+    - `lookup`(map,key) - like map1.get(k1) in java. 
+    - `file`()
 
+  - `Terraform template` .tftpl files
+    - used as templates for generating configuration-files/ other-text-files.
+    - `dynamically generate` files by substituting variables and expressions within the template.
+    - eg: 
+    ```
+    # user_date.tftpl >> shell script text file having lots of placeholders- ${placeholder-1}, etc
+    user_data= `templatefile`("user_data.tftpl", { placeholder-1 = var.value1, placeholder-2 = var.value2 })
+    ```
+
+  - `expressions`
+    - ternary operation
 ---
 
 ## modules
- - source  = `terraform-aws-modules/vpc/aws`
- - source     = "./modules/aws-instance"
+- https://developer.hashicorp.com/terraform/tutorials/modules/module
+- Like, packages, modules, libraries in other prog language
+- Each directory represents a separate module.
+- container for `multiple resources` that are used together.
+  - module { configuration/resources }
+
+- benefits:
+  - `Reusability`: Write code once and reuse it in multiple configurations or environments.
+  - `Maintainability`: Encapsulate complex configurations into simpler, reusable components.
+  - `Organization`: Keep your Terraform code organized by grouping related resources together.
+- Type:
+  - `remote` : `registry`: "terraform-aws-modules/vpc/aws", `VCS`
+  - `local` : localFileSystem -  "./directory-1/child-module-1.tf"
 
 --- 
 
@@ -147,8 +183,11 @@ project-root/
 - Each configuration will have its own state file.
 - Resources defined in one configuration are not aware of resources defined in another configuration
 ---
-
-
+ssh-keygen -C "your_email@example.com" -f ssh_key
+resource "aws_key_pair" "ssh_key" {
+  key_name = "ssh_key"
+  public_key = file("ssh_key.pub")
+}
 
 
 ```
