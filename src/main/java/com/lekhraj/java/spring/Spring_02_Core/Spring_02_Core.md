@@ -1,57 +1,73 @@
-https://www.baeldung.com/spring-tutorial
-https://www.baeldung.com/spring-dependency-injection
-https://chat.openai.com/c/33d0d06d-0aaa-4791-bce9-da8ea3f5dd53
-==================================================================
+# Spring - Core
+- https://www.baeldung.com/spring-tutorial
+- https://www.baeldung.com/spring-dependency-injection
+- https://chat.openai.com/c/33d0d06d-0aaa-4791-bce9-da8ea3f5dd53
+---
 
-1. IoC, DI, AOP Core concept.
-1.1. Custom Annotation
-2. DI is pattern/design for IoC.
-3. IoC container - Bean + LifeCycle.
-3.1. Bean Pre/Post Processor
-3.2. Bean Scopes.
-4. DI
-4.1.manual - Setter and Construtor.
-4.2.Autowire (3 places). https://www.baeldung.com/spring-autowire
-4.2.1. Resolve - Type, @Qualifier, Custom Qualifier,  Beanname,
-5. @Bean, @Component, @Configuration, @R, @S, @C,
-   @order(1), @DependsOn("beanName")
-   @Autowired vs @Resource - same. resource first check by name. also from JEE specification.
-5. @primary, @Qaulifier
-6. @value - Property Injection.
-7. Spring profile.
-8. AOP program.
-9. Autowire more
-    - map, list, set
-    - ResolvableType class for  superclass, interface, generic types.
-10. @lookup - handle scope mismatch.
-    Singlebean <-- inject prototype bean.
-    Spring does not maintain that prototype bean. create memeory leak if not cleaned by manually.
+## Dependency Injection
+- `IoC` : inversion of control of create object from Code to configuration(metadata)
+- `DI` id pattern/design for IoC.
+- create beans:
+  - Beans (Scopes : singleton/prototype )
+  - @`Configuration` >> @`Bean` m(){ return new object() ;}
+  - @`Component`, [ Stereotype: @`Repository`, @`Service`, @`Controller` ] 
+- Inject Dependency
+  - manual
+    - Constructor
+    - Setter : override
+  - @`Autowired` : https://www.baeldung.com/spring-autowire
+    - apply on `property` 
+    - apply on `method` --> get applied to `method arg`, then.
+    - issue while autowire:
+      - `no-bean` found.
+      - `multiple-bean` found (Conflict) 
+        - resolve :: Type >>  @`Qualifier`(BeanName) >> Custom-Qualifier | @`primary`
+      - Circular dependencies:
+        - @order(1), @DependsOn("beanName")
+        - refactor code
+        - avoid using constructor Injection
+    - Autowire more
+      - map, list, set
+      - ResolvableType class for  superclass, interface, generic types. 
 
-    @Component
-    public class MySingletonBean {
-        @Lookup
-        public MyPrototypeBean getPrototypeBean() {
-            // This method body will be ignored
-            return null;
-        }
-    }
+- More:
+  - `Spring profile` : local, dev,qa,prod | @profile()
+  - @`lookup` 
+    - handle scope mismatch.
+    - SingleBean <-- inject prototype bean.
+    - it will not create new instance of proto member.
+    - if we write custom code get new instance, spring won't manage it and could create memory leak, if not cleaned by manually.
+    - solution : use @Lookup
+    - it's recommended to avoid injecting prototype beans into singleton beans
+    - ```
+      @Component
+      public class MySingletonBean {
+           @Lookup
+           public MyPrototypeBean getPrototypeBean() {
+                 // This method body will be ignored
+                  return null;
+           }
+      }
+      ```  
+  - Spring IOC container:
+    - `Life Cycle`.
+    - `Bean Processor` - Pre and Post
+  - @`SpringBootApplication`  --> @Configuration, @EnableAutoConfiguration, and @ComponentScan.  
+  - @`Singleton`
+  - @`Order` meanings:
+    - collection - insertion order.
+    - multiple Aspect - Apply order.
+    - load bean in container.
 
+---
+## Code    
+1. sceduled task
 
-10.  @SpringBootApplication  --> @Configuration, @EnableAutoConfiguration, and @ComponentScan.
-11. Load bean By profile
-12. @Singleton
-
---- More ---
-11. sceduled task
-======
-1. prototype bean instances are not managed by the container after they are created.
-2. In general, it's recommended to avoid injecting prototype beans into singleton beans
-if the prototype bean's lifecycle is not managed correctly, as it can lead to unexpected behavior and memory leaks.
-
-@order / I::Ordered:getOrder()
-- collection - insertion order.
-- multiple Aspect - Apply order.
-- load order in container.
+---
+## AOP
+- Core concept.
+- create Custom Annotation
+---
 
 ## Pending
 https://www.baeldung.com/spring-exceptions

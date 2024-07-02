@@ -1,14 +1,16 @@
 ## A. Spring
+
 ### Spring_01_AOP
 - https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_01_AOP/topic.txt
 - https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_01_AOP/point-cut.txt
 
 ### Spring_02_Core
-- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_02_Core/Life-Cycle.txt
 - https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_02_Core/Spring_02_Core.md
+- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_02_Core/Spring_02_lifeCycle.md
 
 ### Spring_03_Properties
 - https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_03_Properties/topic.txt
+
 ***
 
 ## B. Spring Boot
