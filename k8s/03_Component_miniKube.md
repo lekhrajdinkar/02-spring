@@ -106,7 +106,37 @@
   - minikube version
   - ** minikube `docker-env`: allow miniKube to access local-docker-repo.
 
+### run a Spring project inside pod
+- minikube
+  - minikube start --driver=docker
+  - kubectl cluster-info
+  - minikube status
+  - kubectl get node
+  - minikube docker-env
+  - docker images
+- kubectl
+  - kubectl create `deployment` spring-k8s-deployment --image=com.lekhraj/spring:1.0.0 --port=8083
+  - kubectl get deployments
+  - kubectl describe deployment spring-k8s-deployment
+  
+  - kubectl get pods
+  - kubectl logs <pod-name>
+  
+  - kubectl expose deployment spring-k8s-deployment --type=NodePort
+  - kubectl get service
 
+- minikube service <service-name> --url
+- minikube dashboard
+
+- Cleanup
+  - kubectl delete service spring-xxxxx
+  - kubectl delete deployment spring-k8s-deployment
+  - minikube stop
+  - minikube delete ?
+  
+- https://medium.com/@javatechie/kubernetes-tutorial-setup-kubernetes-in-windows-run-spring-boot-application-on-k8s-cluster-c6cab8f7de5a  
+
+--- 
 ```
 steps:
 
