@@ -20,14 +20,15 @@
 
 ---
 ## B. Container orchestrators
+- maintain container at `runtime`
 - use case:
   - can manually maintain a couple of containers.
   - or write scripts to manage the lifecycle of dozens of containers
   - orchestrators make things easier, when managing hundreds or thousands of containers.
-- eg: ECS, Docker Swarm,Kubernetes/ k8s.
+- eg: ECS, Docker Swarm,Kubernetes/ k8s, marathon, etc.
 
 ### Kubernetes features (brief theory)
-  - can be deployed on cloud(ec2), on-prem(hist), IaaC (EKS).
+  - > can be deployed on cloud(ec2), on-prem(host), IaaS (EKS).
   - Automate the Container deployment at `scale`
   - `Automated Rollouts and Rollbacks`: 
     - Automatically roll out changes and roll them back if something goes wrong.
@@ -47,3 +48,6 @@
     -  increased performance, cost efficiency, reliability, workload distribution, and reduced latency.
   - Implement policies to `secure access` to applications/MS/service running inside containers.
   - Enable containers in a cluster to `communicate with each other` regardless of the host
+  - `scheduling`
+  - `Monitoring`
+  - `Batch Execution`.
