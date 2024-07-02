@@ -16,7 +16,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
+// @Component                     // <<<< here
 @Slf4j
 public class RestConsumeRunner implements CommandLineRunner {
     String url1 = "http://localhost:8083/spring/security/admin/secured-api-1";

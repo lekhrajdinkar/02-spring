@@ -22,8 +22,8 @@
       - `no-bean` found.
       - `multiple-bean` found (Conflict) 
         - resolve :: Type >>  @`Qualifier`(BeanName) >> Custom-Qualifier | @`primary`
-      - Circular dependencies:
-        - @order(1), @DependsOn("beanName")
+      - `Circular dependencies`:
+        - @`order`(1), @`DependsOn`("beanName")
         - refactor code
         - avoid using constructor Injection
     - Autowire more

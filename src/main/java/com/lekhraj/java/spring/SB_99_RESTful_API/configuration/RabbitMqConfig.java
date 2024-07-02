@@ -13,7 +13,7 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
-@Configuration
+// @Configuration                       // <<<< here
 public class RabbitMqConfig
 {
     @Value("${rabbit.mq.queue}") String queueName;
