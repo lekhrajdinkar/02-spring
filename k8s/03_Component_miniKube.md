@@ -13,16 +13,17 @@
 -  `Nodes`: The worker machines in the Kubernetes cluster, which can run multiple pods.
 
 - hierarchy : 
-  - cluster` --> `node` --> `pod`,IP,workloads,posSpecYml/Json 
+  - `cluster` --> `node` --> `pod`,IP,workloads,posSpecYml/Json 
   - `container` --> `app`
 - pod/node talk to each other using `Service` (has DNS).
-- `Replica Set` [ pod1, pod2, ... ]. 
+- `Replica Set`:
   - one pod goes down another comes up from replica set.
   - ensures certain no. of pod running at specific time at all the time.
   - uses selectors(label query)
-  - up/down replica count : horizontal scale.
+  - scale in/out replica count : `horizontal scale`.
   - Self-Healing: 
     - If any of the pods managed by a ReplicaSet are deleted or fail, the ReplicaSet controller will create new ones to maintain the desired number of replicas.
+
 - `Deployment Object` for pods and ReplicaSet
   - higher-level concept that manages ReplicaSets and updates on pods in declarative way:
     - command : `kubectl`
