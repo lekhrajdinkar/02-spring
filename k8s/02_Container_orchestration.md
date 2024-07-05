@@ -1,9 +1,15 @@
 # k8s
 - k8s - 02  Containers :  https://chatgpt.com/c/9836b4c7-2b23-497e-b06b-16885e3e18aa
 - Containers - image, runtime, orchestration (ECS,K8s).
+- https://kubernetes.io/docs/concepts/overview/
 --- 
 ## A. Containers
-### Container images 
+  - Containers are similar to VMs, but share the Operating System (OS) among the applications.
+  - Therefore, containers are considered lightweight.
+  - Similar to a VM, a container has its own filesystem, share of CPU, memory, process space, and more.
+  - As they are decoupled from the underlying infrastructure, they are portable across clouds and OS distributions.
+
+### Container images
   - eg: Docker image
   - best suited for microservices/MS by providing `portability` and `isolated VM`
   - `executable package`, which confine the  `code,runtime and dependencies, env var+configFile` in a pre-defined format.
@@ -14,12 +20,13 @@
     - Use `trusted base-images`
     - identify `vulnerabilities` in images and upgrade it. docker has built in scanner.
     - regularly update images to include security patches.
-
+    
 ### Container runtime 
 - eg: Docker Engine
 
 ---
 ## B. Container orchestrators
+- For Distributed System | provides deployment patterns of container.
 - maintain container at `runtime`
 - use case:
   - can manually maintain a couple of containers.
@@ -30,6 +37,7 @@
 ### Kubernetes features (brief theory)
   - > can be deployed on cloud(ec2), on-prem(host), IaaS (EKS).
   - Automate the Container deployment at `scale`
+    - Horizontal scaling : add up/down more pods.
   - `Automated Rollouts and Rollbacks`: 
     - Automatically roll out changes and roll them back if something goes wrong.
   - `Service Discovery and Load Balancing`: 
@@ -51,3 +59,4 @@
   - `scheduling`
   - `Monitoring`
   - `Batch Execution`.
+  - Pv4/IPv6 dual-stack

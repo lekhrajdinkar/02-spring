@@ -1,13 +1,11 @@
 # K8s - Fundamental 
 - k8s - 03 fundamentals : https://chatgpt.com/c/da40b952-dbd9-46a9-ad58-92c828a89118
 - https://www.youtube.com/playlist?list=PLVz2XdJiJQxybsyOxK7WFtteH42ayn5i9
-- https://kubernetes.io/docs/concepts/overview/components/
-- https://trainingportal.linuxfoundation.org/learn/course/introduction-to-kubernetes/container-orchestration-1/first-lesson
 
 ---
 
 ## A. Components:
-
+- https://kubernetes.io/docs/concepts/overview/components/
 - `Pods`: The smallest deployable units in Kubernetes that you create and manage.
 -  `Services`: Abstract a set of pods and provide a consistent way to access them, even if the individual pods' IP addresses change.
 -  `Nodes`: The worker machines in the Kubernetes cluster, which can run multiple pods.
