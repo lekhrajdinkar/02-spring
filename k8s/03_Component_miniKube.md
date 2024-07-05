@@ -24,10 +24,11 @@
   - Self-Healing: 
     - If any of the pods managed by a ReplicaSet are deleted or fail, the ReplicaSet controller will create new ones to maintain the desired number of replicas.
 
-- `Deployment Object` for pods and ReplicaSet
+- `Deployment Object` 
+  - for ReplicaSet (pods)
   - higher-level concept that manages ReplicaSets and updates on pods in declarative way:
-    - command : `kubectl`
-    - deployment.yml 
+    - command/cli 
+    - yml file. 
 - `Secret`:
   - Store DB config, password, etc outside SB app. then we dont need to build it again.
   - encrypted text, outside pod
@@ -56,7 +57,7 @@
 ---
 
 ##  cluster and node Components 
-1. `master Node` (1)
+1. `master Node` (1) / control panel
 - Checks memory, health, CPU, etc for each WorkerNode.
    - `Kube-API Server` : 
      - cluster-gateway
