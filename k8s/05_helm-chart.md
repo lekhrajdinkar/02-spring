@@ -22,6 +22,7 @@
 
 ---
 ## commands:
+- helm create <spring-helm>
 - helm `install` my-release my-chart 
   * -f custom-values.yaml
   * --set key1=value1,key2=value2

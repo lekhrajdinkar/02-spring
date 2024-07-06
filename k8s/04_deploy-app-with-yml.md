@@ -50,4 +50,6 @@ minikube ip
 --- 
 didnot work
 http://192.168.49.2:30837/spring
+
+minikube service spring-k8s-service
 ```
