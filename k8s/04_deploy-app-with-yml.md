@@ -1,12 +1,12 @@
 # run a Spring project inside pod
 ## using yml 
 - https://medium.com/@javatechie/kubernetes-tutorial-run-deploy-spring-boot-application-in-k8s-cluster-using-yaml-configuration-3b079154d232
-
+- https://github.com/Java-Techie-jt/springboot-crud-k8s/blob/main/db-deployment.yaml
 ---
 
 1. minikube start --driver=docker
 3. minikube docker-env
-   - > docker build -t spring-app-image:1.0.0 .
+   - > docker build -t com.lekhraj/spring:1.0.0 .
    - > & minikube -p minikube docker-env --shell powershell | Invoke-Expression 
 4. Deployment object:
    - create deployment-spring.yml

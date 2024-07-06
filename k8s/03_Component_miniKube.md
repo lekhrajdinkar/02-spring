@@ -8,7 +8,12 @@
 - https://kubernetes.io/docs/concepts/overview/components/
 - `Pods`: The smallest deployable units in Kubernetes that you create and manage.
 -  `Services`: Abstract a set of pods and provide a consistent way to access them, even if the individual pods' IP addresses change.
--  `Nodes`: The worker machines in the Kubernetes cluster, which can run multiple pods.
+-  `Nodes`: 
+  - The worker machines in the Kubernetes cluster, which can run multiple pods.
+  - typically runs on a separate virtual machine (VM), but this is not a strict requirement.
+  - in AWS, each node is  seperate  VM for isolation.
+  - VMs can be easily resized, moved, or replicated,
+  - contains: kubelet, kube-proxy, container-runtime.
 
 - hierarchy : 
   - `cluster` --> `node` --> `pod`,IP,workloads,posSpecYml/Json 
