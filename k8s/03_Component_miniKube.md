@@ -6,36 +6,45 @@
 
 ## A. Components:
 - https://kubernetes.io/docs/concepts/overview/components/
-- `Pods`: The smallest deployable units in Kubernetes that you create and manage.
--  `Services`: Abstract a set of pods and provide a consistent way to access them, even if the individual pods' IP addresses change.
--  `Nodes`: 
+- - hierarchy :
+  - `cluster` --> `node` --> `pod`,IP,workloads,posSpecYml/Json
+  - `container` --> `app`
+
+- `Pods`: 
+  - The smallest deployable units in Kubernetes that you create and manage.
+  - pod/node talk to each other using `Service` (has DNS).
+
+- `Replica Set`:
+  - one pod goes down another comes up from replica set.
+  - ensures certain no. of pod running at specific time at all the time.
+  - uses selectors(label query)
+  - scale in/out replica count : `horizontal scale`.
+  - span with cluster.
+  - Self-Healing:
+    - If any of the pods managed by a ReplicaSet are deleted or fail, the ReplicaSet controller will create new ones to maintain the desired number of replicas.
+
+- `Deployment Object`
+  - higher-level concept that manages ReplicaSets + `updates on pods`/rollup/rollback.
+  
+- `scheduler`
+  - decides which node, a pod is assigned to.
+  
+- `Services`: 
+  - Abstract a set of pods and provide a consistent way to access them, even if the individual pods' IP addresses change.
+  
+- `Nodes`: 
   - The worker machines in the Kubernetes cluster, which can run multiple pods.
   - typically runs on a separate virtual machine (VM), but this is not a strict requirement.
   - in AWS, each node is  seperate  VM for isolation.
   - VMs can be easily resized, moved, or replicated,
   - contains: kubelet, kube-proxy, container-runtime.
 
-- hierarchy : 
-  - `cluster` --> `node` --> `pod`,IP,workloads,posSpecYml/Json 
-  - `container` --> `app`
-- pod/node talk to each other using `Service` (has DNS).
-- `Replica Set`:
-  - one pod goes down another comes up from replica set.
-  - ensures certain no. of pod running at specific time at all the time.
-  - uses selectors(label query)
-  - scale in/out replica count : `horizontal scale`.
-  - Self-Healing: 
-    - If any of the pods managed by a ReplicaSet are deleted or fail, the ReplicaSet controller will create new ones to maintain the desired number of replicas.
-
-- `Deployment Object` 
-  - for ReplicaSet (pods)
-  - higher-level concept that manages ReplicaSets and updates on pods in declarative way:
-    - command/cli 
-    - yml file. 
 - `Secret`:
   - Store DB config, password, etc outside SB app. then we dont need to build it again.
   - encrypted text, outside pod
+  
 - `Config map` : Plain text, outside pod.
+
 - `ETCD` : 
   - key-Value database/store, 
   - 1MB max of a value.

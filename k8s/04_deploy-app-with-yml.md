@@ -11,23 +11,45 @@
 4. Deployment object:
    - create deployment-spring.yml
    - https://github.com/lekhrajdinkar/02-spring/tree/main/k8s/yml/deployment-spring.yml
-   - > kubectl apply -f deployment-spring.yml
+   - > kubectl create/apply/replace/delete -f deployment-spring.yml
 
 5. check 
-   - > kubectl get deployments
-   - > kubectl get pods
+   - > kubectl get/describe deployments
+   - > kubectl get/describe pods
    - > kubectl logs spring-k8s-7dc6f56947-gflfd
    
 6. Expose application
    - create service-spring.yml
    - https://github.com/lekhrajdinkar/02-spring/tree/main/k8s/yml/service-spring.yml
-   - > kubectl apply -f service-spring.yml
+   - > kubectl create/apply/replace/delete -f service-spring.yml
    - > kubectl get nodes -o wide : check node IP, 192.168.49
    - > kubectl get services : check port, 30837
    - >  hit : http://192.168.49.2:30837/spring
 
 ---
+## Yml
+### parent keys(4)
+- `kind` : Pod, Service, ReplicaSet/rs, Deployment
+- `apiVersion` :
+  - Deployment, replicaSet : app/v1
+  - pod, service : v1
+- `metadata`(2)
+  - name :
+  - labels : <dictonary> 
+- `spec`: <dictonary>
+  
+---
+- POD spec
+  - `containers`: <List>
 
+- ReplicaSet spec
+  - `template` : <pod metadata + poc spec>
+  - `replicas` : 2
+  - `selector` >  what pods under it | matchLabels > k:v, ... 
+    - it also manages pods which are not created as part of `template` section
+    - with selector, we can select and include them.
+
+---
 ```
 kubectl apply -f service-spring.yml
 service/spring-k8s-service created

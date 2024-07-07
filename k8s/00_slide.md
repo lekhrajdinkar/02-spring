@@ -12,6 +12,12 @@
 ![](https://github.com/lekhrajdinkar/02-spring/blob/main/k8s/slides/12.png)
 ![](https://github.com/lekhrajdinkar/02-spring/blob/main/k8s/slides/13.png)
 ![](https://github.com/lekhrajdinkar/02-spring/blob/main/k8s/slides/14.png)
+![](https://github.com/lekhrajdinkar/02-spring/blob/main/k8s/slides/15.png)
+![](https://github.com/lekhrajdinkar/02-spring/blob/main/k8s/slides/16.png)
+![](https://github.com/lekhrajdinkar/02-spring/blob/main/k8s/slides/17.png)
+![](https://github.com/lekhrajdinkar/02-spring/blob/main/k8s/slides/18.png)
+![](https://github.com/lekhrajdinkar/02-spring/blob/main/k8s/slides/19.png)
+![](https://github.com/lekhrajdinkar/02-spring/blob/main/k8s/slides/20.png)
 
 
 

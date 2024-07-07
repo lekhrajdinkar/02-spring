@@ -13,6 +13,7 @@
   - > kubectl create deployment spring-k8s-deployment --image=com.lekhraj/spring:1.0.0 --port=8083
   - kubectl get deployments
   - kubectl describe deployment spring-k8s-deployment
+  - kubectl `edit` deployments xxxxx
   
   - kubectl get pods
   - kubectl logs <pod-name>
