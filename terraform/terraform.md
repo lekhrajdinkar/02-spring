@@ -12,7 +12,7 @@
 ---
 ## Commands :
    - `fmt` , `validate`
-   - `plan` , `apply` , `destroy`
+   - init, `plan` , `apply` , `destroy`
    - `login` - to connect to  [ HCP-cluser > org >project > workspace ]
    - `show`, `state` [ list, etc ]
    - `output`
