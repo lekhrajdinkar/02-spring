@@ -22,14 +22,14 @@
 
 ---
 ## commands:
-- helm create <spring-helm>
-- helm `install` my-release my-chart 
+- helm `create` spring-helm
+- helm `install` release-v2 spring-helm 
   * -f custom-values.yaml
   * --set key1=value1,key2=value2
-- helm `upgrade`
-- helm `delete`
-- helm `history` app-1
-- helm `rollback` app-1 revision-n
+- helm `upgrade` release-v2 spring-helm
+- helm `delete` release-v2
+- helm `history` release-v2
+- helm `rollback` release-v2 revision-n
 ---
 ### Scenario / JT
 1. deploy in order :  pod-2(kafka) >  then, pod-3(Database) > then, pod-1(SB)

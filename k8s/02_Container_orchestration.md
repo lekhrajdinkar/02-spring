@@ -4,13 +4,16 @@
 - https://kubernetes.io/docs/concepts/overview/
 --- 
 ## A. Containers
+  - `isolated environment` : physical machine > VM > Containers(host OS)
   - Containers are similar to VMs, but share the Operating System (OS) among the applications.
   - Therefore, containers are considered lightweight.
   - Similar to a VM, a container has its own filesystem, share of CPU, memory, process space, and more.
   - As they are decoupled from the underlying infrastructure, they are portable across clouds and OS distributions.
 
+
 ### Container images
   - eg: Docker image
+  - image built on OS-1 as base, can be run my machine having window OS. docker desktop in between.
   - best suited for microservices/MS by providing `portability` and `isolated VM`
   - `executable package`, which confine the  `code,runtime and dependencies, env var+configFile` in a pre-defined format.
   - Composed of `multiple layers`, stacked on top of a base image.

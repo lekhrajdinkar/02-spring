@@ -111,6 +111,11 @@
 - commands:
   - kubectl `version` --client --output=yaml
   - ** kubectl `cluster-info` dump
+  - kubectl `run` --replicas=1000 xxxxxx
+  - kubectl `scale` --replicas=1000 xxxxxx
+  
+> - aws eks --region region-code update-kubeconfig --name cluster-name
+> - kubectl config use-context context-name
 
 ### B.3 kind or MiniKube
 - minikube version: `v1.33.1`, download minikube.exe, set PATH, install docker (driver)

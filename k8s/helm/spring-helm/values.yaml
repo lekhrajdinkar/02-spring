@@ -4,6 +4,12 @@
 
 replicaCount: 2
 
+# The port your Spring Boot application is running on.
+containerPort: 8083
+
+# Spring profile to use
+springProfile: dev1
+
 image:
   repository: com.lekhraj/spring
   pullPolicy: IfNotPresent
@@ -42,6 +48,7 @@ securityContext: {}
 service:
   type: NodePort
   port: 80
+  targetPort: 8083
 
 ingress:
   enabled: false
@@ -105,3 +112,5 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+
