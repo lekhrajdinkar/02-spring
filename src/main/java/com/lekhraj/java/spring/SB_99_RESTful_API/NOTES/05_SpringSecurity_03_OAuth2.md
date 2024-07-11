@@ -84,6 +84,12 @@ D. `Refresh Token` Grant
 - public claims : https://www.iana.org/assignments/jwt/jwt.xhtml
 - private claims
 
+- code : https://developer.okta.com/docs/guides/sign-into-web-app-redirect/spring-boot/main/
+
+- AWS OKTA SAML : 
+  - https://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-Amazon-Web-Service
+  - https://help.okta.com/en-us/content/topics/deploymentguides/aws/aws-configure-aws-app.htm
+
 
 
 

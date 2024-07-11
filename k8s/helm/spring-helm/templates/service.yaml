@@ -7,9 +7,8 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.containerPort }}
-      protocol: TCP
-      name: http
+    - targetPort: {{ .Values.containerPort }}
+      port: {{ .Values.service.port }}
+      nodePort: 30008
   selector:
     {{- include "spring-helm.selectorLabels" . | nindent 4 }}

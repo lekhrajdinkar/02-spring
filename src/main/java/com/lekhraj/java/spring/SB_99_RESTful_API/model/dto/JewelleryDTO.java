@@ -34,16 +34,16 @@ public class JewelleryDTO
     String name;
 
     @JsonProperty("jewelleryId")
-    @Min(value = 1, message ="Id missing")
+    @Min(value = 1, message ="Id missing") // Hibenate-validator
     int id;
 
     @JsonProperty("jewelleryPrice")
     //@Size(min = 10, max = 1000, message = "Must be between 100 and 1000")
     @Max(value = 1000, message = "maximum value is 1000.")
-    @JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "#0.0000")
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "#0.00")
     double price;
 
-    @DateTimeFormat
+    @DateTimeFormat //SB
     LocalDateTime createTime;
 
     //=========
@@ -62,7 +62,7 @@ public class JewelleryDTO
     }
 
     @JsonAnySetter
-    //On deserialization, the "additional" properties from JSON will simply be added to the map.
+    //On deserialization, the "additional" properties from JSON will simply be added to this map.
     public void setProperty(String key, Object value) {
         unknownFeildMap.put(key, value);
     }
@@ -115,6 +115,6 @@ class MyKey {
     String suffix;
     @JsonKey
     String getMyKey(){
-        return this.prefix+this.key+this.suffix;
+        return "==="+this.prefix+this.key+this.suffix+"===";
     }
 }
