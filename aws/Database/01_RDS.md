@@ -5,10 +5,12 @@
 
 ## Option-2 : AWS RDS
 - `managed` DB service, no access/ssh to underlying Ec2 instance.
-  - EBS(gp2/io1)
+  - But `RDS custom` allow to access it  only for MySQL and oracle DB.
+  - First disable automation mode, take snapshot, then access it.
+- EBS volume type : `gp2` or `io1`
 - Supported engine: 6 + 1 
   - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
-  - `Aurora` (AWS Proprietary database)
+  - `Aurora` (AWS Proprietary database, not Open source)
 - Advantages of RDM:
   - `Auto-Scaling` ( thresold : <10%, last 5min, etc)
     - good for unpredictable workloads
@@ -41,7 +43,7 @@
   - backup window preferrence.
 - enable autoscaling, give maz size.
 - Connectivity : 
-  - option-1: add specified ec2-i, will add SG, etcautomatically
+  - option-1: add specified ec2-i, will add SG, etc automatically (good for beginner)
   - option-2: Dont connect to Ec2-i
     - define VPS, subnet
     - allow public access
