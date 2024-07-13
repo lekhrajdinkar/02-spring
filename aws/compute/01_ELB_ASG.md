@@ -1,3 +1,5 @@
+- https://chatgpt.com/c/b1fe7e08-270f-4a92-a4db-b95e6beab7c7
+---
 ## keys Terms
 - `Availability` : multi AZ, prevent datacenter loss
 - `Scalability`:
@@ -9,28 +11,32 @@
 
 ---
 ## ELB
-- ELB(regional), forwards traffic to multiple ec2 in different AZ
+- regional, `Cross-Zone Load Balancing` : forwards traffic to multiple ec2 in different AZ
 - fixed hostname : `XXXX.region.elb.amazonaws.com`
+- works in conjunction with `ASG`.
 - has :
   - health-check mechanism (/health) at `target-group` level
   - has `DNS` name
   - Security group : sg-lb-1
-    - Also, link SG of ec2 instance with sg-lb-1 as source in traffic rule.
+    - Also, add rule to SG of ec2 instance to allow traffic sg-lb-1 
 - Since `complex`, already configured and integrated with other AWS services.
-  - route 53, ASG, EC2, Certificate manager, ECS, EKS
+  - route 53, ASG, EC2, Certificate manager 
+  - ECS, EKS
   - Cloudwatch, WAF, Global-Accelerator
 - purpose:
   - gateway | forwards traffic to healthy servers.
-  - separate public-traffic from private-traffic, can create public and private LB.
-  - provide `SSL-termination` ?
+  - separate `public-traffic` from `private-traffic`, can create public and private LB.
+  - provide `TLS/SSL-termination`
+    - allowing it to decrypt and inspect incoming traffic before forwarding it to the backend instances.
   - Enforce `stickiness with cookies` ?
 - Types:
-  - CLS (deprecated)
-  - `ALB` : operate at layer 7 : HTTp,HTTPS, websocket
-  - network : operate at layer 4: TCP, UDP, TLS
-  - gateway : GWLB, 2020
+  - `Classic` CLB (deprecated)
+  - `ALB` : operate at layer 7 : HTTP,HTTPS, websocket
+  - network, `NLB` : operate at layer 4: TCP, UDP, TLS : `very low latency, fast`
+  - gateway : `GWLB`, 2020 : provides advance security
 
-### A. ELB : ALB - Application LB (layer7)
+---
+### A. ELB : ALB - Application LB (layer 7)
 - `client` (IP-1) --http-1--> `ELB` (add extra header in http : `X-forwarded-Proto`) --http-2--> `app-server`
 - client >> ELB >> [ tg, redirect, fixed-http-response ]
 - tg / `target groups`:
@@ -61,8 +67,22 @@
       ```
 
 ---
-### B. ELB : NLB - Network LB (layer4)
+### B. ELB : NLB - Network LB (layer 4)
+- layer 4, handle TCP, UDP, and TLS traffic
+- Similar to ELB but fast, handles `millionsOfReq/Second`. ultra-low latencies.
+  - It `automatically scales` to handle the vast amounts of incoming traffic
+- `use-case`:
+  - applications that need fixed IP addresses. `AWS assign static-IP to ALB, one for each AZ`.
+  - ideal for TCP/UDP Applications.
+  - microservices architectures.
+  - gaming and streaming services.
 
+- target group:
+  - ELB
+  - EC2 instances
+  - IP Addresses
+- `health-check` support multiple-protocol : `http,https,TCP`
+- demo : similar as above
 
 ---
 ### B. ELB : GWLB - gateway LB (?)
