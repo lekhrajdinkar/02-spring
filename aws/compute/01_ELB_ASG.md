@@ -14,6 +14,11 @@
   - cookies: 
     - `LB generated` / Duration-based? : uses these reserved name: `AWSALB, AWSALBAPP, AWSALBTG`
     - `Application (TG) based` : MY_TG_1_COOKIE, etc
+- SSl-old/TLS-new.
+  - `X.502` === TLS certificate (private key, bodt, chain)
+  - ccgg uses `digicert` as `CA`.
+  - `SNI` : resolves multiple certificate load problem.
+  - encrypt `in-fly` traffic.
 
 ---
 ## ELB
@@ -22,11 +27,12 @@
     - if az-1 has more instances running, most traffic must go there.
 - fixed hostname : `XXXX.region.elb.amazonaws.com`
 - works in conjunction with `ASG`.
-- has :
+- has/contains :
   - health-check mechanism (/health) at `target-group` level
   - has `DNS` name
   - Security group : sg-lb-1
-    - Also, add rule to SG of ec2 instance to allow traffic sg-lb-1 
+    - Also, add rule to SG of ec2 instance to allow traffic sg-lb-1
+  - integration with ACM : [cert-1 for domain-1, cert-2 for domain-2, ... ] : `SNI` helps to load single Cert.
 - Since `complex`, already configured and integrated with other AWS services.
   - route 53, ASG, EC2, Certificate manager 
   - ECS, EKS
@@ -46,7 +52,8 @@
 
 ---
 ### A. ELB : ALB - Application LB (layer 7)
-- `client` (IP-1) --http-1--> `ELB` (add extra header in http : `X-forwarded-Proto`) --http-2--> `app-server`
+- `client` (IP-1) --https--> `ELB` with ACM (add extra header in http : `X-forwarded-Proto`) --http--> `app-server`
+  - notice https vs http
 - client >> ELB >> [ tg, redirect, fixed-http-response ]
 - tg / `target groups`:
   - Types:
@@ -66,15 +73,20 @@
         - choose AZs
         - add `elb-sg-1` : all public traffic
         - add Listener & Routing :  
-          - Listener-1::No-contion outside traffic on http:80  --> forward to --> `tg-1` 
-          - Listener-1::consition-1 (priority-100) : path, header, queryparam, etc. [TRY] --> tg-?
+          - Listener-1::No-contion : outside traffic on http:80  --> forward to --> `tg-1` 
+          - Listener-1::consition-1 (priority-100) : path, header, queryparam, etc. [TRY] --> tg-x
+          - Listener-2::No-Condition (priority-200)  on https:443 --> forward to --> tg-2 + make sure ACM has Cert for tg-domian.
           - ...
           - ...  
           - Note:rule with higestest priorty win  
         - hit dns-1
         - terminate ec2-i1 and hit elb-dns-1 again.
       ```
-
+- `Connection Draining` / `registration delay`
+  - default 5min : allow 5 min to drains
+  - make 0 to disable
+  - if low like 5sec, then ec2-i will terminate fast, and all active clients session might lost,
+  - and assign to new instance on subsequent req.
 ---
 ### B. ELB : NLB - Network LB (layer 4)
 - operates at layer 4:  handle TCP, UDP, and TLS traffic
