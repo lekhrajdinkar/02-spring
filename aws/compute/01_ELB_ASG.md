@@ -133,9 +133,6 @@
 - uses protocol-GENEVE, port-6081 ?
 - Cross-Zone Load Balancing : disable by default, pay
 
-
-
-
 --- 
 ## Z. Screeshots
 > credit: https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/
