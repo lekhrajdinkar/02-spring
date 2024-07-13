@@ -4,10 +4,9 @@
 - 20% extra cost than RDS.
 - has integration ML service : `SageMaker` and `Comprehend`
   - > usecase : fraud detection, ads targeting, sentiment analysis, product recommendations
-
-
+    
 - `scaling`: 
-  - vertically : 10GB to 128TB
+  - vertically : volumn-10GB to 128TB, ec2-i type, RAM
   - horizontal(automatically) : 1 to 15 Read replicas.
 - `performance`:
   - AWS cloud optimized and claim `5x` Performance improvement.

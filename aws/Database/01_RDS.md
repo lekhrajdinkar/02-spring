@@ -20,10 +20,12 @@
   - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
   - `Aurora` (AWS Proprietary database, not Open source)
 - Advantages of RDM:
-  - `Auto-Scaling` ( thresold : <10%, last 5min, etc)
-    - good for unpredictable workloads
-    - vertical + horizontal
-    - define Maximum Size.
+  - `Auto-Scaling` : good for unpredictable workloads
+    - `vertical`
+      - define Max 15, min 1
+      - `thresold` : <10%, last 5min, etc
+    - Horizontal:
+      - configure/update: each read replica manually : EBS volume, ec2-i family... , memory/RAM
   - `DR`
     - Multi AZ-setup for DR.
     - master DB (az-1) --> `Sync replica` --> Stand-by DB (az-2) : no R/W
