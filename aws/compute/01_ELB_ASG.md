@@ -137,7 +137,7 @@
 ## Z. Screeshots
 > credit: https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/
 
-![img.png](../img/im-1.png)
-![img_1.png](../img/im-2.png)
-![img.png](../img/im-3.png)
+![img.png](../img/ec2/im-1.png)
+![img_1.png](../img/ec2/im-2.png)
+![img.png](../img/ec2/im-3.png)
 

@@ -32,7 +32,25 @@
   - more:
     - `Dashboard`, `Analytics`  --> runs on READ replica
     - Automated provisioning, OS patching, etc
+  - `Security`:
+    - `At-rest` encryption:
+      - Database master & replicas encryption using AWS KMS
+      - If the master is not encrypted, the read replicas cannot be encrypted
+      - To encrypt an un-encrypted database, go through a DB snapshot & restore as encrypted
+    - `In-flight` encryption: 
+      - TLS-ready by default, use the `AWS TLS root certificates` client-side
+    - IAM Authentication: 
+      - can use `IAM roles` to ec2-i, to connect to your database (instead of username/pw)
+    - `Security Groups`: Control Network access to your RDS / Aurora DB
+    - No SSH available, except on RDS Custom
 
+  - `RDS proxy` : 
+    - pools open connections.
+    - reduces fail-over time by 66%
+    - access privatey only
+    - client --> RDS proxy --> RDs instance
+    - ![img.png](../img/db/img_5.png)
+    
 - demo:
 ```
 - create single DB RDB
