@@ -21,7 +21,7 @@
   - encrypt `in-fly` traffic.
 ---
 ## B. AGS
-- client --> ELB --> TG --> ASG [ec2-i1, ...]
+- client --> ELB(sg-lb-1) --> target-group --> ASG [ec2-i1 (sg-1), ...]
 - scaling policies : in/out:
   - `Dynamic`: CloudWatch --> metric(CPU,memory,network, `custom`, `RequestCountPerTarget`) --> `alarm` --> ASG --> scale out
     - `target tracking Scaling` : CPU,memory,network utilization
@@ -39,20 +39,23 @@
 
 ---
 ## C. ELB
-- regional, forwards traffic to multiple ec2 in different AZ
+- `regional`, forwards traffic to multiple ec2 in `mutli-AZ`
   - with/without `Cross-Zone Load Balancing` : Enabled by default, `free`
     - if az-1 has more instances running, most traffic must go there. 
-- works in conjunction with `ASG`.
+    - works in conjunction with `ASG`.
+    
 - has/contains :
   - health-check mechanism (/health) at `target-group` level
   - has `DNS` name, `XXXX.region.elb.amazonaws.com` , IP might change.
   - Security group : sg-lb-1
     - Also, add rule to SG of ec2 instance to allow traffic sg-lb-1
   - integration with ACM : [cert-1 for domain-1, cert-2 for domain-2, ... ] : `SNI` helps to load single Cert.
+  
 - Since `complex`, already configured and integrated with other AWS services.
   - route 53, ASG, EC2, Certificate manager 
   - ECS, EKS
   - Cloudwatch, WAF, Global-Accelerator
+  
 - purpose:
   - gateway | forwards traffic to healthy servers.
   - separate `public-traffic` from `private-traffic`, can create public and private LB.
@@ -60,6 +63,7 @@
     - allowing it to decrypt and inspect incoming traffic before forwarding it to the backend instances.
     - already integrated with `ACM`.
   - Enforce `stickiness with cookies` ?
+  
 - Types:
   - `Classic` CLB (deprecated)
   - `ALB` : operate at layer 7 : HTTP,HTTPS, websocket
