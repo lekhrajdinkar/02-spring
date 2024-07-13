@@ -8,10 +8,18 @@
     - `vertical` scaling
         - scale up and down.
 - `load balancing` : gateway | forwards traffic to healthy servers. 
+- `Sticky Sessions` : 
+  - Client always redirect to same instance, in order to not lose his session data.
+  - might bring some imbalance.
+  - cookies: 
+    - `LB generated` / Duration-based? : uses these reserved name: `AWSALB, AWSALBAPP, AWSALBTG`
+    - `Application (TG) based` : MY_TG_1_COOKIE, etc
 
 ---
 ## ELB
-- regional, `Cross-Zone Load Balancing` : forwards traffic to multiple ec2 in different AZ
+- regional, forwards traffic to multiple ec2 in different AZ
+  - with/without `Cross-Zone Load Balancing` : Enabled by default, `free`
+    - if az-1 has more instances running, most traffic must go there.
 - fixed hostname : `XXXX.region.elb.amazonaws.com`
 - works in conjunction with `ASG`.
 - has :
@@ -28,6 +36,7 @@
   - separate `public-traffic` from `private-traffic`, can create public and private LB.
   - provide `TLS/SSL-termination`
     - allowing it to decrypt and inspect incoming traffic before forwarding it to the backend instances.
+    - already integrated with `ACM`.
   - Enforce `stickiness with cookies` ?
 - Types:
   - `Classic` CLB (deprecated)
@@ -68,7 +77,8 @@
 
 ---
 ### B. ELB : NLB - Network LB (layer 4)
-- layer 4, handle TCP, UDP, and TLS traffic
+- operates at layer 4:  handle TCP, UDP, and TLS traffic
+- TLS traffic: decrypt message using ACM cert.
 - Similar to ELB but fast, handles `millionsOfReq/Second`. ultra-low latencies.
   - It `automatically scales` to handle the vast amounts of incoming traffic
 - `use-case`:
@@ -83,11 +93,27 @@
   - IP Addresses
 - `health-check` support multiple-protocol : `http,https,TCP`
 - demo : similar as above
+- Cross-Zone Load Balancing : disable by default, pay
 
 ---
-### B. ELB : GWLB - gateway LB (?)
-
+### B. ELB : GWLB - gateway LB (layer 3)
+- (layer 3 of OSI) IP packets.
+- all traffic --> GWLB --> TG (3rd party security instance) --> Application/ destinition
+- 3rd party `security` instance:
+  - `Deep packet inspection`
+  - `payload manipulate`.
+- uses protocol-GENEVE, port-6081 ?
+- Cross-Zone Load Balancing : disable by default, pay
 
 ---
 ## AGS
+
+
+--- 
+## Screeshots
+> credit: https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/
+
+![img.png](../img/im-1.png)
+![img_1.png](../img/im-2.png)
+![img.png](../img/im-3.png)
 
