@@ -1,6 +1,6 @@
 - https://chatgpt.com/c/b1fe7e08-270f-4a92-a4db-b95e6beab7c7
 ---
-## keys Terms
+## A. keys Terms
 - `Availability` : multi AZ, prevent datacenter loss
 - `Scalability`:
     - `horizon` scaling(elasticity) / `Distributed system`
@@ -19,17 +19,33 @@
   - ccgg uses `digicert` as `CA`.
   - `SNI` : resolves multiple certificate load problem.
   - encrypt `in-fly` traffic.
+---
+## B. AGS
+- client --> ELB --> TG --> ASG [ec2-i1, ...]
+- scaling policies : in/out:
+  - `Dynamic`: CloudWatch --> metric(CPU,memory,network, `custom`, `RequestCountPerTarget`) --> `alarm` --> ASG --> scale out
+    - `target tracking Scaling` : CPU,memory,network utilization
+    - `Simple scaling`
+    - `Step scaling`
+  - `scheduled` : eg: scale d`on to min count on weekends.
+  - `predictive` : 
+    - continuously forecast load and schedule scaling ahead.
+    - Easy to create. once created ait for Week. ML will be applied on historic data.
+- `Launch template` : EC2 details (AMO,OS, Role, etc)
+- if ELB / health fail, ASG wil terminate instances.
+- During `cool-down effect`, ASG does not add new instances.
+- Check AWS Activity history.
+- demo : create one and link with tg. count : `desired, min, max`
 
 ---
-## ELB
+## C. ELB
 - regional, forwards traffic to multiple ec2 in different AZ
   - with/without `Cross-Zone Load Balancing` : Enabled by default, `free`
-    - if az-1 has more instances running, most traffic must go there.
-- fixed hostname : `XXXX.region.elb.amazonaws.com`
+    - if az-1 has more instances running, most traffic must go there. 
 - works in conjunction with `ASG`.
 - has/contains :
   - health-check mechanism (/health) at `target-group` level
-  - has `DNS` name
+  - has `DNS` name, `XXXX.region.elb.amazonaws.com` , IP might change.
   - Security group : sg-lb-1
     - Also, add rule to SG of ec2 instance to allow traffic sg-lb-1
   - integration with ACM : [cert-1 for domain-1, cert-2 for domain-2, ... ] : `SNI` helps to load single Cert.
@@ -51,8 +67,8 @@
   - gateway : `GWLB`, 2020 : provides advance security
 
 ---
-### A. ELB : ALB - Application LB (layer 7)
-- `client` (IP-1) --https--> `ELB` with ACM (add extra header in http : `X-forwarded-Proto`) --http--> `app-server`
+### C.1. ELB : ALB - Application LB (layer 7)
+- `client` (IP-1) --https--> `ELB` with ACM (add extra header in http : `X-forwarded-for`) --http--> `app-server`
   - notice https vs http
 - client >> ELB >> [ tg, redirect, fixed-http-response ]
 - tg / `target groups`:
@@ -88,7 +104,7 @@
   - if low like 5sec, then ec2-i will terminate fast, and all active clients session might lost,
   - and assign to new instance on subsequent req.
 ---
-### B. ELB : NLB - Network LB (layer 4)
+### C.2. ELB : NLB - Network LB (layer 4)
 - operates at layer 4:  handle TCP, UDP, and TLS traffic
 - TLS traffic: decrypt message using ACM cert.
 - Similar to ELB but fast, handles `millionsOfReq/Second`. ultra-low latencies.
@@ -108,7 +124,7 @@
 - Cross-Zone Load Balancing : disable by default, pay
 
 ---
-### B. ELB : GWLB - gateway LB (layer 3)
+### C.3. ELB : GWLB - gateway LB (layer 3)
 - (layer 3 of OSI) IP packets.
 - all traffic --> GWLB --> TG (3rd party security instance) --> Application/ destinition
 - 3rd party `security` instance:
@@ -117,12 +133,11 @@
 - uses protocol-GENEVE, port-6081 ?
 - Cross-Zone Load Balancing : disable by default, pay
 
----
-## AGS
+
 
 
 --- 
-## Screeshots
+## Z. Screeshots
 > credit: https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/
 
 ![img.png](../img/im-1.png)
