@@ -1,4 +1,12 @@
 # Database on AWS
+
+- Key topic/summary:
+  - Auto-scaling : Hori and verti, policies 
+  - backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always), cloning(at volume)
+  - DR : mainDB>snapshot>restore-Standby, RDS proxy 
+  - performance Arch: W+R/s 
+  - security: SG, encryption(rest/fly(TLS)) 
+---
 ## Option-1 
 - provision Ec2
 - install RDBMS and maintain it (os patching, security update, etc)
