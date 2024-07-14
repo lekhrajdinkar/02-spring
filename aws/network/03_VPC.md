@@ -45,7 +45,7 @@
 - add `IGW` (igw-0ee888f95b632848e, call it `igw-1`) to vpc-1 and `attach` to vpc-1
 - route table:
   - `rtb-main` : gets created automatically with vpc.
-    - will automatically get associated underlying subnet/s
+    - will automatically get associated underlying subnet/s, if not attached to any explicit rtb.
   - `rtb-explicit/s` : can create and association to subnet.
       - create `rtb-explicit-1-private-vpc1` 
       - create `rtb-explicit-2-public-vpc1` : 
@@ -60,14 +60,19 @@
 - add `subnet`
   - az-1 (us-west-2a)
     - vpc-1-subnet-`private`-1-us-west-2a
+      - link with rtb-explicit-2-private-vpc1.
     - vpc-1-subnet-`public`-1-us-west-2a
-      - link with `rtb-explicit-2-public-vpc1`.
+      - link with rtb-explicit-2-public-vpc1.
       - contains:
         - `SG`
           - Ec2-i1(public IP-1)
   - az-2 (us-west-2b)
     - vpc-1-subnet-`private`-2-us-west-2b
+      - link with rtb-explicit-2-private-vpc1
     - vpc-1-subnet-`public`-2-us-west-2b
+      - link with rtb-explicit-2-public-vpc1
+
+
 
 
 
