@@ -42,15 +42,26 @@
 ## C. Demo: create new VPC
 - region - us-west-2
 - `vpc-1` : https://us-west-2.console.aws.amazon.com/vpcconsole/home?region=us-west-2#VpcDetails:VpcId=vpc-04ce2894d2f99bbb8
-- `route-table(main)` is also added : rtb-0a5600eeac1135c16
-  - automatically associated with 4 underlying subnet/s
-  - can create explicit rouble table for each subnet, and remove this association later.
-- add IGW (`igw-1`) to vpc-1
+- add `IGW` (igw-0ee888f95b632848e, call it `igw-1`) to vpc-1 and `attach` to vpc-1
+- route table:
+  - `rtb-main` : gets created automatically with vpc.
+    - will automatically get associated underlying subnet/s
+  - `rtb-explicit/s` : can create and association to subnet.
+      - create `rtb-explicit-1-private-vpc1` 
+      - create `rtb-explicit-2-public-vpc1` : 
+        - add route : client --> destination:publicIP 0.0.0.0/0 --> igw-1
+        - VPC private CIDR --> local (within VPC)
+        - ![img.png](img.png)
+  - `relation`:
+    - VPC <--1-to-1--> rtb-main
+    - underlying subnet/s <--1-to-1--> rtb-explicit/s or rtb-main:default
+  - ![img_1.png](img_1.png)
+
 - add `subnet`
   - az-1 (us-west-2a)
     - vpc-1-subnet-`private`-1-us-west-2a
     - vpc-1-subnet-`public`-1-us-west-2a
-      - `routing table`
+      - link with `rtb-explicit-2-public-vpc1`.
       - contains:
         - `SG`
           - Ec2-i1(public IP-1)
