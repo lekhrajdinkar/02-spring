@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-07-15T09:05:19.635Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="6xb0jYCF_q7Gxp_Bc-Gs" version="24.6.5" type="github">
+<mxfile host="app.diagrams.net" modified="2024-07-15T09:05:51.930Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36" etag="Zg2pz3t-UPW5nSM4dDBz" version="24.6.5" type="github">
   <diagram name="Page-1" id="A67y_53Xcb9LvcjBFK2e">
     <mxGraphModel dx="2284" dy="1838" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -92,7 +92,7 @@
           <mxGeometry x="1080" y="627.54" width="60" height="58.46" as="geometry" />
         </mxCell>
         <mxCell id="3wQzCLE45Nl8WPakzI7t-35" value="rtb-main" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="3wQzCLE45Nl8WPakzI7t-1" vertex="1">
-          <mxGeometry x="1080" y="590" width="60" height="30" as="geometry" />
+          <mxGeometry x="930" y="620" width="60" height="30" as="geometry" />
         </mxCell>
         <mxCell id="3wQzCLE45Nl8WPakzI7t-38" value="igw-1" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="3wQzCLE45Nl8WPakzI7t-1" vertex="1">
           <mxGeometry x="1030" y="40" width="60" height="30" as="geometry" />
@@ -107,7 +107,7 @@
           <mxGeometry x="310" y="180" width="200" height="30" as="geometry" />
         </mxCell>
         <mxCell id="3wQzCLE45Nl8WPakzI7t-71" value="&lt;br&gt;&lt;div style=&quot;font-size: 13px;&quot;&gt;&lt;font style=&quot;font-size: 13px;&quot;&gt;- VPC CIDR-1 -&amp;nbsp; &amp;nbsp;local&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="3wQzCLE45Nl8WPakzI7t-1" vertex="1">
-          <mxGeometry x="931" y="646" width="140" height="40" as="geometry" />
+          <mxGeometry x="931" y="650" width="140" height="36" as="geometry" />
         </mxCell>
         <mxCell id="lTsZ9QhnL7NKHDbEhiwh-3" value="Nat gateway" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="3wQzCLE45Nl8WPakzI7t-1">
           <mxGeometry x="910" y="-50" width="60" height="30" as="geometry" />
