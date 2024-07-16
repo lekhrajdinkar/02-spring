@@ -7,10 +7,10 @@
       - `low latency`
       - `high performance`
       - `reduce load` off of databases for read intensive workloads
-      - ![img.png](../img/redis/img.png)
+      - ![img.png](../99_img/redis/img.png)
       - lazy loading(stale read) and write-through(sync cache with DB)
   - b. Maintain user Session
-    - ![img_1.png](../img/redis/img_1.png)
+    - ![img_1.png](../99_img/redis/img_1.png)
 ---
 ##  A. Redis 
 - think of RDS, similar.

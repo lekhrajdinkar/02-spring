@@ -59,7 +59,7 @@
     - reduces fail-over time by 66%
     - access privatey only
     - client --> RDS proxy --> RDs instance
-    - ![img.png](../img/db/img_5.png)
+    - ![img.png](../99_img/db/img_5.png)
     
 - demo:
 ```

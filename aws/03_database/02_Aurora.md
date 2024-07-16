@@ -14,8 +14,8 @@
 - `Availability`
   - `6 copies` for data access 3 AZ
   - instant fail-over (<30s) + `self healing` from peer2peer replication.
-  - ![img.png](../img/db/img.png)
-  - ![img_2.png](../img/db/img_2.png)
+  - ![img.png](../99_img/db/img.png)
+  - ![img_2.png](../99_img/db/img_2.png)
 
 - `snapshot`/backup + Recovery/`restore`
   - for `automatic` bkp , retention 1 to 35
@@ -33,7 +33,7 @@
 - 1 Primary Region (read / write)
 - Up to 5 secondary (read-only) regions, `replication` lag is less than `1 second`  **
   - Up to 16 Read Replicas per secondary region
-- ![img_3.png](../img/db/img_3.png)
+- ![img_3.png](../99_img/db/img_3.png)
 
 ---
 ## more: 
