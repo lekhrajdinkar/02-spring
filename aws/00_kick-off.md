@@ -13,4 +13,6 @@
     - iolated for dr, 
     - datacenters connected with low letencuy n/w.
 - `edge loc` : 400+
-    - content caching for faster delivey.
+    - content caching for faster delivery.
+    - CDN
+
