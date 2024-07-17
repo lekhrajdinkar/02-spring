@@ -1,3 +1,4 @@
+# Global infra
 ## AWS
 - virtual infra, online delivery on IT, pay by use, go-global in few minutes.
 - stop guessing capcity, elastic.
@@ -16,3 +17,8 @@
     - content caching for faster delivery.
     - CDN
 
+---
+# Side Notes
+1. All services are `publicly` accessible
+2. All service has `policy`. 
+   - eg: bucket-policy, sns-policy, lambda-policy, VPC-endpoint policy, etc.
