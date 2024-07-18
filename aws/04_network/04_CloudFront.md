@@ -50,15 +50,15 @@
 ---
 ### Demo-1 (ALB as origin) :
 ``` pending...```
-![img.png](img.png)
+![img.png](../99_img/CF/cf-2/img.png)
 
 ## Pricing
-![img_1.png](img_1.png)
+![img_1.png](../99_img/CF/cf-2/img_1.png)
 - price class
   - `100`
   - `200`
   - `ALL`
-- ![img_2.png](img_2.png)
+- ![img_2.png](../99_img/CF/cf-2/img_2.png)
 
 ---
 ## ScreenShot
@@ -67,7 +67,7 @@
 - ![img_2.png](../99_img/CF/img_2.png)
 - OAC-policy: add/merge to/with the bucket policy
   - ![img_3.png](../99_img/CF/img_3.png)
-- ![img_3.png](img_3.png)
+- ![img_3.png](../99_img/CF/cf-2/img_3.png)
 ---  
 
 
