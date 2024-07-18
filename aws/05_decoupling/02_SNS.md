@@ -2,7 +2,7 @@
 - ![img.png](../99_img/decouple/sns/img.png)
 - 100k topic per account, can be extended.
 - Like SQS, Standard + FIFO
-- event producer --> topic(message +`attributes`) --> subscriber-1,2,3... `12 million`
+- `event producer` --> `topic`(message +`attributes`) --> subscriber-1,2,3... `12 million`
   - all message will go to all subscribers
   - subscription- filter policy 
     - filter message by `message attribute`
