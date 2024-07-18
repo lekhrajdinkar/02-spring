@@ -13,7 +13,7 @@
 - ![img.png](../99_img/compute/lambda/img.png)
 --- 
 # AWS : lambda 
-## Function
+## A. Function
 - lambda initially was `FaaS`. Now serverless : `provision code/function` 
 - deploy code without underlying infra
 - `auto-scale with load` (parallel Lambdas, `max- 1000`)
@@ -30,41 +30,41 @@
 - `Configuration`:
   - RAM : `RAM 128 MB -10 GB`
   - timeout 0-15 min `15 min` / `900 Sec`
-  - trigger:
-  - handler : file.method (eg: l_function.l_handler)
-  - runtime : java 11, java21, etc
-  - permission : attach one or more role/s (already allow CW)
-  - env var : 4 KB
+  - trigger :  [check integration](#b-integrated-with-services--triggers)
+  - `handler` : file.method (eg: l_function.l_handler)
+  - `runtime` : java 11, java21, etc
+  - `permission` : attach one or more role/s (already allow CW)
+  - `env var` : 4 KB
   - disk : `/tmp` , `512 MD to 10GB`
 
 - deployment pkg size :
   - `50 MB`  compressed
   - `250 MB` code+dependency
   
--  logs : CW : log group
--  lang : node,py,java,Golang, `C#/Ruby`, `Custom Runtime`
+-  logs : CW > log group
+-  language supported : node, py, java, Golang, `C#/Ruby`, `Custom Runtime`.
   - java 11 or above : performance is 10x (free) - `SnapStart` feature
 - `Lambda Container Image` --> run --> lambda Function
   - `base image` : lambda runtime API
   
 ---
-## integrated with services / triggers
+## B. Triggers : Integrated with services 
 - API-gateway/`REST` --> lambda
 - S3, CW, DynamoDB, eventBridge(trigger/schedule) > `event` > Lambda
-- SQS/SNS > lambda as Consumer/Subscriber
+- SQS/SNS > `Consumer/Subscriber` > lambda1/2
 - Kinesis DataStream > `consumer` > Lambda
-- lambda with CloudWatch `lambda@Edge`
+- client-req --> CloudFront ( `lambda@Edge`:customize req+some processing ) --> cf-origin-server
 - IAM:`cognito` > Lambda
 - ![img_1.png](../99_img/compute/lambda/img_1.png)
 
 ---
-## Use case
+## C. Use case
 - ![img_3.png](../99_img/compute/lambda/img_3.png)
 - ![img_2.png](../99_img/compute/lambda/img_2.png)
-- > connect lambda (launch in vpc-1) --> RDS-proxy : good practice  
+- > connect lambda (launch in `vpc-1`) --> `RDS-proxy` : good practice  
 ![img_6.png](../99_img/compute/lambda/img_6.png)
-- 
+
 ---
-## Screeshot:
-![img_4.png](../99_img/compute/lambda/img_4.png)
-![img_5.png](../99_img/compute/lambda/img_5.png)
+## D. Screen shot:
+- `AutoScale` : ![img_4.png](../99_img/compute/lambda/img_4.png)
+- `SnapStart` : ![img_5.png](../99_img/compute/lambda/img_5.png)
