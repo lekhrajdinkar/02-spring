@@ -1,8 +1,8 @@
 # Container in AWS
 ## A. key term
 - `M` vs `VM` (virtualization) vs `Docker` (partial virtualization : share OS, n/w)
-- store image : ECR , dockerHub
-- image --> run --> `Container` (docker-demon)
+- store image : `ECR` , dockerHub
+- image --> run --> `Container` (docker-demon / ecs-agent on ec2-i)
 - docker container mgt:
   - `ECS - lauch: ec2` : amazon own container orch plateform
   - `ECS - lauch: fargate / fargate_spot` : serverless ECS
@@ -20,9 +20,9 @@
   - ...
   - Notice: task are placed in specific Ec2-i
     - eg: task22 placed in Ec2-i2
-- for fargate launch, don't think underlying ec2-i/s
-
-- Demo:
+- For fargate launch, don't think underlying ec2-i/s
+---
+### ECS Demo:
   - Step-1 : create `cluster-1` (choose one or more `infra`/launchType : ec2-i ** , fargate)
   - Step-2 :create `task definition`
     - `definition-1` :
