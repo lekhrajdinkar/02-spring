@@ -4,7 +4,7 @@
 ---
 - k8s (open source, cloud-agnostic)
   - `pod` 
-  -` control panel/master node` 
+  - control panel/master node` 
   - `worker-node/s` === EC2 intance/s
     - managed : 
       - inbuilt `ASG` to scale nodes, register Node.
@@ -47,7 +47,7 @@
       - add Node (single ec2-i) 
       - or, add Node-Group (multiple Ec2-i, set - min, max, desired) 
       - IAM policy for ec2-i : attach "AmazonEKSWorkerNodePolicy", "AmazonEC2ContainerregistryReadOnly"
-      - choose AMI ec2-i class, etc for ec2-i
+      - choose : AMI, ec2-i class, etc for ec2-i
     - Option-2 :: `fargate profile`
       - pending
       - ...
@@ -57,7 +57,8 @@
     -  add VPC-CNI  
     - ...
     - ...
-      
+    
+  *** Note: very high level, need K8s expertise to do more    
 ```
 
 
