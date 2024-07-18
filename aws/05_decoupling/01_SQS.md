@@ -12,9 +12,8 @@
 2. ASG [ FE-1, FE-2, ... ] ---> stage all request in Queue --- > ASG [ BE-1, BE-2, ...]
     - ![img_1.png](../99_img/decouple/sqs/img_1.png)
 3. Overloaded DB request:
-- ASG [ FE-1,...] --> Queue-1(Stage client request) --> ASG [BE-1,...] --> store to DB
-- ASG [ FE-1,...] --> Queue-1(Stage client request) --> ASG [BE-1,...] OVERR-LOADED --> store to DB (`lose some insert`)
-- ASG [ FE-1,...] --> Queue-1(`Stage client request`) --> ASG [BE-1,...] --> Queue-1(`stage-DB-request`) -->  ASG [repo-1,...]
+- ASG [ FE-1,...] --> Queue-1(Stage client request) --> ASG [BE-1,...] --> store to DB, OVERR-LOADED --> `lose some insert`
+- ASG [ FE-1,...] --> Queue-1(`Stage client request`) --> ASG [BE-1,...] --> Queue-2(`stage-DB-request`) -->  ASG [BE-repo-1,...]
 - ![img_3.png](../99_img/decouple/sqs/img_3.png)
 - ![img_5.png](../99_img/decouple/sqs/img_5.png)
 
@@ -29,16 +28,16 @@
 - persisted until consumed for max `14 day retention`. default-4days
 - consume has to delete message, this gaureentee no other consumer see the message.
 - `visibility timeout, 0-12 hr` : ![img_4.png](../99_img/decouple/sqs/img_4.png)
-- Long polling (message receive wait time : 1-20 sec)
-  - poll-1 API -- wait 10 sec -- poll-1 API -- wait 10 sec ...
+- `Long polling` / `message receive wait time` : (1-20 sec)
+  - pattern : poll-1 API -- wait 10 sec -- poll-1 API -- wait 10 sec ...
   - Consumer can optionally “wait” for messages to arrive, if there are none in the queue
   - long poll preferred : more gap in api calls, but `increase latency` :(
   
 ### Queue : FIFO
 - name : has suffix `.fifo`
 - keep single consumer
-- order, no duplicate consume
-- Limited throughput: `300 msg/s`
+- ordering , no duplicate consume.
+- Limited throughput: `300 msg/s` :(
 
 ---
 ## SQS : Security
@@ -69,7 +68,5 @@
 - receive : poll messages + delete
 - purge : delete all message.
 ```
----
-## Screenshot:
 - ![img_2.png](../99_img/decouple/sqs/img_2.png)
 
