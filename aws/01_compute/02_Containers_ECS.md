@@ -9,6 +9,13 @@
   - `EKS - lauch: ec2` : K8s is 3rd party container orch platform, EKS is amazon managed K8s, eks is `openSource`
   - `EKS - lauch: fargate / fargate_spot` : serverless EKS
 - ![img.png](../99_img/compute/ecs/img.png)
+--- 
+- Analogy with `k8s`
+  - `pod` (c1,c2) - task(c1)
+  - `node` (pod1,pod2) - service (t1,t2)
+  - `service` - alb
+  - `eks cluster` - ces cluster
+  
 ---
 
 ## B. ECS 
@@ -41,16 +48,18 @@
     - Define `networking`:
       - choose `subnet/VPC`
       - create `sg` : allow traffic http,etc --> this will attach to ec2-i or `hidden-ec2-i/in-fargate`
-    - `expose` task/service : choose or creat `ALB-1`
+    - `expose` task/service : choose or create `ALB-1`
       - health check 
       - single-listener(http:80)  --> tg-1 ( C1,C2,C3 )
     - optional/more
       - `task placement`
       - `service Auto Scaling` : scale up/down task 
         - For ec2 launch
-          - option-1 (`ASG`) : CW --> metric(CPU,etc) --> `ASG`(up/down)
+          - option-1 (`ASG`) : CW --> metric(CPU,etc) --> `ASG`(up/down Ec2-i and cantainer inside)
           - option-2 (`ECS-Cluster capcity provider`): preferred to use, smart, better.
-        - For fargate: easy, automatically
+        - For fargate: easy
+          - ASG (scale up/down containers only)
+          - `ECS-Cluster capcity provider` : intelligent to do everything.
       
   - READY
     - check cluster > task > container, logs/event,
@@ -64,11 +73,11 @@
 ![img_2.png](../99_img/compute/ecs/img_2.png)
 ### 2. iam roles/policies:
 ![img_3.png](../99_img/compute/ecs/img_3.png)
-### 3. service
+### 3. alb
 ![img_4.png](../99_img/compute/ecs/img_4.png)
 ### 4. Storage:
 ![img_5.png](../99_img/compute/ecs/img_5.png)
-### 5 service(task,task) scale:
+### 5 scale : ASG + Ecs-cluster capcity provider
 ![img_6.png](../99_img/compute/ecs/img_6.png)
  
 ## D. Use case / arch :
