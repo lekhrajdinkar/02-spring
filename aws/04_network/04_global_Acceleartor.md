@@ -4,23 +4,29 @@
 - `Uni-cast IP` : one ip assigned to `one` server
 - `Any-cast IP` : same ip assigned to `multiple` server
   - but, client req goes to geo close loc.
+- `accelerator` : server with anyCast IP and uses AWS privateLink.
 
-## problem statement - 1
+## problems
+### problem-statement - 1
 - `apb-1(api-1)` is running on region-1 `mumbai`
   - client in `USA` --> hops overs multiple server/s s1 > s2 > s3 > s4 > s4 --> to reach `alb-1`
   - client in `europe` --> hops overs multiple server/s s1 > s2 > s3 --> to reach `alb-1`
   - client in `nepal` --> hops overs few server/s > s1 --> to reach `alb-1` 
 - this creates `high latency` + `loss of n/w risk`.
 
-## Solution - 1
+### problem-statement - 2
+- `apb-1(api-1)` is running on region-1 `mumbai`
+- `apb-2(api-2)` is running on region-2 `europe`
+- client in `USA` --> want to connect to closer region-2 europe
+
+### Solution
 - `apb-1(api-1)` is running on region-1 `mumbai`
 - create ANY-cast ip for ALB-1, `ip-1`
-- hit ip-1 --> send traffic to closet edge loc --> privateLink + intelligent routing --> alb-1
+- hit ip-1 --> send traffic to its closet edge loc first --> `privateLink` + `intelligent-routing`(short-Path, close region) -->  edgeLoc close to destination --> `alb-1/2`
+  - client in `USA`    --> CF acce-1 (`ip-1`)    --> to reach alb-1
+  - client in `europe` --> CF acce-1 (`ip-1`)    --> to reach alb-1
+  - client in `nepal`  --> CF acce-1 (`ip-1`)    --> to reach alb-1
 
-  - client in `USA` --> close-edge-loc-1  --> `ip-1` --> to reach alb-1
-  - client in `europe` --> close-edge-loc-2 --> `ip-1` --> to reach alb-1
-  - client in `nepal` --> close-edge-loc-3 --> `ip-1` --> to reach alb-1
-  
 - AWS `Global accelerator` help to do same.
   - create anycast for my alb/app
   - leverage aws `edge-location` + `privateLink` to reach out target server fast.
