@@ -91,3 +91,6 @@
   - take Snapshot + migrate Snapshot + restore to point.
  
 ```
+---
+## Use case
+- `RDS event ntf` > event catch > target : SNS, Lambda

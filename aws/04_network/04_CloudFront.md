@@ -18,7 +18,36 @@
     - get list of Public IPs of all 400+ edge location
     - add app level security to allow access only to above IPs.
   - `OAC` : `Origin access control` : this allow CF to connect/access origin. 
-    
+
+---
+## CloudWatch Function
+- Run some code at CloudFrount distributon type : 
+  - `lambda@Edge` : 
+    - `nodeJs or Py`
+    - Note: regional, written in region-1, CF replicate to all edge loc.
+    - thousand/s, since lambda is heavy. 
+    - set `exec time : 5-10 sec`. forget about 900 sec.
+  - `CloudFront-Function` : 
+    - `very light weight` fun written in` js.`
+    - 10 KB pkg
+    - millionReq/Sec
+    - Max 2Mb ram
+    - 1/6 time cheap than lambda.
+  
+- `purpose`: Customise CDN content :
+  - Website Security and Privacy
+  - Dynamic Web Application at the Edge
+  - Search Engine Optimization (SEO)
+  - Intelligently Route Across Origins and Data Centers
+  - Bot Mitigation at the Edge
+  - Real-time Image Transformation
+  - A/B Testing
+  - User Authentication and Authorization
+  - User Prioritization
+  - User Tracking and Analytics
+- ![img.png](../99_img/CF/cf-3/img.png)
+- ![img_1.png](../99_img/CF/cf-3/img_1.png)
+---
 ## Demo  
 ### Demo-1 (s3 as origin) :
 ```
@@ -68,6 +97,7 @@
 - OAC-policy: add/merge to/with the bucket policy
   - ![img_3.png](../99_img/CF/img_3.png)
 - ![img_3.png](../99_img/CF/cf-2/img_3.png)
+- more : ![img_2.png](../99_img/CF/cf-3/img_2.png)
 ---  
 
 
