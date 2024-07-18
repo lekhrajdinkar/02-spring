@@ -10,12 +10,13 @@
   - `EKS - lauch: fargate / fargate_spot` : serverless EKS
 - ![img.png](../99_img/compute/ecs/img.png)
 --- 
-- Analogy with `k8s`
+- Analogy with `k8s` also its open-source
   - `pod` (c1,c2) - task(c1)
-  - `node` (pod1,pod2) - service (t1,t2)
-  - `service` - alb
+  -` control panel/master node` - ?
+  - `worker-node` (pod1,pod2) - service (t1,t2)
+  - `service` - ALB
   - `eks cluster` - ces cluster
-  
+
 ---
 
 ## B. ECS 
@@ -79,14 +80,15 @@
 ![img_5.png](../99_img/compute/ecs/img_5.png)
 ### 5 scale : ASG + Ecs-cluster capcity provider
 ![img_6.png](../99_img/compute/ecs/img_6.png)
- 
+
+--- 
 ## D. Use case / arch :
-### D.1 with eventBridge ( trigger )
+### 1 with eventBridge ( trigger )
 ![img_7.png](../99_img/compute/ecs/img_7.png)
-### D.2 with eventBridge ( scheduled )
+### 2 with eventBridge ( scheduled )
 ![img_8.png](../99_img/compute/ecs/img_8.png)
-### D.3 with SQS + autoScale
+### 3 with SQS + autoScale
 ![img_9.png](../99_img/compute/ecs/img_9.png)
-### D.3 with SNS
+### 4 with SNS
 ![img_10.png](../99_img/compute/ecs/img_10.png)
 
