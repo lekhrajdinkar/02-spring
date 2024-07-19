@@ -2,12 +2,13 @@
 
 - Key topic/summary:
   - Auto-scaling : Hori and verti, policies 
-  - backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always), cloning(at volume)
-  - DR : mainDB>snapshot>restore-Standby, RDS proxy 
-  - performance Arch: W+R/s 
-  - security: SG, encryption(rest/fly(TLS)) 
+  - backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always), 
+  - `cloning` : EBS volume - clone
+  - DR( multi-AZ and region ) : main-DB (Writer, only 1) > snapshot > restore-Standby  
+  - performance Arch: Write-Instance + Read-Replicas , RDS proxy
+  - security: SG, encryption at rest/fly, IAM 
 ---
-## Option-1 
+## Option-1 : Ec2
 - provision Ec2
 - install RDBMS and maintain it (os patching, security update, etc)
 
@@ -21,11 +22,12 @@
   - `Aurora` (AWS Proprietary database, not Open source)
 - Advantages of RDM:
   - `Auto-Scaling` : good for unpredictable workloads
-    - `vertical`
-      - define Max 15, min 1
-      - `thresold` : <10%, last 5min, etc
-    - Horizontal:
-      - configure/update: each read replica manually : EBS volume, ec2-i family... , memory/RAM
+    - `Read-replica Auto-scale` : 
+      - Max 15, min 1.
+      - bts use ASG and CW alarm ( metric: conn count, cpu utilization, read traffic, etc)
+    - `storage Auto-scale`: Enable/Disable from console.
+      - set max storage in GB/TB.
+      - define `thresold` free space <10%, space runs last 5min, etc.
   - `DR`
     - Multi AZ-setup for DR.
     - master DB (az-1) --> `Sync replica` --> Stand-by DB (az-2) : no R/W
@@ -48,7 +50,10 @@
       - If the master is not encrypted, the read replicas cannot be encrypted
       - To encrypt an un-encrypted database, go through a DB snapshot & restore as encrypted
     - `In-flight` encryption: 
-      - TLS-ready by default, use the `AWS TLS root certificates` client-side
+      - TLS-ready by default, use the `AWS TLS root certificates` client-side.
+      - use the same `domain-name-1` for both the certificate and the CNAME record in Route 53.
+      - Export cert in ACM 
+      - when create/modify RDS instance, configure it use custom  cname `domain-name-1`.
     - IAM Authentication: 
       - can use `IAM roles` to ec2-i, to connect to your database (instead of username/pw)
     - `Security Groups`: Control Network access to your RDS / Aurora DB
