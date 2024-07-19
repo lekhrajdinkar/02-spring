@@ -1,6 +1,7 @@
-# Aurora (Serverless)
+# Aurora (rdbms, Serverless)
 ## Design
 - serverless, no capacity planning
+- same as RDS, but more performance, less maintenance, more flexibility.
 - engine : `Postgres` and `MySQL`
 - 20% extra cost than RDS.
 - has integration ML service : `SageMaker` and `Comprehend`

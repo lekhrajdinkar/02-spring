@@ -1,4 +1,4 @@
-# Cognito
+# Cognito (Serverless)
 - > Complicated service, Need to have high level idea for SAA.
 - Authenticate outside user - web/mobile app.
 - `serverless database` to authentication+authorize outside user

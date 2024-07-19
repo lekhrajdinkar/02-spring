@@ -1,10 +1,14 @@
-# Dynamo DB (NoSQL)
-- serverless, Fully managed - maintenance/patching
+# DynamoDB (NoSQL, serverless)
+
+- Key Summary
+  - serverless, Fully managed - maintenance/patching
+  - 2 way replication
+  - rapidly evolve schemas
 
 ---
 ## key points
 - `highly available` : `multiple-AZs` replication
-- `Scales` to massive workloads, distributed database.
+- `Scales` to massive workloads, `distributed` database.
   - Millions of requests per seconds, 
   - trillions of row, 
   - 100s of TB of storage
@@ -17,9 +21,9 @@
   - Standard
   - Infrequent Access (IA) : to save more cost
 - `DR` : 
-  - automatic `backup` for last `35 days`
+  - automatic `backup` for last `35 days`. take OD backup for longer retention.
   - Enable Cross-region copy. no performace impact/ doentime.
-  - point in time recovery
+  - PITR - point in time recovery
   - `export` (json,ion) data --> S3.
   - `import` (json,csv,ion) --> Dynamo DB
   - ![img_4.png](../99_img/moreSrv/dynamo/img_4.png)

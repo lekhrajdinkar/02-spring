@@ -1,4 +1,4 @@
-# API gateway
+# API gateway (Serverless)
 - > Client --> cname/alias(in R53) --> API gateway (Http/s,webSocket) --> XXXXX
   - lambda
   - on premAPI-API

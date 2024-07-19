@@ -1,16 +1,9 @@
 # ElastiCache
-- AWS Types/offering :  `Redis` vs `MemCache`
-- cache use-cases :
-  - a. `Database`
-    - prg <--- DB (state)
-    - prg (`code` changes to use cache ) <--- `Cache` <--- DB(Data) : for stateless Application
-      - `low latency`
-      - `high performance`
-      - `reduce load` off of databases for read intensive workloads
-      - ![img.png](../99_img/redis/img.png)
-      - lazy loading(stale read) and write-through(sync cache with DB)
-  - b. Maintain user Session
-    - ![img_1.png](../99_img/redis/img_1.png)
+
+- key Summary
+  - AWS Types/offering :  `Redis` vs `MemCache`
+  - sub ms latency.
+  - requires code change
 ---
 ##  A. Redis 
 - think of RDS, similar.
@@ -30,19 +23,17 @@
   - Add `sg` : which app will have acces from n/w perspective.
   - `encryption` at rest + fly(SSL)
 
-
+---
 ## B. MemCache
 - No high availability (replication)
-- `Non persistent`
+- `Non persistent` 
 - No backup/restore
+- Security: `SASL` (more advance)
 - Multi-threaded architecture ?
 - Multi-node for partitioning of data (sharding) ?
-- Security:
-  - `SASL` (more advance)
 
 --- 
-
-- Redis Demo:
+## C. Redis Demo:
 ```
 - Create REDIS (.rdb file)
 - Choose : Design youe own cache
@@ -62,3 +53,15 @@
     - backup/restore
     
 ```
+--- 
+## D. cache use-cases
+- a. `Database`
+  - prg <--- DB (state)
+  - prg (`code` changes to use cache ) <--- `Cache` <--- DB(Data) : for stateless Application
+    - `low latency`
+    - `high performance`
+    - `reduce load` off of databases for read intensive workloads
+    - ![img.png](../99_img/redis/img.png)
+    - lazy loading(stale read) and write-through(sync cache with DB)
+- b. Maintain user Session
+  - ![img_1.png](../99_img/redis/img_1.png)
