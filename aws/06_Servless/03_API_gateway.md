@@ -3,28 +3,30 @@
   - lambda
   - on premAPI-API
   - ALB
-  - Any AWS service API. eg: `S3:GETObject`
+  - Any `AWS service`.  eg: `S3:GETObject`
+  - `VPC endPoint` (access AWS service from VPC_
   
 ---  
 ## A. deployment model
   - `edge-optimized` (default)
-    - backed by : cloudFront,CDN,edge location
-    - for gobal user
+    - deployed in many region
+    - backed by : cloudFront,CDN, edge-location
+    - for global user
   - `regional`
-    - for us-west-1 user only
-  - `regional with CloudFont`
-    - set-1: for us-west-1 user only
-    - UNION
-    - Set-2 : create CF distribution-1 : whiteList - europe user + india user
+    - deployed in single region eg: us-west-1
   - `private`
-    - used with in VPC
-    - VPC endpoint - interface/gateway
+    - in private VPC
+    - Also, VPC endpoint(interface) --> API gateway --> XXXXX
+  - `regional with CloudFont`
+    - set-1: for us-west-1
+    - UNION
+    - Set-2 : create CF distribution-1 (CF) : whiteList - europe user + india user
 ---
 ## B. Security:
-- IAM role
+- IAM role, OIDC and OAuth2
 - `cognito` ?
 - https/TCL with ACM 
-  - keep certificate it `us-east-1` for global deploymnet model.
+  - keep certificate it `us-east-1` for global deployment model.
 ---
 ## C. Key feature
 - `import` from Swagger/OpenAPI to define API.
@@ -36,5 +38,32 @@
 
 ---
 ## D. Use case
-- ![img.png](img.png)
-- ![img_1.png](img_1.png)
+- ![img.png](../99_img/moreSrv/api-gateway/img.png)
+- ![img_1.png](../99_img/moreSrv/api-gateway/img_1.png)
+
+---
+## E. Demo
+```
+- create (4) : api-gateway-1
+    - HTTP API , REST API ** , REST API (Private),  Web-scoketAPI, 
+    - choose - REST API
+    - API details:  
+        - create new **
+        - import frpm OPen/AI swagger
+        - clone API
+    - deplomnet model : regional 
+        - region : us-east-1
+    - integration Type: lambda
+        - choose method: lambda-fn-1
+    - set timeout : default 30 s
+    - check lambda > permission > "resource based policy statemnet" (policy/statemnet auto added)
+        principle:api-gateway
+        Action:lambda-Invoke
+        resource:arnofLambda-1
+        effect:allow
+        condtion > sourceArn: api-gateway-1 
+    - test from UI
+    - Deploy API
+        - will get invoke URL
+```
+![img_2.png](../99_img/moreSrv/api-gateway/img_2.png)
