@@ -23,23 +23,25 @@
   - `export` (json,ion) data --> S3.
   - `import` (json,csv,ion) --> Dynamo DB
   - ![img_4.png](../99_img/moreSrv/dynamo/img_4.png)
+
+---  
+## A. Global table :
+  - table-1 (R/W) is `region-1`
+  - table-1 (R/W) is `region-2`
+    -` 2 way replication` b/w them.
+  - R/W from any region :_)
+  - ![img_3.png](../99_img/moreSrv/dynamo/img_3.png)
 ---
-- DB funda + basic
+## B. DB funda + basic
   - table (Pk - `partitionKey` + `Sortkey`(optional) )
   - record(attributes) > item (single attribute) (`400 KB max`)
   - not fixed schema like rdbms. `schema/attributes can evolve rapidly`
   - Datatype: string, num, Bool,null + `list, Map, Set`
-  - `TTL` : set expiration for record, then auto-delete > send stream
+  - `TTL` : set expiration for record, it will auto-delete + send stream
     - eg: TTL is `2 hr`
-    - webUser --> session 2 hr --> session logout --> cleanUp his/her data after 2 hr. 
-  - Global table :
-    - table-1 (R/W) is `region-1`
-    - table-1 (R/W) is `region-2`
-    -` 2 way replication` b/w them.
-    - R/W from any region :_)
-    - ![img_3.png](../99_img/moreSrv/dynamo/img_3.png)
+    - webUser --> session 2 hr --> session logout --> cleanUp his/her data after 2 hr.
 ---
-- `capacity`:
+## C. capacity
   - `Provision` mode : `we` define RCU, WCU + autoScale:`y/n`
     - use case : predicated workload
     - this will help to optimize/lower cost.
@@ -52,14 +54,14 @@
    WCU - 1 write/sec upto 2KB/sec
   ```
 ---
-## DAX
+## D. DAX
 - `DyanamoDB Accelerator`
 - ![img.png](../99_img/moreSrv/dynamo/img.png)
 - Dax vs ElastiCache.
 - in memory cache, micro sec latency
 
 ---
-## DynamoDB streams
+## E. DynamoDB streams
 - some usecase:
     - `React` to changes in real-time by invoking `lambda`,` KCL-adaptor(Java-App) `
     - Real-time usage `analytics` : send stream to `AmazonShift`
@@ -68,7 +70,7 @@
 - ![img_2.png](../99_img/moreSrv/dynamo/img_2.png)
 
 ---
-## demo :
+## F. demo :
 ```
 - create db - no such thing :_)
 - create table-1
