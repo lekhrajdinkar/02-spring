@@ -1,4 +1,4 @@
-# Intro Serverless in AWS
+# Serverless services in AWS
 - there is underlying server/ec2-i, but don't need to provision/manage it
   - AWS Lambda
   - DynamoDB
@@ -50,7 +50,7 @@
 ---
 ## B. Triggers : Integrated with services 
 - API-gateway/`REST` --> lambda
-- S3, CW, DynamoDB, eventBridge(trigger/schedule) > `event` > Lambda
+- S3, CW, DynamoDB-streams, eventBridge(trigger/schedule) > `event` > Lambda
 - SQS/SNS > `Consumer/Subscriber` > lambda1/2
 - Kinesis DataStream > `consumer` > Lambda
 - client-req --> CloudFront ( `lambda@Edge`:customize req+some processing ) --> cf-origin-server
