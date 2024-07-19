@@ -1,22 +1,24 @@
 # Database on AWS
 
-- Key topic/summary:
-  - Auto-scaling : Hori and verti, policies 
+- summary:
+  - Storage Auto-scaling (EBS volume size)
   - backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always), 
   - `cloning` : EBS volume - clone
   - DR( multi-AZ and region ) : main-DB (Writer, only 1) > snapshot > restore-Standby  
-  - performance Arch: Write-Instance + Read-Replicas , RDS proxy
-  - security: SG, encryption at rest/fly, IAM 
+  - performance Arch: `one` Write-Instance + `many` Read-Replica/s , `RDS proxy`
+  - security: attach `Security group` on RDS instance, encryption at rest/fly, IAM 
+  - usecase: RDBMS / OLTP 
 ---
 ## Option-1 : Ec2
-- provision Ec2
+- Provision Ec2
 - install RDBMS and maintain it (os patching, security update, etc)
 
 ## Option-2 : AWS RDS
 - `managed` DB service, no access/ssh to underlying Ec2 instance.
-  - But `RDS custom` allow to access it  only for MySQL and oracle DB.
+  - But `RDS custom` allow to access it  only for `SQL server` and `oracle` DB.
   - First disable automation mode, take snapshot, then access it.
-- EBS volume type : `gp2` or `io1`
+- `EBS volume type` : `gp2` or `io1`
+- `RDS instance size` : compute family size
 - Supported engine: 6 + 1 
   - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
   - `Aurora` (AWS Proprietary database, not Open source)
@@ -74,11 +76,11 @@
 - backup/screenshot : 
   - enable + retention policy upto 35 days
   - backup window preferrence.
-- enable autoscaling, give maz size.
+- enable STORAGE autoscaling, give maz size : 100 GB
 - Connectivity : 
-  - option-1: add specified ec2-i, will add SG, etc automatically (good for beginner)
+  - option-1: add "specified ec2-i", will automatically configure things (good for beginner)
   - option-2: Dont connect to Ec2-i
-    - define VPS, subnet
+    - define VPC, subnet
     - allow public access
     - choose SG
     - port 
@@ -94,6 +96,7 @@
 - action:
   - create read replica
   - take Snapshot + migrate Snapshot + restore to point.
+  - create read replica.
  
 ```
 ---
