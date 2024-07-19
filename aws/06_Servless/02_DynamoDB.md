@@ -28,7 +28,7 @@
 ## A. Global table :
   - table-1 (R/W) is `region-1`
   - table-1 (R/W) is `region-2`
-    -` 2 way replication` b/w them.
+  - `2 way replication` b/w both regions.
   - R/W from any region :_)
   - ![img_3.png](../99_img/moreSrv/dynamo/img_3.png)
 ---
