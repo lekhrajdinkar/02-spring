@@ -38,11 +38,10 @@
 - like s3 policy
 - define who can access key.
 - default policy : allows everyone in account
-- create custom policy : for cross account access
-- eg-1: 
-  - lambda-1 copy ebs snapshot from one region to another region
-  - lambda-1 must have access to 
-    - region-1-EBS-volume + region-1-key (to decrypt)
+- create custom policy : for cross account access, restricted access with in acct, etc
+- eg-1: lambda-1 copy ebs snapshot from one region to another region
+  - only lambda-1 must have access below keys, no one else.
+    - region-1-key (to decrypt)
     - region-2-key (to re-encrypt)
   - update custom policy accordingly
 - eg-2: cross account kms access
@@ -51,20 +50,22 @@
 ---
 ## C. Regionality:
 - `single regional` : same key cannot be present in 2 diff regions.
-    - Scenario: cross region ebs-snapshot copy
-        - ebs-volume in region-1-`az1` --> region-1-key --> snapshot>encrypt(r1-k1) --> restored to region-1-`az2/3` : VALID
-        - ebs-volume in region-1-`az1` --> region-1-key --> snapshot>encrypt(r1-k1) --> restored to `region-2`-az1  : `INVALID`
-        - ebs-volume in region-1-`az1` --> region-1-key --> snapshot > encrypt(r1-k1) > decrypt(r1-k1) --> `re-encrpted with region-2-key` --> restored to region-2-az1 : valid
+    - Scenario/eg: cross region ebs-snapshot copy
+        - VALID   : ebs-volume in region-1-`az1` -->  snapshot > encrypt(r1-k1) --> restored to region-1-`az2/3` 
+        - INVALID : ebs-volume in region-1 -->  snapshot > encrypt(r1-k1) --> restored to `region-2`.
+        - VALID   : ebs-volume in region-1 -->  snapshot > `encrypt(r1-k1) > decrypt(r1-k1) > re-encrpted(r2-k1)` --> restored to region-2
 
 - `multi regional` : same key is replicated over regions.
-    - looks simple, but not recommended
-    - `primary` (policy-1) + `replicatedd key` (policy-2)
+    - simplify, but `not recommended`
+    - same key replicated in multipe region
+      - `primary` (policy-1) 
+      - `replicatedd key` (can have diff policy-2, in another region)
     - policy can not be modified for each region separately.
     - purspose :
         - encrypt in one region and use/decrypt in another region, seamlessly
         - don't need to re-encrypt again with another region key
     - use-case :
-        - global Aurora DB,
+        - global Aurora DB
         - global Dynamo DB
         - having client side encryption
 
