@@ -60,8 +60,7 @@
     - same key replicated in multipe region
       - `primary` (policy-1) 
       - `replicatedd key` (can have diff policy-2, in another region)
-    - policy can not be modified for each region separately.
-    - purspose :
+    - purpose :
         - encrypt in one region and use/decrypt in another region, seamlessly
         - don't need to re-encrypt again with another region key
     - use-case :
@@ -102,8 +101,9 @@ cross region copy
 - ![img_3.png](../99_img/security/kms/img_3.png)
 ---
 regional key with global dynao and aurora
-- ![img.png](../99_img/security/kms-2/img.png)
----
-- ![img_1.png](../99_img/security/kms-2/img_1.png)
----
-- ![img_2.png](../99_img/security/kms-2/img_2.png)
+
+![img.png](../99_img/security/kms-2/img.png)
+
+![img_1.png](../99_img/security/kms-2/img_1.png)
+
+![img_2.png](../99_img/security/kms-2/img_2.png)
