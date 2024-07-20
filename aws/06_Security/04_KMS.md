@@ -15,6 +15,7 @@
 - Audit `AWS-key-usage`,  using `CloudTrail`
 - use cases:
     - #1. encrypt password with kms-key --> then store to secret manager
+    - #2. encrypt AMI with kms
 *** 
 ### kms-keys : symmetric
 -  single-key (private), user cant-see, aws use to encrypt/decrypt 
@@ -68,10 +69,19 @@
         - global Dynamo DB
         - having client side encryption
 
-- eg: S3 CRR replication with KMS : [here](./../02_storage/03_S3-1.md#security-while-crr-replication)
+---
+## D.use case
+### 1. S3 CRR replication with KMS 
+- [here](./../02_storage/03_S3-1.md#security-while-crr-replication)
+
+### 2. share AMI cross region
+![img.png](../99_img/security/kms-2/img-100.png)
+- share AMI : update `launch-permission` for AMI
+- share kms key : update `kms-policy`
+- Account-b >> re-encrypt with its kms key
 
 ---
-## D.Demo
+## E.Demo
 ```
 - crate key-1
 - choose : regionality : single region
