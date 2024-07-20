@@ -24,8 +24,21 @@
     - ebs-volume in region-1-`az1` --> region-1-key --> backup/encrypt --> restored to `region-2`-az1  : INVALID
       - ebs-volume in region-1-`az1` --> region-1-key --> backup/encrypt --> `re-encrpted with region-2-key` --> restored to region-2-az1
         
-- `multi regional` : same key is replicated over regions
+- `multi regional` : same key is replicated over regions.
+  - `primary` (policy-1) + `replicatedd key` (policy-2)
+  - policy can not be modified for each region separately.
+  - purspose : 
+    - encrypt in one region and use/decript in another region.
+    - dont need to re-encrypt again with another region key
+  - `Not recommended to use`. use exceptionally
+  - use-case : 
+    - global Aurora DB, 
+    - global Dynamo DB
+    - having client side encryption
+
+- eg: S3 CRR replication with KMS : [here](./../02_storage/03_S3-1.md#security-while-crr-replication)
   
+---
 ### kms-keys : symmetric
 -  single-key (private), user cant-see, aws use to encrypt/decrypt 
 - Types:
@@ -83,3 +96,8 @@
 - ![img_1.png](../99_img/security/kms/img_1.png)
 - ![img_2.png](../99_img/security/kms/img_2.png)
 - ![img_3.png](../99_img/security/kms/img_3.png)
+- ![img.png](../99_img/security/kms-2/img.png)
+---
+regional key with global dynao and aurora
+- ![img_1.png](../99_img/security/kms-2/img_1.png)
+- ![img_2.png](../99_img/security/kms-2/img_2.png)
