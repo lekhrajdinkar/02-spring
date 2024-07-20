@@ -42,7 +42,7 @@
   
 - `security`
   - Configure `AWS SSO`/ `Identity Center` for centralized access management
-  - create cross account role.
+    - create `cross account role` in permission-Set of IP
   - centrally manage and govern multiple AWS accounts.
   - policies
       
