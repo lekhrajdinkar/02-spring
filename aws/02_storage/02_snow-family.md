@@ -1,7 +1,8 @@
-# AWS SNOW family
+# AWS snow family
  
-## A. SNOW : Data Migration
-### A.1 Snowball Edge
+## A. snowball : Data Migration
+
+### A.1 Snowball `Edge`
 - `Use cases`: large data cloud migrations, DC decommission, disaster recovery
 - If it takes more than a week to transfer over the network, use Snowball devices!
 - challenges without snow:
@@ -19,7 +20,7 @@
   
 ![img.png](../99_img/storage/snow/img.png)
 
-### A.2 Snowball Cone
+### A.2 Snowball `Cone`
 - Small, portable, light (2 kg)
 - `Snowcone` –  `8 TB HDD`  | `4 GB RAM, 2cpu`
 - `Snowcone SSD`– `14 TB SSD` | `4 GB RAM, 2cpu`
@@ -27,7 +28,7 @@
   - post/offline 
   - online:`AWS DataSync` to send/upload data to AWS
 
-### A.3 Snowball mobile
+### A.3 Snowball `mobile`
 - size 100 PB
 - `truck` (GPS, 24/7 video surveillance)  --> 100 PB + 100 PB + ...  === upto `1 exabyte`
   - 1000 TB = 1 PB 
@@ -36,7 +37,9 @@
 - truck/offline
 
 ### summary
-![img_1.png](../99_img/storage/snow/img_1.png)
+- ![img_1.png](../99_img/storage/snow/img_1.png)
+- ![img.png](../99_img/storage/snow/img-6.png)
+- Snowball cannot import to Glacier directly
 
 ---
 ## B. SNOW : Edge computing
