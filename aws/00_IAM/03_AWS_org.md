@@ -1,7 +1,7 @@
 # AWS Organisation (global srv)
 
 ## key term
-- `organisation unit, OU` : Apply SCP-AWS Access
+- `organisation unit, OU` : Applied one policy(scp) : `AWSFULLAccess`
   - `OU (root)` :  
       - `Management-account` (main) : 
         - Don't apply SCP, have full access already.
@@ -17,7 +17,7 @@
         - dev-account-2
         - ...
       - ...
-      - can have nested > nested > ...
+      - can have nesting > nesting> ...
     
 - `policies`
   - `SCP` : Service Control Policies 
@@ -45,13 +45,7 @@
   - Configure `AWS SSO` for centralized access management
   - create cross account role.
   - centrally manage and govern multiple AWS accounts.
-  - define `SCP` - Service Control Policies
-    - IAM policies - apply to `member-acct` or `OU`.
-    - by default, allow NOTHING.
-    - child OU `inherit SCP` from parent OU
-    - strategies:
-      - `AllowedList` : deny all first, then start adding allowed items.
-      - `Blocklist` : allow all first, then start adding blocks.
+  - policies
       
 - `centralized log` : Send CloudWatch Logs to central account
 
