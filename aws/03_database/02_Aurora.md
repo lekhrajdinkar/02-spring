@@ -1,4 +1,7 @@
 # Aurora (rdbms, Serverless)
+- key Summary:
+  - serverless, global DB, self-healing, continous s3 backup, PITR, 128TB auto-scale, OLTP
+
 ## Design
 - serverless, no capacity planning
 - same as RDS, but more performance, less maintenance, more flexibility.
@@ -7,10 +10,11 @@
 - has integration ML service : `SageMaker` and `Comprehend`
   - > usecase : fraud detection, ads targeting, sentiment analysis, product recommendations
 ---    
-- `Auto-scaling` (storage and compute are separate)
-  - `storage` scaling :EBS volume - 10GB to 128TB
-  - `compute` Instance --> auto-scale up/down to bigger/small type( eg: d.r3.large,etc), --RAM++, --cpu++.
-  - `Read replicas`:  CW metric --> triggers --> auto read replica
+- `Auto`-scaling (storage and compute are separate)
+  - `storage` scaling :EBS volume - `10 GB to 128 TB`
+  - `compute` Instance --> auto-scale up/down to bigger/small `compute instances` --> type( eg: d.r3.large,etc), --RAM++, --cpu++.
+  - `Read replicas`:  (built-in, dont need to create CW + ASG, auto happens bts)
+    - CW metric --> triggers --> auto up/down read replicas
 ---   
 - `performance`:
   - AWS cloud optimized and claim `5x` Performance improvement.

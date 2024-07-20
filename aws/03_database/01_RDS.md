@@ -23,17 +23,19 @@
   - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
   - `Aurora` (AWS Proprietary database, not Open source)
 - Advantages of RDM:
-  - `Auto-Scaling` : good for unpredictable workloads
+  - `Scaling` : good for unpredictable workloads
     - `Read-replica Auto-scale` : 
       - Max 15, min 1.
-      - bts use ASG and CW alarm ( metric: conn count, cpu utilization, read traffic, etc)
+      -`not built-in` scaling, but can manually create CW:alarm + ASG
+      - ASG and CW alarm ( metric: conn count, cpu utilization, read traffic, etc)
+      - or, manually edit and create read replication.
     - `storage Auto-scale`: Enable/Disable from console.
       - set max storage in GB/TB.
       - define `thresold` free space <10%, space runs last 5min, etc.
   - `DR`
-    - Multi AZ-setup for DR.
+    - `manually enable` Multi AZ-setup for DR, not built-in.
     - master DB (az-1) --> `Sync replica` --> Stand-by DB (az-2) : no R/W
-    - Automatic fail-over from master to standby.
+    - `Automatic` fail-over from master to standby.
     - just single click, can go from Single-AZ to multi-AZ RDS
       - bts : Single-AZ RDS --> screenShot (already taken) --> will be restored to Standby DB
   - `performance` 
