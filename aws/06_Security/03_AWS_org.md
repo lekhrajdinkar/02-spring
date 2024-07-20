@@ -1,5 +1,4 @@
-# AWS Organisation (global srv)
-
+# A. AWS Organisation (global srv)
 ## key term
 - `organisation unit, OU` : Applied one policy(scp) : `AWSFULLAccess`
   - `OU (root)` :  
@@ -42,14 +41,26 @@
   - `consolidated` billing.
   
 - `security`
-  - Configure `AWS SSO` for centralized access management
+  - Configure `AWS SSO`/ `Identity Center` for centralized access management
   - create cross account role.
   - centrally manage and govern multiple AWS accounts.
   - policies
       
 - `centralized log` : Send CloudWatch Logs to central account
-
 ---
 ## Screenshot
 - ![img_1.png](../99_img/security/org/img_1.png)
 - ![img.png](../99_img/security/org/img.png)
+
+---
+# B. AWS org > Control tower
+- Another service on top of `AWS org`
+- set-up/automate multi-account AWS account
+- Automate ongoing `policy management` using `guardrails`
+  - Detect `policy violations` 
+  - remediate them.
+  - type:
+    - `Preventive` guardrails : restrict, using `SCP`
+    - `detective` guardrails : notify non-compliance using `AWS config ?`
+- `interactive dashboard` : see compliance in all acct in org.
+- ![img_10.png](../99_img/security/org-2/img_10.png)
