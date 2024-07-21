@@ -37,3 +37,6 @@
 - network ACL ?
 - subnet ACL
 - ASG/EC2 -> SG
+
+---
+- edge location : CF, acc, API-gateway-edge-optimzied

@@ -18,6 +18,7 @@
     - but sends `eventBridge` event to expiration, before `45 days`
     - can catch event --> SNS alert, lambda, 
     - `AWS-Config > rule:acm-cert-expiracy-check` --> change days from 45 to something else.
+    - Also, add event-bridge rule to catch daily/monthly expiration events.
     
 - ACM has `integration` with
   - CloudFront `distribution`

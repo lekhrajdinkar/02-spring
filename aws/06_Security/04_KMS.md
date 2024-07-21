@@ -83,6 +83,10 @@ rotation: ?
 - share kms-key-1 : update `kms-policy` to allow access
 - Account-b >> decrypt with kms-key-1 >> re-encrypt with its kms-key-2(Account-b)
 
+### 2. S3 SRR replication
+- bucket-1(key-1) --> replicate(decrypt with key-1 > encrypt with key-2) --> bucket-2(key-2)
+- add permission for both keys to ...
+
 ---
 ## E.Demo
 ```
