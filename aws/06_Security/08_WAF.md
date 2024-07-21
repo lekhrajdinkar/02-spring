@@ -1,4 +1,4 @@
-# WAF (webapp FireWall)
+# A. WAF (webapp FireWall)
 - `webApp --> ALB(layer:7) --> WAF(layer:7):web-ACL` ---> expose to web-client
 - `webApp --> NLB(layer:4) --> WAF(layer:7)` : invalid, since nlb is layer4.
  
@@ -29,7 +29,7 @@
       ![img.png](../99_img/security/others/img.png)
 
 ---
-# FireWall manager 
+# B. FireWall manager 
 - all types of security, at common place.
 - AWS org > `mgt acct`(main) > create `security policy`(`region` level)
 - apply these policy on `multiple member` account in your org.

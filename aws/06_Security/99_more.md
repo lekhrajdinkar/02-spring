@@ -12,7 +12,7 @@
 ![img_2.png](../99_img/security/others/img_2.png)
 
 ---
-# C. Macie
+# B. Macie
 - fully managed by aws
 - uses ML + pattern match, to find `sensitive data(PII)` and protect it
   - `PII` :  persnally identifiable information
@@ -22,7 +22,7 @@
 ![img_4.png](../99_img/security/others/img_4.png)
 
 ---
-# B. Inspector
+# C. Inspector
 - analyze and perform `security assessment` on:
   - `container` (image scan)
   - `lambda` (code scan - CVE database)
