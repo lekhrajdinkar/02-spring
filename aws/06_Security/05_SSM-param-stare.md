@@ -27,7 +27,7 @@
 ## use case
 - #1. Store IAM policy inside store
 - #2. Store secret also inside store
-  - ![img.png](img.png)
+  - ![img.png](../99_img/security/acm/img.png)
 
 ## Demo-1
 ```
