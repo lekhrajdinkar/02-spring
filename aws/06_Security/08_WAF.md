@@ -2,9 +2,12 @@
 - `webApp --> ALB(layer:7) --> WAF(layer:7):web-ACL` ---> expose to web-client
 - `webApp --> NLB(layer:4) --> WAF(layer:7)` : invalid, since nlb is layer4.
  
-- deploy on top of :
-  - `regionally` : ALB, API-gateway, AppSync(GrapgQL-API)
-  - `globally`  : CloudFront distribution
+- WAF deploy on:
+  - regionally 
+    - `ALB`, 
+    - `API-gateway `/ AppSync(GrapgQL-API)
+  - globally
+    - `CloudFront distribution`
  
 ---
 ## WAF : web ACL 
@@ -23,7 +26,20 @@
       - use fixed for API for ALB
       - use AWS global accelerator (has fixed any-cast IPs)
       - > `webApp --> ALB(layer:7) --> WAF(l7):ACL --> AWS global accelerator` --> expose to web-client.
-      ![img.png](img.png)
+      ![img.png](../99_img/security/others/img.png)
+
+---
+# FireWall manager 
+- all types of security, at common place.
+- AWS org > `mgt acct`(main) > create `security policy`(`region` level)
+- apply these policy on `multiple member` account in your org.
+
+- Security policies
+  - `WAF rules` (Application Load Balancer, API Gateways, CloudFront)
+  - `AWS Shield Advanced` (ALB, CLB, NLB, Elastic IP, CloudFront)
+  - `Sg` : EC2:ENI , ALB and ENI-resources in VPC
+  - `Network Firewall` (VPC Level)... pending
+  - `R53 Resolver` ( DNS Firewall)
       
 
 

@@ -12,6 +12,9 @@
     - cant make KMS api call
   
 - integrated with `IAM`. check more.
+
+- `CMK` need to rotated manually. use with `kms-key alias`
+
 - Audit `AWS-key-usage`,  using `CloudTrail`
 - use cases:
     - #1. encrypt password with kms-key --> then store to secret manager
@@ -33,7 +36,7 @@
   - ( `public-key` + data) --> uploaded `encrypted` data to s3-bucket-1.
   - Another bucket, s3-bucket-`2` need data, will make `KMS api call` to get `decrypted` data
   - and decryption will be done by it `private key`.
-
+rotation: ?
 ---
 ## B. KMS Policy
 - like s3 policy
@@ -76,9 +79,9 @@
 
 ### 2. share AMI cross region
 ![img.png](../99_img/security/kms-2/img-100.png)
-- share AMI : update `launch-permission` for AMI
-- share kms key : update `kms-policy`
-- Account-b >> re-encrypt with its kms key
+- share AMI : update `launch-permission` for AMI to allow access
+- share kms-key-1 : update `kms-policy` to allow access
+- Account-b >> decrypt with kms-key-1 >> re-encrypt with its kms-key-2(Account-b)
 
 ---
 ## E.Demo

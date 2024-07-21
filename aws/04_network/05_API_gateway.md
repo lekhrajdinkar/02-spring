@@ -9,8 +9,8 @@
 ---  
 ## A. deployment model
   - `edge-optimized` (default)
-    - deployed in many region
-    - backed by : cloudFront,CDN, edge-location
+    - deployed in many edge location/s
+    - backed by : cloudFront distribution.
     - for global user
   - `regional`
     - deployed in single region eg: us-west-1
@@ -24,7 +24,7 @@
 ---
 ## B. Security:
 - IAM role, OIDC and OAuth2
-- `cognito` ?
+- `cognito`
 - https/TCL with ACM 
   - keep certificate it `us-east-1` for global deployment model.
 ---
