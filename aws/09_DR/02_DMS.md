@@ -9,8 +9,9 @@
 - concept
   - on prem db (large) --> offline : snowball --> aws cloud
   - on-prem-db --> `online : run DMS on EC2` --> aws cloud
+    - `Serverless` option also there.
 ---  
-## source
+## DMS : source
   - `on-prem` : db ( Oracle, MS SQL Server, MySQL, MariaDB, PostgreSQL, MongoDB, SAP, DB2)
   - `azure` : sql-db
   - `aws`:
@@ -20,7 +21,7 @@
     - s3
     - DocumentDB
 ---  
-## targets
+## DMS : targets
   - `on-prem` : db ( Oracle, MS SQL Server, MySQL, MariaDB, PostgreSQL, SAP)
   - `aws`:
       - ec2 : db ( Oracle, MS SQL Server, MySQL, MariaDB, PostgreSQL, SAP)
@@ -80,3 +81,24 @@
         - task setting : { json } - update it
            
 ```
+---
+
+## scenario
+- #1 RDS(`mySQl`)  --> migrate(no DMS) --> Aurora(engine:`mySQL`)
+  - option-1: RDS > `rds::snapshot` > s3 > restore > Aurora
+  - option-2: aurora > create `read-replica from RDS`  > promote it.
+
+- #2 ext-mysql --> migrate(no DMS) --> Aurora(engine:`mySQL`)
+  - option-1 : ext-mysql > `percona-mysql-tool`:`backup` > s3 > restore > Aurora
+  - option-2 : ext-mysql > `dump-util`  > restore dumps > aurora : SLOW (no s3)
+  
+![img.png](../99_img/dr/dms/img.png)
+
+- #3 RDS(`postgres`)  --> migrate(no DMS) --> Aurora(engine:`postgres`)
+  - option-1: RDS > `rds`         :`snapshot` > s3 > restore > Aurora
+  - option-2: aurora > create `read-replica` from RDS  > promote it
+
+- #4 ext-postgres --> migrate(no DMS) --> Aurora(engine:`postgres`)
+  - option-1 : RDS > `backup-tool`:`backup` > s3 > import(`aws_se_aurora extension`) > Aurora
+
+![img_1.png](../99_img/dr/dms/img_1.png)
