@@ -6,7 +6,7 @@
   - Auto-renew in `60 days ` before.
   
 - import External cert (`digicert`)
-  - `digi-cert: generate cert for FQDN or with wildcard
+  - digi-cert: generate cert for FQDN or with wildcard
     - dev1.outbound.aws.org.com,  dev1.outbound.aws.org.com
     - *.outbound.aws.org.com
     - *..aws.org.com
@@ -15,7 +15,7 @@
     - `email` : ?
     - `dns` : just, create `cname` entry in R53 with above dns
   - no auto re-new
-    - but sen eventBrifge event to expiration, before `45 days`
+    - but sends `eventBridge` event to expiration, before `45 days`
     - can catch event --> SNS alert, lambda, 
     - `AWS-Config > rule:acm-cert-expiracy-check` --> change days from 45 to something else.
     
@@ -32,6 +32,7 @@
 ---
 # Screenshot
 integration with ALB (with redirect rule)
+
 ![img_1.png](../99_img/security/acm/img_1.png)
 
 ![img_2.png](../99_img/security/acm/img_2.png)
