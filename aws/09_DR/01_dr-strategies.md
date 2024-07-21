@@ -42,18 +42,18 @@
 ![img_1.png](../99_img/dr/dr-1/img_1.png)
 
 ### B.2 Pilot light
-- A `small version of the app` (critical business) is always running in the `cloud` in `standby`.
-- update r53 to switch.
-- restore rest.
+- A `small version of the app` (critical business workload) is always running in different region.
+- update r53 to switch, on DR.
+- continuously replicate critical db to this region.
 
 ![img_2.png](../99_img/dr/dr-1/img_2.png)
 
 ### B.3 warm light
-- `Full` system is up and running, but at `minimum size`
-- Upon disaster, scale to `production load`
+- Full but `scaled-down version` of your system, up and running in different region
+- Upon disaster, just `scale up` to `production load`
 
 ### B.4 multi site
-- active - active
+- `active - active`
 - Full Production Scale is running AWS and On Premise
 - on D, it will inactive - active.
 - no recovery need to do.

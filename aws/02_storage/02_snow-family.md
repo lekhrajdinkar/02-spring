@@ -26,7 +26,7 @@
 - `Snowcone SSD`– `14 TB SSD` | `4 GB RAM, 2cpu`
 - send option:
   - post/offline 
-  - online:`AWS DataSync` to send/upload data to AWS
+  - online:`AWS DataSync` to send/upload data to AWS (`EBS` only) , `not s3`
 
 ### A.3 Snowball `mobile`
 - size 100 PB
