@@ -1,4 +1,5 @@
-# AWS Global accelerator
+# AWS Global accelerator (global srv)
+-  global service and cannot be deployed to a specific region
 
 ## key term
 - `Uni-cast IP` : one ip assigned to `one` server
