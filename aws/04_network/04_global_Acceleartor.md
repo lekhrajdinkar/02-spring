@@ -7,33 +7,34 @@
 - `accelerator` : server with anyCast IP and uses AWS privateLink.
 
 ## problems
-### problem-statement - 1
+### problem-statement - 1 (hopping)
 - `apb-1(api-1)` is running on region-1 `mumbai`
   - client in `USA` --> hops overs multiple server/s s1 > s2 > s3 > s4 > s4 --> to reach `alb-1`
   - client in `europe` --> hops overs multiple server/s s1 > s2 > s3 --> to reach `alb-1`
   - client in `nepal` --> hops overs few server/s > s1 --> to reach `alb-1` 
 - this creates `high latency` + `loss of n/w risk`.
 
-### problem-statement - 2
-- `apb-1(api-1)` is running on region-1 `mumbai`
-- `apb-2(api-2)` is running on region-2 `europe`
+### problem-statement - 2 (latency)
+- `alb-1(api-1)` is running on region-1 `mumbai`
+- `alb-2(api-2)` is running on region-2 `europe`
 - client in `USA` --> want to connect to closer region-2 europe
 
-### Solution
-- `apb-1(api-1)` is running on region-1 `mumbai`
-- create ANY-cast ip for ALB-1, `ip-1`
+### Solution of above problem/s
+- `alb-1(api-1)` is running on region-1 `mumbai`
+- create CF-acce-1(`anycast-ip-1`) with endpoint group(alb-1,alb2) 
 - hit ip-1 --> send traffic to its closet edge loc first --> `privateLink` + `intelligent-routing`(short-Path, close region) -->  edgeLoc close to destination --> `alb-1/2`
-  - client in `USA`    --> CF acce-1 (`ip-1`)    --> to reach alb-1
-  - client in `europe` --> CF acce-1 (`ip-1`)    --> to reach alb-1
-  - client in `nepal`  --> CF acce-1 (`ip-1`)    --> to reach alb-1
+  - client in `USA`    --> CF acce-1 (`anycast-ip-1`)    --> to reach `alb-2`
+  - client in `europe` --> CF acce-1 (`anycast-ip-1`)    --> to reach `alb-2`
+  - client in `nepal`  --> CF acce-1 (`anycast-ip-1`)    --> to reach `alb-1`
+- anycast-ip-1 : `fixed IP`,  does not support dynamic IP addresses.
 
 - AWS `Global accelerator` help to do same.
-  - create anycast for my alb/app
-  - leverage aws `edge-location` + `privateLink` to reach out target server fast.
+  - create anycast for my `set of alb/app`.
+  - bts, leverage aws `edge-location` with `privateLink` to reach out closest target server fast.
   - benefit:
     - low `latency`, consistent performance.
     - fast `failover`, 
-    - integrated with AWS-sheild, thus provides `DDoS protection`
+    - integrated with `AWS-sheild`, thus provides `DDoS protection`
 - demo:
 ```
 - launch ec2-1 in region-1 (us-east-1)

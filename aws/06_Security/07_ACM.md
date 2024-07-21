@@ -19,22 +19,17 @@
     - can catch event --> SNS alert, lambda, 
     - `AWS-Config > rule:acm-cert-expiracy-check` --> change days from 45 to something else.
     
-- ACM has integration with
+- ACM has `integration` with
   - CloudFront `distribution`
   - R53
   - `LB` : ALB, NLB, ... 
+    - ![img_2.png](../99_img/security/acm/img_2.png)
   - `API gateway`
     - `edge-optimized` : keep ACM cert in `us-east-1`
     - ![img_3.png](../99_img/security/acm/img_3.png)
     - `regional`, `private( withInvpc)` : keep ACM cert in same region
     - ![img_4.png](../99_img/security/acm/img_4.png)
 
----
-# Screenshot
-integration with ALB (with redirect rule)
 
-![img_1.png](../99_img/security/acm/img_1.png)
-
-![img_2.png](../99_img/security/acm/img_2.png)
 
 
