@@ -4,6 +4,8 @@
 - eg: fssrr : oracle --> SCT --> Postgres/aurora
 - ![img.png](../99_img/dr/DR2/img.png)
 
+---
+
 # B. DMS  
 - supports : `homo` + `hetero(with SCT)`
 - concept
@@ -38,6 +40,13 @@
         - OpenSearch Service ?
         - Redshift ?
 --- 
+## network perspective
+- Transferring large amount of data into AWS, from `network perspective`
+  - Over the `internet` / Site-to-Site VPN:
+  - Over `direct connect `1Gbps
+  - Over Snowball `offline`
+
+---  
 ## DMS : Continuous replication
 - use SCT and DMS
 - also `enable multi-zone` on target db
@@ -81,8 +90,8 @@
         - task setting : { json } - update it
            
 ```
----
 
+---
 ## scenario
 - #1 RDS(`mySQl`)  --> migrate(no DMS) --> Aurora(engine:`mySQL`)
   - option-1: RDS > `rds::snapshot` > s3 > restore > Aurora
