@@ -1,20 +1,32 @@
 # Athena (serverless)
 
 - pay for data Scan : `$5/TB`
+- run adhoc SQL query serverlessly
+- parquet(columnar format)
 
+---
 ## Athena : Load Data
 - `source` --> Athena (`scan and query/analyze, data using SQL`) --> result --> `S3` and `Amazon QuickSight` (dashboard)
 - sources:
-  - `S3(object)`:csv,json,avro,`parquet`, 
+  - `S3(object)`:csv,json,avro,`parquet(columnar format)`, 
     - vpc-logs,elb-logs, cloudtrail, goes to s3, can be analyzed.
     - organize data in S3 like `/year/month/day/hr/...`
     - so it will query specific object. fewer data will be scanned === cost reduce.
     - more cost saving : use `compressed` + `columnar` data
-  - `on-prem/aws:database` (relational/NoSQL) --> etl/`aws-glue` --> parquet
+    - S3:object.csv -->`aws-glue` --> parquet
+    
+  - `on-prem/aws:database` (relational/NoSQL) --> `aws-glue` --> parquet
+  
   - `kineses data steam`
-  - `Data Source Connector`
-    - AWS `Lambda` to run Federated Queries on RDS,CW,DynamoDB,etc
-    - if don't want to write etl.glue. so with this option.
+  
+  - `Data Source Connector`: AWS `Lambda` to run Federated Queries on RDS,CW,DynamoDB,etc
+
+---
+## Athena : integration with glue
+- athena call `glue data crawler`
+- crawler, crawls over above source/s, prepare some `metadata`
+- and, create `Glue Data Catalog`
+- Athena uses these catalog to run SQL.
 
 ---
 ## demo:

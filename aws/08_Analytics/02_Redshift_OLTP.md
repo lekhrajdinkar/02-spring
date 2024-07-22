@@ -18,14 +18,18 @@
 - `spectrum`
   - **Cluster** : leader Node > compute Node > `1000s of spectrum`
   - helps to query data from S3
-
+  
+- `Integrated with glue` (crawler > catalog)
+  
 --- 
 ## Redshift : Load Data
 - `source` --> Redshift (`query/analyze : complex SQL`) --> result --> `S3` and `Amazon QuickSight` (dashboard) and `Tableau`
 - sources
-    1. kinesis Data stream --> `kinesis FireHore` --> Redshift
-    2. s3 --> Redshift
-    3. program(Java:SDK): `in-batches` --> Redshift
+  - kinesis Data stream --> `kinesis FireHore` --> Redshift
+  - s3 --> Redshift
+  - program(Java:SDK): `in-batches` --> Redshift
+  - `glue` ETL  --> Redshift
+  - ...
 
 ![img_2.png](../99_img/moreSrv/redshift/img_2.png)
 
@@ -34,7 +38,7 @@
 - single AZ by default
 - cross az-replication : enable `Multi-AZ`  
 - cross region replication
-  - `incremental-snapshot`(only new change), in every in every 8 hr. retention: 35 days.
+  - `incremental-snapshot`(only new change), in every 8 hr. retention: 35 days.
   - stored in s3.
   - restore snapshot/s into new region : **manually/automate**.
   - ![img_1.png](../99_img/moreSrv/redshift/img_1.png)
