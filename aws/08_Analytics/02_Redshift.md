@@ -43,5 +43,5 @@
 ## Screenshot
 
 ![img.png](../99_img/moreSrv/redshift/img.png)
-
+---
 ![img_3.png](../99_img/moreSrv/redshift/img_3.png)
