@@ -5,24 +5,24 @@
   - order `gateway Hardware appliance`
   - it has required CPU, memory, n/w, etc
 
-## Type:
+## Type
   - s3 gateway
-    - `on-prem`  <-- NFS, SMB--> gateway <--> `aws`(Object-storage/S3)
+    - `on-prem`  <-- NFS, SMB--> **s3-gateway** <--> `aws`(Object-storage/S3)
     - ![img_2.png](../99_img/storage/more/img_2.png)
     
   - FXs/file gateway
-    - `on-prem`  <-- SMB, NTFS, etc --> gateway <--> `aws`(File-storage/FS+EFS)
+    - `on-prem`  <-- SMB, NTFS, etc --> **file-gateway** <--> `aws`(File-storage/FS+EFS)
     - `on-prem`  <--> `aws`(File-storage/FS+EFS) : could directly access as well.
     - `Local cache` : gateway help to cache frequent access file/data.
     - ![img_3.png](../99_img/storage/more/img_3.png)
     
   - Volume gateway
-    - `on-prem`  <-- iSCSI --> gateway <--> `aws`(EBS volume backup on S3)
+    - `on-prem`  <-- iSCSI --> **Volume-gateway** <--> `aws`(EBS volume backup on S3)
     - ![img_4.png](../99_img/storage/more/img_4.png)
     
   - Tap gateway 
     - tap : physical tapes, drive.
-    - `on-prem`  <-- iSCSI VTL --> gateway <--> `aws`(S3 has `VTL` running --> glacier)
+    - `on-prem`  <-- iSCSI VTL --> **tap-gateway** <--> `aws`(S3 has `VTL` running --> glacier)
     - VTL : virtual tap library
     - ![img_5.png](../99_img/storage/more/img_5.png)
 
