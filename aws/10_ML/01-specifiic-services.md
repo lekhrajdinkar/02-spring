@@ -1,5 +1,6 @@
 # MS services
-## A. Amazon Rekognition
+## A. Media related
+### A.1 Amazon `Rekognition`
 - Find objects, people, text, scenes in `images and videos`
 - Face Detection and analysis
 - Celebrity Recognition
@@ -10,7 +11,8 @@
   - set `Minimum Confidence Threshold` flagged item
 
 ---
-## B.1 Amazon Transcribe
+## B. speech related
+### B.1 Amazon `Transcribe`
 - speech --> text, uses `ASR`(automatic speech recognition/deep ML)
 - Automatically remove Personally Identifiable Information `(PII)`
 - Automatic `Language Identification`
@@ -18,8 +20,7 @@
   - transcribe customer service calls
   - captioning and subtitling
 
----
-## B.2. Amazon polly
+### B.2. Amazon `polly`
 - speech <-- text
 
 - upload `lexicon` and synthesis speech operation. eg:
@@ -33,27 +34,28 @@
   - `phonetic pronunciation`
   - including `breathing sounds, whispering`
   - using the `Newscaster speaking style`
-  
----
-## C. Amazon Translate
+
+### B.3. Amazon `Translate`
 - language translation.
 
 ---
-## D. Amazon Connect
+## C. language processing
+### C.1 Amazon `lex`
 - same, its `Alexa` using ASR bts 
 - + better natural language understand.
 - use case: built `chat-bots`
 - integrate with `CRM` (customer relation management system)
-- ![img.png](../99_img/ml/ml1/img.png)
 
 ---
-## E. Amazon Connect
+### C.2 Amazon `Connect`
 - cloud-based `virtual contact center`
 - Receive calls, create contact flows
 - 80% cheaper
+- ![img.png](../99_img/ml/ml1/img.png)
 
 ---
-## F.1 Amazon Comprehend (serverless)
+## D. language processing (Advance)
+### D.1 Amazon `Comprehend` (serverless)
 - `NLP`, Natural Language Processing ( with more detailed analysis )
 - find `insights and relationships` in text
   -  `Language` of the text
@@ -63,7 +65,7 @@
   -  Automatically `organizes` a collection of text files by `topic` / article
 
 ---
-## F.2. Amazon Comprehend Medical (serverless)
+### D.2. Amazon `Comprehend Medical` (serverless)
 - uses `NLP` only to detect `PHI` (Protected Health Information), eg:
   - Physician’s notes
   - Discharge summaries
