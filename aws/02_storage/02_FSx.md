@@ -31,7 +31,7 @@
 - deployment option:
   - `scratch` : short term storage, 6x faster, `no data replication`
   - `persistent`: Long term storage: data replication in same AZ
-  - ![img.png](img.png)
+  - ![img.png](../99_img/storage/more/img.png)
 
 ### NetApp ONTAP FS
 - protocol : NFS, SMB, iSCSI
@@ -39,7 +39,7 @@
 - `auto-scaling`, compression
 - Point-in-time instantaneous cloning
 - `compatible` with lots of system.
-- ![img_1.png](img_1.png)
+- ![img_1.png](../99_img/storage/more/img_1.png)
 
 ### OpenZFS FS
 - protocol : NFS (v3,4.1,4.2)
