@@ -29,7 +29,7 @@
   
 - uses `SSML` for customization, usecase:
   - ssml : Speech Synthesis `Markup Language`. 
-    - > <speak> hello <break time="3s"> lekhraj. </speak>
+    - <speak> hello <break time="3s"> lekhraj. </speak>
   - `emphasizing` specific words or phrases
   - `phonetic pronunciation`
   - including `breathing sounds, whispering`
