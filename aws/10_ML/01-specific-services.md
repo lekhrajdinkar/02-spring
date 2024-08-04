@@ -13,7 +13,7 @@
 ---
 ## B. speech/text related
 ### B.1 Amazon `Transcribe`
-- speech --> text, uses `ASR`(automatic speech recognition/deep ML)
+- `speech` --> text, uses `ASR`(automatic speech recognition/deep ML)
 - Automatically remove Personally Identifiable Information `(PII)`
 - Automatic `Language Identification`
 - use case: 
@@ -21,7 +21,7 @@
   - captioning and subtitling
 
 ### B.2. Amazon `polly`
-- speech <-- text
+- text --> `speech`
 
 - upload `lexicon` and synthesis speech operation. eg:
   - Stylized words: St3ph4ne => “Stephane”
@@ -47,7 +47,7 @@
 - ![img_4.png](../99_img/ml/ml2/img_4.png)
 
 ---
-## C. language processing
+## C. lex and connect
 ### C.1 Amazon `lex`
 - same, its `Alexa` using ASR bts 
 - + better natural language understand.
@@ -62,7 +62,7 @@
 - ![img.png](../99_img/ml/ml1/img.png)
 
 ---
-## D. language processing (Advance)
+## D. Natural Language Processing
 ### D.1 Amazon `Comprehend` (serverless)
 - `NLP`, Natural Language Processing ( with more detailed analysis )
 - find `insights and relationships` in text
@@ -94,3 +94,19 @@
 - `document search` service.
 - incremental learning
 - ![img_2.png](../99_img/ml/ml2/img_2.png)
+
+---
+
+# Summary
+-  `Rekognition`: face detection, labeling, celebrity recognition
+-  `Transcribe`: audio to text (ex: subtitles)
+-  `Polly`: text to audio
+-  `Translate`: translations
+-  `Lex`: build conversational bots – chatbots
+-  `Connect`: cloud contact center
+-  `Comprehend`: natural language processing
+-  `SageMaker`: machine learning for every developer and data scientist
+-  `Forecast`: build highly accurate forecasts
+-  `Kendra`: ML-powered search engine
+-  `Personalize`: real-time personalized recommendations
+-  `Textract`: detect text and data in documents
