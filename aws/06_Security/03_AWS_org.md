@@ -18,8 +18,9 @@
       - ...
       - can have nesting > nesting> ...
     
-- `policies`
-  - `SCP` : Service Control Policies 
+- `organizational policies`
+  - `SCP` : Service Control Policies ( access policies )
+    - permission boundary can be imposed to child accounts by SCPs.
     - IAM policies - apply to `member-acct` or `OU`.
     - by default, allow NOTHING.
     - child OU `inherit SCP` from parent OU
@@ -54,10 +55,9 @@
 
 ---
 # B. AWS org > Control tower
-- Another service on top of `AWS org`
-- set-up/automate multi-account AWS account
+- Another service on top of `AWS org` to set-up new, secure, and compliant `multi-account AWS environmnet`, reducing the time and complexity involved.
 - Automate ongoing `policy management` using `guardrails`
-  - Detect `policy violations` 
+  - Detect `policy violations` : built-in governance and compliance 
   - remediate them.
   - type:
     - `Preventive` guardrails : restrict, using `SCP`
