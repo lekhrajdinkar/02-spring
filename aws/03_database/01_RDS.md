@@ -1,4 +1,4 @@
-# summary
+## Summary
   - Storage Auto-scaling (EBS volume size)
   - backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always), 
   - `cloning` : EBS volume - clone
@@ -10,7 +10,7 @@
     - `RDS event ntf` > event catch > target : SNS, Lambda
 
 ---
-# A. `SQL`/ RDBMS Database on AWS
+## AWS RDBMS offering 
 - Option-1 : `on EC2`
   - Provision Ec2
   - install RDBMS and maintain it (os patching, security update, etc)
@@ -18,9 +18,9 @@
 - Option-3 : AWS `RDS` 
 
 ---
-# RDS  (regional)
+## RDS  (regional)
 - manually manage : multi-AZ:t/f ; CW>Alarm>R-replicaScale, etc
-## provision:
+### provision:
   - choose `EBS volume type` : `gp2` or `io1`
   - choose `RDS instance size` : compute family size
     - no access/ssh
@@ -30,8 +30,8 @@
     - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
     - `Aurora` (AWS Proprietary database, not Open source)
   
-##  Advantages of RDS
-### Scaling
+###  Advantages of RDS
+#### Scaling
 - For performance >> `Read-replica Auto-scale` : 
   - Max 15, min 1.
   -`not built-in` scaling, but can manually create CW:alarm + ASG
@@ -42,7 +42,7 @@
   - set max storage in GB/TB.
   - define `thresold`  +  `trigger` : free space <10%, space runs last 5min, etc.
 
-### DR
+#### DR
 -  `Point in Time Restore` : Continuous backups and restore to specific timestamp
 - **option-1**:  Stand-by DB copy  
   - `manually enable` Multi AZ-setup for DR, not built-in.
@@ -58,7 +58,7 @@
   - `cross-region`-read replicas, is also possible : paid
   - DR fail-over : `promote` any READ replica as main DB later.
   
-### performance
+#### performance
 - `Main DB` + `Read replica/s` for improved read performance.
 - Up to 15 READ replica/s 
   - within a AZ, or
@@ -67,7 +67,7 @@
 - main-DB --> `A-SYNC replication (free within region)` --> Read Replicas
 - `cross-region`-read replicas, is also possible : paid
 
-### Security
+#### Security
 - `At-rest` encryption:
   - Database master & replicas encryption using AWS KMS
   - If the master is not encrypted, the read replicas cannot be encrypted
@@ -82,14 +82,14 @@
   - `Security Groups`: Control Network access to your RDS / Aurora DB
   - No SSH available, except on RDS Custom
 
-### RDS proxy
+#### RDS proxy
 - pools open connections.
 - reduces fail-over time by 66%
 - access privatey only
 - client --> RDS proxy --> RDs instance
 - ![img.png](../99_img/db/img_5.png)
 
-### more
+#### more
 - `Dashboard`, `Analytics`  --> runs on READ replica
 - Automated provisioning, OS patching, etc 
 --- 
@@ -125,5 +125,3 @@
   - create read replica.
  
 ```
----
-## Use case
