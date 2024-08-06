@@ -1,4 +1,4 @@
-- summary:
+# summary
   - Storage Auto-scaling (EBS volume size)
   - backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always), 
   - `cloning` : EBS volume - clone
@@ -10,51 +10,62 @@
     - `RDS event ntf` > event catch > target : SNS, Lambda
 
 ---
-## A. SQL Database on AWS
-### Option-1 : Ec2
-- Provision Ec2
-- install RDBMS and maintain it (os patching, security update, etc)
-
-### Option-2 : AWS RDS/aurora
-- `managed` DB service, no access/ssh to underlying Ec2 instance.
-  - But `RDS custom` allow to access it  only for `SQL server` and `oracle` DB.
-  - First disable automation mode, take snapshot, then access it.
-- `EBS volume type` : `gp2` or `io1`
-- `RDS instance size` : compute family size
-- Supported engine: 6 + 1 
-  - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
-  - `Aurora` (AWS Proprietary database, not Open source)
+# A. `SQL`/ RDBMS Database on AWS
+- Option-1 : `on EC2`
+  - Provision Ec2
+  - install RDBMS and maintain it (os patching, security update, etc)
+- Option-2 : AWS `Aurora`
+- Option-3 : AWS `RDS` 
 
 ---
-## B. Advantages of `RDS`
-### Scaling 
-- good for unpredictable workloads
-- `Read-replica Auto-scale` : 
+# RDS  (regional)
+- manually manage : multi-AZ:t/f ; CW>Alarm>R-replicaScale, etc
+## provision:
+  - choose `EBS volume type` : `gp2` or `io1`
+  - choose `RDS instance size` : compute family size
+    - no access/ssh
+    - But `RDS custom` allow to access it  only for `SQL server` and `oracle` DB.
+    - First disable automation mode, take snapshot, then access it
+  - choose Supported engine: 6 + 1
+    - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
+    - `Aurora` (AWS Proprietary database, not Open source)
+  
+##  Advantages of RDS
+### Scaling
+- For performance >> `Read-replica Auto-scale` : 
   - Max 15, min 1.
   -`not built-in` scaling, but can manually create CW:alarm + ASG
   - ASG and CW alarm ( metric: conn count, cpu utilization, read traffic, etc)
   - or, manually edit and create read replication.
-- `storage Auto-scale`: Enable/Disable from console.
+- For Size >> `storage Auto-scale`: Enable/Disable from console.
+  - good for unpredictable workloads
   - set max storage in GB/TB.
-  - define `thresold` free space <10%, space runs last 5min, etc.
+  - define `thresold`  +  `trigger` : free space <10%, space runs last 5min, etc.
 
 ### DR
-- `manually enable` Multi AZ-setup for DR, not built-in.
-- master DB (az-1) --> `Sync replica` --> Stand-by DB (az-2) : no R/W operation
-- `Automatic` fail-over from master to standby.
-- just single click, can go from Single-AZ to multi-AZ RDS
-  - bts : Single-AZ RDS --> screenShot (already taken) --> will be restored to Standby DB
-- RDS (single-region) --> 1hr --> backup/snapshot --> goes to S3
-  - not directly accessible
-  - managed by aws
+-  `Point in Time Restore` : Continuous backups and restore to specific timestamp
+- **option-1**:  Stand-by DB copy  
+  - `manually enable` Multi AZ-setup for DR, not built-in.
+  - master DB (az-1) --> `SYNC replica/free` --> Stand-by DB (az-2) : no R/W operation
+  - `Automatic fail-over` from master to standby.
+  - just single click, can go from Single-AZ to multi-AZ RDS
+    - bts : Single-AZ RDS --> screenShot (already taken) --> will be restored to Standby DB
+    
+- **option-2** : Promote Read replica.
+  - RDS(single-region) --> 1hr --> backup/snapshot --> goes to S3 
+    - bkp: not directly accessible, managed by aws
+    - manually restore the backup into another region, in DR situation.
+  - `cross-region`-read replicas, is also possible : paid
+  - DR fail-over : `promote` any READ replica as main DB later.
   
 ### performance
 - `Main DB` + `Read replica/s` for improved read performance.
-- Up to 15 READ replica/s within Az, cross AZ, cross region.
-- main-DB --> `async replication (free within region)` --> Read Replicas
-- promote any READ replica as main DB later. hence for DR fail-over as well.
-- `Point in Time Restore`
-  - Continuous backups and restore to specific timestamp
+- Up to 15 READ replica/s 
+  - within a AZ, or
+  - cross-AZ, or
+  - cross-region
+- main-DB --> `A-SYNC replication (free within region)` --> Read Replicas
+- `cross-region`-read replicas, is also possible : paid
 
 ### Security
 - `At-rest` encryption:
@@ -85,7 +96,7 @@
 
 ## demo:
 ```
-- create single DB RDB
+- create single DB RDB in region-1
 - choose underlying ec2 type (memory optimzed), EBS volume
 - DB admin + password + DB name
 - backup/screenshot : 
