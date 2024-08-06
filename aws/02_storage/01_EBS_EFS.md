@@ -1,7 +1,9 @@
-###  EC2: Storage
-#### A. EC2: Storage: EC2 instant-store
+# EC2: Storage
+## A. EC2 instant-store
 - better iops, temp context cache | risk of data loss if h/w fails | manual backup.
-#### EC2: Storage: `EBS`
+
+---
+## B. EC2: Storage: `EBS`
 - delete on termination[on/off]
 - Network drive, `same AZ`,
 - only volume can be attached to single EC2-i only, multiple volumns assign to same ec2-i,
@@ -22,24 +24,34 @@
         - `cold HDD` : max-250 iops | max-250 Mbps
             - > data that is infrequently accessed
 
-#### B. EC2: Storage: EFS
-- 3x times expensive than EBS.
-- attach to multiple EC2 ( Linux based AMI only)
-- `POSIX` file system + standard POXIS API
+---
+## C. EC2: Storage: `EFS`
+- uses `POSIX` file system + standard POXIS API
+- `3x times expensive` than EBS, because:
+  - `no capacity planning`, auto-Scale in Size(PB) and auto/manual adjust performance.
+  - supports `multi-AZ`/Regional +  singleAZ
+  - attach to multiple EC2 ( Linux based AMI only)
+  - high performance : 3GBps/R , 1GBps/W
+  - can save cost with `storage class`.
 
-- Type : `Regional` (span over AZ) and `One-Zone`
-- `storage class`
-    - lifecycle policy to move between : `standard` >> Infrequent-Access/`EFS-IA`(after n1 days) >> `Archive`((after n2 days)) 50%
-- choose performance
-    - throughput
-        - `bursting ` : scale with size. `mode: general-purpose(R) + max I/O `
-        - `enhanced > mode: elastic` : regardless of size, auto-scale with the best performance. (R/recommended)
-        - `enhanced > mode: provision` :  manual configure tp
+- `usecase` :  content management, web serving, data sharing, Wordpress, big data, media processing.
+    
+### storage class
+- lifecycle policy to move between : `standard` >> Infrequent-Access/`EFS-IA`(after n1 days) >> `Archive`((after n2 days)) 50%
+- same like s3.
+
+### performance
+- throughput
+  - `bursting ` : scale with size. `mode: general-purpose(R) + max I/O `
+  - `enhanced > mode: elastic` : regardless of size, auto-scale with the best performance. (R/recommended)
+  - `enhanced > mode: provision` :  manual configure tp
 -  max: (auto scale to `Petabyte`-scale) + `3GiB/s for reads` and `1GiB/s for writes`
-- choose VPC/subnet >  add security group
-- Encryption at rest using KMS + enable/disable automatic backup
-- > usecase content management, web serving, data sharing, Wordpress, big data, media processing
-- demo:
+
+### Security
+- choose VPC/subnet >  add `sg`
+- Encryption at rest using `KMS` + enable/disable automatic backup
+
+### demo:
   ```
   - Create EFS `efs-1` + efs-sg-1
   - Ec2-i1 and i2 : launch instance > attach efs-1

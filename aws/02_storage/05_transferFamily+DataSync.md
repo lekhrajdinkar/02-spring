@@ -1,18 +1,20 @@
-# more
-## A. AWS Transfer Family
+## A. FTP : AWS Transfer Family(3)
+- SFTP / FTPS (outside AWS) 
+- FTP with in AWS/VPC
 ![img.png](../99_img/storage/img.png)
 
 ---
 ## B. AWS DataSync
 - hourly, daily, weekly `sync (not continuous, scheduled)` : Move large amount of data/files to and from 
-  - On-prem and aws (using `datasync-agent` - 10 Gbps, use multiple agent)
+  - On-prem and aws (using `datasync-agent` - 10 Gbps, tip:use multiple agent for more speed.)
   - AWS to AWS (no agent)
 - on aws its `s3/glacier, EFS, FSx`, where data is synchronized.
 - File permissions and metadata are `preserved`
 - protocol: NFS-POSIX, SMB
 - ![img_1.png](../99_img/storage/img_1.png)
-- Notice : TLS; save n/w cost with snowcone
+  - Notice : TLS; save n/w cost with snowcone
 - ![img_2.png](../99_img/storage/img_2.png)
+  - can also use internal migration.
 
 ---
 

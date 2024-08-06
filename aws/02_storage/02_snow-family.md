@@ -27,6 +27,8 @@
 - send option:
   - post/offline 
   - online:`AWS DataSync` to send/upload data to AWS (`EBS` only) , `not s3`
+  - `AWS DataSync agent` is pre-installed.
+  - [check here](./05_transferFamily+DataSync.md#b-aws-datasync)
 
 ### A.3 Snowball `mobile`
 - size 100 PB

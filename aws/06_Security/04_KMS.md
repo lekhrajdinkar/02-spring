@@ -44,9 +44,9 @@ rotation: ?
 - default policy : allows everyone in account
 - create custom policy : for cross account access, restricted access with in acct, etc
 - eg-1: lambda-1 copy ebs snapshot from one region to another region
-  - only lambda-1 must have access below keys, no one else.
-    - region-1-key (to decrypt)
-    - region-2-key (to re-encrypt)
+  - only lambda-1 must have access below 2 keys, no one else.
+    - region-1-key (to decrypt) : [ policy-1: allow Lambda-1 + more statemnets ]
+    - region-2-key (to re-encrypt) [ policy-2: allow Lambda-1 + more statemnets ]
   - update custom policy accordingly
 - eg-2: cross account kms access
   - ![img_4.png](../99_img/security/kms/img_4.png)
