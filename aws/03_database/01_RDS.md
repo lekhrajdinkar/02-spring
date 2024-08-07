@@ -2,7 +2,7 @@
   - Storage Auto-scaling (EBS volume size)
   - backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always), 
   - `cloning` : EBS volume - clone
-  - DR( multi-AZ and region ) : main-DB (Writer, only 1) > snapshot > restore-Standby  
+  - DR( multi-AZ or region ) : main-DB (Writer, only 1) > snapshot > restore-Standby  
   - performance Arch: `one` Write-Instance + `many` Read-Replica/s , `RDS proxy`
   - security: attach `Security group` on RDS instance, encryption at rest/fly, IAM 
   - use case and scenarios: 
@@ -20,6 +20,7 @@
 ---
 ## RDS  (regional)
 - manually manage : multi-AZ:t/f ; CW>Alarm>R-replicaScale, etc
+- Automated provisioning, OS patching, just choose maintenance window, 
 ### provision:
   - choose `EBS volume type` : `gp2` or `io1`
   - choose `RDS instance size` : compute family size
@@ -40,11 +41,11 @@
 - For Size >> `storage Auto-scale`: Enable/Disable from console.
   - good for unpredictable workloads
   - set max storage in GB/TB.
-  - define `thresold`  +  `trigger` : free space <10%, space runs last 5min, etc.
+  - define `thresold`/maz-size  +  `trigger` : free space <10%, space runs last 5min, etc.
 
 #### DR
 -  `Point in Time Restore` : Continuous backups and restore to specific timestamp
-- **option-1**:  Stand-by DB copy  
+- **option-1**:  Stand-by replica  
   - `manually enable` Multi AZ-setup for DR, not built-in.
   - master DB (az-1) --> `SYNC replica/free` --> Stand-by DB (az-2) : no R/W operation
   - `Automatic fail-over` from master to standby.
@@ -66,6 +67,7 @@
   - cross-region
 - main-DB --> `A-SYNC replication (free within region)` --> Read Replicas
 - `cross-region`-read replicas, is also possible : paid
+- tip: can run `Dashboard`, `Analytics` on read replicas.
 
 #### Security
 - `At-rest` encryption:
@@ -89,9 +91,6 @@
 - client --> RDS proxy --> RDs instance
 - ![img.png](../99_img/db/img_5.png)
 
-#### more
-- `Dashboard`, `Analytics`  --> runs on READ replica
-- Automated provisioning, OS patching, etc 
 --- 
 
 ## demo:

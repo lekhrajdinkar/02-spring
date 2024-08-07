@@ -20,19 +20,19 @@
   - `SNI` : resolves multiple certificate load problem.
   - encrypt `in-fly` traffic.
 ---
-## B. AGS
+## B. ASG
 - client --> ELB(sg-lb-1) --> target-group --> ASG [ec2-i1 (sg-1), ...]
-- scaling policies : in/out:
-  - `Dynamic`: CloudWatch --> metric(CPU,memory,network, `custom`, `RequestCountPerTarget`) --> `alarm` --> ASG --> scale out
+- scaling policies/types:
+  - `Dynamic`: CloudWatch --> metric(CPU,memory,network, `custom`, `RequestCountPerTarget`) --> `alarm` --> ASG --> scale in/out
     - `target tracking Scaling` : CPU,memory,network utilization
-    - `Simple scaling`
-    - `Step scaling`
-  - `scheduled` : eg: scale d`on to min count on weekends.
+    - `Simple scaling` : trigger(CW:Alarm) + single action + cooldown-period
+    - `Step scaling` : trigger(CW:Alarm) + different/many actions + cooldown-period
+  - `scheduled` : eg: scale up/down to max/min count on weekends.
   - `predictive` : 
-    - continuously forecast load and schedule scaling ahead.
+    - continuously `forecast` load and schedule scaling ahead of time.
     - Easy to create. once created ait for Week. ML will be applied on historic data.
-- `Launch template` : EC2 details (AMO,OS, Role, etc)
-- if ELB / health fail, ASG wil terminate instances.
+- `Launch template` : EC2 details (AMI, OS, Role, etc)
+- works in conjunction with ELB. if ELB::health-check fails, ASG will terminate corresponding target instances.
 - During `cool-down effect`, ASG does not add new instances.
 - Check AWS Activity history.
 - demo : create one and link with tg. count : `desired, min, max`
@@ -58,11 +58,11 @@
   
 - purpose:
   - gateway | forwards traffic to healthy servers.
-  - separate `public-traffic` from `private-traffic`, can create public and private LB.
+  - separate `public-traffic` and `private-traffic`, can create public and private LB.
   - provide `TLS/SSL-termination`
     - allowing it to decrypt and inspect incoming traffic before forwarding it to the backend instances.
     - already integrated with `ACM`.
-  - Enforce `stickiness with cookies` ?
+  - Enforce `stickiness with cookies`
   
 - Types:
   - `Classic` CLB (deprecated)
@@ -120,12 +120,12 @@
   - gaming and streaming services.
 
 - target group:
-  - ELB
+  - ELB/ALB
   - EC2 instances
   - IP Addresses
 - `health-check` support multiple-protocol : `http,https,TCP`
 - demo : similar as above
-- Cross-Zone Load Balancing : disable by default, pay
+- Cross-Zone Load Balancing : disable by default, paid
 
 ---
 ### C.3. ELB : GWLB - gateway LB (layer 3)

@@ -14,7 +14,7 @@
   - `storage` scaling :EBS volume - `10 GB to 128 TB`
   - `compute` Instance --> auto-scale up/down to bigger/small `compute instances` --> type( eg: d.r3.large,etc), --RAM++, --cpu++.
   - `Read replicas`:  (built-in, dont need to create CW + ASG, auto happens bts)
-    - CW metric --> triggers --> auto up/down read replicas
+    - can add, CW metric --> triggers --> auto up/down read replicas
 ---   
 - `performance`:
   - AWS cloud optimized and claim `5x` Performance improvement.
