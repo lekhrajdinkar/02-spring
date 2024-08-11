@@ -5,7 +5,9 @@
 - `Uni-cast IP` : one ip assigned to `one` server
 - `Any-cast IP` : same ip assigned to `multiple` server
   - but, client req goes to geo close loc.
-- `accelerator` : server with anyCast IP and uses AWS privateLink.
+- `accelerator` : 
+  - uses anyCast IP
+  - uses AWS privateLink.
 
 ## problems
 ### problem-statement - 1 (hopping)
