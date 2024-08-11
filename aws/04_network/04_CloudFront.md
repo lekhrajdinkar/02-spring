@@ -20,7 +20,7 @@
   - `OAC` : `Origin access control` : this allow CF to connect/access origin. 
 
 ---
-## CloudWatch Function
+## CloudFront Function
 - Run some code at CloudFrount distributon type : 
   - `lambda@Edge` : 
     - `nodeJs or Py`
