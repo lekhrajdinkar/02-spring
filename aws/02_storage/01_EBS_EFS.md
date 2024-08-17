@@ -40,12 +40,16 @@
 - lifecycle policy to move between : `standard` >> Infrequent-Access/`EFS-IA`(after n1 days) >> `Archive`((after n2 days)) 50%
 - same like s3.
 
-### performance
-- throughput
-  - `bursting ` : scale with size. `mode: general-purpose(R) + max I/O `
-  - `enhanced > mode: elastic` : regardless of size, auto-scale with the best performance. (R/recommended)
-  - `enhanced > mode: provision` :  manual configure tp
--  max: (auto scale to `Petabyte`-scale) + `3GiB/s for reads` and `1GiB/s for writes`
+### provision
+- select throughput mode:
+  - `bursting` : throughput scale with size.
+    - general-purpose(R)
+    - max I/O 
+  - `enhanced` : throughput scale regardless of size
+    - `elastic` : auto-scale with the best performance. (R/recommended)
+    - `provision` :  manually configure throughput
+-  size : (auto scale to `Petabyte`-scale)
+-  R/W max speed : `3GiB/s for R` and `1GiB/s for W`
 
 ### Security
 - choose VPC/subnet >  add `sg`
