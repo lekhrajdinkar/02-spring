@@ -1,11 +1,11 @@
 ## Amazon FXs (serverless)
 - RDS for serverless DB, similarly for fileSystem we have FXs.
 - high performance FS / file-system, fully managed ; configure `multi-AZ` 
-- access from `on-prem` (vpn-->internet or directConnect)
+- access from `on-prem` (vpn-->internet or directConnect) or mount on ec2-i
 - KMS encrypted.
 
-
-### windows FS
+---
+### Windows FS
   - supported protocol : `SMB & NTFS` smb-server message block
   - storage option : SSD and HDD.
   - DR : s3 backup
@@ -17,9 +17,9 @@
   - performance:
     - millions of iops
     - 100s PB data
-    - 10 GB/s
+    - max : 10 GB/s
     
-### luster FS
+### Luster FS
 - luster : linux + cluster
 - parallel DFS
 - use case : HPC, ML, video process, modelling, etc
@@ -48,3 +48,13 @@
 - performance : millions of iops
 - Point-in-time instantaneous cloning
 - `compatible` with lots of system. same as netApp FS.
+
+
+----
+- side notes on FS protocol:
+  - `SMB` is a `network` file-sharing protocol 
+  - primarily used in Windows environments but is also supported on other platforms like Linux and macOS
+  - `NTFS` is a file system developed by Microsoft for the Windows operating system. 
+  - It’s used for storing and retrieving files on a hard drive or other storage devices
+  - `iSCSI` is used to facilitate data transfers between storage devices and servers over `TCP/IP networks`.
+  - `NFS` (Network File System) is a `distributed` file system protocol that allows users to access and share files over a network 

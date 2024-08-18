@@ -34,6 +34,11 @@
     - scale automatically based on last 30 throughput peek history
     - cost - hourly `per stream`, data in/out GB
     - Also, `4000 record/sec/shard + 4 MB/sec/shard`  :)
+    
+- QnA:use the `Enhanced Fanout feature`
+  - provides each consumer application with its own dedicated throughput, up to 2 MB/second.
+  - Multiple consumers can simultaneously process the same data stream without affecting each other's performance.
+  
 - summary:
   - ![img.png](../99_img/decouple/img.png)
   

@@ -17,7 +17,8 @@
 
 - `spectrum`
   - **Cluster** : leader Node > compute Node > `1000s of spectrum`
-  - helps to query data from S3
+  - Redshift Spectrum, allows you to run queries on data stored in Amazon S3, without having to move that data into your Redshift cluster.
+  - Analysts can use Redshift SQL queries to access both Redshift tables (recent data) and data in S3 (historical data) without moving data between the two, `enabling cross-referencing`
   
 - `Integrated with glue` (crawler > catalog)
   
