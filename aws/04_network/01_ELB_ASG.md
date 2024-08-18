@@ -31,11 +31,13 @@
   - `predictive` : 
     - continuously `forecast` load and schedule scaling ahead of time.
     - Easy to create. once created ait for Week. ML will be applied on historic data.
-- `Launch template` : EC2 details (AMI, OS, Role, etc)
+- `Launch template` (Preferred) : EC2 details (AMI, OS, Role, etc), more flexible.
+- `Launch Configurations` are simpler but less flexible.
 - works in conjunction with ELB. if ELB::health-check fails, ASG will terminate corresponding target instances.
 - During `cool-down effect`, ASG does not add new instances.
 - Check AWS Activity history.
-- demo : create one and link with tg. count : `desired, min, max`
+- demo : create one and link with tg. count : `desired, min, max`.
+-  `immutable`, meaning you cannot modify them once they have been created.
 
 ---
 ## C. ELB

@@ -27,6 +27,7 @@
     - no access/ssh
     - But `RDS custom` allow to access it  only for `SQL server` and `oracle` DB.
     - First disable automation mode, take snapshot, then access it
+    - R51DS custom, allow some customization capabilities of underlying DB and OS (limited)
   - choose Supported engine: 6 + 1
     - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
     - `Aurora` (AWS Proprietary database, not Open source)

@@ -100,4 +100,9 @@
 - more : ![img_2.png](../99_img/CF/cf-3/img_2.png)
 ---  
 
+- Choosing Between ElastiCache and CloudFront:
+  - If your goal is to improve the performance of database queries or store session data `in memory`, use Amazon ElastiCache. 
+  - It is suited for scenarios where you need fast, in-memory data access.
+  - If your goal is to deliver content quickly to users across the globe, reduce latency for static and dynamic content, or offload content delivery from your origin server, use Amazon CloudFront.
+
 
