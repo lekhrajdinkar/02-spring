@@ -15,6 +15,7 @@
 # AWS : lambda 
 ## A. Function
 - lambda initially was `FaaS`. Now serverless : `provision code/function` 
+- use `lambda layer` for common code.
 - deploy code without underlying infra
 - `auto-scale with load` (parallel Lambdas, `max- 1000`)
 

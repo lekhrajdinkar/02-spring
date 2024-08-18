@@ -1,5 +1,7 @@
 # AWS Global accelerator (global srv)
--  global service and cannot be deployed to a specific region
+- `network layer service` that directs traffic to optimal endpoints over the AWS global network.
+- it provides `two` static anycast IP addresses that act as a fixed `entry point` to your application endpoints. (ALB,etc)
+-  uses `endpoint weights` to determine the proportion of traffic that is directed to endpoints in an endpoint group
 
 ## key term
 - `Uni-cast IP` : one ip assigned to `one` server
@@ -47,11 +49,14 @@
 - create Listener/s :
     - listener-1 : 
         - TCP:80
-        - endpoint-group: 
+        - endpoint-group -1 (weight - w1 ): 
             - endpoint-1 : ec2-1 
             - endpoint-2 : ec2-2
             - endpoint-3 : alb-2
             - endpoint-4 : static-ip 
+        - endpoint-group -2 (weight - w2 ):
+          - ...
+          - ...
         - setup health as well, for each endpoint.
 - hit dn-1 url:
     - goes to us-east-1,ec2-2 everytime, since iam in CA,USA
@@ -66,3 +71,9 @@
 ## Screenshots:
 ![img.png](../99_img/CF/ga/img.png)
 ![img_1.png](../99_img/CF/ga/img_1.png)
+
+--- 
+# scenario
+- `Blue/green deployment` is a technique for releasing applications by shifting traffic between two identical environments running different versions of the application: "Blue" is the currently running version and "green" the new version. This type of deployment allows you to test features in the green environment without impacting the currently running version of your application. 
+- Use AWS Global Accelerator to `distribute a portion of traffic to a particular deployment`.
+- 

@@ -15,7 +15,7 @@
   - Notice : TLS; save n/w cost with snowcone
 - ![img_2.png](../99_img/storage/img_2.png)
   - can also use internal migration.
-
+- eg:on-prem (DatasyncAgent:`scheduled-task`) --> AWS Direct connection --> VPC gateway(interface) --> resource,EFS
 ---
 
 # Quick Summary on All storage options

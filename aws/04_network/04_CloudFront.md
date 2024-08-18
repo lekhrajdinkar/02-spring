@@ -17,7 +17,8 @@
   - make origin `publicly` accessible.
     - get list of Public IPs of all 400+ edge location
     - add app level security to allow access only to above IPs.
-  - `OAC` : `Origin access control` : this allow CF to connect/access origin. 
+  - `OAC` : `Origin access control` : this allow CF to connect/access origin.
+- `origin failover feature` to help support your `data resiliency` needs.
 
 ---
 ## CloudFront Function

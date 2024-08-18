@@ -1,4 +1,5 @@
 - https://chatgpt.com/c/b1fe7e08-270f-4a92-a4db-b95e6beab7c7
+- QnA: traffic is routed to instance from ELB using `private IPS` of ENI of instance.
 ---
 ## A. keys Terms
 - `Availability` : multi AZ, prevent datacenter loss

@@ -40,7 +40,9 @@
   - if having multiple consumer, then use group messages: `msg + groupingId`
   - group-1 ( msg1, msg-2, ...) --> consumer-1
   - group-2 ( msg1, msg-2, ...) --> consumer-2
-- Limited throughput: `300 msg/s` :(
+- Limited throughput: 
+  - `300 msg/s` without batch
+  - `3000 msg/s` with batch
 
 ---
 ## SQS : Security

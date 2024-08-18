@@ -38,6 +38,7 @@
 
 ---
 ## D. Use case
+- QnA: throttles requests in case of sudden traffic spikes.
 - ![img.png](../99_img/moreSrv/api-gateway/img.png)
 - ![img_1.png](../99_img/moreSrv/api-gateway/img_1.png)
 

@@ -35,10 +35,6 @@
     - cost - hourly `per stream`, data in/out GB
     - Also, `4000 record/sec/shard + 4 MB/sec/shard`  :)
     
-- QnA:use the `Enhanced Fanout feature`
-  - provides each consumer application with its own dedicated throughput, up to 2 MB/second.
-  - Multiple consumers can simultaneously process the same data stream without affecting each other's performance.
-  
 - summary:
   - ![img.png](../99_img/decouple/img.png)
   
@@ -46,6 +42,14 @@
   - ![img_1.png](../99_img/decouple/img_1.png)
 - demo : aws cli > produce cmd + consume cmd. (v:193)
 - Security: IAM policy, Encryption (rest-kms, fly-tLS/ssl)
+
+- QnA:
+  - use the `Enhanced Fanout feature`
+    - provides each consumer application with its own dedicated throughput, up to 2 MB/second.
+    - Multiple consumers can simultaneously process the same data stream without affecting each other's performance.
+    - ![img_2.png](img_2.png)
+  - S3 --> `DMS` --> kinesis
+  - ![img_1.png](img_1.png)
 ---
 
 ## B. Kinesis : Data Firehose 
