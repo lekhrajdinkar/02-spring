@@ -23,6 +23,7 @@
 ---
 ## B. ASG
 - client --> ELB(sg-lb-1) --> target-group --> ASG [ec2-i1 (sg-1), ...]
+- span over AZs
 - scaling policies/types:
   - `Dynamic`: CloudWatch --> metric(CPU,memory,network, `custom`, `RequestCountPerTarget`) --> `alarm` --> ASG --> scale in/out
     - `target tracking Scaling` : CPU,memory,network utilization
