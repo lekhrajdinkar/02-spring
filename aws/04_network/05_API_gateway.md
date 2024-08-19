@@ -1,10 +1,11 @@
 # API gateway (Serverless)
+
 - > Client --> cname/alias(in R53) --> API gateway (Http/s,webSocket) --> XXXXX
   - lambda
   - on premAPI-API
   - ALB
-  - Any `AWS service`.  eg: `S3:GETObject`
-  - `VPC endPoint` (access AWS service from VPC_
+  - `ALL AWS service API call`.  eg: S3::GETObject,SQS::PUBLISH, etc
+  - `VPC endPoint` ( access AWS service from VPC )
   
 ---  
 ## A. deployment model
@@ -31,7 +32,7 @@
 ## C. Key feature
 - `import` from Swagger/OpenAPI to define API.
 - `transform` req/resp
-- `cache` response
+- `cache` response <<< IMP
 - API versioning
 - diff env support ?
 - `rate limiting` , `throttling`

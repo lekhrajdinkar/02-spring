@@ -1,6 +1,7 @@
 ## A. FTP : AWS Transfer Family(3)
 - SFTP / FTPS (outside AWS) 
 - FTP with in AWS/VPC
+- expose s3/EFS over FTP protocol
 ![img.png](../99_img/storage/img.png)
 
 ---
@@ -15,7 +16,7 @@
   - Notice : TLS; save n/w cost with snowcone
 - ![img_2.png](../99_img/storage/img_2.png)
   - can also use internal migration.
-- eg:on-prem (DatasyncAgent:`scheduled-task`) --> AWS Direct connection --> VPC gateway(interface) --> resource,EFS
+- eg:on-prem (DatasyncAgent:`scheduled-task`) --> AWS Direct connection --> VPC gateway(interface) --> resource(EFS/S3)
 ---
 
 # Quick Summary on All storage options
