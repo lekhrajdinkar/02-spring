@@ -36,7 +36,7 @@
 ---
 ### `Problem-1`:  multiple Volume, no track which image is which volume
 - use EFS
-- ![img_2.png](../99_img/ssa-discussion/11-3/img_2.png)![img_1.png](../99_img/ssa-discussion/11-1/img_1.png)
+- ![img_2.png](../99_img/ssa-discussion/11-3/img_2.png)
 
 ---
 ## C. more
@@ -50,5 +50,9 @@
 
 ### `problem-3 ` Quickly restore EBS Volumes:
 - Restore from a snapshot: the disk will already be formatted and have data!
+
+---
+
+use `BeanStalk` (managed srv), if dont want to deal with all above things, and have things already in place.
 
 
