@@ -1,7 +1,7 @@
 # SAA discussion
 
 ## A. High Performance Computing (HPC)
-- not a service maximize 
+- not a service  
 - combination of multiple service to maximize AWS computation potential.
 
 ### 1. Data Management & Transfer
