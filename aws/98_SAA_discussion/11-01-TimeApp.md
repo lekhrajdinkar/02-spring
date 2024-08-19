@@ -1,7 +1,8 @@
 # SSA Discussion
 
-## A. Time App
+## A. Time App (stateless)
 - launch time app on Ec2 (t1.micro) in Az-1
+- give current time
 ---
 ### `Problem-1`:  need static/fixed Ip 
   - assign `elastic IP `(paid)
@@ -22,6 +23,7 @@
 ### `problem-5` : ec2-i health issue and went down.
   - add `ALB` in same AZ-1 + health check
   - update sg of ec2-i and alb for allowed traffics.
+  - allow traffic from alb for security purpose.
   - ![img_3.png](../99_img/ssa-discussion/11-1/img_3.png)
 ---
 ### `problem-6` : traffic is less, scaling down
@@ -30,7 +32,7 @@
   - ![img_4.png](../99_img/ssa-discussion/11-1/img_4.png)
   - ![img_6.png](../99_img/ssa-discussion/11-1/img_6.png)
 ---
-### `problem-7` : Availability issue
+### `problem-7` : Availability issue / DR
   - deploy` app/ec2-i` in multiple AZ / az-1, az-2, az-3
   - deploy `ALB` in multiple AZ  / az-1, az-2, az-3 
   - ![img_5.png](../99_img/ssa-discussion/11-1/img_5.png)
