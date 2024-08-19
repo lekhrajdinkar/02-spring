@@ -28,4 +28,27 @@
 ### `problem-5` : RDS and Elasti-cache : Availability / DR
   - use multi-AZ
 
+---
+## B. wordpress (stateful)
+- upload and store image on volumes.
+- ![img.png](../99_img/ssa-discussion/11-3/img.png)
+- ![img_1.png](../99_img/ssa-discussion/11-3/img_1.png)
+---
+### `Problem-1`:  multiple Volume, no track which image is which volume
+- use EFS
+- ![img_2.png](../99_img/ssa-discussion/11-3/img_2.png)![img_1.png](../99_img/ssa-discussion/11-1/img_1.png)
+
+---
+## C. more
+### `problem-1 ` : Quickly instantiate App
+- `Golden AMI pattern` : Install your applications, OS dependencies etc.. beforehand and launch your EC2 instance from the Golden AMI
+- Bootstrap using `User Data`: For dynamic configuration, use User Data scripts.
+- Hybrid: mix Golden AMI and User Data (Elastic Beanstalk).
+
+### `problem-2 ` Quickly restore RDS Databases:
+- Restore from a snapshot: the database will have schemas and data ready!
+
+### `problem-3 ` Quickly restore EBS Volumes:
+- Restore from a snapshot: the disk will already be formatted and have data!
+
 
