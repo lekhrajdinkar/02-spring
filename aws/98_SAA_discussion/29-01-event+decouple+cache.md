@@ -22,3 +22,6 @@
 
 ### 6. more-1
 ![img_5.png](../99_img/ssa-discussion/29-1/img_5.png)
+
+### 7. cache Strategies
+![img.png](../99_img/ssa-discussion/29-1/img-cache.png)
