@@ -1,6 +1,6 @@
 # Redshift
 - **Not serverless**
-- `OLTP` (online analytic processing) + Analytics and data warehousing
+- `OLAP` (online analytic processing) + Analytics and data warehousing. Not OLTP
 - scale to `PB of data`
 
 ---
