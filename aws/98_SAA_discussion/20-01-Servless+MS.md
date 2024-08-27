@@ -1,7 +1,7 @@
 # SSA Discussion
 
 ## A. TodoList App (Serverless)
-- REST : web-client --> `api-gateway --> s3`
+- REST : web-client -->  upload/dowload > s3
 - serverless Authentication : `cognito` --> api-gateway
 - scalable DB with high READ throughput : `DynamoDB`
 
