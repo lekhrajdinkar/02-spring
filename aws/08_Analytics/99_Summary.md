@@ -22,9 +22,8 @@
 
 ## 5. OpenSearch
 - search and Analysis for `Unstructured Data` from CW:log + stream(DynoDB,KDS).
-- L,KDF --> OpenSearch
+- CW:Logs,KDF --> OpenSearch
 
 ## 6. EMR
 - Run `Hadoop` Cluster (Master.Core.task Nodes)
 
-## 6. EMR
