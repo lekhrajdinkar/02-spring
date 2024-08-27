@@ -37,11 +37,13 @@
   - > `Trick` : take snapshot and delete db if you dont need.  later on restore from snapshot. this will `save money`
 
 ---            
-## Global Aurora
+## Global Aurora 
 - cross `region` replicas in `less than a sec`. | single Database spans over multiple region.
 - 1 Primary Region (read / write)
 - Up to 5 secondary (read-only) in each region, `replication` lag is less than `1 second`  **
   - Up to 16 Read Replicas per secondary region
+  - RPO: less than second
+  - RTO: less than a minute
 - ![img_3.png](../99_img/db/img_3.png)
 
 ---

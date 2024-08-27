@@ -40,6 +40,7 @@
 - Check AWS Activity history.
 - demo : create one and link with tg. count : `desired, min, max`.
 -  `immutable`, meaning you cannot modify them once they have been created.
+- ASG can have spot instance and can terminate them, on health check fail status
 
 ---
 ## C. ELB
@@ -50,6 +51,9 @@
     
 - has/contains :
   - health-check mechanism (/health) at `target-group` level
+    - `Grace Period` : helps to avoid premature health check failures.
+    - `impaired status of EC2` : Os check, n/w status failed on Ec2 - failed
+      -  marks unhealthy, and **terminate** after grace period.
   - has `DNS` name, `XXXX.region.elb.amazonaws.com` , IP might change.
   - Security group : sg-lb-1
     - Also, add rule to SG of ec2 instance to allow traffic sg-lb-1
