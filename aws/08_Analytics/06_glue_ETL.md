@@ -1,4 +1,5 @@
 # Glue (Serverless , ETL)
+- create `bookmark` for previous run.
 
 ## Use case
 - #1. transform data before loading to `redshift` data warehouse

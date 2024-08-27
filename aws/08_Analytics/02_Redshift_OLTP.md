@@ -37,8 +37,8 @@
 ---
 ## Redshift : DR
 - single AZ by default
-- cross az-replication : enable `Multi-AZ`  
-- cross region replication
+- cross `az`-replication : enable `Multi-AZ`  
+- cross `region`-replication (better)
   - `incremental-snapshot`(only new change), in every 8 hr. retention: 35 days.
   - stored in s3.
   - restore snapshot/s into new region : **manually/automate**.
