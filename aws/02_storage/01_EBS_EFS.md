@@ -42,15 +42,25 @@
 - lifecycle policy to move between : `standard` >> Infrequent-Access/`EFS-IA`(after n1 days) >> `Archive`((after n2 days)) 50%
 - same like s3.
 
-### provision
-- select throughput mode:
-  - `bursting` : throughput scale with size.
-    - general-purpose(R)
-    - max I/O 
-  - `enhanced` : throughput scale regardless of size
-    - `elastic` : auto-scale with the best performance. (R/recommended)
-    - `provision` :  manually configure throughput
--  size : (auto scale to `Petabyte`-scale)
+### performance Mode
+- `general-purpose`( default)
+  - **low-latency** operations :)
+  - lower throughput and is not ideal for highly parallelized big data processing tasks.
+  
+- `max I/O` 
+  - Highly parallelized applications and **big data workloads** that require higher throughput.
+  -  supports thousands of concurrent connections and higher I/O operations.
+  - slightly **higher latencies** compared to the General Purpose mode :(
+  
+- `enhanced` : throughput scale regardless of size
+  - `elastic` : auto-scale with the best performance. (R/recommended)
+  - `provision` :  
+    - manually configure throughput.
+    - If your workloads require even higher and consistent throughput
+    - allows you to specify the throughput you need, independent of the amount of data stored.
+  
+### Max limit
+-  storage size : (auto scale to `Petabyte`-scale)
 -  R/W max speed : `3GiB/s for R` and `1GiB/s for W`
 
 ### Security

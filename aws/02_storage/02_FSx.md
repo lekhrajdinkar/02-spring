@@ -20,6 +20,7 @@
     - max : 10 GB/s
     
 ### Luster FS
+- usecase : `distributed` computing for HPC, ||, ML, Modeling
 - protocol : POSIX,
 - luster : linux + cluster
 - parallel DFS

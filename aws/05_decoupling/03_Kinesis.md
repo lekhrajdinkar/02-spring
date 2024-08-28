@@ -62,4 +62,7 @@
 - Supports ETL : can transform record with lambda, support compression
 - can set buffer `size 0-900Sec`
 - if delivery failed, store failed record in s3 bucket.
+- fact : `Kinesis Agent` cannot write to KDF, for which source is already set as KDS
+  - source-1: KDS --> KDF
+  - source-2: kinesis-agent --> **NOT** --> KDF
 - ![img_3.png](../99_img/decouple/img_3.png)
