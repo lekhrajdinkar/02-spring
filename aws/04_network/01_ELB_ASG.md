@@ -41,7 +41,9 @@
 - demo : create one and link with tg. count : `desired, min, max`.
 -  `immutable`, meaning you cannot modify them once they have been created.
 - ASG can have spot instance and can terminate them, on health check fail status
-
+- `Default Termination Policy`
+  - instance that uses the oldest launch configuration first.
+  - next, it considers oldest age.
 ---
 ## C. ELB
 - `regional`, forwards traffic to multiple ec2 in `mutli-AZ`

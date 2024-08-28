@@ -4,7 +4,9 @@
 
 ---
 ## B. EC2: Storage: `EBS`
-- delete on termination[on/off]
+- deleteOnTermination[on/off]
+  - primary - true
+  - additional ebs - off
 - Network drive, `same AZ`,
 - only volume can be attached to single EC2-i only, multiple volumns assign to same ec2-i,
     - latency due to network.
