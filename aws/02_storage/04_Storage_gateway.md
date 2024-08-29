@@ -18,6 +18,9 @@
     
   - Volume gateway
     - `on-prem`  <-- iSCSI --> **Volume-gateway** <--> `aws`(EBS volume backup on S3)
+    - Types:
+      - `Gateway-Cached Volumes`: Primary data storage is in Amazon S3, with frequently accessed data cached locally.
+      - `Gateway-Stored Volumes`: Primary data storage is on-premises, with cloud-based backup.
     - ![img_4.png](../99_img/storage/more/img_4.png)
     
   - Tap gateway 

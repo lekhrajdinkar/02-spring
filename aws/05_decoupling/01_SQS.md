@@ -18,7 +18,8 @@
 - ![img_5.png](../99_img/decouple/sqs/img_5.png)
 
 ---
-## SQS 
+# SQS
+## SQS Types
 ### Queue : Standard 
 - > multiple p1,p2,p3, ...  ---> [queue] ---> multiple consumers in parallel (C1,C2,C3, lambda-Consumer, ... )
 - oldest & Fully managed : scales auto
@@ -53,6 +54,16 @@
 - `SQS bucket policy` : eg: cross queue access, allow other service, etc
 - principle (attach `IAM policy`) --> access queue
 
+---
+## SQS : price
+- based on the **number of requests** / **data transfer**
+- **Standard Queue** : $0.40 / million requests. 40 cent
+- **FIFO Queue** : $0.50 /  million requests. 50 cent
+- Additional Costs:
+  - Data Transfer: Charges apply for data transferred out of SQS, but inbound data is free.
+  - Long Polling: No extra cost for long polling.
+
+---
 ## SQS : demo
 ```
 - create queue : queue-1
