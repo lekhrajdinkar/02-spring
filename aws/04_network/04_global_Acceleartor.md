@@ -2,6 +2,7 @@
 - `network layer service` that directs traffic to optimal endpoints over the AWS global network.
 - it provides `two` static anycast IP addresses that act as a fixed `entry point` to your application endpoints. (ALB,etc)
 -  uses `endpoint weights` to determine the proportion of traffic that is directed to endpoints in an endpoint group
+- `UDP traffic support` : no
 
 ## key term
 - `Uni-cast IP` : one ip assigned to `one` server

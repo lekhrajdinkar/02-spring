@@ -26,6 +26,29 @@
         - `cold HDD` : max-250 iops | max-250 Mbps
             - > data that is infrequently accessed
 
+```
+General Purpose SSD (gp3):
+- IOPS: Up to 16,000 IOPS.
+- Throughput: Up to 1,000 MB/s.
+- Use Case: Balanced price/performance for a wide variety of workloads.
+
+Provisioned IOPS SSD (io2/io2 Block Express):
+- IOPS: Up to 64,000 IOPS (io2), up to 256,000 IOPS (io2 Block Express).
+- Throughput: Up to 1,000 MB/s (io2), up to 4,000 MB/s (io2 Block Express).
+- Use Case: Critical applications requiring high performance and reliability.
+
+Throughput Optimized HDD (st1):
+- IOPS: Up to 500 IOPS.
+- Throughput: Up to 500 MB/s.
+- Use Case: Big data, data warehouses, and log processing.
+
+Cold HDD (sc1):
+- IOPS: Up to 250 IOPS.
+- Throughput: Up to 250 MB/s.
+- Use Case: Infrequently accessed data with lower cost requirements.
+```
+
+
 ---
 ## C. EC2: Storage: `EFS`
 - uses `POSIX` file system + standard POXIS API
