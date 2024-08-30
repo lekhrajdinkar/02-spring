@@ -46,6 +46,7 @@
   - next, it considers oldest age.
 ---
 ## C. ELB
+-  offers a `synchronous` decoupling of applications.
 - `regional`, forwards traffic to multiple ec2 in `mutli-AZ`
   - with/without `Cross-Zone Load Balancing` : Enabled by default, `free`
     - if az-1 has more instances running, most traffic must go there. 

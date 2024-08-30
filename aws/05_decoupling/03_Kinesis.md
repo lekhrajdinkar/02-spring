@@ -7,7 +7,8 @@
   - `Video Streams`
 ---
 
-## A. Kinesis : Data Stream 
+## A. KDS - Kinesis : Data Stream  (serverless)
+- manages the infrastructure, storage, networking, and configuration needed to stream data.
 - `ingest data at scale` + `real-time processing`
 - `stream` : `shard/s` --> shard-1, shard-2, ... 
   - record count :` 1000 record/sec/shard` : if 6 shards => 6000 message/sec

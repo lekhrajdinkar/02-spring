@@ -1,4 +1,4 @@
-## Kinesis Data Analytics
+# KDA - Kinesis Data Analytics (serverless)
 - Fully managed
 - Automatic scaling
 
@@ -11,3 +11,7 @@
 - flink application (more advance than SQL) --> run on KDA -->  analysis/process --> `Stream`
 - Source : `KDS` + `MSK`
 - ![img_3.png](../99_img/moreSrv/analytics-2/img_3.png)
+
+## pricing
+- no minimum fee or setup cost, 
+- and you only pay for the resources your streaming applications consume

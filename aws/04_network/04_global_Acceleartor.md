@@ -1,8 +1,12 @@
 # AWS Global accelerator (global srv)
 - `network layer service` that directs traffic to optimal endpoints over the AWS global network.
-- it provides `two` static anycast IP addresses that act as a fixed `entry point` to your application endpoints. (ALB,etc)
+- it provides 2 static anycast IP addresses that act as a fixed `entry point` to your application endpoints. (ALB,etc)
 -  uses `endpoint weights` to determine the proportion of traffic that is directed to endpoints in an endpoint group
+  - re-routes your traffic to your nearest healthy available endpoint.  
 - `UDP traffic support` : no
+- PERFORMACE 60%, using the **global network infrastructure of AWS**.
+- optimizes the path to your application to prevent packet loss.
+
 
 ## key term
 - `Uni-cast IP` : one ip assigned to `one` server

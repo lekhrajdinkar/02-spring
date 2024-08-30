@@ -4,6 +4,7 @@
   - serverless, Fully managed - maintenance/patching
   - 2 way replication
   - rapidly evolve schemas
+  - **single-digit millisecond performance** at any scale
 
 ---
 ## key points
@@ -60,10 +61,12 @@
   ```
 ---
 ## D. DAX
-- `DyanamoDB Accelerator`
+- `DyanamoDB Accelerator` , 10x performance
+- fix :  hot partition problem
 - ![img.png](../99_img/moreSrv/dynamo/img.png)
 - Dax vs ElastiCache.
 - in memory cache, micro sec latency
+-  won't require an application refactoring
 
 ---
 ## E. DynamoDB streams
