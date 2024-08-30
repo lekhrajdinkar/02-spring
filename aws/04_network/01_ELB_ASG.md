@@ -121,6 +121,7 @@
 ---
 ### C.2. ELB : NLB - Network LB (layer 4)
 - operates at layer 4:  handle TCP, UDP, and TLS traffic
+- expose a fixed IP to the public web + **no sg**
 - TLS traffic: decrypt message using ACM cert.
 - Similar to ELB but fast, handles `millionsOfReq/Second`. ultra-low latencies.
   - It `automatically scales` to handle the vast amounts of incoming traffic
