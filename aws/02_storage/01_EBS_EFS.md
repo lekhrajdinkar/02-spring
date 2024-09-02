@@ -1,6 +1,9 @@
 # EC2: Storage
 ## A. EC2 instant-store
 - better iops, temp context cache | risk of data loss if h/w fails | manual backup.
+- volume size is fixed and determined by the EC2 instance type.
+- AMIs do not preserve instance store data
+- cannot be detached or reattached, fixed to host machine.
 
 ---
 ## B. EC2: Storage: `EBS`
