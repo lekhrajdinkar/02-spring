@@ -18,7 +18,7 @@
     - kubectl get pods
     - kubectl logs <pod-name>
     
-  -service
+  - service
     - kubectl expose deployment deployment-1 --type=NodePort
     - kubectl get service
     - **minikube** service <service-name> --url  

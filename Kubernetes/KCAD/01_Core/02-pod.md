@@ -24,7 +24,21 @@ spec
       image
     - name
       image
-      
-kubectl get/describe pod pod-1
+```
+
+- commands: 
+```
+- kubectl get/describe pod pod-1
+
+- kubectl get pod <pod-name> -o yaml > pod-definition.yaml
+  create yml out of existing pod
+  
+- kubectl edit pod <pod-name>
+  only the properties listed below are editable:
+    spec.containers[*].image
+    spec.initContainers[*].image
+    spec.activeDeadlineSeconds
+    spec.tolerations
+    spec.terminationGracePeriodSeconds
 
 ```
