@@ -7,6 +7,7 @@
 - Candidate Handbook: https://www.cncf.io/certification/candidate-handbook
 - Exam Tips: https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad
 - not mcq
+- editor for exam task  : vi or nano
 - can refer official documentation in exam
 - `20KLOUD` - 20% off
 

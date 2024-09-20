@@ -1,0 +1,10 @@
+- kubectl create -f .\maps-outbound-pod.yml
+- kubectl delete -f .\maps-outbound-pod.yml
+- kubectl create -f .\maps-outbound-pod.yml
+
+- kubectl get pods
+NAME                READY   STATUS             RESTARTS   AGE
+maps-outbound-pod   1/1     Running            0          3s
+
+- kubectl delete pod maps-outbound-pod
+

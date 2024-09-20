@@ -1,6 +1,3 @@
-## k8 Arch
-- 
-
 ## container-d
 - K8s initially supports docker runtime only (cli,api,build, volumne, auth, security, **runtime/container-d**)
 - Afterward supports different Runtime/s via `CRI` - OCI-standard imageSpec and ContainerSpec

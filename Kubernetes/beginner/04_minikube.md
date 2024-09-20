@@ -1,34 +1,33 @@
-# run a Spring project inside pod
-## using commands 
+# run a Spring project container in pod
 
-- minikube
-  - > minikube start --driver=docker
+## using commands 
+- run k8s cluster - use `minikube` fro development env
+  - minikube start --driver=docker
   - kubectl cluster-info
   - minikube status
-  - kubectl get nodes - o wide
-  - > minikube docker-env
-  - docker images
+  - minikube docker-env
   - minikube ip
+  - minikube dashboard
+  
 - kubectl
-  - > kubectl create deployment spring-k8s-deployment --image=com.lekhraj/spring:1.0.0 --port=8083
-  - kubectl get deployments
-  - kubectl describe deployment spring-k8s-deployment
-  - kubectl `edit` deployments xxxxx
-  
-  - kubectl get pods
-  - kubectl logs <pod-name>
-  
-  - > kubectl expose deployment spring-k8s-deployment --type=NodePort
-  - kubectl get service
+  - deployments-object
+    - kubectl create deployment deployment-1 --image=image-1 --port=8083
+    - kubectl get/edit/describe deployments
 
-- minikube service <service-name> --url
-- minikube dashboard
+  - pod
+    - kubectl get pods
+    - kubectl logs <pod-name>
+    
+  -service
+    - kubectl expose deployment deployment-1 --type=NodePort
+    - kubectl get service
+    - **minikube** service <service-name> --url  
 
-- Cleanup
-  - kubectl delete service spring-xxxxx
-  - kubectl delete deployment spring-k8s-deployment
-  - minikube stop
-  - minikube delete ?
+  - Cleanup
+    - kubectl delete service spring-xxxxx
+    - kubectl delete deployment spring-k8s-deployment
+    - minikube stop
+    - minikube delete ?
   
 - https://medium.com/@javatechie/kubernetes-tutorial-setup-kubernetes-in-windows-run-spring-boot-application-on-k8s-cluster-c6cab8f7de5a  
 

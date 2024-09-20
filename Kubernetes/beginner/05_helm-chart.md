@@ -3,9 +3,10 @@
 - https://helm.sh/docs/intro/quickstart/
 ---
 ## Intro
-- `template engine` for K8s manifest yml files.
-- `package manager` for Kubernetes.
-- benefit:
+- definition:
+  - `template engine` for K8s manifest yml files.
+  - `package manager` for Kubernetes.
+- benefit/s:
   - simplifies the process of defining, installing, and managing Kubernetes applications.
   - reuse across env and clusters.
 - chart : collections of files that describe a `related set of Kubernetes resources`.
@@ -19,7 +20,6 @@
     - yml : deployment/service/configmap/PersistentVolume 
   - `Charts`: 
     - directory that can contain dependent charts.
-
 ---
 ## commands:
 - helm `create` spring-helm
@@ -38,6 +38,5 @@
 - deploy them in order : chart with dependent chart.
 - rollout/rollback/version them all together : rollback, history, etc
 - run deployment with env specific values :
-
 ---
 
