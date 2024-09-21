@@ -1,6 +1,8 @@
 #1 create pod without definition yaml / imperative command
 - kubectl run pod-1 --image=image-1 -n=ns-1
 - kubectl get svc ( or service )
+- kubectl get all
+-
 
 #2 create/delete some pods
 - kubectl create -f .\maps-outbound-pod.yml
@@ -11,6 +13,7 @@
 NAME                READY   STATUS             RESTARTS   AGE
 maps-outbound-pod   1/1     Running            0          3s
 
+- kubectl get pod maps-outbound-pod -o yaml
 - kubectl delete pod maps-outbound-pod
 
 #3 output option with get command
@@ -41,3 +44,15 @@ maps-outbound-pod   1/1     Running            0          3s
 - kubectl create deployment redis-deploy --replicas=2 --image=redis --namespace=dev-ns
 - kubectl run httpd --image=httpd:alpine --namespace=default
 - kubectl expose pod httpd --type=ClusterIP --name=httpd --port=80 --namespace=default
+
+# edit non-editable feild in pod
+-  kubectl edit pod ubuntu-sleeper-3
+- this open yaml in vi
+- save, this saved below tmp copy
+- kubectl delete pod ubuntu-sleeper-3
+- kubectl create -f /tmp/kubectl-edit-1598052637.yaml
+
+# pass arg/cmd
+- kubectl run pod-1 image=image-1 -- --arg1 value --arg2 value2
+- arg1/2 are argumnet to kubectl
+- they arg to container running

@@ -8,12 +8,23 @@
 - yaml is same as rs
   - just update kind to deployment object.
 
-- some command  
-  - kubectl get **deployments**
-  - kubectl get **all**  
+- some command 
+``` 
+  - kubectl get deployments
+   
   - kubectl create deployment --image=nginx nginx
-  - kubectl create deployment --image=nginx nginx --dry-run -o yaml
+  
+  - kubectl create deployment --image=nginx nginx --dry-run -o yaml > def.yaml
+  
   - kubectl scale deployment nginx --replicas=4
+  
+  - kubectl edit deployment d1  :)
+    - With Deployments, you can easily edit "any" field/property of the POD template. 
+    - unlike pod edit, few feilds can edit.
+    - Since the pod template is a child of the deployment specification, 
+    - the deployment will automatically delete and create a new pod with the new changes. 
+    
+```
 ---
 ![img.png](../99_img/do/img.png)
 

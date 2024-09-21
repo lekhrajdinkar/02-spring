@@ -21,7 +21,11 @@ metadata
 spec
   conatainers
     - name
-      image
+      image: eg: image has ENTRYPOINT ["sleep"]
+      command: ["sleep"] ENTRYPOINT of dockerfile or --entrypoint of dcoker run ...
+        - sleep
+      args: ["10"] CMD of dockerfile or docker run --entrypoint <> ...
+        - 10
       ports:
         - containerPort: 8080
         - containerPort: 8443
@@ -37,11 +41,26 @@ spec
   create yml out of existing pod
   
 - kubectl edit pod <pod-name>
-  only the properties listed below are editable:
+  - This will open the pod specification in an editor (vi editor
+  
+  - only the properties listed below are editable:
     spec.containers[*].image
     spec.initContainers[*].image
     spec.activeDeadlineSeconds
     spec.tolerations
     spec.terminationGracePeriodSeconds
 
+  - cannot edit the environment variables, service accounts, and resource limits 
+ 
+ option-1  :: delete and re-create
+  - if we attemp to edit, non-editable feild then it will create a temp copy of yaml.
+    copy of the file with your changes is saved in a temporary location.
+    - kubectl delete pod pod-1    
+    - kubectl create -f /tmp/kubectl-edit-ccvrq.yaml
+    
+ option-2  :: delete and re-create
+  - kubectl get pod pod-1 -o yaml > my-new-pod.yaml
+  - kubectl delete pod pod-1    
+  - kubectl create -f  my-new-pod.yaml
 ```
+![img.png](../99_img/do/img-100.png)
