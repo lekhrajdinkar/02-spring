@@ -1,3 +1,8 @@
+#1 create pod without definition yaml / imperative command
+- kubectl run pod-1 --image=image-1 -n=ns-1
+- kubectl get svc ( or service )
+
+#2 create/delete some pods
 - kubectl create -f .\maps-outbound-pod.yml
 - kubectl delete -f .\maps-outbound-pod.yml
 - kubectl create -f .\maps-outbound-pod.yml
@@ -8,8 +13,31 @@ maps-outbound-pod   1/1     Running            0          3s
 
 - kubectl delete pod maps-outbound-pod
 
-Note:
+#3 output option with get command
 -o json Output a JSON formatted API object.
 -o name Print only the resource name and nothing else.
 -o wide Output in the plain-text format with any additional information.
 -o yaml Output a YAML formatted API object.
+
+#4 Namespace
+- kubectl get pods --namespace=default
+- kubectl create namespace dev
+- kubectl config set-context $(kubectl config current-context) --namespace=dev
+- kubectl get pods --all-namespaces  ( or just -A )
+- use while create/delete/replace
+
+#5 Don’t create it(–dry-run) and -o yaml
+- kubectl run nginx --image=nginx --dry-run=client -o yaml > abc.yaml
+- kubectl create deployment --image=nginx deployment-1  --replicas=4 --dry-run -o yaml
+- kubectl expose pod redis --port=6379 --name redis-service --type=NodePort --dry-run=client -o yaml
+- kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml
+
+#6 imperative + declarative/yaml
+- kubectl run redis --image=redis:alpine --dry-run=client -o yaml > redis-pod-def.yaml
+- kubectl expose pod redis --name=redis-service --port=6379 --type=clusterip
+- kubectl create deployment webapp --replicas=2 --image=kodekloud/webapp-color
+- kubectl scale deployment webapp --replicas=3
+- kubectl create ns dev-ns
+- kubectl create deployment redis-deploy --replicas=2 --image=redis --namespace=dev-ns
+- kubectl run httpd --image=httpd:alpine --namespace=default
+- kubectl expose pod httpd --type=ClusterIP --name=httpd --port=80 --namespace=default

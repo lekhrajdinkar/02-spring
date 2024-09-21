@@ -22,6 +22,9 @@ spec
   conatainers
     - name
       image
+      ports:
+        - containerPort: 8080
+        - containerPort: 8443
     - name
       image
 ```
