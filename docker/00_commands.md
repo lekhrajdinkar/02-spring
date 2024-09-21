@@ -1,5 +1,6 @@
 - docker `build` -t name:version
 - docker pull | push | login
+- docker inspect <conatiner-id> , <image-id>
 
 ## image
 - docker images  
