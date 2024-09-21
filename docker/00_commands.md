@@ -22,3 +22,5 @@
   - WORKDIR
   - COPY
   - EXEC
+  - EXPOSE 8080
+  - RUN pip install flask
