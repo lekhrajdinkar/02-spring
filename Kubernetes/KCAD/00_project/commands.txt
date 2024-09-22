@@ -56,3 +56,8 @@ maps-outbound-pod   1/1     Running            0          3s
 - kubectl run pod-1 image=image-1 -- --arg1 value --arg2 value2
 - arg1/2 are argumnet to kubectl
 - they arg to container running
+
+# configmap and env
+- kubectl get configmaps
+- kubectl describe configmap db-config
+- kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue --from-literal=APP_OTHER=diregard

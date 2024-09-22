@@ -18,10 +18,10 @@ kind
 metadata
   name:pod-1
   label
-spec
-  conatainers
-    - name
-      image: eg: image has ENTRYPOINT ["sleep"]
+spec:
+  conatainers:
+    - name: c1
+      image: eg: image has ENTRYPOINT ["sleep"] & CMD ["10"]
       command: ["sleep"] ENTRYPOINT of dockerfile or --entrypoint of dcoker run ...
         - sleep
       args: ["10"] CMD of dockerfile or docker run --entrypoint <> ...
@@ -29,8 +29,12 @@ spec
       ports:
         - containerPort: 8080
         - containerPort: 8443
-    - name
-      image
+      env:
+        - name:
+          value:
+            
+    - name: c2
+      image:
 ```
 
 - commands: 
