@@ -11,8 +11,8 @@ kind: ConfigMap
 metadata
   name:config-map-1
 data:
-  K_1: V_1
-  K_2: V_2
+  - name: K1
+    value: V1
   ...
   
 ```
@@ -23,7 +23,6 @@ data:
 envFrom:
     - configMapRef:
         name: config-map-1
-       
 ```
 
 - specific single value
@@ -31,7 +30,7 @@ envFrom:
 env:
     - name: ENV_1
       valueFrom:
-        configMapKeyRef / secretKeyRef :
+        configMapKeyRef:
             name:
             key:  
 ```

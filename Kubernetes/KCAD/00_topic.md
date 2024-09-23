@@ -1,4 +1,5 @@
-> docker push lekhrajdinkar18/backend-repo:v1
+- docker push lekhrajdinkar18/backend-repo:v1
+- https://www.youtube.com/watch?v=QJ4fODH6DXI&list=PL2We04F3Y_43dAehLMT5GxJhtk3mJtkl5&ab_channel=KodeKloud
 ---
 
 ## about

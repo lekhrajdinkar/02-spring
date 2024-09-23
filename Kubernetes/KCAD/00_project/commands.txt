@@ -2,7 +2,7 @@
 - kubectl run pod-1 --image=image-1 -n=ns-1
 - kubectl get svc ( or service )
 - kubectl get all
--
+- k get all
 
 #2 create/delete some pods
 - kubectl create -f .\maps-outbound-pod.yml
@@ -61,3 +61,9 @@ maps-outbound-pod   1/1     Running            0          3s
 - kubectl get configmaps
 - kubectl describe configmap db-config
 - kubectl create configmap webapp-config-map --from-literal=APP_COLOR=darkblue --from-literal=APP_OTHER=diregard
+
+# secrets
+kubectl create secret generic db-secret \
+  --from-literal=DB_Host=sql01 \
+  --from-literal=DB_User=root \
+  --from-literal=DB_Password=password123
