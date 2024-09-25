@@ -6,11 +6,21 @@
 
 ![img_5.png](img/crash-course/img_5.png)
 
+---
 ## Registry
 
 ![img_1.png](img/crash-course/arch/img_1.png)
 
 ![img.png](img/crash-course/arch/img.png)
+
+---
+## Container Security:
+  - --user < userID >
+  - --cap-add/drop < CAPABILITY >
+  - Add these at:
+    - container level :  ![img.png](img/imgg-1.png)
+    - pod level :        ![img_1.png](img/imgg_2.png)
+    - both present, container will override.
 
 
 ---

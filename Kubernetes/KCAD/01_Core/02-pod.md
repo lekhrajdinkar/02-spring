@@ -17,9 +17,10 @@ apiVersion
 kind
 metadata
   name:pod-1
-  label
+  label:
+  securityContext:  # can also add container level, set user only, not capability here.
 spec:
-  conatainers:
+  containers:
     - name: c1
       image: eg: image has ENTRYPOINT ["sleep"] & CMD ["10"]
       command: ["sleep"] ENTRYPOINT of dockerfile or --entrypoint of dcoker run ...
@@ -32,6 +33,10 @@ spec:
       env:
         - name:
           value:
+      securityContext:  # can also add metadata level
+        runAsUser: <userid>
+        capabilities: # only supported here
+          add: ["MAC_ADMIN"]
             
     - name: c2
       image:
@@ -67,4 +72,9 @@ spec:
   - kubectl delete pod pod-1    
   - kubectl create -f  my-new-pod.yaml
 ```
+---
+## Screenshots
+
 ![img.png](../99_img/do/img-100.png)
+
+![img.png](../99_img/imgg-1.png)
