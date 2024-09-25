@@ -3,6 +3,7 @@
 - kubectl get svc ( or service )
 - kubectl get all
 - k get all
+- k exec pod-1 < my-command >
 
 #2 create/delete some pods
 - kubectl create -f .\maps-outbound-pod.yml

@@ -1,4 +1,17 @@
-## layered arch
+## key points
+- container/s not completed isolated and sahre host kernal/os, but isolated based namespaces.
+- all the process run by container/s, runs on the host but in their own `Namespaces`.
+- **process isolation** : a container cannot see anything out of its namespace.
+- `ps aux` show all process
+  - a - all user
+  - u - user-oriented format
+  - u - includes daemon process
+  - same process has diff pid in diff namespace. 
+- by default, docker runs container with `root` user **on host** (with less Linux **capability**)
+  - dockerfile > USER < userID >
+  - docker run --user option
+---
+## Layered Arch
 
 ![img_3.png](img/crash-course/img_3.png)
 
@@ -15,13 +28,12 @@
 
 ---
 ## Container Security:
-  - --user < userID >
+  - --user < userID > 
   - --cap-add/drop < CAPABILITY >
   - Add these at:
     - container level :  ![img.png](img/imgg-1.png)
     - pod level :        ![img_1.png](img/imgg_2.png)
     - both present, container will override.
-
 
 ---
 - pod-1

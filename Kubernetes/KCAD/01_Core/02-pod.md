@@ -32,11 +32,21 @@ spec:
         - containerPort: 8443
       env:
         - name:
-          value:
-      securityContext:  # can also add metadata level
+          value :
+        - name:
+          valueFrom: 
+            configMapKeyRef :
+              - name:
+                key: 
+        - name:
+          valueFrom: 
+            secretKeyRef: 
+              - name:
+                key: 
+      securityContext:  # can also add metadata level (pod level)
         runAsUser: <userid>
         capabilities: # only supported here
-          add: ["MAC_ADMIN"]
+          add: ["MAC_ADMIN", "SYS_TIME", "NET_ADMIN"]
             
     - name: c2
       image:
