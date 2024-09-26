@@ -20,6 +20,9 @@ metadata
   label:
   securityContext:  # can also add container level, set user only, not capability here.
 spec:
+  mounts:
+  volumes:
+  serviceAccountName: sa-1 #default  is default sa
   containers:
     - name: c1
       image: eg: image has ENTRYPOINT ["sleep"] & CMD ["10"]
@@ -47,7 +50,9 @@ spec:
         runAsUser: <userid>
         capabilities: # only supported here
           add: ["MAC_ADMIN", "SYS_TIME", "NET_ADMIN"]
-            
+      
+     
+           
     - name: c2
       image:
 ```

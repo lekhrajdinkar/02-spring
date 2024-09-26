@@ -5,7 +5,7 @@
 - k get all
 - k exec pod-1 < my-command >
 
-#2 create/delete some pods
+#2.1 create/delete some pods
 - kubectl create -f .\maps-outbound-pod.yml
 - kubectl delete -f .\maps-outbound-pod.yml
 - kubectl create -f .\maps-outbound-pod.yml
@@ -16,6 +16,17 @@ maps-outbound-pod   1/1     Running            0          3s
 
 - kubectl get pod maps-outbound-pod -o yaml
 - kubectl delete pod maps-outbound-pod
+
+## 2.2 rs:
+- kubectl get replicaset
+- kubectl create -f <yaml>
+- kubectl scale --replicas=6 -f replicaSet-definition.yaml
+- kubectl scale --replicas=6 replicaset replicaset-1
+- kubectl delete replicaset rs-1
+    - all linked pods will be deleted.
+-  kubectl get replicaset -o yaml > sample.yaml
+- Note: use rs
+
 
 #3 output option with get command
 -o json Output a JSON formatted API object.
