@@ -6,14 +6,14 @@
     - my-app.py --> get list of all pods from cluster
 
 ---    
-- create :: `k create serviceaccount a1`
+- create :: `k create serviceaccount sa-1`
 - then attach role-based-permission: how ?
-  - pending
-  - `token`(JWT) with same that permission will be created
+  - pending... using RBAC ?
+  - `token`(JWT) with same that permission will be auto-created
   - token has `no-expiry`
-- link sa to pod : inside pod:
-  - `serviceAccountName` (non-editable field)
-  - delete and re-crate pod with new sa, if need to change. cant edit.
+- link sa-1 to pod :
+  - spec > `serviceAccountName` (non-editable field)
+  - delete and re-create pod with new sa-2, if need to change. cant edit sa once pod created.
   
 ---  
 - `default` serviceAccount - for every namespace, get created automatically
@@ -33,12 +33,12 @@
   - stored inside `secret` ( secret name: token-1)
   - this secret-object is linked to serviceaccount-object
   - k describe secret token-1
-    - can see enitire: JWT token
+    - can see entire: JWT token
     - can be used as auth bearer token for to call kube-api
     - curl kube-api --http-header "Authorization : Bearer JWT-token"
 - v1.22
-  - can request token with token-api, for pod.
-  - > k create token token-1
+  - can request token with token-api, for sa-1
+  - > k create token sa-1
   - having expiry (default 1hr)
   - before, we create sa which automatically creates token.
   - secret(token) --> mount --> pod

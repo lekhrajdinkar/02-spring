@@ -79,3 +79,17 @@ kubectl create secret generic db-secret \
   --from-literal=DB_Host=sql01 \
   --from-literal=DB_User=root \
   --from-literal=DB_Password=password123
+
+# Service Account
+-  k get pod web-dashboard-6cbbc88b59-96zjk -o yaml
+-  found :
+    - serviceAccountName: default
+    - volumeMounts > mountpath : /var/run/secrets/kubernetes.io/serviceaccount
+    - k exec web-dashboard-6cbbc88b59-96zjk -- cat /var/run/secrets/kubernetes.io/serviceaccount/token
+    - default sa has not enough permission.
+- create new account
+    - k create serviceaccount dashboard-sa
+    - permission added , using RBAC
+    -  k create token dashboard-sa
+    - use this token
+
