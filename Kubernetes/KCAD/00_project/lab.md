@@ -14,3 +14,5 @@
 - https://uklabs.kodekloud.com/topic/commands-and-arguments/
 - https://uklabs.kodekloud.com/topic/security-contexts-3/
 - https://uklabs.kodekloud.com/topic/service-account-2/
+- https://uklabs.kodekloud.com/topic/resource-limits-2/
+- https://uklabs.kodekloud.com/topic/taints-and-tolerations-3/
