@@ -93,3 +93,7 @@ kubectl create secret generic db-secret \
     -  k create token dashboard-sa
     - use this token
 
+# resource and schedular
+- k taint  nodes node1 taint1=blue:**taint-effect**
+- k label nodes node-1 size=large
+
