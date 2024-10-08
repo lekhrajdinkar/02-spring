@@ -12,6 +12,7 @@
 - docker start | stop | restart c1
 - docker rm c1
 - docker exec c1 <command>
+- docker logs -f c1 : live log trail
 
 ---
 - `dockerfile`

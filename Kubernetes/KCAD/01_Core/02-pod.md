@@ -23,6 +23,9 @@ spec:
   mounts:
   volumes:
   serviceAccountName: sa-1 #default  is default sa
+  initContainers:
+    -
+    -
   containers:
     - name: c1
       image: eg: image has ENTRYPOINT ["sleep"] & CMD ["10"]

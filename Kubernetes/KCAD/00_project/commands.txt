@@ -4,6 +4,9 @@
 - kubectl get all
 - k get all
 - k exec pod-1 < my-command >
+- k logs -f pod-1 c1
+- k top node
+- k top pod
 
 #2.1 create/delete some pods
 - kubectl create -f .\maps-outbound-pod.yml
@@ -96,4 +99,6 @@ kubectl create secret generic db-secret \
 # resource and schedular
 - k taint  nodes node1 taint1=blue:**taint-effect**
 - k label nodes node-1 size=large
+
+
 
