@@ -1,6 +1,6 @@
 - if any container fails, pod failed.
 - All containers  in pod are expected to stay alive at all times.
-- ![img.png](img.png)
+- ![img.png](../99_img/04/img.png)
 --- 
 ## initContainers
   - purpose:  task that will be run only one time when the pod is first created.

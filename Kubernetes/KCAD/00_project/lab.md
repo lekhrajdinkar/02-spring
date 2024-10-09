@@ -37,3 +37,11 @@
   - https://uklabs.kodekloud.com/topic/readiness-probes-2/
   - https://uklabs.kodekloud.com/topic/logging-2/
   - https://uklabs.kodekloud.com/topic/monitoring-2/
+
+## Section 6 : pod design
+- pending:
+  - https://uklabs.kodekloud.com/topic/labels-and-selectors-2/
+  - https://uklabs.kodekloud.com/topic/rolling-updates-rollbacks-2/
+  - https://uklabs.kodekloud.com/topic/practice-test-de…ent-strategies-2/ 
+  - https://uklabs.kodekloud.com/topic/jobs-and-cronjobs/
+  

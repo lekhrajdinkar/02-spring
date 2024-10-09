@@ -1,8 +1,13 @@
 ## Deployment Object
+- deployment (has all revision history)
+  - replicationSet-1 (revison=1)
+  - replicationSet-2 (revison=2)
+  - ...
+  - replicationSet-n (current)
 - concept:
   - deploy pod/s
   - upgrade (upgrade all pods together)
-  - rollout (upgrade pods one after another)
+  - rollout (upgrade pods `one after another`)
   - rollback
   - pause and resume
 - yaml is same as rs
