@@ -8,7 +8,6 @@
 - Accessible only within the cluster via a stable IP.
 - enables loose coupling between pod/microservices
 - ![img.png](../99_img/06/img-6.png)
-- ![img.png](../99_img/06/img-5.png)
 
 ---
 ## NodePort:
