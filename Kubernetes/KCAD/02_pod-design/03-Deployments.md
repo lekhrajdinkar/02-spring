@@ -5,14 +5,14 @@
 - when we first create deployment, it performs a rollout with **revision=1**  === replicaSet-1
 - next, if deployment object is **upgraded**, new rollout happens with **revision=2** === replicaSet-2
   - eg: updating label, image,etc
-  - (imperative way) k set image deployment-1 c1=image:version  --record=true (default false)
-  -  or, k edit deployment deployment-1 `--record=true`
+  - **k set image deployment-1 c1=image:version  --record=true** 
+  -  or, **k edit deployment deployment-1 --record=true**
     - `--record` flag to save the command used to create/update a deployment against the revision number.
   - ![img_5.png](../99_img/04/img_5.png)
 
 - check rollout status
-  - k rollout `status` deployment deployment-1 --> status for deployment, status of each replica/pod
-  - k rollout `history` deployment deployment-1 `--revision=1` --> show revision history
+  - **k rollout status deployment deployment-1** --> status for deployment, status of each replica/pod
+  - **k rollout history deployment deployment-1 --revision=1** --> show revision history
 - Also run : k decribe deploymnet and  check `events`
 
 ### rollout strategies :
@@ -40,7 +40,7 @@
     - ![img_8.png](../99_img/04/img_8.png)
     
 ## rollback:
-- k rollout `undo` deployment deployment-1 `--to-revision=1`
+- **k rollout undo deployment/deployment-1 --to-revision=1**
   - destroys the pod in replicaSet-2 (current)
   - bring back pod in replicaSet-1 (previous)
 
