@@ -7,7 +7,8 @@
 - default 
 - Accessible only within the cluster via a stable IP.
 - enables loose coupling between pod/microservices
-- ![img.png](../99_img/06/img.png)
+- ![img.png](../99_img/06/img-6.png)
+- ![img.png](../99_img/06/img-5.png)
 
 ---
 ## NodePort:
@@ -20,8 +21,8 @@
     - note: cloud-logo with 10.244.0.0, represents internal-network, here.
   - multipod service
     - ![img_3.png](../99_img/06/img_3.png)
-    - ![img_4.png](../99_img/06/img_4.png)
-    - span over nodes
+    - ![img.png](../99_img/06/img-7.png)
+    - span over multiple nodes
 
 ---
 ## LoadBalancer:
