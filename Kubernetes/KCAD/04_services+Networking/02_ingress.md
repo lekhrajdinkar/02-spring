@@ -7,7 +7,6 @@
     - with proxy
       - ![img.png](../99_img/07/img.png)
     - with `loadBalancer-service-1` + `gcp-lb-1`
-      - ![img_1.png](../99_img/07/img_1.png)
 
 - `app-2` : video-stream app - **deploymnet-object-2**
   - deploy it same cluster, as new deploymnet object
