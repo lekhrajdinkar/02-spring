@@ -1,14 +1,13 @@
 ## Demo
 - K8s Cluster has : 
 - `app-1` : online shop - **deploymnet-object-1**
-  - ![img_4.png](../99_img/07/img_4.png)
+  - ![img_4.png](../99_img/07/img_444.png)
   - access:
     - with nodeIp:port
-      - ![img_1.png](../99_img/07/img_1.png)
     - with proxy
-      - ![img_2.png](../99_img/07/img_2.png)
+      - ![img.png](../99_img/07/img.png)
     - with `loadBalancer-service-1` + `gcp-lb-1`
-      - ![img_3.png](../99_img/07/img_3.png)
+      - ![img_1.png](../99_img/07/img_1.png)
 
 - `app-2` : video-stream app - **deploymnet-object-2**
   - deploy it same cluster, as new deploymnet object
@@ -34,17 +33,17 @@
   - will add SSL
   - will add firewall
   - thus, simplfies all such config at central place.
-- ![img.png](../99_img/07/img.png)
-- like pod, expose ingress with service NodePort / loadBalancer <<<
-  - ![img_5.png](../99_img/07/img_5.png)
+- ![img_2.png](../99_img/07/img_2.png)
+- like pod, also need **expose ingress with service** NodePort / loadBalancer <<<
+  - ![img_3.png](../99_img/07/img_3.png)
 
 - ingress object components:
-  - ![img_6.png](../99_img/07/img_6.png)
+  - ![img_4.png](../99_img/07/img_4.png)
   - `ingress controller`
     - proxy server, for routing / forwarding
     - need to deploy this server, does not come by default
     - eg: `nginx server` : deploy at as another pod.
-      - ![img_7.png](../99_img/07/img_7.png)
+      - ![img_7.png](../99_img/07/img_777.png)
       - also create **configmap** for configuration for Nginx like live-log path,etc
   - `ingress resources`
     - SSL
