@@ -2,7 +2,7 @@
 - K8s Cluster has : 
 - `app-1` : online shop - **deploymnet-object-1**
   - ![img_4.png](../99_img/07/img_444.png)
-  - access:
+  - access app-1:
     - with nodeIp:port
     - with proxy
       - ![img.png](../99_img/07/img.png)
@@ -33,7 +33,7 @@
   - will add SSL
   - will add firewall
   - thus, simplfies all such config at central place.
-- ![img_2.png](../99_img/07/img_2.png)
+
 - like pod, also need **expose ingress with service** NodePort / loadBalancer <<<
   - ![img_3.png](../99_img/07/img_3.png)
 
