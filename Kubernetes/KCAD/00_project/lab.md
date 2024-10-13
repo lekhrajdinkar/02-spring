@@ -44,4 +44,10 @@
   - https://uklabs.kodekloud.com/topic/rolling-updates-rollbacks-2/
   - https://uklabs.kodekloud.com/topic/practice-test-de…ent-strategies-2/ 
   - https://uklabs.kodekloud.com/topic/jobs-and-cronjobs/
-  
+
+## Section 7 : network and service
+- pending
+  - https://uklabs.kodekloud.com/topic/kubernetes-services/ 
+  - https://uklabs.kodekloud.com/topic/ingress-networking-1/
+  - https://uklabs.kodekloud.com/topic/ingress-networking-2/
+  - https://uklabs.kodekloud.com/topic/network-policies-4/

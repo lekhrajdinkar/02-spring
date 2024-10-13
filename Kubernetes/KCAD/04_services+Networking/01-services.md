@@ -1,8 +1,6 @@
-- Note: pod, services  === VM, has IP:port
 
-# services
-
-## ClusterIP:
+## Services
+### ClusterIP:
 - Exposes the service internally within the cluster. 
 - default 
 - Accessible only within the cluster via a stable IP.
@@ -10,7 +8,7 @@
 - ![img.png](../99_img/06/img-6.png)
 
 ---
-## NodePort:
+### NodePort:
 - external-client --> internet --> k8s-cluster [  node-1[external-ip:node-port] > service-1[internal-ip:service-port] > pod/s[internal-ip:target-port]  ]
   - maps `port-on-Node` to `pod`::container::process(port)
   - listens traffic on node-port and forward traffic to pod.
@@ -24,5 +22,5 @@
     - span over multiple nodes
 
 ---
-## LoadBalancer:
+### LoadBalancer:
 - Routes traffic to the backend pods through the cloud provider’s load balancerr.
