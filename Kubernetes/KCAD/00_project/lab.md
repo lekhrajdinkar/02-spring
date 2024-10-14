@@ -51,3 +51,8 @@
   - https://uklabs.kodekloud.com/topic/ingress-networking-1/
   - https://uklabs.kodekloud.com/topic/ingress-networking-2/
   - https://uklabs.kodekloud.com/topic/network-policies-4/
+
+## Section 8 : state persistence
+- pending
+  - https://uklabs.kodekloud.com/topic/persistent-volumes-5/
+  - https://uklabs.kodekloud.com/topic/storage-class-2/
