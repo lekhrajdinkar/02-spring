@@ -1,8 +1,8 @@
 # A. Volume (in pod)
-- by-default popd are `transient`. data get deleted.
-- persist data processed by the containers
-- retaining data it permanently. Even if the container is deleted.
-- ![img_2.png](../99_img/08/01/img_2.png)
+- by-default pop are `transient`. data in not retained after pod is terminated.
+- how to persist data processed by the containers. 
+- sol - `Volume`
+  - ![img_2.png](../99_img/08/01/img_2.png)
 - **volume Types**:
   -  `emptyDir` - Temporary storage created when a pod starts, Deleted when the pod is terminated
   -  `nfs`: Mounts a remote NFS server directory into the pod.
@@ -10,7 +10,7 @@
   -  `csi` : third-party storage providers to integrate with Kubernetes
   - `hostpath` - mount File or directory from the host node's filesystem into a pod
   - ![img.png](../99_img/08/01/img.png)
-  
+- Create volume and mount it in single pod.  
 ```
 apiVersion: v1
 kind: Pod                       <<<<<
@@ -38,7 +38,7 @@ spec:
 - ![img_1.png](../99_img/08/01/img_1.png)
 ## PV - Persistent Volume
 - having multiple pod, then maintain storage `centrally`
-- and carve out part of to each pod(if  needed) using `claims` (PVC)
+- and carve out part of to each pod using `claims` (PVC)
 - usually admin creates PV. and user creates PVC
 ```
 apiVersion: v1
@@ -73,8 +73,12 @@ spec:
   - then no other PVC will get bind to that PV>
 - smaller PVC  can get binded to  big PV (if thats the only match)
 - state: `pending` + bind
-- delete PVC, PV is retain (by default). even data.
-  - `pesistentVolumeClaimPolicy: Retain` # Delete and recycle(retain but scrap all Data)
+- if delete PVC, then PV is retain (by default). even data inside PV
+  - `pesistentVolumeClaimPolicy: Retain` 
+  -  options:
+    - `retain` - keep PV with data (default)
+    - `Delete` - delete PV
+    - `recycle` -  keep PV only, scrap all Data
 - definition:
   - we don't define binding in definition
   - it just finds matching one at runtime. <<<<
@@ -104,7 +108,8 @@ spec:
        persistentVolumeClaim:
          claimName: myclaim
   ```
-- Screenshots:
+---  
+### Screenshots:
   - ![img_3.png](../99_img/08/01/img_3.png)
   - ![img_4.png](../99_img/08/01/img_4.png)
   - ![img_5.png](../99_img/08/01/img_5.png)
