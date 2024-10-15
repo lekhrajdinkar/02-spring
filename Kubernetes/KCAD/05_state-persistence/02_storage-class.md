@@ -14,7 +14,10 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
    name: myclaim
-provisioner: kubernetes.io/gce-pd   
+provisioner: kubernetes.io/gce-pd  
+parameters:
+  type:
+  replication-types:  
 ```
 ---
 ## Screenshots

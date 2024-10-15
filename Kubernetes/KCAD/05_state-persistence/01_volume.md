@@ -75,19 +75,21 @@ spec:
 - state: `pending` + bind
 - if delete PVC, then PV is retain (by default). even data inside PV
   - `pesistentVolumeClaimPolicy: Retain` 
-  -  options:
+  - options:
     - `retain` - keep PV with data (default)
     - `Delete` - delete PV
     - `recycle` -  keep PV only, scrap all Data
 - definition:
   - we don't define binding in definition
   - it just finds matching one at runtime. <<<<
+  
     ```
       apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
           name: myclaim
       spec:
+        # storageClassName: 
         accessModes:
           - ReadWriteOnce
         resources:
