@@ -11,7 +11,7 @@
 ## headless service ( **optional** )
 - scenario: mysql-pod-0 MASTER `(R/W)`, mysql-pod-1 (R), mysql-pod-2 (R) - write happen only from MASTER.
 - create regular service with `ClusterIP: None` +  ( selector and ports ). eg: mysql-h
-- headless service, creates DNS a-record to access pod only if:
+- headless service, creates DNS a-record to access pod directly only if:
   - add `subdomain` and `hostname` for pod are present., adding **manually** bad. All ns will be same.
   - rather add  `serviceName` in StatefulSet, it automatically assigns subdomain(mysql-h) and hostname(mysql-index) for pod/s (better).
   - ![img_1.png](../99_img/stateful-set/img_1.png)

@@ -36,7 +36,7 @@
 - 
 
 ### K8s
-- https://github.com/lekhrajdinkar/02-spring/blob/main/k8s
+- https://github.com/lekhrajdinkar/02-spring/blob/main/Kubernetes
 
 ### AWS
 - https://github.com/lekhrajdinkar/02-spring/blob/main/aws
