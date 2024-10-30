@@ -33,6 +33,11 @@ maps-outbound-pod   1/1     Running            0          3s
 -  kubectl get replicaset -o yaml > sample.yaml
 - Note: use rs
 
+## 2.3 staefulSet:
+# ================================================
+- kubectl create -f <yaml>
+- kubectl scale --replicas=6 statefulset statefulset-1 # pod-1 > pod-2 > .... pod-6
+- kubectl scale --replicas=3 statefulset statefulset-1 # pod-6 down > pod-5 down > pod-4 down. (reverse order)
 
 #3 output option with get command
 # ================================================
