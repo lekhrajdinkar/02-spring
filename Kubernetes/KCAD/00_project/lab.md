@@ -56,3 +56,7 @@
 - pending
   - https://uklabs.kodekloud.com/topic/persistent-volumes-5/
   - https://uklabs.kodekloud.com/topic/storage-class-2/
+
+## Section 9 : security
+- pending
+  - https://uklabs.kodekloud.com/topic/practice-test-kubeconfig-4/
