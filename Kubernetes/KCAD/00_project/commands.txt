@@ -128,6 +128,14 @@ kubectl create secret generic db-secret \
 - k taint  nodes node1 taint1=blue:**taint-effect**
 - k label nodes node-1 size=large
 
+# KubeConfig
+#===================
+- kubectl config use-context research --kubeconfig=my-kube-config
+- kubectl config view
+- kubectl config use-context
+- kubectl config -h ---> this will show more command.
+- kubectl get pods --kubeconfig=my-kube-config
+
 
 
 

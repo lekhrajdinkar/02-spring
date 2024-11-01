@@ -23,7 +23,31 @@
 
 ### 3. Certificate
 -  Note : generate certificates for different Kubernetes components and for a user and use them in the Kubernetes cluster is not in the scope of the official CKAD exam
+- we don't create them in k8s
+- first generate certificate for user. 
+- All users certificates are stored at  --> `/etc/kubernetes/pki/users`
+- check : [02-kubeconfig.md](./02-kubeConfig-file.md)
+```
+1. Generate a Private Key for the User:
+- openssl genrsa -out newuser.key 2048
+
+2. Create a Certificate Signing Request (CSR):
+- openssl req -new -key newuser.key -out newuser.csr -subj "/CN=newuser/O=your-organization"
+
+3. Sign the Certificate with Minikube’s CA
+- openssl x509 -req -in newuser.csr -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key -CAcreateserial -out newuser.crt -days 365 -extensions v3_req
+
+4. Add the New User to kubeconfig
+- kubectl config set-credentials newuser --client-certificate=newuser.crt --client-key=newuser.key
+- kubectl config set-context newuser-context --cluster=minikube --user=newuser
+# minikube cluster a;lready exist.
+
+5. Switch to the New User Context
+kubectl config use-context newuser-context
+
+```
 
 ### 4. External ID service - okta,LDAP.
+- not in scope.
 
 ---
