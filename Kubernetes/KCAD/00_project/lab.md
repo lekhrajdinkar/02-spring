@@ -59,4 +59,10 @@
 
 ## Section 9 : security
 - pending
-  - https://uklabs.kodekloud.com/topic/practice-test-kubeconfig-4/
+  - https://uklabs.kodekloud.com/topic/practice-test-kubeconfig-4/ - DONE
+  - https://uklabs.kodekloud.com/topic/practice-test-ro…ccess-controls-4/
+  - https://uklabs.kodekloud.com/topic/practice-test-cluster-roles-4/
+  - https://uklabs.kodekloud.com/topic/labs-admission-controllers-5/
+  - https://uklabs.kodekloud.com/topic/labs-validating-and-mutating-admission-controllers-5/
+  - https://uklabs.kodekloud.com/topic/lab-api-versions-deprecations-2/
+  - https://uklabs.kodekloud.com/topic/practice-test-custom-resource-definition-2/
