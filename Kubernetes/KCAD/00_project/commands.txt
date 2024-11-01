@@ -132,7 +132,7 @@ kubectl create secret generic db-secret \
 #===================
 - kubectl config use-context research --kubeconfig=my-kube-config
 - kubectl config view
-- kubectl config use-context
+- kubectl config use-context context-01
 - kubectl config -h ---> this will show more command.
 - kubectl get pods --kubeconfig=my-kube-config
 
