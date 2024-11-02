@@ -1,4 +1,9 @@
 # Authorization
+- check kube-apiserver setting:
+  - kubectl get pods -n **kube-system** -o wide + then describe pod
+  - cat **/etc/kubernetes/manifests/kube-apiserver.yaml**
+  - ps -aux | grep kube-apiserver
+  - 
 ## A. Common task for :
 - `Admin` 
   - scaling : add node in cluster
@@ -19,6 +24,7 @@
 ---
 
 ## B. Authorization Mode
+- kubectl get pods -n kube-system -o wide
 ### 1. Node
 - built-in **special authorizer** for kubelets.
 - allows Kubernetes nodes (`kubelets`) to access only resources needed to manage pods on that node.
@@ -58,4 +64,4 @@
   - ![img.png](../99_img/security/04/img.png)
 
 ## C. Check Access
-- kubectl auth can-i [create|delete]  [deploymnets|node|pods} --as user1 --namespace ns1
+- kubectl auth can-i [create|delete]    [deploymnets|node|pods] --as user1 --namespace ns1

@@ -136,6 +136,22 @@ kubectl create secret generic db-secret \
 - kubectl config -h ---> this will show more command.
 - kubectl get pods --kubeconfig=my-kube-config
 
+# Security
+===========
+- kubectl get pods -n kube-system -o wide + then describe pod
+- cat /etc/kubernetes/manifests/kube-apiserver.yaml
+- ps -aux | grep kube-apiserver
+
+## Authentication
+
+## Authorization
+- kubectl auth can-i [create|delete]    [deploymnets|node|pods] --as user1 --namespace ns1
+- k get roles
+- k get role kube-proxy -o json -n kube-system
+- k auth can-i list pods --as dev-user --namespace default
+- k create role developer --verb=get --verb=list --verb=delete --resource=pod
+- k create rolebinding dev-user-binding --user=dev-user --role=developer
+- k edit role developer --> it wil open yaml in vi editor.
 
 
 
