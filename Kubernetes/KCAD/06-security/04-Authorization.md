@@ -46,6 +46,8 @@
 - then associate users (u1, u2, group1, sa1 ...) with role-1
 - Create below 2 definitions:
   - **Role** --> `rules`: list of [ apigroup, resources, verb, resourceName ]
+    - role for **namespace scoped resource**
+    - eg: pod, service, sa
   - **RoleBinding** --> `subject/s` (user) and `roleRef`
   - ![img_1.png](../99_img/security/04/img_1.png)
   - ![img_2.png](../99_img/security/04/img_2.png)
