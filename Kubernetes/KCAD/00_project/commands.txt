@@ -152,6 +152,11 @@ kubectl create secret generic db-secret \
 - k create role developer --verb=get --verb=list --verb=delete --resource=pod
 - k create rolebinding dev-user-binding --user=dev-user --role=developer
 - k edit role developer --> it wil open yaml in vi editor.
+- k get clusterroles | wc
+- k get clusterrolebindings | wc
+- k create clusterrole clusterrole1 --verb=* --resource=nodes --dry-run=client -o yaml
+- k create clusterrolebinding cluster-role-binding1 --user=michelle --clusterrole=clusterrole1
+
 
 
 

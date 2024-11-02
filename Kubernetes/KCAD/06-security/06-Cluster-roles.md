@@ -1,6 +1,6 @@
 - k api-resources -namespaced=true
 - k api-resources -namespaced=false
-- ![img.png](img.png)
+- ![img.png](../99_img/security/06/img.png)
 
 ---
 ## cluster Role and binding
@@ -8,5 +8,5 @@
 - Also, create role for `namespace`-scoped-resource. eg: pod, etc
   - this will add role for that resource in all namespace inside clusters.
 
-- ![img_1.png](img_1.png)
+- ![img_1.png](../99_img/security/06/img_1.png)
 
