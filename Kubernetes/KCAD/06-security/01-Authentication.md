@@ -5,6 +5,10 @@
   - `SA` : we create these in k8s.
   - `end user` : out of scope. will be handled `inside application` deployed on k8s pod.
 
+- NOTE : kube-apiserver is running as pod.
+  - hence always update : /etc/kubernetes/manifests/kube-apiserver.yaml.
+  - ps -ef | grep kube-apiserver 
+
 ---
 ## Authentication mechanism
 ### 1. Static password file  (basic Auth)
@@ -14,6 +18,7 @@
   - usage: curl -v -k https://master-node-ip:6443/api/v1/pods `-u "u1:p1"`
   - user-detail.csv --> pwd_1, username_1, userId, **groupId**
   - plain text file , hence **not** recommended. deprecated in Kubernetes version 1.19
+  - 
 
 ### 2. Static token file
   - add `--token-auth-file=user-token-detail.csv` 

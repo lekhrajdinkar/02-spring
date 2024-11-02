@@ -1,3 +1,6 @@
+- kube-apiserver -h
+- k exec kube-apiserver-controlplane -n kube-system -- kube-apiserver -h
+
 #1 create pod without definition yaml / imperative command
 # ================================================
 - kubectl run pod-1 --image=image-1 -n=ns-1
