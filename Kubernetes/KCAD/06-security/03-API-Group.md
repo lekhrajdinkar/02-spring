@@ -4,7 +4,7 @@
   - **minikube ip**
   - **kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'**
   
-- ** API groups / categories  --> all k8s resources are grouped under:
+- **API groups / categories**  --> all k8s resources are grouped under:
   - /metrics
   - /healthz
   - /version --> cluster version. ?
@@ -12,7 +12,7 @@
   - `/apis` * --> named. more organized. **future** functionalities.
   - /logs --> integrating with 3rd part logging server.
 
-- so, not all user can can call all api. will authorize user, will give granular permission. [check](./04-Authorization.md) 
+- so, not all user can  call all api. will authorize user, will give granular permission. [check here](./04-Authorization.md) 
   
 - try:
   - curl http://localhost:6443 -k
