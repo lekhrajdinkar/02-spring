@@ -1,10 +1,10 @@
 # Admission Controller
 ## concept
 - kubectl --> kube-apiserver --> ? > ? > ? > create pod
-- kubectl --> kube-apiserver --> `authentication` --> `Authorization` --> **additional check ? ** --> create pod
+- kubectl --> kube-apiserver --> `authentication` --> `Authorization` --> **additional actions**  --> create pod
   - use Admission controller for more security measures.
   - use built in or create your own.
-- **actions**:
+- **additional actions**:
   - allow/deny request 
   - validate configuration 
   - perform operations 
@@ -45,14 +45,14 @@
 ### C.1 updating/mutating Admission Controller
 - runs first,  (before validation   Admission Controller )
 - change/update object yaml/description before creating.
-- eg: Default storage class.
+- eg: `DefaultstorageClass`, `NamespaceAutoProvision`
   - it updates PVC object : add `storageClassName: default`. was **initially not present.**
   - ![img_3.png](../99_img/security/07/img_3.png)
   - inspect after creation, `k describe pvc myclaim | grep StorageClass`
 
 ### C.2 validating Admission Controller
 - allow or deny create|edit|delete requests.
-- eg:  NamespaceExists, NamespaceLifecycle
+- eg:  `NamespaceExists`, `NamespaceLifecycle`
 
 ---
 ## D. external Admission Controller / AdmissionHook

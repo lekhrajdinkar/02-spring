@@ -160,6 +160,16 @@ kubectl create secret generic db-secret \
 - k create clusterrole clusterrole1 --verb=* --resource=nodes --dry-run=client -o yaml
 - k create clusterrolebinding cluster-role-binding1 --user=michelle --clusterrole=clusterrole1
 
+## Admission controller
+- k create ns webhook-demo
+- kubectl -n webhook-demo create secret tls webhook-server-tls \
+    --cert "/root/keys/webhook-server-tls.crt" \
+    --key "/root/keys/webhook-server-tls.key"
+   # k get secret webhook-server-tls -n webhook-demo -o yaml
+   # notice  tls.crt  and tls.key
+- k create -f /root/webhook-deployment.yaml
+- k create -f /root/webhook-service.yaml
+
 
 
 

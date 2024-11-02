@@ -39,30 +39,31 @@
   - https://uklabs.kodekloud.com/topic/monitoring-2/
 
 ## Section 6 : pod design
-- pending:
+- `pending`:
   - https://uklabs.kodekloud.com/topic/labels-and-selectors-2/
   - https://uklabs.kodekloud.com/topic/rolling-updates-rollbacks-2/
   - https://uklabs.kodekloud.com/topic/practice-test-de…ent-strategies-2/ 
   - https://uklabs.kodekloud.com/topic/jobs-and-cronjobs/
 
 ## Section 7 : network and service
-- pending
+- `pending`
   - https://uklabs.kodekloud.com/topic/kubernetes-services/ 
   - https://uklabs.kodekloud.com/topic/ingress-networking-1/
   - https://uklabs.kodekloud.com/topic/ingress-networking-2/
   - https://uklabs.kodekloud.com/topic/network-policies-4/
 
 ## Section 8 : state persistence
-- pending
+- `pending`
   - https://uklabs.kodekloud.com/topic/persistent-volumes-5/
   - https://uklabs.kodekloud.com/topic/storage-class-2/
 
 ## Section 9 : security
-- pending
-  - https://uklabs.kodekloud.com/topic/practice-test-kubeconfig-4/ - DONE
-  - https://uklabs.kodekloud.com/topic/practice-test-ro…ccess-controls-4/ - DONE
-  - https://uklabs.kodekloud.com/topic/practice-test-cluster-roles-4/ - Done
-  - https://uklabs.kodekloud.com/topic/labs-admission-controllers-5/
-  - https://uklabs.kodekloud.com/topic/labs-validating-and-mutating-admission-controllers-5/
+  - https://uklabs.kodekloud.com/topic/practice-test-kubeconfig-4/  
+  - https://uklabs.kodekloud.com/topic/practice-test-ro…ccess-controls-4/ 
+  - https://uklabs.kodekloud.com/topic/practice-test-cluster-roles-4/ 
+  - https://uklabs.kodekloud.com/topic/labs-admission-controllers-5/ 
+  - https://uklabs.kodekloud.com/topic/labs-validating-and-mutating-admission-controllers-5/ 
   - https://uklabs.kodekloud.com/topic/lab-api-versions-deprecations-2/
   - https://uklabs.kodekloud.com/topic/practice-test-custom-resource-definition-2/
+
+## Section 10 : HELM
