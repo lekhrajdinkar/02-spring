@@ -1,7 +1,7 @@
 ## Custom Resource.
 ### STEP-1 : custom `resource definition` (CRD)
-- ![img.png](img.png)
-- ![img_1.png](img_1.png)
+- ![img.png](../99_img/others/02/img.png)
+- ![img_1.png](../99_img/others/02/img_1.png)
 - `k create -f flightticket.yaml`
 - `k get flighttickets`. it will go into `pending` state.
 - `k create -f flightticket.yaml`
@@ -12,7 +12,7 @@
 - next, look into etcd and take action.
 - clone : https://github.com/kubernetes/sample-controller.git (language : go)
 - run it as pod inside cluster.
-- ![img_2.png](img_2.png)
+- ![img_2.png](../99_img/others/02/img_2.png)
 
 ---
 
