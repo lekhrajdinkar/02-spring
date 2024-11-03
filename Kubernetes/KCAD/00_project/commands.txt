@@ -170,6 +170,14 @@ kubectl create secret generic db-secret \
 - k create -f /root/webhook-deployment.yaml
 - k create -f /root/webhook-service.yaml
 
+## API version
+- kubectl api-versions
+- kubectl api-resources
+- kubectl api-resources | grep deployments
+- kubectl explain resource-1 -->  kubectl explain job
+
+
+
 
 
 
