@@ -37,12 +37,12 @@
 
 ### rule-5
 - **v1**-Alpha1 > v1-Alpha2 > V1-beta1 > v1-beta2 > `v1`
-- **v2**-Alpha1 > v2-Alpha2 > V1-beta1 > v1-beta2 > `v2` > after this can deprecate ``.
+- **v2**-Alpha1 > v2-Alpha2 > V1-beta1 > v1-beta2 > `v2` > after this can deprecate `v1`.
 
 ---
 - eg:
-  - ![img_1.png](../99_img/others/01/img_1.png)
   - ![img_2.png](../99_img/others/01/img_2.png)
+  - ![img_1.png](../99_img/others/01/img_1.png)
 
 ---
 ## `Kubectl Convert`

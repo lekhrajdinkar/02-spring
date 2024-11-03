@@ -176,6 +176,8 @@ kubectl create secret generic db-secret \
 - kubectl api-resources | grep deployments
 - kubectl explain resource-1 -->  kubectl explain job
 
+## CRD and CR
+- k get customresourcedefinitions
 
 
 
