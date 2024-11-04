@@ -24,6 +24,9 @@ spec:
   volumes:
   restartPolicy: Always / Never --> container exited in pod will come up again.
   serviceAccountName: sa-1 #default  is default sa
+  resources:  # better to use LimitRange object
+    request:
+    limit:
   initContainers:
     -
     -
