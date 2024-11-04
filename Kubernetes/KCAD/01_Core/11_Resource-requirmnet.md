@@ -61,7 +61,8 @@ spec:
 apiversion: v1
 kind" ResourceQuota
 metadata:
-  name: 
+  name:
+  namespace:
 spec:
   hard:
     requests.cpu
