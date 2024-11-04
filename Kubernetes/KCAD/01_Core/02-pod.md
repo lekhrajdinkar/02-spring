@@ -20,8 +20,18 @@ metadata
   label:
   securityContext:  # can also add container level, set user only, not capability here.
 spec:
+
+  tolerations:
+  nodeSelector:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      requiredDuringSchedulingRequiredDuringExecution: future
+      
   mounts:
   volumes:
+  
   restartPolicy: Always / Never --> container exited in pod will come up again.
   serviceAccountName: sa-1 #default  is default sa
   initContainers:

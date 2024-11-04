@@ -19,8 +19,15 @@
   - request , no limit  *** --> make sure has pod has some resource request set.
 
 ## LimitRange
+- manage resource usage within a namespace
 - set limit at Namespace level, hence applied to all pod and need to define to each pod.
 - this is effect only the newer pod.
+- Types of Limits:
+  - `min`: The minimum amount of a resource (e.g., CPU, memory) that must be requested by a container or Pod.
+  - `max`: The maximum amount of a resource a container or Pod can request or consume.
+  - `DefaultRequest`: If a container or Pod does not specify a request, Kubernetes assigns this default request.
+  - `DefaultLimit`: If a container or Pod does not specify a limit, Kubernetes assigns this default limit.
+  - `Resource Ratios`: Some LimitRange configurations also allow setting ratios for resources to ensure balanced use, especially for storage resources. ?
 ```
 apiversion: v1
 kind" LimitRange
@@ -28,19 +35,25 @@ metadata:
   name: 
 spec:
   limits:
-    - type: container
-      min:  === request
-        cpu
-        memory
-      max:   === limit
-        cpu
-        memory 
-      defaultRequest:  === request 
-        cpu
-        memory
-      default:  === limit / like defaultlimit
-        cpu
-        memory
+    - type: Container       # Container, pod, PVC
+      max:
+        cpu: "2"            # Maximum of 2 CPUs per container
+        memory: "1Gi"       # Maximum of 1Gi memory per container
+      min:
+        cpu: "200m"         # Minimum of 200m CPU per container
+        memory: "100Mi"     # Minimum of 100Mi memory per container
+      default:
+        cpu: "500m"         # Default CPU request if not specified
+        memory: "200Mi"     # Default memory request if not specified
+      defaultRequest:
+        cpu: "300m"         # Default CPU request
+        memory: "150Mi"     # Default memory request
+        
+    - type : PersistentVolumeClaim 
+      max:
+        storage: 
+      min:
+        storage:  
 ```
 ## ResourceQuota
 - set limit on resource used by all pod in namespace, together.

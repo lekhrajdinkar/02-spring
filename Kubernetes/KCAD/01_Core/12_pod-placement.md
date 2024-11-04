@@ -1,7 +1,7 @@
 # pod placement on node
-## A. taint and tolerance
+## A. taint (on node) and tolerance (on pod)
 - has nothing with security.
-- just to set restriction on pods must be scheduled on which pod.
+- just to set restriction on pods, meaning "a pod must be scheduled on which node ?".
 - analogy :
     - person (node) - taint applied
     - and bug (pod) - tolerance applied.
@@ -42,9 +42,9 @@
 ## B. Node Selector
 - scenario: want **POD-D** (big prcocess) to run only in **Node-1** (larger Node) (refer above demo)
 - solution:
-  - add label in Node
-  - pod definition, use node-selector.
-- pod spec > NodeSelector > label-1: value-1
+  - add label in Node-1 > `size: large`
+  - in pod spec, use **node-selector**.
+- pod spec > `NodeSelector` > label-1: value-1
 - demo:
     ```
     - k label nodes node-1 size=large
@@ -52,7 +52,7 @@
         spec:
             nodeSelector: 
                 size: large
-                # this pod will go mnode-1 only.
+                # this pod will go node-1 only.
     ```
 ---
 
@@ -64,13 +64,10 @@
 - demo:
     ```
     apiVersion: v1
-    kind: Pod
+      kind: Pod
     metadata:
-    name: pod-d
+      name: pod-d
     spec:
-    containers:
-    - name: nginx
-      image: nginx
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution: #hard constraint - preferred
@@ -84,10 +81,22 @@
                - key: size
                  operator: NotIn #more - Exists
                  values:
-                   - Small
+                   - Small  
+      containers:
+      - name: nginx
+        image: nginx
 
     ```
 - type:
   - `required`DuringScheduling `Ignored`DuringExecution
+    - this rule is a hard requirement, 
+    - meaning that Kubernetes must find a node that matches the specified criteria to schedule the Pod.
+    - ignored during execution (if node labels change after the Pod is scheduled)
+    
   - `preferred`DuringScheduling `Ignored`DuringExecution
+    - This rule is a soft requirement,
+    - meaning Kubernetes prefers to place the Pod on a node matching the criteria.
+    - but will still schedule it elsewhere if no matching nodes are available.
+    
   - `required`DuringScheduling `required`DuringExecution (planned for future) --> this will evict pod if expression/label change in b/w.
+
