@@ -7,7 +7,12 @@
 - **helm repo add bitnami https://charts.bitnami.com/bitnami**
   - `helm search repo aabbcc-chart` # replace hub with repo.
   - helm repo list
-
+   ```
+    - NAME            URL                                                 
+      bitnami         https://charts.bitnami.com/bitnami                  
+      puppet          https://puppetlabs.github.io/puppetserver-helm-chart
+      hashicorp       https://helm.releases.hashicorp.com
+    ```
 ---
 ## Intro
 - definition:
@@ -32,7 +37,7 @@
 - create or pull
   - helm `create` spring-helm. 
   - helm pull --untar bitnami/wordpress
-- helm list  
+- helm `list`  
 - helm `install` release-v2 spring-helm  # `uninstall`
   - -f custom-values.yaml
   - --set key1=value1,key2=value2

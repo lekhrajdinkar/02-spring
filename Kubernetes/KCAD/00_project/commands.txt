@@ -179,6 +179,12 @@ kubectl create secret generic db-secret \
 ## CRD and CR
 - k get customresourcedefinitions
 
+## helm
+- helm pull --untar bitnami/wordpress
+- helm create chart-1
+- helm install releaseName bitnami/chartName
+- helm list
+
 
 
 
