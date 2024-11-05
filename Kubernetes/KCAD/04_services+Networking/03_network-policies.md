@@ -11,11 +11,14 @@
     - eg: DB-pod <---allow---- API-pod. good. enough
     - yml definition:
 ```
-apiVersion:
-kind:
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
 metadata:
   name: db-policy
-spec:
+spec:  # apply on pods
+  podSelector:
+    matchLabels:
+      role: frontend  
   policyTypes:
   - Ingress
   # - Egress
