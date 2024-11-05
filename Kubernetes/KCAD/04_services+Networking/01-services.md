@@ -1,15 +1,25 @@
+# pod/container communication
 
-## Services
-### ClusterIP:
+## A. within pod
+- no service needed, just use localhost.
+- use `localhost` for container/s comm inside a pod.
+
+## B. Services
+### ClusterIP: (pod 2 pod) : default
 - Exposes the service internally within the cluster. 
-- default 
+- check for service IP (internal cluster IP, stable) 
+  - manually grab it and use.
+  - or use auto generated env var. `<service-Name>_SERVICE_HOST`
+  - or use **coreDNS** - `<service-Name>.<namespace>`
 - Accessible only within the cluster via a stable IP.
+- also performs load balancing.
 - enables loose coupling between pod/microservices
 - ![img.png](../99_img/06/img-6.png)
 
+
 ---
-### NodePort:
-- external-client --> internet --> k8s-cluster [  node-1[external-ip:node-port] > service-1[internal-ip:service-port] > pod/s[internal-ip:target-port]  ]
+### NodePort: (outside 2 pod)
+- external-client --> internet --> k8s-cluster [  node-1[node-ip:node-port] > service-1[internal-ip:service-port] > pod/s[internal-ip:target-port]  ]
   - maps `port-on-Node` to `pod`::container::process(port)
   - listens traffic on node-port and forward traffic to pod.
   - Can be accessed externally using `<NodeIP>:<NodePort>`.
@@ -20,13 +30,18 @@
     - ![img_3.png](../99_img/06/img_3.png)
     - ![img.png](../99_img/06/img-7.png)
     - span over multiple nodes
+- Node IP can be changed. 
+  - if 3 nodes, then 3 endpoints
+---
+### LoadBalancer: (outside 2 pod)
+- Routes traffic to the backend pods through internet IP.
+- if 3 nodes, then single endpoints
+- use-case : cloud provider’s load balancer.
+- **minikube service lb-service-name** --> it will give external url
+  - in EKS, we don't need this additional step, can always see external url.
 
 ---
-### LoadBalancer:
-- Routes traffic to the backend pods through the cloud provider’s load balancerr.
-
----
-### headless service:
+### headless service: (outside 2 pod directly)
 - allows direct access to individual pod IPs without a load balancer or cluster IP. 
 
 - Key Features:
@@ -41,3 +56,12 @@
   - `Stateful` applications (e.g., databases) that require direct access to specific pods.
   - Service discovery for applications that need `pod-level DNS` (e.g., my-headless-service-0.my-headless-service).
 - This approach offers more control over **pod communication** compared to standard services.
+
+---
+# deploy frontend on K8s
+- deploy frontend as pod/deploymnet object in k8s cluster
+- have fe-service (expose on 8080), **loadbalance** Type
+- host fe with **nginx**. 
+- front end code --> while makeing api call, use `/my-be/***`
+- in **nginx.conf** file
+  - location `/my-be/` { proxy-pass https://fe-sevice.namespace1:8080 } 

@@ -1,4 +1,4 @@
-## A. Demo
+## A. Scenario
 - K8s Cluster has : 
 - `app-1` : online shop - **deploymnet-object-1**
   - ![img_4.png](../99_img/07/img_444.png)
@@ -29,11 +29,9 @@
   - will add SSL
   - will add firewall
   - thus, simplfies all such config at central place.
-
-
-
 - ingress object components:
   - ![img_4.png](../99_img/07/img_4.png)
+  
 ### ingress controller (pod)
   - proxy server, will be used for routing,forwarding, security
   - need to deploy this server, does not come by default
@@ -43,7 +41,7 @@
       - ![img.png](../99_img/07/ingres-resource/img.png)
     - 3 expose this pod with **service** ( NodePort / loadBalancer)
       - ![img_3.png](../99_img/07/img_3.png)
-      - 
+      
 
   ```
   #1 
