@@ -1,40 +1,30 @@
-# run a Spring project container in pod
+# run a Spring project inside pod
+## yaml reference 
+- https://medium.com/@javatechie/kubernetes-tutorial-run-deploy-spring-boot-application-in-k8s-cluster-using-yaml-configuration-3b079154d232
+- https://github.com/Java-Techie-jt/springboot-crud-k8s/blob/main/db-deployment.yaml
+- check project-01
 
-## using commands 
-- run k8s cluster - use `minikube` fro development env
-  - minikube start --driver=docker
-  - kubectl cluster-info
-  - minikube status
-  - minikube docker-env
-  - minikube ip
-  - minikube dashboard
-  
-- kubectl
-  - deployments-object
-    - kubectl create deployment deployment-1 --image=image-1 --port=8083
-    - kubectl get/edit/describe deployments
+## minikube command
+- minikube start --driver=docker
+- minikube status
+- minikube docker-env
+- minikube ip
+- minikube dashboard
+- kubectl cluster-info
+- minikube stop
+- minikube delete ?
 
-  - pod
-    - kubectl get pods
-    - kubectl logs <pod-name>
-    
-  - service
-    - kubectl expose deployment deployment-1 --type=NodePort
-    - kubectl get service
-    - **minikube** service <service-name> --url  
+## steps
 
-  - Cleanup
-    - kubectl delete service spring-xxxxx
-    - kubectl delete deployment spring-k8s-deployment
-    - minikube stop
-    - minikube delete ?
-  
-- https://medium.com/@javatechie/kubernetes-tutorial-setup-kubernetes-in-windows-run-spring-boot-application-on-k8s-cluster-c6cab8f7de5a  
+1. minikube start --driver=docker
+2. minikube docker-env
+3. kubectl create -f deployment-spring.yml
+4. kubectl create -f service-spring.yml
 
---- 
+---
+
+## output/console
 ```
-steps:
-
 minikube start --driver=docker
 
 * minikube v1.33.1 on Microsoft Windows 11 Enterprise 10.0.22631.3737 Build 22631.3737
@@ -91,3 +81,29 @@ registry.k8s.io/pause                     3.9        e6f181688397   20 months ag
 gcr.io/k8s-minikube/storage-provisioner   v5         6e38f40d628d   3 years ago     31.5MB
 
 ```
+```
+kubectl apply -f service-spring.yml
+service/spring-k8s-service created
+---
+kubectl get services
+
+NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes           ClusterIP   10.96.0.1       <none>        443/TCP          3d2h
+spring-k8s-service   NodePort    10.102.17.189   <none>        8083:30837/TCP   17s
+---
+kubectl get nodes -o wide
+
+NAME       STATUS   ROLES           AGE    VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION                       CONTAINER-RUNTIME
+minikube   Ready    control-plane   3d2h   v1.30.0   192.168.49.2   <none>        Ubuntu 22.04.4 LTS   5.15.153.1-microsoft-standard-WSL2   docker://26.1.1
+
+---
+minikube ip
+192.168.49.2
+
+--- 
+didnot work
+http://192.168.49.2:30837/spring
+
+minikube service spring-k8s-service
+```
+
