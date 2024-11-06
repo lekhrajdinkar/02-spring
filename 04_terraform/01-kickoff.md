@@ -1,8 +1,8 @@
 - https://chatgpt.com/c/672bc367-e60c-800d-9fc4-5782d0a7741b
 ---  
-## Official Tutorial: 
+## A. Official Tutorial: 
 - check more : https://developer.hashicorp.com/terraform/tutorials
-## Fundamental
+### Fundamental
   - https://developer.hashicorp.com/terraform/tutorials/configuration-language
   - https://developer.hashicorp.com/terraform/tutorials/cli
   - https://developer.hashicorp.com/terraform/tutorials/modules/module
@@ -14,15 +14,18 @@
 
 ---
 
-## Terraform  - intro
+## B.Terraform  - intro
+- ![img.png](99_img/01/img-04.png)
 - Switching from one provider (e.g., AWS) to another (e.g., Azure) usually requires rewriting the configuration.
   - https://registry.terraform.io/providers/
   - https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs
 - However, Terraform provides ways to make this process more manageable/consistent.
   - Define common Variables,Outputs, modules, etc across providers.
+- `tf providers`:
+  - automatically finds dependencies b/w resources and deploy in correct order.
 
 ---
-## install / setup
+## C. install / setup
 - windows: install binary in local, set PATH.
   - ![img_1.png](99_img/01/img_1.png)
   
@@ -39,8 +42,8 @@
     - run history
     - workspace Variable + env var
     - suitable for long-running iac
----
-## Commands :
+
+### Basic Commands
 - `terraform -version`  # Terraform v1.9.0
 ``` 
   console       Try Terraform expressions at an interactive command prompt
@@ -71,7 +74,7 @@
     show      Show the name of the current workspace
 ```
 ---
-## quick hands on - [ provider : Docker ]
+## D. Quick hands on - [ provider : Docker ]
 - login to workspace (`docker`): https://app.terraform.io/app/lekhrajdinkar-org/workspaces/docker
 - clone project from **git**.
   - or, can try sample project : git clone https://github.com/hashicorp/tfc-getting-started.git
