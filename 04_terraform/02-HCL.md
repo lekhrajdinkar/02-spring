@@ -1,3 +1,5 @@
+- https://developer.hashicorp.com/terraform/tutorials/configuration-language
+
 ## HCL (HashiCorp Configuration Language)
   - facts:  
     - String interpolation : eg `web-sg-${var.resource_tags["project"]}-${var.resource_tags["environment"]}`
@@ -101,33 +103,7 @@
 
   - `expressions`
     - ternary operation
----
 
-## modules
-- https://developer.hashicorp.com/terraform/tutorials/modules/module
-- Like, packages, modules, libraries in other prog language
-- Each directory represents a separate module.
-- container for `multiple resources` that are used together.
-  - module { configuration/resources }
-
-- benefits:
-  - `Reusability`: Write code once and reuse it in multiple configurations or environments.
-  - `Maintainability`: Encapsulate complex configurations into simpler, reusable components.
-  - `Organization`: Keep your Terraform code organized by grouping related resources together.
-- Type:
-  - `remote` : `registry`: "terraform-aws-modules/vpc/aws", `VCS`
-  - `local` : localFileSystem -  "./directory-1/child-module-1.tf"
-
---- 
-
-## References:
-- Tutorial links:
-  - https://developer.hashicorp.com/terraform/tutorials/aws-get-started/
-  - https://developer.hashicorp.com/terraform/tutorials/configuration-language
-  - https://developer.hashicorp.com/terraform/tutorials/cli
-  - https://developer.hashicorp.com/terraform/tutorials/modules/module
-  - https://developer.hashicorp.com/terraform/tutorials/provision
-  - https://developer.hashicorp.com/terraform/tutorials/state/state-import
 
 ---
 
