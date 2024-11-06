@@ -11,10 +11,11 @@
 - `Workload Separation`: 
   - Separate different types of workloads (e.g., frontend, backend, batch processing) into different node groups
   - to ensure **optimal resource allocation** and **security isolation**.
-    Cost Optimization: Use different instance types in separate node groups to optimize costs based on workload requirements. For example, use GPU instances in a node group for machine learning workloads and standard instances for web applications.
-
+- `Cost Optimization`: 
+  - Use different instance types in separate node groups to optimize costs based on workload requirements. 
 - `High Availability`: 
   - Spread node groups **across multiple availability zones** to ensure high availability and fault tolerance.
+  
 - In short, providing flexibility, scalability, and efficiency in handling diverse workload requirements.
 
 

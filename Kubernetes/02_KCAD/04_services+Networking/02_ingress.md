@@ -172,4 +172,30 @@ spec:
           serviceName : watch-service
           servicePort : 80
 ```
+# understand yaml
+## properties
+
+## annotation
+- `alb.ingress.kubernetes.io/backend-protocol`: HTTP: 
+  - Specifies the protocol (HTTP in this case) used to communicate between the load balancer and the backend pods.
+- `alb.ingress.kubernetes.io/certificate-arn`: "{{ .Values.certificateArn }}":
+  - Associates an SSL certificate (from AWS Certificate Manager) with the load balancer, enabling HTTPS traffic.
+- `alb.ingress.kubernetes.io/group.name`: "{{ .Values.component }}-ingress-group": 
+  - Defines a group name to manage multiple Ingress resources as a single Application Load Balancer (ALB) group.
+- `alb.ingress.kubernetes.io/listen-ports`: '[{"HTTP": 80},{"HTTPS": 443}]': 
+  - Configures the ALB to listen on both HTTP (port 80) and HTTPS (port 443).
+- `alb.ingress.kubernetes.io/load-balancer-attributes`:
+  - Sets various load balancer attributes, such as enabling access logs and specifying the S3 bucket and prefix where logs are stored.
+- `alb.ingress.kubernetes.io/scheme: internal`: 
+  - Makes the load balancer internal, meaning it’s only accessible within the VPC and not publicly exposed.
+- `alb.ingress.kubernetes.io/ssl-policy`: ELBSecurityPolicy-FS-1-2-Res-2020-10: 
+  - Specifies the TLS policy for secure connections. This policy enforces certain encryption standards.
+- `alb.ingress.kubernetes.io/ssl-redirect`: "443": 
+  - Redirects HTTP traffic to HTTPS by specifying port 443 as the target.
+- `alb.ingress.kubernetes.io/tags`: "k1=v1,..."
+  - Adds tags to the ALB with information such as costCenter, envType, expDate, and ppmcId, useful for resource management and tracking.
+- `alb.ingress.kubernetes.io/target-type`: ip: 
+  - Specifies that the target type for the ALB is ip, meaning it targets pod IPs directly, which is often used with EKS clusters.
+- `external-dns.alpha.kubernetes.io/hostname`: "{{ .Values.hostname }}": 
+  - Allows the ExternalDNS controller to manage DNS records for the specified hostname.
 

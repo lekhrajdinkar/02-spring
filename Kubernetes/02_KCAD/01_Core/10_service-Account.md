@@ -68,3 +68,12 @@
   - just mount service-account's secret 
   - write code to read it
 
+---
+
+## understand yaml
+### annotation
+- `eks.amazonaws.com/role-arn`: arn-1
+- `helm.sh/hook`: pre-install
+
+### properties
+

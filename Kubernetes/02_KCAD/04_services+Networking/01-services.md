@@ -65,3 +65,15 @@
 - front end code --> while makeing api call, use `/my-be/***`
 - in **nginx.conf** file
   - location `/my-be/` { proxy-pass https://fe-sevice.namespace1:8080 } 
+
+---
+# understand yaml
+## properties
+- `Enableservicelink`  : T/F - environment variables for services are automatically injected into the pod
+- `sessionAffinity` : None
+- `internalTrafficPolicy` Cluster or local(node)
+- `ipFamily` :IPv4
+- `ipFalimilyPolicy`: singleStack
+
+## annotation
+
