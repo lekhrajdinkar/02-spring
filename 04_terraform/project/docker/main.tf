@@ -15,11 +15,15 @@ terraform {
 }
 
 # https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs
+# provider : docker
 provider "docker" {
   host     = "ssh://user@remote-host:22"
   ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
 }
 
+# string 1 - resource_type  ( provider as prefix )
+# string 1 - resource_name
+# resource_type.resource_name --> forms unique id for resource
 resource "docker_image" "nginx" {
   name         = "nginx:latest"
   keep_locally = false

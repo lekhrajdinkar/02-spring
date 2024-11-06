@@ -28,7 +28,7 @@
 ## C. install / setup
 - windows: install binary in local, set PATH.
   - ![img_1.png](99_img/01/img_1.png)
-  
+- next, run locally or through HCP 
 - **HCP** (hashicorp cloud plateform) :
   - create account. (signup with github)
   - create **org** (`lekhrajdinkar-org`) 
@@ -37,7 +37,9 @@
     - ![img.png](99_img/01/img.png)
     - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/banzai-dev_api-driven
     - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/docker
-  - **benefits** of workspaces 
+  - check out confiurationCode from git
+    - root-module >> main.tf >> `terraform` { `cloud` { update this } }
+  - **benefits**
     - state mgt
     - run history
     - workspace Variable + env var
@@ -74,16 +76,18 @@
     show      Show the name of the current workspace
 ```
 ---
-## D. Quick hands on - [ provider : Docker ]
+## D. Quick hands on 
+###  provider : Docker
+- cd .../04_terraform/project/docker  <<<<
 - login to workspace (`docker`): https://app.terraform.io/app/lekhrajdinkar-org/workspaces/docker
 - clone project from **git**.
   - or, can try sample project : git clone https://github.com/hashicorp/tfc-getting-started.git
-- cd .../04_terraform/project/docker
+
 - **terraform login**
   - copy token from, C:\Users\Manisha\AppData\Roaming\terraform.d\credentials.tfrc.json
   - or create new token : https://app.terraform.io/app/settings/tokens?source=terraform-login
   - ![img_2.png](99_img/01/img_2.png)
-- **terraform init**
+- **terraform init** - finds and downloads required provider.
 ```
 Initializing HCP Terraform...
 Initializing provider plugins...
@@ -100,7 +104,21 @@ you run "terraform init" in the future.
 ```
 - **terraform fmt** : formatting
 - **terraform validate** : validate configuration/s
-- **terraform plan**
+- **terraform plan** : prints out execution plan.
   - failed : https://app.terraform.io/app/lekhrajdinkar-org/workspaces/docker/runs/run-8hZLDTrQfEJ27ixj
   - provider "docker" { } empty - fix it.
 - **terraform apply**
+  - ran run directly, without running plan.
+- **terraform destroy**
+  - print out execute plan for destroy
+  - confirm to apply.
+  
+###  provider : aws
+- cd .../04_terraform/project/banzai-dev_api-driven   <<<<
+- pre-work: configure awscli + gimme-aws-creds
+- login to https://app.terraform.io/app/lekhrajdinkar-org/workspaces/banzai-dev_api-driven
+- init
+- plan and apply
+- next, make some changes and update tf file resource. say ami id
+- plan and apply
+- destroy
