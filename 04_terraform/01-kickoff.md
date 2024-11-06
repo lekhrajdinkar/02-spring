@@ -1,14 +1,29 @@
+- https://chatgpt.com/c/672bc367-e60c-800d-9fc4-5782d0a7741b
+
 # Terraform / IAC
 - Switching from one provider (e.g., AWS) to another (e.g., Azure) usually requires rewriting the configuration.
+  - https://registry.terraform.io/providers/
+  - https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs
 - However, Terraform provides ways to make this process more manageable/consistent.
   - Define common Variables,Outputs, modules, etc across providers. 
 
-## install
-1. windows: install binary in local, set PATH.
-2. HCP (cloud plateform) : 
+## install / setup
+- windows: install binary in local, set PATH.
+  - ![img_1.png](99_img/01/img_1.png)
+  
+- **HCP** (hashicorp cloud plateform) :
+  - create account. (signup with github)
+  - create **org** (`lekhrajdinkar-org`) 
+  - create **projects** (`default project` and `maps`)  
+  - under projects > add **workspace** (cli/api driven)
+    - ![img.png](99_img/01/img.png)
     - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/banzai-dev_api-driven
-    - org > project > workspace(cli/api driven)
-    - store state, run history, workspace Variable, long running plan
+    - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/docker
+  - **benefits** of workspaces 
+    - state mgt
+    - run history
+    - workspace Variable + env var
+    - suitable for long-running iac
 ---
 ## Commands :
 - `terraform -version`  # Terraform v1.9.0
@@ -31,5 +46,43 @@
   test          Execute integration tests for Terraform modules
   untaint       Remove the 'tainted' state from a resource instance
   version       Show the current Terraform version
+  
   workspace     Workspace management
+    Subcommands:
+    delete    Delete a workspace
+    list      List Workspaces
+    new       Create a new workspace
+    select    Select a workspace
+    show      Show the name of the current workspace
 ```
+---
+## hands on
+- login to workspace (`docker`): https://app.terraform.io/app/lekhrajdinkar-org/workspaces/docker
+- clone project from **git**.
+  - or, can try sample project : git clone https://github.com/hashicorp/tfc-getting-started.git
+- cd .../04_terraform/project/docker
+- **terraform login**
+  - copy token from, C:\Users\Manisha\AppData\Roaming\terraform.d\credentials.tfrc.json
+  - or create new token : https://app.terraform.io/app/settings/tokens?source=terraform-login
+  - ![img_2.png](99_img/01/img_2.png)
+- **terraform init**
+```
+Initializing HCP Terraform...
+Initializing provider plugins...
+- Finding kreuzwerker/docker versions matching "~> 3.0.1"...
+- Installing kreuzwerker/docker v3.0.2...
+- Installed kreuzwerker/docker v3.0.2 (self-signed, key ID BD080C4571C6104C)
+Partner and community providers are signed by their developers.
+If you'd like to know more about provider signing, you can read about it here:
+https://www.terraform.io/docs/cli/plugins/signing.html
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+```
+- **terraform fmt** : formatting
+- **terraform validate** : validate configuration/s
+- **terraform plan**
+  - failed : https://app.terraform.io/app/lekhrajdinkar-org/workspaces/docker/runs/run-8hZLDTrQfEJ27ixj
+  - provider "docker" { } empty - fix it.
+- **terraform apply**

@@ -8,13 +8,17 @@ terraform {
   }
   required_providers {
     docker = {
-      source = "kreuzwerker/docker"
+      source  = "kreuzwerker/docker"
       version = "~> 3.0.1"
     }
   }
 }
 
-provider "docker" {}
+# https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs
+provider "docker" {
+  host     = "ssh://user@remote-host:22"
+  ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
+}
 
 resource "docker_image" "nginx" {
   name         = "nginx:latest"
