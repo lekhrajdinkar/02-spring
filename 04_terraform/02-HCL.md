@@ -8,23 +8,7 @@
   - `web-sg-${var.resource_tags["project"]}-${var.resource_tags["environment"]}`
 - write in JSON or yaml
 - state file `terraform.tfstate` - keep it secure and encrypted.
-- **for-each**
-  - for-each = var.projects, projects is **map(object)**  [p1:{}, p2:{}]
-    - `each.key` and `each.value`
-  - for-each = var.projects, projects is **list/set(object)**  [0:{}, 1:{}]
-    - `each.key` === index,  `each.value` === item
-  - eg:
-    - value = { for p in sort(keys(var.project)) : p => module.elb_http[p].elb_dns_name }
-    - for_each = { for i, instance in var.allowed_ports : i => instance }
-  - use case: with resource, dynamic attribute in resource, module, output, etc
-  - **fact** : `mutliple for_each` on resource:
-    - cannot use two for_each expressions directly at the same level within a single resource block.  <<<
-    - However, can have multiple dynamic blocks, each with its own for_each. eg:
-      - resource "aws_instance" "example" { 
-      -    for_each
-      -    dynamic "tag" { for_each ... } 
-      -    dynamic "ingress" { for_each ... }
-      - } 
+
 
 ## B. project structure 
   - `terraform { ... required_version="", required_provider={} }`
@@ -135,17 +119,25 @@ lifecycle {
 - use variable across workspace/s.  
 
 ### 7. Functions
-- merge()
-- join() 
-- count() 
-- length()
-- `templatefile`(tftpl-file-1, map)
-- `file`(file-1)
-- `lookup`(map,key) - like map1.get(k1) in java.
-- `key`(var.projects)
-- `sort`(key(var.projects))
-- `value`(var.projects)
-- `slice`(var.private_subnet_cidr_blocks, 0, 2)
+- check complete list : https://developer.hashicorp.com/terraform/language/functions
+- **numeric** -> abs(-12.3),ceil/floor(5.2), log(number, base), parseint("100", 2/10/16),  pow(3, 2)
+- **string** -> format,start|endswith, join("-", ["foo", "bar", "baz"]), regex(pattern, string), replace, split, substr, upper/lower, etc
+- **collection**
+  - `lookup`(map,key) - like map1.get(k1) in java.
+  - `key`(var.projects)
+  - `sort`(key(var.projects))
+  - `value`(var.projects)
+  - `slice`(var.private_subnet_cidr_blocks, 0, 2)
+  - merge()
+  - count()
+  - length()
+- **file system**
+  - `templatefile`(tftpl-file-1, map)
+  - `file`(file-1)
+- **Date time**
+- **IP netwpork**
+- `jsonencode`()
+
 
 ### 8. Terraform template
 - `.tftpl` files
@@ -157,9 +149,29 @@ lifecycle {
     user_data= `templatefile`("user_data.tftpl", { placeholder-1 = var.value1, placeholder-2 = var.value2 })
     ```
 ### 9. expressions
-- ternary operation
+- **ternary operation**
+- **count criteria**
+  - associate_public_ip_address = (`count.index` == 0 ? true : false)
 
-### 10. data source
+## 10. for-each
+- for-each = var.projects, projects is **map(object)**  [p1:{}, p2:{}]
+  - `each.key` and `each.value`
+- for-each = var.projects, projects is **list/set(object)**  [0:{}, 1:{}]
+  - `each.key` === index,  `each.value` === item
+- eg:
+  - value = { for p in sort(keys(var.project)) : p => module.elb_http[p].elb_dns_name }
+  - for_each = { for i, instance in var.allowed_ports : i => instance }
+- use case: with resource, dynamic attribute in resource, module, output, etc
+- **fact** : `mutliple for_each` on resource:
+  - cannot use two for_each expressions directly at the same level within a single resource block.  <<<
+  - However, can have multiple dynamic blocks, each with its own for_each. eg:
+    - resource "aws_instance" "example" {
+    -    for_each
+    -    dynamic "tag" { for_each ... }
+    -    dynamic "ingress" { for_each ... }
+    - }
+    
+### 11. data source
 - makes configuration more **dynamic**
   - query (`read only`) **external information or resources** that are not managed by your Terraform configuration.
   - dynamically fetch data from 

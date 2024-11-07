@@ -10,9 +10,12 @@ output "instance_public_ip" {
   sensitive   = false
 }
 
-output "module_1_test_output_1" {
+output "module_s3_website_output_1" {
   description = "module_1_test_output_1"
-  value       = module.module_1.test_output_1
+  value       = module.module_s3_website.test_output_1
+}
+output "module_s3_website_arn" {
+  value       = module.module_s3_website.arn
 }
 
 # availability_zones is list

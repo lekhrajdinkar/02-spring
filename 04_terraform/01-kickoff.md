@@ -47,6 +47,7 @@
     - suitable for long-running iac
 
 ### Basic Commands
+- https://developer.hashicorp.com/terraform/tutorials/cli/init
 - `terraform -version`  # Terraform v1.9.0
 ``` 
   console       Try Terraform expressions at an interactive command prompt
