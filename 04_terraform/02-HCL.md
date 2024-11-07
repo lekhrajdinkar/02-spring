@@ -195,6 +195,13 @@ resource "aws_subnet" "example" {
   availability_zone = "us-west-2a"
 }
 ```
+- inline datasource. eg:
+```
+data "aws_iam_policy_document" "example" {
+  statement { ... }
+  statement { ... }
+}
+```
 ---
 
 ## Z. More

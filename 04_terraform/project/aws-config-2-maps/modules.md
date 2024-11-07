@@ -1,0 +1,9 @@
+## s3 module
+- resource aws_s3_bucket
+- resource aws_s3_bucket_logging
+- resource aws_s3_bucket_public_access_block
+- resource aws_s3_bucket_versioning
+- resource aws_s3_bucket_server_side_encryption
+- resource aws_s3_bucket_ownership_controls
+- resource aws_s3_bucket_policy
+- resource aws_s3_bucket_replication_configuration

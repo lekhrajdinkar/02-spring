@@ -1,4 +1,6 @@
-- https://chatgpt.com/c/672bc367-e60c-800d-9fc4-5782d0a7741b
+- https://chatgpt.com/c/672bc367-e60c-800d-9fc4-5782d0a7741b - question
+- https://chatgpt.com/c/672cec04-fb0c-800d-a873-d0ad332219fb - sample aws config.
+
 ---  
 ## A. Official Tutorial: 
 - check more : https://developer.hashicorp.com/terraform/tutorials
