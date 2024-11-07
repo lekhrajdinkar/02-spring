@@ -4,11 +4,27 @@
 # HCL ( HashiCorp Configuration Language)
 ## A. basic
 - used write `configuration` - to create infra.
-- .tf, .tfvar, etc
 - **String-interpolation** 
   - `web-sg-${var.resource_tags["project"]}-${var.resource_tags["environment"]}`
 - write in JSON or yaml
-- `state file` / `terraform.tfstate` - keep it secure and encrypted.
+- state file `terraform.tfstate` - keep it secure and encrypted.
+- **for-each**
+  - for-each = var.projects, projects is **map(object)**  [p1:{}, p2:{}]
+    - `each.key` and `each.value`
+  - for-each = var.projects, projects is **list/set(object)**  [0:{}, 1:{}]
+    - `each.key` === index,  `each.value` === item
+  - eg:
+    - value = { for p in sort(keys(var.project)) : p => module.elb_http[p].elb_dns_name }
+    - for_each = { for i, instance in var.allowed_ports : i => instance }
+  - use case: with resource, dynamic attribute in resource, module, output, etc
+  - **fact** : `mutliple for_each` on resource:
+    - cannot use two for_each expressions directly at the same level within a single resource block.  <<<
+    - However, can have multiple dynamic blocks, each with its own for_each. eg:
+      - resource "aws_instance" "example" { 
+      -    for_each
+      -    dynamic "tag" { for_each ... } 
+      -    dynamic "ingress" { for_each ... }
+      - } 
 
 ## B. project structure 
   - `terraform { ... required_version="", required_provider={} }`
@@ -36,42 +52,59 @@
 ---
 ## C. Language constructs
 ### provider
-- aws : https://registry.terraform.io/providers/hashicorp/aws/latest
-  - aws_`key_pair`
-  - aws_`security_group`
+- **aws** : https://registry.terraform.io/providers/hashicorp/aws/latest
+- providerName_resourceType --> **aws_**`key_pair` , **aws_**`security_group`
   
-### variable  (32 char max)
-- types  - number, string, list, map, bool, tuple, object 
-- use : var.*
-- replace default value:  
-  - `terraform apply -var var1=val1`
-  - `terraform apply -var-file var1=val1.tfvar`
+### 1. variable  (name,32 char max)
+- `types`  
+  - number, string, bool
+  - list(T), map(T) - key is string  type and value is of T type.
+  - tuple, object({k1 = string <newline> k2 = number  })
+  - any
+- check : variable.tf
+- assign value : 
+  - via `tfvars` file --> check values-dev, values-prod.tfvars
+  - via `env variables` prefixed with **TF_VAR_<variablename>**
+  - default values.
+- use variable : **var**.<<variableName>>
+- replace default value:   `-var`, `-var-file`
+  - **terraform apply -var var1=val1**
+  - **terraform apply -var-file var1=val1.tfvar**
 - `validation` { condition=, error_message=}
-- sensitive = true :
+- **sensitive = true** : mandatory
   - apply will prompt to enter values 
-  - or can provide via `.tfva`r file too.
+  - or can provide via `.tfvars` file too.
     
-### output
-- sensitive = true : will not be printed on logs.
-- `terraform output` -> query : output1, json, etc
+### 2. output
+- `terraform output` -> query : output1, json, etc.
+- `terraform output output-1` --> view a specific output
+- after terraform apply, output will get printed on console.
+- sensitive = true --> will not be printed on logs. : will not be printed on logs.
 
-### `locals` 
+### 3. locals
 - locals { instance_count = var.environment == "production" ? 5 : 1 }
 - name to complex expressions or repeated values
 - making your configuration easier to read and maintain.
 - sensitive = true : will not be printed on logs.
-- use : local.*
+- usage : **local**.<<variableName>>
 
 ### resource
-- `attribute` : (optional, mandatory)
-- `argument` : resourceType.resourceName.agrument.*
-- Resource Lifecycle : ?
-- Resource dependencies:
-  - trf creates dependency graph.
-  - `Implicit`, eg: ec1 > elasticIP , automatically infer by attribute
-  - `Explicit` : certain scenario, need to tell explicitly using `deponds_on`
-     - eg : depends_on = [aws_s3_bucket.r1, aws_instance.r1]
-- `count`
+- `attribute` : ( optional, mandatory)
+  - argument - property we pass. eg `ami`
+  - attribute - property resource has, once created. eg: `id`.
+- `dynamic attribute`. eg  :`tags`
+  ```
+  dynamic "tags" {
+    for_each = <collection>
+    content {
+     # use each.value
+     # "${count.index}" 
+    }
+  }
+  
+  result :: tags = [ content-0, content-1, etc ]
+  ```
+- `meta-attribute` eg : `count` in resource
   - Manage `similar resources` with count.
   - `replicates` the given resource with given count.
   ``` 
@@ -82,33 +115,47 @@
           - aws_instance.app[0] : first instance tr provisioned.
           - aws_instance.app[count.index] : current index, useful while iterate.
   ```
-- `for-each` = var.projects # p1:{}, p2:{}, etc
-  - on map : `each.key` and `each.value.?`
-  - on list/set : `each.key`=index,  `each.value`=item
-  - `key`(var.projects), `sort`(key(var.projects))
-  - `value`(var.projects)
-  - value = { for p in sort(keys(var.project)) : p => module.elb_http[p].elb_dns_name }
-      
+- **Resource Lifecycle** 
+```
+lifecycle {
+    create_before_destroy = true
+    prevent_destroy = true #for critical resource
+    ignore_changes = [ tags]
+    ...
+  }
+```
+- **Resource dependencies**
+  - terraform graph
+  - `Implicit`, eg: ec2 > ingress , automatically infer by attribute.
+  - `Explicit` : certain scenario, need to tell explicitly using `deponds_on`
+    - eg : depends_on = [aws_s3_bucket.r1, aws_instance.r1]
+    
+
 ### variable set
 - use variable across workspace/s.  
 
 ### Functions
-- merge(), join(), count(), length(), sort(), key(), value()
-- `templatefile`(tftpl-file-1, map), `file`(file-1)
-- `lookup`(map,key) - like map1.get(k1) in java. 
-- `file`()
+- merge()
+- join() 
+- count() 
+- length()
+- `templatefile`(tftpl-file-1, map)
+- `file`(file-1)
+- `lookup`(map,key) - like map1.get(k1) in java.
+- `key`(var.projects)
+- `sort`(key(var.projects))
+- `value`(var.projects)
 
 ### Terraform template
-- .tftpl files
-- used as templates for generating configuration-files/ other-text-files.
+- `.tftpl` files
+- used as templates for generating configuration-files / other-text-files.
 - `dynamically generate` files by substituting variables and expressions within the template.
 - eg: 
     ```
     # user_date.tftpl >> shell script text file having lots of placeholders- ${placeholder-1}, etc
     user_data= `templatefile`("user_data.tftpl", { placeholder-1 = var.value1, placeholder-2 = var.value2 })
     ```
-
-### expressions`
+### expressions
 - ternary operation
 
 ---
