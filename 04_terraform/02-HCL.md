@@ -51,11 +51,11 @@
   ```
 ---
 ## C. Language constructs
-### provider
+### 1.  provider
 - **aws** : https://registry.terraform.io/providers/hashicorp/aws/latest
 - providerName_resourceType --> **aws_**`key_pair` , **aws_**`security_group`
   
-### 1. variable  (name,32 char max)
+### 2. variable  (name,32 char max)
 - `types`  
   - number, string, bool
   - list(T), map(T) - key is string  type and value is of T type.
@@ -75,20 +75,20 @@
   - apply will prompt to enter values 
   - or can provide via `.tfvars` file too.
     
-### 2. output
+### 3. output
 - `terraform output` -> query : output1, json, etc.
 - `terraform output output-1` --> view a specific output
 - after terraform apply, output will get printed on console.
 - sensitive = true --> will not be printed on logs. : will not be printed on logs.
 
-### 3. locals
+### 4. locals
 - locals { instance_count = var.environment == "production" ? 5 : 1 }
 - name to complex expressions or repeated values
 - making your configuration easier to read and maintain.
 - sensitive = true : will not be printed on logs.
 - usage : **local**.<<variableName>>
 
-### resource
+### 5. resource
 - `attribute` : ( optional, mandatory)
   - argument - property we pass. eg `ami`
   - attribute - property resource has, once created. eg: `id`.
@@ -131,10 +131,10 @@ lifecycle {
     - eg : depends_on = [aws_s3_bucket.r1, aws_instance.r1]
     
 
-### variable set
+### 6. variable set
 - use variable across workspace/s.  
 
-### Functions
+### 7. Functions
 - merge()
 - join() 
 - count() 
@@ -145,8 +145,9 @@ lifecycle {
 - `key`(var.projects)
 - `sort`(key(var.projects))
 - `value`(var.projects)
+- `slice`(var.private_subnet_cidr_blocks, 0, 2)
 
-### Terraform template
+### 8. Terraform template
 - `.tftpl` files
 - used as templates for generating configuration-files / other-text-files.
 - `dynamically generate` files by substituting variables and expressions within the template.
@@ -155,9 +156,33 @@ lifecycle {
     # user_date.tftpl >> shell script text file having lots of placeholders- ${placeholder-1}, etc
     user_data= `templatefile`("user_data.tftpl", { placeholder-1 = var.value1, placeholder-2 = var.value2 })
     ```
-### expressions
+### 9. expressions
 - ternary operation
 
+### 10. data source
+- makes configuration more **dynamic**
+  - query (`read only`) **external information or resources** that are not managed by your Terraform configuration.
+  - dynamically fetch data from 
+    - **APIs** eg:
+      - query information about your `VPC`, subnet, sg
+      - query `machine image IDs` from a cloud provider
+    - other Terraform **state backends**
+    - Terraform outputs from **other configurations**.
+- eg: `aws_ami`, `aws_vpc`, `aws_security_group`
+```
+data "aws_vpc" "main" {
+  filter {
+    name   = "tag:Name"
+    values = ["main-vpc"]
+  }
+}
+
+resource "aws_subnet" "example" {
+  vpc_id            = data.aws_vpc.main.id  # Reference the VPC ID
+  cidr_block        = "10.0.1.0/24"
+  availability_zone = "us-west-2a"
+}
+```
 ---
 
 ## Z. More

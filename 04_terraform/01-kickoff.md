@@ -19,6 +19,7 @@
 - Switching from one provider (e.g., AWS) to another (e.g., Azure) usually requires rewriting the configuration.
   - https://registry.terraform.io/providers/
   - https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs
+  - https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 - However, Terraform provides ways to make this process more manageable/consistent.
   - Define common Variables,Outputs, modules, etc across providers.
 - `tf providers`:
@@ -29,7 +30,7 @@
 - windows: install binary in local, set PATH.
   - ![img_1.png](99_img/01/img_1.png)
 - next, run locally or through HCP 
-- **HCP** (hashicorp cloud plateform) :
+- **HCP** (hashicorp cloud plateform) : **remote state**
   - create account. (signup with github)
   - create **org** (`lekhrajdinkar-org`) 
   - create **projects** (`default project` and `maps`)  
