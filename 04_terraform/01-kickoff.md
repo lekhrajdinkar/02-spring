@@ -40,6 +40,7 @@
     - ![img.png](99_img/01/img.png)
     - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/banzai-dev_api-driven
     - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/docker
+    - ![img.png](99_img/01/img-ws-type.png)
   - check out confiurationCode from git
     - root-module >> main.tf >> `terraform` { `cloud` { update this } }
   - **benefits**

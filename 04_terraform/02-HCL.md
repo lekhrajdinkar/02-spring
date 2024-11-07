@@ -136,7 +136,7 @@ lifecycle {
   - `file`(file-1)
 - **Date time**
 - **IP netwpork**
-- `jsonencode`()
+- `jsonencode`(), `try`(expression1, expression2, ..., fallback)
 
 
 ### 8. Terraform template
@@ -202,6 +202,9 @@ data "aws_iam_policy_document" "example" {
   statement { ... }
 }
 ```
+- `data "aws_caller_identity" "current" {} `
+  - retrieve details about the AWS account and credentials currently being used to execute the Terraform code
+  - returns : account_id, arn, user_id
 ---
 
 ## Z. More
