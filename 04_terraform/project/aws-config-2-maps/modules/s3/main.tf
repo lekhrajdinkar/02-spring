@@ -34,8 +34,9 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
   rule {
     bucket_key_enabled = true
     apply_server_side_encryption_by_default {
-      sse_algorithm     = "aws:kms"
-      kms_master_key_id = data.aws_kms_key.s3_key
+      # sse_algorithm     = "aws:kms" #sse-kms
+      # kms_master_key_id = data.aws_kms_key.s3_key
+      sse_algorithm = "AES256" #sse-s3
     }
   }
 }
@@ -58,7 +59,7 @@ resource "aws_s3_bucket_ownership_controls" "this" {
 resource "aws_iam_role" "s3_replication_role" {
   inline_policy {
     name = "s3-full-access-policy"
-    policy = sonencode({
+    policy = jsonencode({
       "Version": "2012-10-17",
       "Statement": [
         {
@@ -83,21 +84,21 @@ resource "aws_iam_role" "s3_replication_role" {
   })
 }
 
-resource "aws_s3_bucket_replication_configuration" "example" {
+resource "aws_s3_bucket_replication_configuration" "this" {
   count = var.replicate_flag ? 1 : 0
 
   bucket = aws_s3_bucket.this[0].id
   role   = aws_iam_role.s3_replication_role
-  rules {
+  rule {
     id     = "replication-rule-1"
     status = "Enabled"
     delete_marker_replication { status = "Enabled" }
     destination {
       bucket        = "arn:aws:s3:::${var.replicate_bucket_name}"
       storage_class = "STANDARD"
-      encryption_configuration {
+      /*encryption_configuration {
         replica_kms_key_id = data.aws_kms_key.replication_s3_key.id
-      }
+      }*/
     }
     # source_selection_criteria { sse_kms_encrypted_objects {status="Enabled"} }
     filter {}
