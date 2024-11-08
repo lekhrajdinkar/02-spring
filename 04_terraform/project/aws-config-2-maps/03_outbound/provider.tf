@@ -1,8 +1,8 @@
 provider "aws" {
   region = var.aws_primary_region
 
-  access_key = "AKIAXYKJR5R3ZUMRLAFJ"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
 
   assume_role {
     role_arn = var.aws_assume_role_arn
@@ -15,8 +15,8 @@ provider "aws" {
 provider "aws" {
   region = var.aws_secondary_region
 
-  access_key = "AKIAXYKJR5R3ZUMRLAFJ"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
 
   alias = "secondary"
   assume_role {
