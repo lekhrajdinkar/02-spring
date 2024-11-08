@@ -37,6 +37,10 @@ variable "replicate_bucket_name" { type = string }
 
 variable "mft_account_arn" { type = string }
 
+variable "attach_policy_flag" {
+  type    = bool
+  default = false
+}
 variable "policy" {
   type    = string
   default = null

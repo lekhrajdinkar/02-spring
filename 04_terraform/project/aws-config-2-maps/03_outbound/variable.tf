@@ -14,6 +14,7 @@ variable "aws_env" {
 
 variable "aws_assume_role_arn" {
   type = string
+  default = "arn:aws:iam::533267082359:role/maps-outbound-harness-pipeline-role"
 }
 
 variable "aws_primary_region" {

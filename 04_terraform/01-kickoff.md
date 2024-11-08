@@ -114,9 +114,12 @@ you run "terraform init" in the future.
   - provider "docker" { } empty - fix it.
 - **terraform apply**
   - ran run directly, without running plan.
-- **terraform destroy**
+- **terraform destroy** -auto-approve -target=aws_s3_bucket.example_bucket (specific resource)
   - print out execute plan for destroy
   - confirm to apply.
+  - terraform destroy 
+  - `terraform refresh` : if we manully delete something.
+  - `terraform plan -destroy`
   
 ###  provider : aws
 - cd .../04_terraform/project/banzai-dev_api-driven   <<<<
@@ -126,4 +129,5 @@ you run "terraform init" in the future.
 - plan and apply
 - next, make some changes and update tf file resource. say ami id
 - plan and apply
-- destroy
+- plan -destroy
+- destroy -auto-approve

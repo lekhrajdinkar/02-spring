@@ -24,8 +24,8 @@ resource "aws_s3_bucket_public_access_block" "this" {
 resource "aws_s3_bucket_versioning" "this" {
   bucket = aws_s3_bucket.this[0].id
   versioning_configuration {
-    status     = var.versioning_configs.enabled ? "Enabled" : "Suspended"
-    mfa_delete = var.versioning_configs.mfa_delete_enabled ? "Enabled" : "Suspended"
+    status     = var.versioning_configs.enabled ? "Enabled" : "Disabled"
+    mfa_delete = var.versioning_configs.mfa_delete_enabled ? "Enabled" : "Disabled"
   }
 }
 
@@ -88,7 +88,7 @@ resource "aws_s3_bucket_replication_configuration" "this" {
   count = var.replicate_flag ? 1 : 0
 
   bucket = aws_s3_bucket.this[0].id
-  role   = aws_iam_role.s3_replication_role
+  role   = aws_iam_role.s3_replication_role.arn
   rule {
     id     = "replication-rule-1"
     status = "Enabled"
