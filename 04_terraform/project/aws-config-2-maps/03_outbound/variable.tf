@@ -27,6 +27,7 @@ variable "aws_secondary_region" {
   default = "us-east-1"
 }
 
+# already created
 variable "aws_vpc_id" {
   type = string
   default = "vpc-04ce2894d2f99bbb8"
@@ -54,6 +55,10 @@ variable "app_name" {
 variable "app_component" {
   type = string
   default = "outbound"
+}
+variable "app_env" {
+  type = string
+  default = "dev1"
 }
 
 variable "app_domain_name" {
