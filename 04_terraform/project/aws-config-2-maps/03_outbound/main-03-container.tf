@@ -23,7 +23,9 @@ locals {
     }
   ]
 }
-
+###################################################################
+# ECR
+###################################################################
 module "ecr"{
   source = "./modules/ecr"
 
@@ -34,6 +36,9 @@ module "ecr"{
   tags = var.tags
 }
 
+###################################################################
+# ECS -> cluster, service, task/container + ALB (listener, targetGroup)
+###################################################################
 module "ecs"{
   source = "./modules/ecs"
 
@@ -46,12 +51,12 @@ module "ecs"{
   vpc_id              = var.aws_vpc_id
 
   container_image = "${module.ecr.ecr_repository_url}:latest"
-  container_port  = 8080
-  host_port       = 8080
-  memory          = 1024
-  cpu             = 512
+  container_port  = var.container_port
+  host_port       = var.container_port
+  memory          = var.memory
+  cpu             = var.cpu
 
-  desired_count     = 0
+  desired_count     = var.task_count
 
   container_env_vars = local.container_env_vars
   secrets            = local.secrets
@@ -59,4 +64,17 @@ module "ecs"{
 
   depends_on = [module.ecr]
 
+}
+
+###################################################################
+# ALLOW TRAFFIC FROM ALB to ECS TASK
+###################################################################
+resource "aws_security_group_rule" "alb_egress_to_ecs_service" {
+  security_group_id = module.ecs.alb_sg_arn
+  type              = "egress"
+
+  from_port         = var.container_port
+  to_port           = var.container_port
+  protocol          = "tcp"
+  source_security_group_id = module.ecs.ecs_srv_sg_arn
 }

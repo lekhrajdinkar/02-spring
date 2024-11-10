@@ -33,16 +33,13 @@
   - ssh -i "path/to/your-key-file.pem" -p 22 ec2-user@your-ec2-public-dns
   - use keypair over password
   
-- **Inbound RULES**
+- **Inbound / Outbound RULES**
   - Protocol (TCP, UDP, RDP etc)
   - `Source` IP range/CIDR + `another SG`
       - 203.0.113.1/32 (specfic IP)
       - 0.0.0.0/0 (anywhere)
-  - `target port` / single or range (target machine which is ec2)
-      - classic port: 21,22,80,443, 3389
+  - `port` / single **range** (target machine which is ec2)
+      - **classic port**: 21,22,80,443, 3389
       - ICMP (Ping)  doesn't use ports
-    
-- **Outbound RULES**
-  - Protocol
-  - destination  : IP range/CIDR + `another SG`
-  - source port
+      - range (from_port=80, to_port=80 ) --> it will set single port.
+      - range (from_port=1, to_port=10 ) --> it will 10 ports.

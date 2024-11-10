@@ -65,12 +65,33 @@ resource "aws_ecs_task_definition" "task" {
   depends_on = [module.ecs_task_role, aws_cloudwatch_log_group.log_group]
 }
 
-# ecs service sg
-resource "aws_security_group" "ecs_service_sg" {
-  name = "${var.app_name}-${var.app_component}-${var.aws_primary_region}-${var.app_env}-ecs-service-sg"
+# 5. alb
+module "alb" {
+  source = "./alb"
+  app_component = var.app_component
+  app_env = var.app_env
+  app_name = var.app_name
+  aws_account_id = var.aws_account_id
+  aws_primary_region = var.aws_primary_region
+  sg_ingress_object = var.alb_sg_ingress_object
+  tags = var.tags
+  vpc_id = var.vpc_id
+  container_port = var.container_port
 }
 
-# ECS service
+# 6. ecs service sg
+resource "aws_security_group" "ecs_service_sg" {
+  name = "${var.app_name}-${var.app_component}-${var.aws_primary_region}-${var.app_env}-ecs-service-sg"
+  vpc_id      = var.vpc_id
+  ingress {
+    from_port       = 443
+    to_port         = 443
+    protocol        = "tcp"
+    security_groups = [ module.alb.alb_sg_arn ]
+  }
+}
+
+# 7. ECS service === POD
 resource "aws_ecs_service" "service" {
   name            = "${var.app_name}-${var.app_component}-${var.aws_primary_region}-${var.app_env}-ecs-service"
   cluster         = aws_ecs_cluster.cluster.id
@@ -83,5 +104,15 @@ resource "aws_ecs_service" "service" {
     assign_public_ip = false
   }
 
+  # ecs service === pod
+  # register ecs/service with target group.
+  load_balancer {
+    target_group_arn = module.alb.arn_tg_for_ecs_task
+    container_name   = "${var.app_name}-${var.app_component}-${var.aws_primary_region}-${var.app_env}-container"
+    container_port   = var.container_port
+  }
+
   desired_count = var.desired_count
+
+  depends_on = [module.alb]
 }
