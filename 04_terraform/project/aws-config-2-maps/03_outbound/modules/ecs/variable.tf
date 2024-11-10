@@ -13,6 +13,7 @@ variable "memory" { type = number }
 variable "container_image" { type = string }
 variable "container_port" { type = number }
 variable "host_port" { type = number }
+variable "app_domain_name" {  type = string }
 variable "container_env_vars" { type = list(any) }
 variable "secrets" { type = list(any) }
 

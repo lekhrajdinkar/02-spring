@@ -1,3 +1,13 @@
+/*
+## manual creation
+- vpc
+- acm cert with domain name
+- secrets + ssm
+- rds
+- hosted zone
+- permission boundary policy
+*/
+
 # --- AWS ---
 variable "aws_account_id" {  type = string }
 variable "aws_account_alias" {  type = string }

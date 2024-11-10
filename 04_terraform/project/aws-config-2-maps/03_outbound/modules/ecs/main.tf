@@ -77,6 +77,7 @@ module "alb" {
   tags = var.tags
   vpc_id = var.vpc_id
   container_port = var.container_port
+  app_domain_name = var.app_domain_name
 }
 
 # 6. ecs service sg

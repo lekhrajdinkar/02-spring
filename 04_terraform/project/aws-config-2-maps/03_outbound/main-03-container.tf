@@ -55,6 +55,7 @@ module "ecs"{
   host_port       = var.container_port
   memory          = var.memory
   cpu             = var.cpu
+  app_domain_name = var.app_domain_name
 
   desired_count     = var.task_count
 
