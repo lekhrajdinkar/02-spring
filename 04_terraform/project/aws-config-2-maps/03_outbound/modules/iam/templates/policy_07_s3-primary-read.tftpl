@@ -1,4 +1,4 @@
-policy_05_sns.tftpl{
+{
   "Version": "2012-10-17",
   "Statement": [
      {
@@ -11,8 +11,8 @@ policy_05_sns.tftpl{
                 "s3:ListObject"
               ],
                "Resource": [
-                   "arn:aws:s3:${region}:${aws_account_id}:${app_name}-${app_component}-${region}-${app_env}-${bucket_name}",
-                   "arn:aws:s3:${region}:${aws_account_id}:${app_name}-${app_component}-${region}-${app_env}-${bucket_name}/*"
+                   "arn:aws:s3:::${app_name}-${app_component}-${region}-${app_env}-${bucket_name}",
+                   "arn:aws:s3:::${app_name}-${app_component}-${region}-${app_env}-${bucket_name}/*"
                ]
      }
   ]

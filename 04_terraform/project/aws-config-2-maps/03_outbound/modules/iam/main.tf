@@ -21,7 +21,7 @@ resource "aws_iam_policy" "inline_policy" {
 # attach - trusted policy + permission_boundary
 resource "aws_iam_role" "role"{
   name                  = var.role_name
-  assume_role_policy    = templatefile("${path.module}/templates/trsuted_policy.tftpl", { trusted_service = var.trusted_service} )
+  assume_role_policy    = templatefile("${path.module}/templates/${var.trsusted_policy_templatefile_name}.tftpl", { trusted_service = var.trusted_service} )
   permissions_boundary  = data.aws_iam_policy.permission_boundary.arn
 
   lifecycle {
