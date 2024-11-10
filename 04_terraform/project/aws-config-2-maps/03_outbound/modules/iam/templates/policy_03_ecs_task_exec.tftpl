@@ -13,14 +13,14 @@
     },
 
     {
-              "Effect": "Allow",
-              "Action": [
+         "Effect": "Allow",
+         "Action": [
                    "secretsmanager:GetSecretValue",
                    "secretsmanager:ListSecrets",
                    "secretsmanager:DescribeSecret"
-              ],
-              "Resource": *
-         },
+         ],
+         "Resource": *
+    },
 
     {
       "Effect": "Allow",
@@ -53,8 +53,8 @@
             "s3:ListObject",
           ],
            "Resource": [
-               "arn:aws:s3:${region}:${aws_account_id}:${app_name}-${app_component}-${region}-${app_env}-archive-bucket",
-               "arn:aws:s3:${region}:${aws_account_id}:${app_name}-${app_component}-${region}-${app_env}-archive-bucket/*"
+               "arn:aws:s3:::${app_name}-${app_component}-${region}-${app_env}-archive-bucket",
+               "arn:aws:s3:::${app_name}-${app_component}-${region}-${app_env}-archive-bucket/*"
            ]
      },
 

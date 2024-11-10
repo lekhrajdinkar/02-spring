@@ -1,12 +1,12 @@
 locals{
-  bucket_prefix = "${var.app_name}-${var.app_component}-"
-  bucket_access_logging = "${var.app_name}-${var.app_component}-s3-access_logs"
+  bucket_prefix = "${var.app_name}-${var.app_component}"
+  bucket_access_logging = "${var.app_name}-${var.app_component}-${var.app_env}-s3-access_logs"
 }
 
 module "outbound_archive_bucket" {
   source = "../modules/s3"
-  bucket_name           = "${local.bucket_prefix}-${var.aws_primary_region}-archive-bucket"
-  replicate_bucket_name = "${local.bucket_prefix}-${var.aws_secondary_region}-archive-bucket"
+  bucket_name           = "${local.bucket_prefix}-${var.aws_primary_region}-${var.app_env}-archive-bucket"
+  replicate_bucket_name = "${local.bucket_prefix}-${var.aws_secondary_region}-${var.app_env}-archive-bucket"
   force_destroy_flag    = false
   primary_region        = var.aws_primary_region
   secondary_region      = var.aws_secondary_region
@@ -23,6 +23,10 @@ module "outbound_archive_bucket" {
     mfa_delete_enabled = false
   }
   aws_account_alias     = var.aws_account_alias
+
+
   attach_policy_flag = false
+  # policy = templatefile("${path.module}/templates/s3-policy-template.tftpl", { } )
+  policy = null
 }
 

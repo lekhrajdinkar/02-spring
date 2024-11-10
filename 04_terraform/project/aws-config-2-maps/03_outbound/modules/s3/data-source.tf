@@ -21,7 +21,7 @@ data "aws_iam_policy_document" "this" {
   count = var.create_bucket_flag ? 1 : 0
   source_policy_documents = compact([
     data.aws_iam_policy_document.organization-policy.json,
-    var.attach_policy_flag ? var.policy : ""
+    var.attach_policy_flag ? var.policy : null
   ])
 }
 
