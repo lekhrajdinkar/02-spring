@@ -10,11 +10,14 @@ variable "vpc_id" { type = string }
 
 variable "desired_count" { type = number }
 
-variable "cpu" { type = string }
-variable "memory" { type = string }
+# task definition and container
+variable "cpu" { type = number }
+variable "memory" { type = number }
 variable "container_image" { type = string }
-variable "container_port" { type = string }
-variable "host_port" { type = string }
-
+variable "container_port" { type = number }
+variable "host_port" { type = number }
 variable "container_env_vars" { type = list(any) }
 variable "secrets" { type = list(any) }
+
+variable "policy_templatefile_name" { type = string }
+
