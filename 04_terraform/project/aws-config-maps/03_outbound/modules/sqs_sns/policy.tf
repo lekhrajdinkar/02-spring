@@ -1,5 +1,5 @@
 #####################
-# WAY-1 : datasource
+# WAY-1 : datasource **
 #####################
 data "aws_iam_policy_document" "sns_policy" {
   statement {
@@ -50,6 +50,33 @@ locals {
 # WAY-3 : templateFile - actual json
 #########################################
 ## skip
+
+# -----------------------------------
+
+data "aws_iam_policy_document" "sqs_policy" {
+  statement {
+    actions   = [
+      "sqs:SendMessage",
+      "sqs:ReceiveMessage",
+      "sqs:DeleteMessage",
+      "sqs:GetQueueAttributes",
+      "sqs:GetQueueUrl"
+    ]
+    resources = [aws_sqs_queue.standard_queue.arn]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    condition {
+      test     = "StringEquals"
+      variable = "aws:SourceAccount"
+      values   = ["${var.aws_account_id}"]
+    }
+  }
+}
+
 
 
 
