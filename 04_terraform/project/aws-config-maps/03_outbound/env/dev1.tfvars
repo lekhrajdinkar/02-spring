@@ -1,4 +1,5 @@
 aws_assume_role_arn = "arn:aws:iam::533267082359:role/maps-outbound-harness-pipeline-role"
+permission_boundary_name = "DefaultPermissionBoundary"
 aws_account_id = "533267082359"
 aws_account_alias = "lekhrajdinkar"
 aws_env = "dev"

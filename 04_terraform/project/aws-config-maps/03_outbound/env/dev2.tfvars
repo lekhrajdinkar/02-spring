@@ -1,4 +1,5 @@
 aws_assume_role_arn = "arn:aws:iam::533267082359:role/maps-outbound-harness-pipeline-role"
+permission_boundary_name = "DefaultPermissionBoundary"
 aws_account_id = "533267082359"
 aws_account_alias = "lekhrajdinkar"
 aws_env = "dev"
@@ -42,3 +43,14 @@ sg_ingress_object = [
     cidr_blocks = ["10.0.0.0/16", "10.1.0.0/16"]
   }
 ]
+
+###############################
+# lambda
+###############################
+function_name             = "function-1"
+function_1_handler        = "index.handler"
+function_1_runtime        = "python3.8"
+function_1_timeout        = 300
+function_1_memory_size    = 128 #MB
+function_1_architectures  = ["x86_64"]
+function_1_env_var        = { "env" = "dev2"}
