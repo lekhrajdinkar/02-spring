@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "lekhrajdinkar-org"
     workspaces {
-      name = "aws-config-maps-outbound-dev1-all"
+      name = "aws-config-maps-outbound-dev2-vpc"
     }
   }
 }

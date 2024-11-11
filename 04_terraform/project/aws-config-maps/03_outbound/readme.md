@@ -13,8 +13,8 @@
 ---
 
 # HCP workspace: aws-config-maps-outbound-`dev2`-`<configName>`
-- terraform plan --var-file ..\..\env\dev1.tfvars
-- terraform apply --var-file ..\..\env\dev1.tfvars --auto-approve
+- **terraform plan --var-file ..\..\env\dev2.tfvars**
+- **terraform apply --var-file ..\..\env\dev2.tfvars --auto-approve**
 
 ##  aws-config-maps-outbound-`dev2`-eks
 - cd ./modules/eks

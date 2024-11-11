@@ -6,6 +6,7 @@
 - rds
 - hosted zone
 - permission boundary policy
+- kms keys
 */
 
 # --- AWS ---

@@ -1,3 +1,4 @@
+/*
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
   tags = {
@@ -51,4 +52,20 @@ resource "aws_route_table_association" "public_association_1" {
 resource "aws_route_table_association" "public_association_2" {
   subnet_id      = aws_subnet.public_subnet_2.id
   route_table_id = aws_route_table.public_route_table.id
+}
+*/
+
+module "vpce" {
+  source = "./vpce"
+
+  app_component                 = var.app_component
+  app_env                       = var.app_env
+  app_name                      = var.app_name
+  aws_primary_region            = var.aws_primary_region
+  aws_vpc_id                    = var.aws_vpc_id #vpc-04ce2894d2f99bbb8
+  sg_ingress_object             = var.sg_ingress_object
+  tags                          = var.tags
+  private_subnet_route_table_id = var.private_subnet_route_table_id
+  public_subnet_route_table_id  = var.public_subnet_route_table_id
+  private_subnet_ids            = var.private_subnet_ids
 }
