@@ -1,6 +1,6 @@
 # Harness
-- `Account`: lekhrajdinkar
-- `Organization`: default
+- **Account**: `lekhrajdinkar` : https://app.harness.io/ng/account/e0wDKKO_S46x3M75TWv0iw/all/settings/
+- **Organization**: `default`
 - module - **Cd** , CI, security testing, etc
 
 --- 
@@ -18,6 +18,8 @@
     - terraform-hcp-connector
     - aws-secret-manager-connector
     - aws-account-connector
+      - authentication : AWS access key *, assume role on aws-delegate, IRSA
+      - As
     - nexus-repo-connector (optional)
     - service-now-connector (optional)
 - **environment**
@@ -28,11 +30,41 @@
       - `prod`
 ### more
 - **delegate**
-    - k8s-delegate
+    - docker-delegate
+      - ```
+        docker run  --cpus=1 --memory=2g \
+        -e DELEGATE_NAME=docker-delegate \
+        -e NEXT_GEN="true" \
+        -e DELEGATE_TYPE="DOCKER" \
+        -e ACCOUNT_ID=e0wDKKO_S46x3M75TWv0iw \
+        -e DELEGATE_TOKEN=MGY2OGJmMWQwYjMwZGM5NDYzZDM5NGFlMDg5Mzk4NzY= \
+        -e DELEGATE_TAGS="" \
+        -e LOG_STREAMING_SERVICE_URL=https://app.harness.io/log-service/ \
+        -e MANAGER_HOST_AND_PORT=https://app.harness.io harness/delegate:24.10.84200
+        
+        docker run  --cpus=1 --memory=2g -e DELEGATE_NAME=docker-delegate -e NEXT_GEN="true" -e DELEGATE_TYPE="DOCKER" -e ACCOUNT_ID=e0wDKKO_S46x3M75TWv0iw -e DELEGATE_TOKEN=MGY2OGJmMWQwYjMwZGM5NDYzZDM5NGFlMDg5Mzk4NzY= -e DELEGATE_TAGS="" -e LOG_STREAMING_SERVICE_URL=https://app.harness.io/log-service/  -e MANAGER_HOST_AND_PORT=https://app.harness.io harness/delegate:24.10.84200
+        ```
 - **secrets**
     - added by aws-account-connector
     - added manual
-
+- **Access control**
+  - **service account** : none
+  - **user group** : `OZ_DEV_MAPS_DEV_LEAD` ( u1, u2,  coming from ? integrate with lDAP ?)
+    - manage role-binding --> `role-1 <==bind==> resource-group-1` ,etc.
+    - added binding : `pipelineExecutor - All-Project-Level-Resources`
+    - **roles**
+      - found 19, built-in. eg : `pipeline-executor`, etc
+      - cant add more with enterprise version - role-1,2,...
+      - role has granular permission.
+      - create later:
+        - OZ_dev_role : service, template, pipeline
+        - OZ_prod_role  : service, template, pipeline
+    - **resource-groups**
+      - found 1 : `All-Project-Level-Resources`  
+      - cant add more with enterprise version - resource-group-1,2,...
+      - create later:
+        - OZ_dev_resource-group : services, templates, pipelines
+        - OZ_prod_resource-group : services, templates, pipelines
 
 ---
 ## project:2 - maps-outbound-ui (`hold`)
