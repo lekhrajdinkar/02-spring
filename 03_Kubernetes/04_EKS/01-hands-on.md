@@ -47,8 +47,8 @@
 - create VPC for EKS 
   - will get standard cloudformation template, use that for now.
 - kubeCtl > add new context in kubeconfig file.
-  - **aws eks update-kubeconfig --cluster cluster-1 --region r1**
-  - 
+  - **aws eks update-kubeconfig --cluster cluster-1 --region r1** :point_left:
+  
 ### steps
 - create **cluster** with above VPC and role
   - it will add default ns.
