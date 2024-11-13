@@ -67,3 +67,4 @@ env:
 
 - after this if we create any new secret it will encrypted.
 - ![img.png](../99_img/img.png)
+---

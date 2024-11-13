@@ -19,12 +19,17 @@ metadata
   name:pod-1
   label:
   securityContext:  # can also add container level, set user only, not capability here.
+annotation:
+  secret.reloader.stakater.com/auto: "true" 
+  configmap.reloader.stakater.com/auto: "true" 
+  reloader.stakater.com/auto: "true"  
 spec:
 
   tolerations:
   nodeSelector:
     kubernetes.io/arch: "amd64" # arm64
-    karpenter.sh/capacity-type: "spot"
+    karpenter.sh/capacity-type: "spot"         <<<
+    
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
