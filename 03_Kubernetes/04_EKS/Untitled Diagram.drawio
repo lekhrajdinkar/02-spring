@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-11-13T09:08:58.773Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" etag="6aL2WUrH3steDL1w9ykC" version="24.6.5" type="github">
+<mxfile host="app.diagrams.net" modified="2024-11-13T09:10:32.179Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" etag="h1NaFw1MflgPzIOqgXxA" version="24.6.5" type="github">
   <diagram name="Page-1" id="77FXZlbwy5sw5B4aOLtn">
-    <mxGraphModel dx="2176" dy="1838" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="2176" dy="738" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -85,9 +85,6 @@
         </mxCell>
         <mxCell id="TPYvqTaAF-6Quw0X2QA_-55" value="" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.role;" vertex="1" parent="TPYvqTaAF-6Quw0X2QA_-2">
           <mxGeometry x="340" y="240" width="53.18" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="TPYvqTaAF-6Quw0X2QA_-11" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="310" y="-350" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="TPYvqTaAF-6Quw0X2QA_-19" value="&lt;font color=&quot;#ff00ff&quot;&gt;kubeconfig&lt;/font&gt;&lt;br&gt;&lt;div style=&quot;background-color: rgb(255, 255, 255);&quot;&gt;&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;&lt;b&gt;context&lt;/b&gt;:&lt;/pre&gt;&lt;pre style=&quot;font-family: &amp;quot;JetBrains Mono&amp;quot;, monospace; font-size: 9.8pt;&quot;&gt;cluster: mcp-im-usel-dev-ns-01&lt;br&gt;user:    mcp-im-usel-dev-ns-01&lt;/pre&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="295" y="765" width="260" height="80" as="geometry" />
