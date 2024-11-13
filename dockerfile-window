@@ -7,14 +7,14 @@ WORKDIR /app
 COPY .mvn/ .mvn
 COPY src/ src
 COPY pom.xml .
-COPY mvnw .
+COPY mvnw-window .
 
 # Make the Maven wrapper executable
-RUN chmod 775 ./mvnw
+RUN chmod 775 ./mvnw-window
 
 RUN ls -l /app
 # Package the application
-RUN ./mvnw package -f ./pom.xml
+RUN ./mvnw-window package -f ./pom.xml
 
 # Extract layers using layertools from the packaged JAR
 RUN java -Djarmode=layertools -jar ./target/spring-1.0.0.jar extract

@@ -42,6 +42,7 @@
   - -f custom-values.yaml
   - --set key1=value1,key2=value2
   - each release has name. here `release-v2`
+  - `--set` image.repository=<your-ecr-repo-url>,image.tag=<tag>
 - helm `upgrade` release-v2 spring-helm
 - helm `delete` release-v2
 - helm `history` release-v2
