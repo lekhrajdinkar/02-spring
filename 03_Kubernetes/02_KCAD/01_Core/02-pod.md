@@ -23,6 +23,8 @@ spec:
 
   tolerations:
   nodeSelector:
+    kubernetes.io/arch: "amd64" # arm64
+    karpenter.sh/capacity-type: "spot"
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -67,7 +69,10 @@ spec:
         runAsUser: <userid>
         capabilities: # only supported here
           add: ["MAC_ADMIN", "SYS_TIME", "NET_ADMIN"]
-      
+          drop" ["ALL"]
+          allowPrivilegeEscalation: false
+          runAsGroup: 101      
+          runAsUser: 101
      
            
     - name: c2

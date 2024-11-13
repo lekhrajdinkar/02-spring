@@ -8,9 +8,9 @@
 - https://app.harness.io/ng/account/e0wDKKO_S46x3M75TWv0iw/home/orgs/default/projects/mapsoutboundapi/details
 ### common
 - **pipeline**
-    - pipeline-1 :: `build-deploy-pipeline`
-        - trigger : git-push
-        - stages : build, ecr-push, deploy
+  - pipeline-1 :: `build-deploy-pipeline`
+    - trigger : git-push
+    - stages : build, ecr-push, deploy
 - **services**
 - **connectors**
     - k8s-cluster-connector
@@ -19,13 +19,13 @@
     - aws-secret-manager-connector
     - aws-account-connector
       - authentication : AWS access key *, assume role on aws-delegate, IRSA
-      - As
     - nexus-repo-connector (optional)
     - service-now-connector (optional)
 - **environment**
   - env-group : `oz-dev`
       - `dev1`
         - infrastructure definition : none
+        - input files
       - `dev2`
       - `prod`
 ### more
