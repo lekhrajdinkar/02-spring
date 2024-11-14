@@ -1,20 +1,3 @@
-# references
-- OIDC provider: with Okta `Dont use this`  <<<
-  - https://dev-16206041-admin.okta.com/
-  - https://dev-16206041.okta.com/
-  - eks-cluster-app : https://dev-16206041-admin.okta.com/admin/app/oidc_client/client/0oal3d72smuSHBhwF5d7#tab-general
-    - client_id : 0oal3d72smuSHBhwF5d7
-    - issuer URI : 
-      - https://dev-16206041.okta.com/oauth2/default (default)
-      - https://dev-16206041.okta.com/oauth2/ausl3dg4kkpyvEBft5d7
----  
-# chatgpt: 
-- EKS 01 - harness pipeline : https://chatgpt.com/g/g-CbdJhMyfi-aws-cloud-architect-developer/c/67332811-eb9c-800d-a4f1-d4cdbe1542dd ...in progress
-- EKS 02 - OIDC + IRSA : https://chatgpt.com/c/67341083-2714-800d-b4f6-6b52821c0181
-- EKS-03 - `ns:kube-system > configMap:aws-auth` : https://chatgpt.com/c/6734280e-7d48-800d-b410-280da79926fe
-  - access  specific namespace based on iam-role-assumed-by-sa  <<<
-  - eg: sa-1 > assumed role-1 > access ns-1
----
 # Cluster
 ## cg - MCP cluster
 - multi tenant(shared) kube env in 2 aws region. Dedicated AWS account - **mcp-aws**
