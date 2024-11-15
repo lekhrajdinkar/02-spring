@@ -84,7 +84,7 @@ pipeline:
                 value: <+input>
         when:
           pipelineStatus: Success
-          condition: <+pipeline.variables.APP_ENV> == "dev2"
+          condition: <+pipeline.variables.APP_ENV> == "dev1"
   variables:
     - name: APP_NAME
       type: String
