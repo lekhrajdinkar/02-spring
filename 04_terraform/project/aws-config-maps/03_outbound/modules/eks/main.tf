@@ -14,7 +14,9 @@ resource "aws_iam_role" "eks_cluster_role" {
   # managed_policy_arn = ["arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"]
 }
 
+
 # attach inline policy - optional
+/*
 resource "aws_iam_policy" "eks_cluster_inline_policy" {
   policy = templatefile("${path.module}/policy_05_eks_cluster.tftpl", {})
 }
@@ -22,6 +24,7 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_inline_policy_attachment"
   role       = aws_iam_role.eks_cluster_role.name
   policy_arn = aws_iam_policy.eks_cluster_inline_policy.arn
 }
+*/
 
 # attach inbuilt policy - AmazonEKSClusterPolicy
 resource "aws_iam_role_policy_attachment" "eks_cluster_policy_attachment" {

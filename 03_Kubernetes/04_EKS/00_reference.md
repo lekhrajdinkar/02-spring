@@ -17,17 +17,23 @@
 - EKS + harness pipeline - `handson`
   - https://chatgpt.com/c/67346f23-ce58-800d-9b35-a0ccf088f920
   - https://chatgpt.com/c/67352892-e094-800d-a053-9a51c1074097
+  - https://chatgpt.com/c/67358116-3f1c-800d-96c6-c6d447f1b283
 
 ---
 ```
-aws eks describe-cluster --name your-cluster-name --region us-west-2
+
 aws ec2 describe-subnets --filters "Name=vpc-id,Values=vpc-id-from-output" --region us-west-2
 aws ec2 describe-vpcs --vpc-ids vpc-id-from-output --region us-west-2
 aws eks list-fargate-profiles --cluster-name your-cluster-name --region us-west-2
 aws ec2 describe-vpc-endpoints --filters "Name=vpc-id,Values=vpc-id-from-output" --region us-west-2
-kubectl get nodes
-kubectl get pods -A
 aws ec2 describe-route-tables --filters "Name=vpc-id,Values=vpc-id-from-output" --region us-west-2
 aws ec2 describe-security-groups --filters "Name=vpc-id,Values=vpc-id-from-output" --region us-west-2
-curl http://your-vpc-endpoint-url
+
+
+aws eks describe-cluster  --name maps-outbound-us-west-2-dev2-eks-fargate-cluster --region us-west-2 --query "cluster.identity.oidc.issuer"
+aws iam create-open-id-connect-provider --url https://oidc.eks.us-west-2.amazonaws.com/id/867FAFA03F6706024B5895223D5D3451 --client-id-list sts.amazonaws.co
+aws eks get-token  --cluster-name maps-outbound-us-west-2-dev2-eks-fargate-cluster --region us-west-2
+aws eks update-kubeconfig --name maps-outbound-us-west-2-dev2-eks-fargate-cluster --region us-west-2
 ```
+
+-https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html

@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: maps-dev
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: outbound-api-pod
+  namespace: maps-dev  # Change this to your desired namespace if needed
+  labels:
+    app: outbound-api
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx:latest
+      ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: outbound-api-service
+  namespace: maps-dev  # Change this to match your desired namespace
+spec:
+  selector:
+    app: outbound-api  # Ensure this matches the labels on your pod
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: NodePort  # You can change this to NodePort or LoadBalancer if needed
+

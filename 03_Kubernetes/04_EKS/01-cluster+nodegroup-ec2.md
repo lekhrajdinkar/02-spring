@@ -35,7 +35,12 @@
   - https://www.udemy.com/course/docker-kubernetes-the-practical-guide/learn/lecture/22628019#overview
   - https://www.udemy.com/course/docker-kubernetes-the-practical-guide/learn/lecture/22628021#overview
 
-
+- created with `terraform` HCL
+  - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/aws-config-maps-outbound-dev2-eks/runs 
+  - kubectl cluster-info
+  - `master`: https://C7467B80CEF6669327EE0493423B84A5.gr7.us-west-2.eks.amazonaws.com
+  - `CoreDNS` : https://C7467B80CEF6669327EE0493423B84A5.gr7.us-west-2.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+  
 ### pre work:
 - **permission** - create below roles:
   - `cluster-role-1` : 
@@ -47,12 +52,15 @@
 - create VPC for EKS 
   - will get standard cloudformation template, use that for now.
 - kubeCtl > add new context in kubeconfig file.
-  - **aws eks update-kubeconfig --cluster cluster-1 --region r1** :point_left:
+  - **aws eks update-kubeconfig --cluster cluster-1 --region r1**
   
 ### steps
+- role-1 is used to created cluster.
+  - cluster > ns:kube-sysytem > configMap: `aws-auth` : authenticate role-1.
+  - later on can add more role those will get authenticated. :point_left:
 - create **cluster** with above VPC and role
   - it will add default ns.
-- once created > **compute** tab > add Nodegroup with above role + vpc
+- once created > **compute** tab > add `Nodegroup`(ec2 machines) with above role + vpc
   - choose instance-type and scaling.
   - it will also install k8s software needed for **worker node**.
 - choose cluster type : **public and private**

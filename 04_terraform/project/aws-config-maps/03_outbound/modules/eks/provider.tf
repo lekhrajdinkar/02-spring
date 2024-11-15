@@ -1,15 +1,15 @@
 provider "aws" {
   region = var.aws_primary_region
 
-  assume_role {
+/*  assume_role {
     role_arn = var.aws_assume_role_arn
-  }
+  }*/
   shared_credentials_files = ["./credentials"]
-  profile                  = "trf"
+  profile                  = "ld"
 
 }
 
-provider "aws" {
+/*provider "aws" {
   region = var.aws_secondary_region
 
   alias = "secondary"
@@ -18,7 +18,7 @@ provider "aws" {
   }
   shared_credentials_files = ["./credentials"]
   profile                  = "trf"
-}
+}*/
 
 terraform {
   required_providers {

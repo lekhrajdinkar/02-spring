@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.lekhraj.java</groupId>
-	<artifactId>spring</artifactId>
+	<artifactId>06_messaging</artifactId>
 	<version>1.0.0</version>
 	<name>spring</name>
 	<description>Demo project for Spring Boot</description>
