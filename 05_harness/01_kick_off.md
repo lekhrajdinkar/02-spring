@@ -1,3 +1,5 @@
+https://developer.harness.io/docs/continuous-delivery/get-started/key-concepts
+---
 # Harness
 - **Account**: `lekhrajdinkar` : https://app.harness.io/ng/account/e0wDKKO_S46x3M75TWv0iw/all/settings/
 - **Organization**: `default`
@@ -8,9 +10,10 @@
 - https://app.harness.io/ng/account/e0wDKKO_S46x3M75TWv0iw/home/orgs/default/projects/mapsoutboundapi/details
 ### common
 - **pipeline**
-  - pipeline-1 :: `build-deploy-pipeline`
-    - trigger : git-push
-    - stages : build, ecr-push, deploy
+  - https://app.harness.io/ng/account/e0wDKKO_S46x3M75TWv0iw/all/orgs/default/projects/mapsoutboundapi/pipelines
+  - pipeline > stages (build, deploy, another pipleline) > steps (run, image push, etc)
+    - input set
+    - triggers
 - **services**
 - **connectors**
     - k8s-cluster-connector
