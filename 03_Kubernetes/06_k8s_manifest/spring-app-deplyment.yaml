@@ -1,7 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev-ns
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-app-deployment
+  namespace: dev-ns
   labels:
     app: spring-app
 spec:
@@ -25,6 +32,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: spring-app-service
+  namespace: dev-ns
 spec:
   type: NodePort
   selector:
