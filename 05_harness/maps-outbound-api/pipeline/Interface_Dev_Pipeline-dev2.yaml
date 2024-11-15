@@ -1,0 +1,18 @@
+inputSet:
+  name: dev2
+  identifier: dev2
+  orgIdentifier: default
+  projectIdentifier: mapsoutboundapi
+  pipeline:
+    identifier: Interface_Dev_Pipeline
+    properties:
+      ci:
+        codebase:
+          build: <+input>
+    variables:
+      - name: GIT_BRANCH
+        type: String
+        value: <+input>
+      - name: DOCKER_HUB_REPO
+        type: String
+        value: <+input>
