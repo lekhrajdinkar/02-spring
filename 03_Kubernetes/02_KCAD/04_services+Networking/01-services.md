@@ -5,7 +5,7 @@
 - use `localhost` for container/s comm inside a pod.
 
 ## B. Services
-### ClusterIP: (pod 2 pod) : default
+### ClusterIP: (pod <==>  pod) : default
 - Exposes the service internally within the cluster. 
 - check for service IP (internal cluster IP, stable) 
   - manually grab it and use.
@@ -18,11 +18,14 @@
 
 
 ---
-### NodePort: (outside 2 pod)
-- external-client --> internet --> k8s-cluster [  node-1[node-ip:node-port] > service-1[internal-ip:service-port] > pod/s[internal-ip:target-port]  ]
+### NodePort: (outside world <==> pod)
+- external-client --> internet --> k8s-cluster -->  `node-1|2|..[static-node-ip:node-port] `--> `nodePort-service[internal-ip:service-port] `--> `pod/s[internal-ip:target-port]`  
   - maps `port-on-Node` to `pod`::container::process(port)
   - listens traffic on node-port and forward traffic to pod.
   - Can be accessed externally using `<NodeIP>:<NodePort>`.
+  - Kubernetes cluster allocates a port (usually between 30000-32767) on all nodes.
+  - `uascase` : external-load-balance (aws-alb) --> send traffic to node-port service/s (so, 3 node === 3 services, once on each Node/ec2)
+    - manually create exter alb ahead of time.
   - ![img_1.png](../99_img/06/img_1.png)
   - ![img_2.png](../99_img/06/img_2.png)
     - note: cloud-logo with 10.244.0.0, represents internal-network, here.
@@ -32,16 +35,17 @@
     - span over multiple nodes
 - Node IP can be changed. 
   - if 3 nodes, then 3 endpoints
+  
 ---
-### LoadBalancer: (outside 2 pod)
-- Routes traffic to the backend pods through internet IP.
-- if 3 nodes, then single endpoints
-- use-case : cloud provider’s load balancer.
-- **minikube service lb-service-name** --> it will give external url
+### LoadBalancer: (outside <==>  pod)
+- calls cloud provider API and automatically creates external lb inside cloud infra, that routes the traffic to this service.
+- so use this, if deploying services on AWS,etc
+- Note: for minikube
+  - **minikube service lb-service-name** --> it will give external url.
   - in EKS, we don't need this additional step, can always see external url.
 
 ---
-### headless service: (outside 2 pod directly)
+### headless service: (outside <==>  pod, directly)
 - allows direct access to individual pod IPs without a load balancer or cluster IP. 
 
 - Key Features:
