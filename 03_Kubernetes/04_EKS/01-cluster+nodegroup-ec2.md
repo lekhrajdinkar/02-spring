@@ -30,7 +30,7 @@
 - diff:
   - ECS is AWS specific concept and configuration
   - EKS follows kubernetes standards.
-  - both solves same probolem in similar way.
+  - both solves same problem in similar way.
 - setup video:
   - https://www.udemy.com/course/docker-kubernetes-the-practical-guide/learn/lecture/22628019#overview
   - https://www.udemy.com/course/docker-kubernetes-the-practical-guide/learn/lecture/22628021#overview

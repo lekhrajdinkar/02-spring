@@ -4,6 +4,7 @@
 ---
 
 ## A. Minikube Components:
+### core
 - https://kubernetes.io/docs/concepts/overview/components/
 - - hierarchy :
   - `cluster` --> `node` --> `pod`,IP,workloads,posSpecYml/Json
@@ -70,9 +71,12 @@
   - `DNS Server` 
   - `metric Server`
   - Web based `UI`
-  - Cluster level `logging`  
+  - Cluster level `logging` 
+  - ingress controller ??
 
-- `User`: 
+### more
+
+- `User`:  :point_left:
   - eg: An admin using `kubectl` to create a deployment.
   - Represents a real human (`admins` / `developers`) or an external entity accessing the Kubernetes cluster.
   -  Users are not managed by Kubernetes itself.
@@ -84,45 +88,9 @@
     - developer user : 
       - admin will role and role binfing
 
-- `Service Account`: 
+- `Service Account`:  :point_left:
   - represents processes running inside the Kubernetes cluster.
   - Managed within Kubernetes
   - created inside ns
   - Service accounts use secrets that are automatically created and mounted to pods running under them.
   - create role and rolebinding for SA. (fine granular access)
----
-## B. Install minikube
-- https://kubernetes.io/docs/tasks/tools/
-- install `docker` desktop
-  - docker Engine
-  - docker local repo / or,  dockerhub
-
-- install `kubectl` 
-  - https://kubernetes.io/docs/reference/kubectl/
-  - https://kubernetes.io/docs/reference/kubectl/quick-reference/
-  - curl.exe -LO "https://dl.k8s.io/release/v1.30.0/bin/windows/amd64/kubectl.exe
-  - check Kubeconfig 
-    - .kube/config  - default file
-    - **KUBECONFIG** env Var
-
-- install `MiniKube`
-  - gcr.io/k8s-minikube/kicbase:v0.0.44
-  - minikube version: `v1.33.1`, download minikube.exe, set PATH, install docker (driver)
-  - Minikube automatically configures kubectl to use the Minikube cluster.
-  - purpose:
-    - learn Kubernetes concepts and experiment with different configurations and deployments without the need for a full-fledged cluster
-    - used in CI/CD pipelines for testing Kubernetes applications.
-  -  Run k8s cluster on your local machine | `single-node`
-  - `add-ons` : Ingress, Dashboard, DNS, Metrics Server,etc.
-  - configure : CPU and memory
-  - commands :
-    - minikube `addons` enable/disable <addon-name>
-    - minikube `service` <service-name> --> host services with external IPs.
-    - minikube `status`
-    - minikube `dashboard`
-      - http://127.0.0.1:59962/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/daemonset?namespace=default
-    - ** minikube `start` --driver=docker | `stop` | `delete`
-      - https://minikube.sigs.k8s.io/docs/drivers/
-    - minikube version
-    - ** minikube `docker-env`: allow miniKube to access local-docker-repo.
-
