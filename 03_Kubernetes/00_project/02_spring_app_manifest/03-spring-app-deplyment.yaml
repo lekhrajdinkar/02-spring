@@ -29,7 +29,7 @@ metadata:
   name: spring-app-service
   namespace: dev-ns
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: spring-app
   ports:

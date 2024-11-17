@@ -26,8 +26,12 @@
 
 ---
 ## create new user/sa
+- https://chatgpt.com/c/673940a9-d1cc-800d-a117-847107be2e53
+
 ### 1. create new `eks-user` (admin, token-based)
 - Note: users === outside k8s user === represent aws `IAM user` or `IAM role`
+  - of same AWS account
+  - or cross AWS account
 - create `aws-role-1`, attach policies/permission:
   - AmazonEKSClusterPolicy
   - AmazonEKSServicePolicy
@@ -54,19 +58,50 @@ mapRoles: |
 
 ### 2. create new `eks-user` (non-admin, token-based )
 - same as above. but remove this `system:masters`
-- add RBAC for a group (say : `developer-group `)
+- add RBAC for a group (say : `developer-group-1`). check below
   - create `ClusterRole` and `ClusterRoleBinding` for this group. (for cluster-level resource)
   - create `Role` and `RoleBinding` for this group. (for ns-level resource)
   - in binding object > subject > kind: user, name: `aws-role-1-user`
 ```
 # notice linking of group and user.
-# this is EKS specfic thing only 
+# this group is EKS specfic thing only 
 
 mapRoles: |
   - rolearn: arn:aws:iam::123456789012:role/aws-role-1
     username: aws-role-1-user    <<<
     groups:
-      - developer-group          <<<
+      - developer-group-1          <<<
+```
+
+```
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: developer-role-1
+# edit rules - fine grain 
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["*"]
+  labelSelector
+    matchLabels:
+        atm-id: "aa00003199"          <<<
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: developer-role-1-binding
+subjects:
+- kind: Group
+  name: developer-group-1  
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: developer-role-1
+  apiGroup: rbac.authorization.k8s.io
+  
 ```
 
 ### 3. create new minikube user (non-admin, certificate-based )
@@ -74,6 +109,7 @@ mapRoles: |
 
 ### 4. create new service (non-admin)
 - create eks object yaml, inside ns.
-- for permission to k8s-resource : role and role-binding
-- for permission to aws-resource : IRSA
+- for permission to k8s-resource : `role and role-binding`
+- for permission to aws-resource : `IRSA`
+  - **annotate** service account with `aws iam role`.
 
