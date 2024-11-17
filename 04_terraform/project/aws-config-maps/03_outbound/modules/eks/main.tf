@@ -186,4 +186,51 @@ resource "aws_route_table_association" "eks_subnet_association" {
   route_table_id = aws_route_table.eks_route_table.id
 }
 
+# ============iam : identity provider ODIC ============
 
+resource "aws_eks_identity_provider_config" "oidc" {
+  cluster_name = aws_eks_cluster.eks_cluster.name
+
+  oidc {
+    identity_provider_config_name = "${local.prefix}-oidc-eks"
+    issuer_url                    = "https://oidc.eks.${var.aws_primary_region}.amazonaws.com/id/${aws_eks_cluster.eks_cluster.id}"
+    client_id                     = "sts.amazonaws.com"
+  }
+  depends_on = [aws_eks_cluster.eks_cluster]
+}
+
+# iam : ID provider - create manually
+/*
+resource "aws_iam_openid_connect_provider" "eks_oidc_provider" {
+  client_id_list  = ["sts.amazonaws.com"]
+  thumbprint_list = ["9e99a48a9960b14926bb7f3b02e22da2b0ab7280"]
+  url             = "https://oidc.eks.${var.aws_primary_region}.amazonaws.com/id/${aws_eks_cluster.eks_cluster.id}"
+}
+*/
+
+
+# =========== Role for K8s service Account for pod ============
+
+resource "aws_iam_role" "eks_cluster_sa_role" {
+  name               = "${local.prefix}-k8s-sa-role"
+  assume_role_policy = templatefile("${path.module}/trusted_policy_k8s_federated_sa.tftpl", {
+    # oidc_id = aws_eks_cluster.eks_cluster.identity[0].oidc[0].id
+    eks_cluster_id  = aws_eks_cluster.eks_cluster.id
+    region          = var.aws_primary_region
+    aws_account_id  = var.aws_account_id
+    ns              = var.namespace
+    sa_name         = var.sa_name
+  })
+  depends_on = [aws_eks_cluster.eks_cluster]
+}
+resource "aws_iam_role_policy_attachment" "eks_cluster_sa_role_s3_full" {
+  role       = aws_iam_role.eks_cluster_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
+}
+
+
+# =========== Role for eks federated user ============
+# mauanlly added :: arn:aws:iam::533267082359:role/eks-cluster-role-1-for-federated-user
+# https://us-east-1.console.aws.amazon.com/iam/home?region=us-west-2#/roles/details/eks-cluster-role-1-for-federated-user?section=permissions
+# this user will connect to eks cluster
+# then use it in harness connector.

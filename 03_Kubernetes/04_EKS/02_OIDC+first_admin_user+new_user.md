@@ -33,10 +33,9 @@
   - of same AWS account
   - or cross AWS account
 - create `aws-role-1`, attach policies/permission:
-  - AmazonEKSClusterPolicy
-  - AmazonEKSServicePolicy
-  - eks:AccessKubernetesApi
-  -  ...
+  - AmazonEKSClusterPolicy, AmazonEKSWorkerNodePolicy , AmazonEKSServicePolicy
+  - inline : eks:AccessKubernetesApi, DescribeCluster, ListClusters, iam:gegetroltRole,PassRole
+  - https://us-east-1.console.aws.amazon.com/iam/home?region=us-west-2#/roles/details/eks-cluster-role-1-for-federated-user?section=permissions - created manually.
 - let's create new-user  (for `aws-role-1`)
 - `first-admin-user` has to update `aws-auth` ConfigMap.
   - **kubectl edit configmap aws-auth -n kube-system**
@@ -46,6 +45,9 @@ mapRoles: |
     username: aws-role-1-user    <<<
     groups:
       - system:masters
+      # - system:bootstrappers
+      # - system:nodes
+      # - system:node-proxier
 ```
 - aws configure (with aws-role-1) :point_left:
 - update **kubeconfig**
@@ -56,7 +58,7 @@ mapRoles: |
 ```
 - new admin user got created :)
 
-### 2. create new `eks-user` (non-admin, token-based )
+### 2. create new `eks-user` (non-admin, token-based )  === cg
 - same as above. but remove this `system:masters`
 - add RBAC for a group (say : `developer-group-1`). check below
   - create `ClusterRole` and `ClusterRoleBinding` for this group. (for cluster-level resource)

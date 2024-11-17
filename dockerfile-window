@@ -17,7 +17,7 @@ RUN ls -l /app
 RUN ./mvnw-window package -f ./pom.xml
 
 # Extract layers using layertools from the packaged JAR
-RUN java -Djarmode=layertools -jar ./target/spring-1.0.0.jar extract
+RUN java -Djarmode=layertools -jar ./target/spring-app-1.0.0.jar extract
 
 # Runtime stage
 FROM eclipse-temurin:17-jre-alpine as runtime

@@ -22,6 +22,25 @@
     - serviceAccount in k8s object > authenticated by OIDC > become federated user to assume role.  :point_left:
     - notice condition: audience is `sa of ns`
     - check this : [trusted_policy_k8s_federated_sa.tftpl](..%2F..%2F04_terraform%2Fproject%2Faws-config-maps%2F03_outbound%2Fmodules%2Feks%2Ftrusted_policy_k8s_federated_sa.tftpl)
+    ```
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Federated": "arn:aws:iam::533267082359:oidc-provider/oidc.eks.us-west-2.amazonaws.com/id/C1D7C8CD6FB2C01B2998093B7999CB8D"
+            },
+            "Action": "sts:AssumeRoleWithWebIdentity",
+            "Condition": {
+                "StringEquals": {
+                    "oidc.eks.us-west-2.amazonaws.com/id/C1D7C8CD6FB2C01B2998093B7999CB8D:sub": "system:serviceaccount:dev-ns:spring-app-sa"
+                }
+            }
+        }
+    ]
+    }
+    ```
 - create sa-1
   - add annotation : eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/`role-1-sa-1`
 - Associate the Service Account with Your Pods. 

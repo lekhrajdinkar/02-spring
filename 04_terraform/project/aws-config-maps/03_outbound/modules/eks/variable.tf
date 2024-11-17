@@ -19,3 +19,7 @@ variable "cpu" { type = number }
 variable "memory" { type = number }
 variable "task_count" { type = number }
 variable "okta_domain_name" { type = string }
+
+# ------ eks -----------
+variable "namespace" { type = string }
+variable "sa_name" { type = string }

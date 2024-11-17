@@ -54,3 +54,9 @@ function_1_timeout        = 300
 function_1_memory_size    = 128 #MB
 function_1_architectures  = ["x86_64"]
 function_1_env_var        = { "env" = "dev2"}
+
+####################
+# EKS
+#################
+namespace              = "dev-ns"
+sa_name         = "spring-app-sa"
