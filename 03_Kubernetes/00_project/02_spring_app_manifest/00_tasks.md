@@ -29,6 +29,7 @@
 - next, ingress rule
   - rule-1 
 - *** update harness pipeline service ***
+- kubectl get pods **-n ingress-nginx**
 
 ## 4. do same with helm
 - create new harness pipeline for helm deployment

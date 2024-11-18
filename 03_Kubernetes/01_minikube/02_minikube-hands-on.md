@@ -68,11 +68,38 @@ kubectl get nodes -o wide
 NAME       STATUS   ROLES           AGE    VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION                       CONTAINER-RUNTIME
 minikube   Ready    control-plane   3d2h   v1.30.0   192.168.49.2   <none>        Ubuntu 22.04.4 LTS   5.15.153.1-microsoft-standard-WSL2   docker://26.1.1
 
+```
 ---
+## ingress
+```
 minikube ip
 192.168.49.2
 
----
 minikube service spring-k8s-service
+
+minikube tunnel
+
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
+kubectl get pods -n ingress-nginx
+
+C:\Windows\System32\drivers\etc
+192.168.49.2 hello-world.local
+127.0.0.1 hello-world.local
+
+http://hello-world.local/spring/swagger-ui/index.html
+
+
+  rules:
+    - host: hello-world.local
+      http:
+        paths:
+          - path: /spring
+            pathType: Prefix
+            backend:
+              service:
+                name: spring-app-service
+                port:
+                  number: 8080 # Matches the `port` defined in your service
+
 ```
 
