@@ -75,9 +75,9 @@ spec:
         capabilities: # only supported here
           add: ["MAC_ADMIN", "SYS_TIME", "NET_ADMIN"]
           drop" ["ALL"]
-          allowPrivilegeEscalation: false
-          runAsGroup: 101      
-          runAsUser: 101
+        allowPrivilegeEscalation: false
+        runAsGroup: 101      
+        runAsUser: 101
      
            
     - name: c2

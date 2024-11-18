@@ -1,5 +1,5 @@
 ## key points
-- container/s not completed isolated and sahre host kernal/os, but isolated based namespaces.
+- container/s not completed isolated and share host kernal/os, but isolated based **namespaces**.
 - all the process run by container/s, runs on the host but in their own `Namespaces`.
 - **process isolation** : a container cannot see anything out of its namespace.
 - `ps aux` show all process
@@ -10,6 +10,9 @@
 - by default, docker runs container with `root` user **on host** (with less Linux **capability**)
   - dockerfile > USER < userID >
   - docker run --user option
+- **Docker host** : on host machine install docker
+  - eg: docker desktop on out laptops.
+  - all containers runs on this  docker host.
 ---
 ## Layered Arch
 

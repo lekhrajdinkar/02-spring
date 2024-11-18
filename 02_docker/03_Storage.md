@@ -1,28 +1,28 @@
 ## A.Storage
 - storage drivers : based on OS picks correct one.
-- /var/lib/docker
-  - **containers**
-  - **images**
-    - Stores all layers
-  - **volumes**
-    - docker volume `create` vol-1:location-on-`host` (loc1)
-    - can see `/var/lib/docker/vol-1` then.
 
-## B.Mount type
-- -v is old
-- use `--mount`
-  - --mount type=volume, source=vol-1,           target=location-on-container
-  - --mount type=bind,   source=external-drive , target=location-on-container
+```
+side note: 
+/var/lib/docker/below-folder --> check this location
+  - containers
+  - images:  Stores all layers
+  - volumes : 
+    - Docker-managed volumes to store data here
+    - Volumes can be shared between containers
+    - allow to manage data seperately from host 
+    - /var/lib/docker/vol-1 -- better
+    - /path/to/host/dir  - host + container, both using them
+```
   
-### volume mount
-- docker run -v `vol-1`:location-on-`container` (loc2) c1
-- perform R/W, retained after container destroyed.
-- loc1 === loc2, or loc2 is mapped to loc1
+- first create volume 
+  - **docker volume create vol-1:location-on-host**
+  - check `/var/lib/docker/vol-1` then.
 
-### bind mount
-- bind external drive to c1
-- docker run -v `external-location`:location-on-`container` (loc2) c1
-
+- second, it Mount
+- -v is old, use `--mount` on docker run ....
+  - --mount type=volume, source=vol-1 (/var/lib/docker/vol-1),           target=/container/path
+  - --mount type=bind,   source=/path/to/host/dir , target=/container/path
+  
 ---
 ## Z.Screenshots
 ![img_6.png](img/crash-course/img_6.png)

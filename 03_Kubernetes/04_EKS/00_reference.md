@@ -18,7 +18,8 @@
   - https://chatgpt.com/c/67346f23-ce58-800d-9b35-a0ccf088f920
   - https://chatgpt.com/c/67352892-e094-800d-a053-9a51c1074097
   - https://chatgpt.com/c/67358116-3f1c-800d-96c6-c6d447f1b283
-
+- setup new user
+  - https://chatgpt.com/c/67371203-d934-800d-94f1-3c996d9584dd
 ---
 ```
 

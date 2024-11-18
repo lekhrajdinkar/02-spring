@@ -6,14 +6,16 @@
   - all containers are connected.
   - ![img_2.png](img/crash-course/network/img_2.png)
 - can create many bridge n/w.
-  - docker network create  --driver=bridge --subnet ... n1
+  - **docker network create  --driver=bridge --subnet ... n1**
   - ![img_1.png](img/crash-course/network/img_1.png)
 
-- Embedded DNS
+- **Embedded DNS**
   - `privateIP` == containerName(act as hostname)
   - ![img_3.png](img/crash-course/network/img_3.png)
   
 ### 2. host
+- internet
+- intranet - inf, cg, etc
 
 ### 3. none
 - c1 is not connected to host n/w + default n/w
