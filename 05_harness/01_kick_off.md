@@ -8,6 +8,8 @@ https://developer.harness.io/docs/continuous-delivery/get-started/key-concepts
 --- 
 ## project:1 - maps-outbound-api
 - https://app.harness.io/ng/account/e0wDKKO_S46x3M75TWv0iw/home/orgs/default/projects/mapsoutboundapi/details
+- `update secret` : https://app.harness.io/ng/account/e0wDKKO_S46x3M75TWv0iw/all/settings/secrets/aws_eks_get_token/overview :point_left:
+  -  **aws eks get-token  --cluster-name maps-outbound-us-west-2-dev2-eks-fargate-cluster --region us-west-2**
 ### common
 - **pipeline**
   - https://app.harness.io/ng/account/e0wDKKO_S46x3M75TWv0iw/all/orgs/default/projects/mapsoutboundapi/pipelines

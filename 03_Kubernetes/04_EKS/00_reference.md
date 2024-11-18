@@ -34,6 +34,11 @@ aws eks describe-cluster  --name maps-outbound-us-west-2-dev2-eks-fargate-cluste
 aws iam create-open-id-connect-provider --url https://oidc.eks.us-west-2.amazonaws.com/id/867FAFA03F6706024B5895223D5D3451 --client-id-list sts.amazonaws.co
 aws eks get-token  --cluster-name maps-outbound-us-west-2-dev2-eks-fargate-cluster --region us-west-2
 aws eks update-kubeconfig --name maps-outbound-us-west-2-dev2-eks-fargate-cluster --region us-west-2
+
+aws eks describe-update --name maps-outbound-us-west-2-dev2-eks-fargate-cluster  --update-id 388626d9-068d-3325-b988-f15ecd94ee51 --region us-west-2
+# got update it from trf logs
+
+kubectl get configmap aws-logging -n kube-system
 ```
 
 -https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html

@@ -49,7 +49,7 @@ resource "aws_eks_cluster" "eks_cluster" {
 # B Node - fargate profile
 ## B.1 eks node role
 resource "aws_iam_role" "eks_pod_exec_role" {
-  name               = "${local.prefix}-pod-exec-role"
+  name               = "${local.prefix}-fargate-profile-role"
   assume_role_policy =  templatefile("${path.module}/trusted_policy.tftpl", { trusted_service = "eks-fargate-pods"})
 }
 
@@ -77,7 +77,7 @@ resource "aws_eks_fargate_profile" "eks_fargate_profile" {
   subnet_ids = aws_subnet.eks_private_subnet[*].id
 
   selector {
-    namespace = "default"
+    namespace = var.namespace
   }
   depends_on = [
     aws_eks_cluster.eks_cluster,
@@ -224,8 +224,8 @@ resource "aws_iam_role" "eks_cluster_sa_role" {
   depends_on = [aws_eks_cluster.eks_cluster]
 }
 resource "aws_iam_role_policy_attachment" "eks_cluster_sa_role_s3_full" {
-  role       = aws_iam_role.eks_cluster_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
+  role       = aws_iam_role.eks_cluster_sa_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
 
 
