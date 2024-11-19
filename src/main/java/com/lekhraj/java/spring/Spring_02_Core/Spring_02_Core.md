@@ -13,8 +13,8 @@
 - `dependency`
 - `IoC` : inversion of control of create object from Code to configuration(metadata) + resolve dependency
 - `DI` : pattern/design for IoC.
-- `Beans` 
-  - Scopes : singleton / prototype 
+- `Beans` : singleton / prototype 
+  - `@Scope`(ConfigurableBeanFactory.SCOPE_SINGLETON)
 --- 
 ### developer primary 2 tasks
 
@@ -22,24 +22,37 @@
 
 - **task-1**: create/define beans in meta-config 
   - way-1: `@Configuration` > `@Bean`
-  - way-2: `@Component`
-    - `@Repository`
-    - `@Service` 
-    - `@Controller`
+  - way-2: `@Component` 
+    - get created with default constructor, if parameterized not present.
+    - if parameterized present with arg-1 (Type:BeanX). then beanX object must be present.
+      - `@Repository`
+      - `@Service` 
+      - `@Controller`
+    - fact with generic class.
+      - @Component public class MyGenericBean<**PT,CT extends Item**> {} --> this will **NOT** create a bean. :small_red_triangle:
+      - @Component public class StringItemBean extends MyGenericBean<**String, Item**> {} --> will create
+      - @Bean -->  new MyGenericBean<**String, Item**> myGenericBean() --> will create
   
 - **task-2**: Inject Dependency
   - **manual**
-    - `@Configuration`
+    - `@Configuration` + add this for additional bean lookup `@ComponentScan`("")
       - `@Bean` m(){ return new object() ;}
+        - name = {"customBeanName1", "customBeanName2"}
+        - initMethod = "init"
+        - destroyMethod = "cleanup"
+        - autowireCandidate = false/true
       - `@Bean` m( bean1 b1 ){ bean2 o = new object(); o.setb1(b1) ; return o; }  -  **setter injection (manual)** :point_left:
         - use-case: for mandatory dependency
       - `@Bean` m( bean1 b1 ){ bean2 o = new object(b1);  return o; } -  **contructor injection (manual)** :point_left:
         - use-case: for optional dependency
         - override dependency, previously set by construction injection.
       
-  - **Autowire** - `@Autowired` 
+  - **Autowire** - `@Autowired (required=t/f)` 
     - https://www.baeldung.com/spring-autowire
     - ResolvableType class for  superclass, interface, generic types.
+    - injection happens with reflection api
+    - used inside bean created with @component
+    - default - singlton
     - apply on :
       - `property` 
       - `method` --> get applied to `method arg`, then.
@@ -92,32 +105,59 @@
   - collection :  insertion order.
   - multiple Aspect - Apply order.
   - load bean in container.
-  
-### `@Singleton`
 
 ---
 
 ## C. Spring IOC container
 ### bean Life Cycle
-- check : [Spring_02_lifeCycle.md](Spring_02_lifeCycle.md)
+- also check : [Spring_02_lifeCycle.md](Spring_02_lifeCycle.md)
 - manage bean scopes
   - singleton : create along with IoC container on start up.
   - prototype : create on demand
+  
 - **stage-1** : create creation + injection
   - step-1 bean creation : by calling constructor + inject mandatory dependency
   - step-2 bean dependency injection :  resolve conflict, if comes
   - step-3 call aware
-  - step-4 call Bean Pre-Processor
+  - step-4 call Bean Post Processor
+    - @component class Hook_1 implements BeanPostProcessor {} - need to register it. :point_left:
+    
 - BEAN READY  :green_circle:
+
 - **stage-2** : initialization
   - I:InitializingBean > call afterPropertiesSet(){...}
   - `@PostConstruct` m() {...}
+  
 - **stage-3** : Destruction
   - I:DisposableBean > call destroy(){...}
   - `@PreDestory` m() {...}
-
+  
+- **Step-4** : after container is up:
+  - @Component CommandLineRunner/s > run()
 ---
+
 ## D. Code / sample programs   
-- scheduled task
-- create Custom Annotation using Aop
+### 1. scheduled task
+  - @EnableScheduling @Configuration class Config1
+  - @Scheduled(cron = "0 15 10 15 * ?") m() {...}
+  - @Scheduled(fixedRate = 5000) m() {...}
+  - [ScheduledConfig.java](configuration%2FScheduledConfig.java)
+
+### 2. Custom Annotation
+- get class/s
+- get all method/s
+- anno = method.getAnnotation(myAnno1.class)
+- anno.attribute1(), ...
+- run you logic around it.
+```
+public void CustomAnnotationTest(){
+        Method method = Runner1.class.getMethod("testMethod1");
+        MyAnnotation annotation = method.getAnnotation(MyAnnotation.class);
+
+        if (annotation != null) {
+            System.out.println("Value: " + annotation.value());
+            System.out.println("Count: " + annotation.count());
+        }
+    }
+```
 

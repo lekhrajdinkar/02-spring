@@ -32,9 +32,8 @@ public class Runner1 implements CommandLineRunner {
     // 2. DI(Manual) - Injection by Setter
     // 3. DI(Auto) - Type >> if 2+ >> @primary >> @Qualifier("beanName")
     //========================================
-    // 3.1 DI - Auto (feild injection uses reflection)
-    @Autowired(required = true) Store store;
 
+    @Autowired(required = true) Store store; // 3.1 DI - Auto (feild injection uses reflection)
 
     Runner1(){
         log.info("Main :: default construtor");
