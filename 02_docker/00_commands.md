@@ -31,6 +31,7 @@
 
 ### volume and network
 - docker volume create vol-1:location-on-host
+- docker network create  --driver=bridge --subnet ... n1
 
 ---
 - `dockerfile`
