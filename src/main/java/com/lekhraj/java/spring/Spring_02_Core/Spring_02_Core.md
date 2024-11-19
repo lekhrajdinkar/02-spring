@@ -1,4 +1,5 @@
 # Spring - Core
+## reference/s
 - bauleng:
   - https://www.baeldung.com/spring-tutorial
   - https://www.baeldung.com/spring-dependency-injection
@@ -31,7 +32,10 @@
     - `@Configuration`
       - `@Bean` m(){ return new object() ;}
       - `@Bean` m( bean1 b1 ){ bean2 o = new object(); o.setb1(b1) ; return o; }  -  **setter injection (manual)** :point_left:
+        - use-case: for mandatory dependency
       - `@Bean` m( bean1 b1 ){ bean2 o = new object(b1);  return o; } -  **contructor injection (manual)** :point_left:
+        - use-case: for optional dependency
+        - override dependency, previously set by construction injection.
       
   - **Autowire** - `@Autowired` 
     - https://www.baeldung.com/spring-autowire
@@ -43,13 +47,14 @@
   - Autowire more
     - issue while autowire:
       - `no-bean` found.
-      - `multiple-bean` found (Conflict) 
-        - resolve :: Type >>  @`Qualifier`(BeanName) >> Custom-Qualifier | @`primary`
+      - `multiple-bean` found (Conflict)  resolve:
+        - `@Qualifier`(BeanName)
+        - `@primary`
       - `Circular dependencies`:
         - use @`order`(1) 
         - use @`DependsOn`("beanName")
         - refactor code
-        - avoid using constructor Injection
+        - avoid using **constructor Injection** :small_red_triangle:
       - inject - map, list, set
       ```
         - create @Bean b1, b2, b3, of Bean1 type
@@ -94,10 +99,25 @@
 
 ## C. Spring IOC container
 ### bean Life Cycle
-- `Bean Processor` - Pre and Post
+- check : [Spring_02_lifeCycle.md](Spring_02_lifeCycle.md)
+- manage bean scopes
+  - singleton : create along with IoC container on start up.
+  - prototype : create on demand
+- **stage-1** : create creation + injection
+  - step-1 bean creation : by calling constructor + inject mandatory dependency
+  - step-2 bean dependency injection :  resolve conflict, if comes
+  - step-3 call aware
+  - step-4 call Bean Pre-Processor
+- BEAN READY  :green_circle:
+- **stage-2** : initialization
+  - I:InitializingBean > call afterPropertiesSet(){...}
+  - `@PostConstruct` m() {...}
+- **stage-3** : Destruction
+  - I:DisposableBean > call destroy(){...}
+  - `@PreDestory` m() {...}
 
 ---
 ## D. Code / sample programs   
-- sceduled task
+- scheduled task
 - create Custom Annotation using Aop
 
