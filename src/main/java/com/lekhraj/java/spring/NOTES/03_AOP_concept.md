@@ -4,10 +4,13 @@
 - `point-cut` - expression/criteria to define joint-point `eg: annotated method`
 - `Advice` - code
 -  J P A
+-  **s3 bucket publish example** :point_left:
+  - `Aspect` : publish report into s3 bucket.
+  - `pointcut` - @After("expression to find report method")publish_s3() { // logic is `advise` } 
+  - at end of method execution is `jointpoint`
 ---
 
 ## Aspects
------------
 - Spring AOP encapsulate Cross cutting concept, like
   - logging 
   - transaction management
@@ -21,7 +24,6 @@
 - implemented using proxies.
 
 ## Join points
----------------
 - Aspects are **applied** to the code at specified join-points
 - **points in the execution** of the application.
 - example:
@@ -34,7 +36,6 @@
     - `Static initialization`: Join points where a class is initialized.
 
 ## Pointcut
-------------
 - It defines the **criteria/expression for matching join points**.
 - notice expression below
 - Types: before, after(irrespective, normally, exception), around(before+after)
@@ -64,7 +65,6 @@
     - ```@Around("execution(* com.example.service.*.*(..))")```
 
 ## Advice
-----------
 - code being runs at a particular join point.
 
 
