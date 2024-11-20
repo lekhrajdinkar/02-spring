@@ -18,9 +18,9 @@
 6. @ConditionalExpression
 7. `@Conditional` : Custom condition
 
-Apply these on
-- @Configuration class
-- @Bean method
+- Apply these on
+  - @Configuration class
+  - @Bean method
 
 ---
 

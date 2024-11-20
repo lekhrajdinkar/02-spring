@@ -6,6 +6,7 @@
   - https://www.baeldung.com/spring-exceptions
 - chatgpt 
   - question: https://chat.openai.com/c/33d0d06d-0aaa-4791-bce9-da8ea3f5dd53
+  - interview question (spring core): https://chatgpt.com/c/673d9844-6528-800d-92eb-fa5f45362570
 ---
 
 ## A. Dependency Injection
