@@ -2,7 +2,11 @@
 - The lifecycle of a Spring bean consists of several stages, from instantiation to destruction.
   - performing initialization
   - performing cleanup tasks.
-
+- fact: don't use aware, better way is to inject.
+  ```
+  @Autowired    private BeanFactory beanFactory;
+  @Autowired    private ApplicationContext applicationContext;
+  ```
 ---
 
 ###  `stages` : bean's lifecycle

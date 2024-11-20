@@ -3,6 +3,7 @@
 - `join-point` - points in the **execution** at code. `eg : method execution`
 - `point-cut` - expression/criteria to define joint-point `eg: annotated method`
 - `Advice` - code
+
 -  J P A
 -  **s3 bucket publish example** :point_left:
   - `Aspect` : publish report into s3 bucket.
@@ -66,6 +67,24 @@
 
 ## Advice
 - code being runs at a particular join point.
+
+---
+- multiple aspects defined for same join point, then can run then in order by using `@order`
+```
+@Aspect
+@Order(1)
+public class LoggingAspect {
+    // Aspect implementation
+}
+
+@Aspect
+@Order(2)
+public class ValidationAspect {
+    // Aspect implementation
+}
+
+```
+
 
 
 

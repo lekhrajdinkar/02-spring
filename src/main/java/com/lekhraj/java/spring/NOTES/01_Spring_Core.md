@@ -13,8 +13,11 @@
 - `dependency`
 - `IoC` : inversion of control of create object from Code to configuration(metadata) + resolve dependency
 - `DI` : pattern/design for IoC.
-- `Beans` : singleton / prototype 
-  - `@Scope`(ConfigurableBeanFactory.SCOPE_SINGLETON)
+- `Beans` : 
+  - `@Scope`(ConfigurableBeanFactory.**SCOPE_SINGLETON**)
+  - **singleton** (for stateless bean)
+  - **prototype** - hold state and are not thread-safe by default
+
 --- 
 ### developer primary 2 tasks
 
@@ -52,7 +55,7 @@
     - ResolvableType class for  superclass, interface, generic types.
     - injection happens with reflection api
     - used inside bean created with @component
-    - default - singlton
+    - classes with a single constructor can omit the @Autowired annotation
     - apply on :
       - `property` 
       - `method` --> get applied to `method arg`, then.
@@ -60,7 +63,7 @@
   - Autowire more
     - issue while autowire:
       - `no-bean` found.
-      - `multiple-bean` found (Conflict)  resolve:
+      - `multiple-bean` found (Conflict)  NoUniqueBeanDefinitionException. resolve:
         - `@Qualifier`(BeanName)
         - `@primary`
       - `Circular dependencies`:
@@ -73,6 +76,7 @@
         - create @Bean b1, b2, b3, of Bean1 type
         - @Autowire list<Bean1> listofbean1 --> inject/add b1,b2,b3 into listofbean1
       ```
+      - @Resource(name = "myCustomBean") from J2EE. can also use in spring project.
 ---
 ## B. Annotation
 ### `@profile()`
@@ -105,7 +109,16 @@
   - collection :  insertion order.
   - multiple Aspect - Apply order.
   - load bean in container.
+- Ordered.LOWEST_PRECEDENCE | HIGHEST_PRECEDENCE
 
+### @DependsOn
+```
+@Component
+@DependsOn({"beanA", "beanC"})
+public class BeanB {
+    // Bean implementation
+}
+```
 ---
 
 ## C. Spring IOC container
@@ -134,6 +147,7 @@
   
 - **Step-4** : after container is up:
   - @Component CommandLineRunner/s > run()
+
 ---
 
 ## D. Code / sample programs   
