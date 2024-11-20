@@ -12,7 +12,7 @@
 ### Register custom properties-file
 - use `@propertySource / @propertySources`
 - keep here - **src/main/resources** : sb has utility method to read from resource folder.
-- check : [ReadConfigFromGlobalProperty.java](..%2FSpring_03_Properties%2Fconfiguration%2FReadConfigFromGlobalProperty.java)
+- check : [ReadConfigFromGlobalProperty.java](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSpring_03_Properties%2Fconfiguration%2FReadConfigFromGlobalProperty.java)[ReadConfigFromGlobalProperty.java](..%2FSpring_03_Properties%2Fconfiguration%2FReadConfigFromGlobalProperty.java)
 - can have env/profile specific files too, as shoen below.
 ```
 @Configuration  
@@ -29,7 +29,7 @@
 ```
 
 ## 2. Binding into custome class
-- check : [ConfigurationPropertiesByPrefixBean.java](..%2FSpring_03_Properties%2Fbean%2FConfigurationPropertiesByPrefixBean.java)
+- check : [ConfigurationPropertiesByPrefixBean.java](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSpring_03_Properties%2Fbean%2FConfigurationPropertiesByPrefixBean.java)
 - **property** --> sb does **binding** bts --> into **Object** (of ConfigurationPropertiesByPrefixBean class)
 - **@ConfigurationProperties**
 ```
@@ -104,7 +104,7 @@ credentials2=object:{lek,password2}
 - create converter class:
   - 1 annotate with **@ConfigurationPropertiesBinding**
   - 2 implement **Converter<SourceType,TargetType>** --> @override TargetType **convert**(SourceType)
-    - [CustomConverter_1.java](..%2FSpring_03_Properties%2Fconverter%2FCustomConverter_1.java)
+    - [Prop2Map.java](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSpring_03_Properties%2Fbean%2FProp2Map.java)[CustomConverter_1.java](..%2FSpring_03_Properties%2Fconverter%2FCustomConverter_1.java)
     - string to Credential binding
     - `mail.credentials2 = john2,password2`
   - 3 add **validation** (JSR-380 format), if needed
