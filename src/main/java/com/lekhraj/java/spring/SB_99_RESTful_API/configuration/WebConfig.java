@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebApplicationInitializer {
 
-    @Bean
+    @Bean // for spring MVC
     WebMvcConfigurer webMvcConfigurerForApp(){
         return new WebMvcConfigurer() {
             @Override

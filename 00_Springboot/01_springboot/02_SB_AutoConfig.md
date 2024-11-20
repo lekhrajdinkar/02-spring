@@ -8,8 +8,17 @@
   - Conditional-1(Is webApp)--> beans-1
   - Conditional-2 : beans-2
   
-- Notice this pattern :: @Configuration Class-1 implements interface-1 >> Override
-  - eg: public class MyWebConfig implements WebApplicationInitializer {onStartup(ServletContext servletContext) {...}}
+- **Notice this pattern** 
+  - @Configuration Class-1 implements interface-1 >> Override method --> gives new bean. :point_left:
+  - this is sb config customization way.
+  - ```
+    public class MyWebConfig implements WebApplicationInitializer {
+       onStartup(ServletContext servletContext) {
+         ...
+       }
+    }
+    ```
+  - note: **WebApplicationInitializer**, provides spring way to configure **ServletContext**
 
 ### Conditions
 1. @ConditionalOnClass and @ConditionalOnMissingClass
