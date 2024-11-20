@@ -5,8 +5,10 @@
 - necessary dependencies (jackson, springMVC), 
 - embedded server
 - default exception
+- Actuator
 
-## WebServerFactoryCustomizer
+---
+## WebServerFactoryCustomizer class
 - interface provided by Spring Boot 
 - allows you to customize the configuration of embedded web servers
   - setting ports, 
@@ -37,3 +39,30 @@ public class MyTomcatCustomizer implements WebServerFactoryCustomizer<TomcatServ
     }
 }
 ```
+---
+## ServletRegistrationBean
+- Register a New Servlet (spring boot way)
+
+```
+@Configuration
+public class ServletConfig 
+{
+    @Bean
+    public ServletRegistrationBean<CustomServlet> customServletRegistrationBean() 
+    {
+        ServletRegistrationBean<CustomServlet> registrationBean = new ServletRegistrationBean<>(new CustomServlet(), "/custom");
+        registrationBean.setLoadOnStartup(1);
+        return registrationBean;
+    }
+}
+```
+---
+## Typical things:
+### update embedded server
+- update pom 
+  - add spring-boot-starter-**undertow** / spring-boot-starter-**jetty**
+  - exclude <spring-boot-starter-**tomcat** from `spring-boot-starter-web`
+
+### shut down
+- ApplicationContext context = SpringApplication.run(DemoApplication.class, args);
+- context.close();
