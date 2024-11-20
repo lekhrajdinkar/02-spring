@@ -1,5 +1,6 @@
 - https://chat.openai.com/c/d75560a0-1c06-4195-80fc-563ec8449bc5
 - https://www.baeldung.com/configuration-properties-in-spring-boot
+
 ---
 # Application properties
 

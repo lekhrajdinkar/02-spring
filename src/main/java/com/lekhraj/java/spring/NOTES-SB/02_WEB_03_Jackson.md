@@ -1,12 +1,16 @@
+# jackson
+## reference
+- https://chatgpt.com/c/0f8b8a16-cab5-4fbb-8f0e-1c7949dd97f4 - anno 1
+- https://chatgpt.com/c/0f8b8a16-cab5-4fbb-8f0e-1c7949dd97f4 - anno 2
+- https://chatgpt.com/c/4334405c-e8c0-4e88-a138-a53b14ae52b5 - object mapper
+- https://www.baeldung.com/jackson
+--- 
 - Json , JsonStr , Object , JsonNode(asText(), readTree())
 - Objectmapper / Xmlmapper API
 - @ResquestBody and @responseBody behind the scene perform S and D using OM.
-- 
-- https://www.baeldung.com/jackson : Advance Section pending
-- Object mapper : https://chatgpt.com/c/4334405c-e8c0-4e88-a138-a53b14ae52b5
-- 
----
+-  Advance Section pending : https://www.baeldung.com/jackson
 
+---
 ## Common task
 1. Serialize and Deserialize 
    - Class, generic-Class

@@ -1,3 +1,18 @@
+- web
+  - https://chatgpt.com/c/831f36a0-bce4-4372-87d4-9ab6528babc5 - web kickoff
+  - https://chatgpt.com/c/7d23b0fe-a7a5-43d5-9ced-69d4a344e31a - error handling
+  - https://chatgpt.com/c/f4a0c9cd-c6cb-414e-888c-605c2d50340c - ext server deploy
+  - https://chatgpt.com/c/efc733ec-0a20-4be2-88da-df50535517b3 - MVC overview
+- REST
+  - https://chatgpt.com/c/0471007c-7d4e-4a04-bd37-d6262d5f9aaf - kickoff
+  - https://chatgpt.com/c/7fa2c12d-eada-4991-944f-cfad8d084805 - API version
+  - https://chatgpt.com/c/34abc85f-eabb-47ac-b525-7c2c6af8023a - web filter
+  - https://chatgpt.com/c/b8c60911-2df5-478b-9804-67c3ecf9506d - validation
+  - https://chatgpt.com/c/591c7b06-4ac0-4f03-a328-038cde9cf7ca - validation 2
+  - https://chatgpt.com/c/a04dc001-e879-43e0-a39d-acd01b9ef2c7 - bean validation
+  - https://chatgpt.com/c/9719e1f6-c4e4-4fac-8941-178c26acc484 - Consume API
+  
+---
 # REST
 - https://chat.openai.com/c/831f36a0-bce4-4372-87d4-9ab6528babc5
 - @ResponseBody + `@Controller` =` @RestController`

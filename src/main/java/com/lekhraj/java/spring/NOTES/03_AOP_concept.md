@@ -1,3 +1,5 @@
+- https://chatgpt.com/c/2616aaed-2668-4b78-85c8-f5c81f5ed6a0
+---
 # APO
 - `Aspect` - aspect is a modular unit of cross-cutting concern, `eg : metrics`
 - `join-point` - points in the **execution** at code. `eg : method execution`

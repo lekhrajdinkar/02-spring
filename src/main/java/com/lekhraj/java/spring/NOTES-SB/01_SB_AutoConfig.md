@@ -1,6 +1,8 @@
-## Auto-Config
+- https://chatgpt.com/c/795ed757-ef25-48fc-a1c5-6755aab9bb03
 - https://www.baeldung.com/spring-boot-annotations
-  - Starter project > `spring.factories` = listOfConfigClasses (which can be applied conditionally)
+--- 
+## Auto-Config
+- Starter project > `spring.factories` = listOfConfigClasses (which can be applied conditionally)
 - SpringApplication.run() > create AC, Loads:
   - Standard beans
   - Conditional-1(Is webApp)--> beans-1

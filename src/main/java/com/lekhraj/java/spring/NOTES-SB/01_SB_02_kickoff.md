@@ -13,6 +13,7 @@
 
 ### Spring Boot Basics:
 - Spring Boot **CLI**
+- admin setup : https://chatgpt.com/c/478413ee-1707-408e-b3f3-d13ee00e7471
 - Spring Boot **Starter project**
   - Spring MVC
   - RESTful Web Services
@@ -36,7 +37,7 @@
   - `banner.txt` keep in resources folder
 
 ### later topics
-- Spring Boot Actuator:
+- Spring Boot Actuator: https://chatgpt.com/c/7094d3bf-5952-4b93-bd73-a8abf39ebda1
 - Testing in Spring Boot:
 - Microservices with Spring Boot
 - Spring Cloud
