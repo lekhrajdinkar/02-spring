@@ -27,8 +27,9 @@
 3. Command Line Arguments  :: ?
 ```
 
-## 2. Binding
-- **property** --> sb does **binding** bts --> java-Object / primitive type
+## 2. Binding into custome class
+- check : [ConfigurationPropertiesByPrefixBean.java](..%2FSpring_03_Properties%2Fbean%2FConfigurationPropertiesByPrefixBean.java)
+- **property** --> sb does **binding** bts --> into **Object** (of ConfigurationPropertiesByPrefixBean class)
 - **@ConfigurationProperties**
 ```
 @ConfigurationProperties(prefix = "mail")
@@ -42,13 +43,13 @@ public class ConfigurationPropertiesByPrefixBean
 // Using @ConfigurationProperties on a @Bean Method
 // pending...
 ```
-- more ways to **register** above bean - ConfigurationPropertiesByPrefixBean
+- more ways to **register** above class as bean - ConfigurationPropertiesByPrefixBean
   - EnableConfigurationProperties({c1.class, c2.class}) --> enable/register explicitly, may be in Application.java file
   - add @ConfigurationPropertiesScan Apply on class c1/c2 (done above)
   - add @Component
   - add @Configuration
 
-### inbuilt binding
+### in-built binding
 - property name must match - b/w prop and java class fields.
 ```
 all these works
@@ -58,26 +59,66 @@ all these works
 - mail.host-name
 - mail.HOST_NAME
 ```
+```
+# prefix = mail
 
+# ------ String  --------
+mail.hostname =    mailer@mail.com
+
+# ------ number  --------
+mail.port     =    9000
+
+# ------ List / set --------
+mail.defaultRecipients[0]=admin@mail.com
+mail.defaultRecipients[1]=owner@mail.com
+
+# ------- Object  -------
+mail.credentials1.username=john
+mail.credentials1.password=password
+mail.credentials1.authMethod=SHA1
+
+# ------- Map<String,String>  ---------
+mail.additionalHeaders.redelivery=true
+mail.additionalHeaders.secure=true
+
+# ------- Map<String,Object>  ---------
+mail.map1.credentials1.username=mani
+mail.map1.credentials1.password=password1
+mail.map1.credentials2.username=lek
+mail.map1.credentials2.password=password12
+
+map :
+credentials1=object:{mani,password1}
+credentials2=object:{lek,password2}
+
+# ------- Map<String,list<Object>>  ---------
+
+# ----- Duration,DataSize ------
+
+```
+- check this for more Map binding example:
+  - [Prop2Map.java](..%2FSpring_03_Properties%2Fbean%2FProp2Map.java)
 
 ### custom binding
-- **@ConfigurationPropertiesBinding**, custom binding rule/code.
-  - implement Converter<S,T> --> @override T convert(S)
-  - https://www.baeldung.com/configuration-properties-in-spring-boot
-  - check this: mail.credentials2=john2,password2 to ConfigurationPropertiesByPrefixBean
-  - validation (JSR-380 format) while binding.
-
-- PropertySourcesPlaceholderConfigurer
+- create converter class:
+  - 1 annotate with **@ConfigurationPropertiesBinding**
+  - 2 implement **Converter<SourceType,TargetType>** --> @override TargetType **convert**(SourceType)
+    - [CustomConverter_1.java](..%2FSpring_03_Properties%2Fconverter%2FCustomConverter_1.java)
+    - string to Credential binding
+    - `mail.credentials2 = john2,password2`
+  - 3 add **validation** (JSR-380 format), if needed
+    ```
+    @NotBlank
+    @length(min,max)
+    @Max(1025)
+    @Min(1025)
+    @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")
+    ```
 
 ## 3. Read properties
 - `@Autowired Environmnet` env.
 - `@value` 
-  - inject string
-  - inject boolean
-  - inject number types
+  - hardcode static value
   - SpEL
-  - inject object
-  - inject collection - map
-  - inject collection - list/set
-- check : [ConfigurationPropertiesByPrefixBean.java](..%2FSpring_03_Properties%2Fbean%2FConfigurationPropertiesByPrefixBean.java)
+
 

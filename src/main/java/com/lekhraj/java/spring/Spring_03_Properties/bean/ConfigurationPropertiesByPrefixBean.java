@@ -46,7 +46,5 @@ public class ConfigurationPropertiesByPrefixBean
 @Min(1025)
 @Pattern(regexp = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$")
 
-https://www.baeldung.com/configuration-properties-in-spring-boot ,at bottom
-
  */
 

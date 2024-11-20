@@ -56,7 +56,7 @@ public class Runner2 implements CommandLineRunner {
         Arrays.stream(env.getActiveProfiles()).forEach(System.out::println);
 
         Print.print(myMapsFromProprty);
-        Map configmap = myMapsFromProprty.getConfig();
+        Map configmap = myMapsFromProprty.getConfig1();
         Map applicationmap = myMapsFromProprty.getApplication();
         Map usermap = myMapsFromProprty.getUsers();
         /*configmap.forEach((k,v)->{Print.print(k,v);});
