@@ -1,17 +1,11 @@
 ## A. Spring
+- Notes: [Spring notes](src%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FNOTES)
+- programs:
+  - [Spring-core](src%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSpring_02_Core%2FRunner1.java)
+  - [Spring-AOP](src%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSpring_03_Properties%2FRunner2.java)
+  - [Spring-properties](src%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSpring_01_AOP%2FRunner3.java)
 
-### Spring_01_AOP
-- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_01_AOP/topic.txt
-- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_01_AOP/point-cut.txt
-
-### Spring_02_Core
-- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_02_Core/Spring_02_Core.md
-- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_02_Core/Spring_02_lifeCycle.md
-
-### Spring_03_Properties
-- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/Spring_03_Properties/topic.txt
-
-***
+---
 
 ## B. Spring Boot
 ### SB_01_AutoConfiguration
@@ -29,9 +23,9 @@
 ### SB_99_RESTful_API - `Hibernate`
 - https://github.com/lekhrajdinkar/02-spring/tree/main/src/main/java/com/lekhraj/java/spring/SB_99_RESTful_API/NOTES
 
-***
+---
 
-## DevOps
+## C. DevOps
 ### `terraform` - HCL / HCL cloud
 - https://github.com/lekhrajdinkar/02-spring/blob/main/04_terraform
 - https://chatgpt.com/c/2f328724-50e4-427d-8c04-0a17e9747150
@@ -48,17 +42,18 @@
 - EKS https://github.com/lekhrajdinkar/02-spring/blob/main/03_Kubernetes/04_EKS
 - helm : https://github.com/lekhrajdinkar/02-spring/blob/main/03_Kubernetes/05_helm
 
-### AWS
+## D. Cloud - `AWS`
 - All: https://github.com/lekhrajdinkar/02-spring/blob/main/01_aws
 
-***
+---
 
-## More
+## D. Messages Services
+### `rmq`  (in progress...)
+- https://github.com/lekhrajdinkar/02-spring/blob/main/05_messaging/rmq
+### `kafka` (in progress...)
+- https://github.com/lekhrajdinkar/02-spring/blob/main/05_messaging/kafka
 
-### messages services
-- rmq: https://github.com/lekhrajdinkar/02-spring/blob/main/05_messaging/rmq
-- kafka : https://github.com/lekhrajdinkar/02-spring/blob/main/05_messaging/kafka
+---
 
-
-### micro services
-- https://github.com/lekhrajdinkar/02-spring/blob/main/07_micro-services
+## E. Micro services (in progress...)
+- project: https://github.com/lekhrajdinkar/02-spring/blob/main/07_micro-services
