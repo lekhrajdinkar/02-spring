@@ -1,5 +1,6 @@
+- okta https://chatgpt.com/c/7db419de-fa44-4403-b587-a0e849b35ce8
 - OAuth2 : https://dev-16206041-admin.okta.com/admin/apps/active
-
+---
 ## Application types and Flow
 - handle this on 3 type on architecture/flows:
     - server-side web applications (SpringMVC, JSP) :

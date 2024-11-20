@@ -1,5 +1,6 @@
 - https://chatgpt.com/c/672bc367-e60c-800d-9fc4-5782d0a7741b - question
 - https://chatgpt.com/c/672cec04-fb0c-800d-a873-d0ad332219fb - sample aws config.
+- https://chatgpt.com/c/2f328724-50e4-427d-8c04-0a17e9747150 - 
 
 ---  
 ## A. Official Tutorial: 

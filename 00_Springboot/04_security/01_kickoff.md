@@ -1,3 +1,7 @@
+- https://chatgpt.com/c/5865254e-a777-416f-ad16-8e40df050c04 - LDAP
+- https://chatgpt.com/c/93986452-c257-4324-859b-6e08142fb677 - spring security overview
+
+---
 # SpringBoot Security
 - JWT - Sateless Authorization/Authorization
 - Authentication and access-control framework.

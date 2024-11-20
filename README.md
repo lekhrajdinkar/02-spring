@@ -1,27 +1,13 @@
-## A. Spring
-- Notes: [Spring notes](src%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FNOTES)
-- programs:
-  - [Spring-core](src%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSpring_02_Core%2FRunner1.java)
-  - [Spring-AOP](src%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSpring_03_Properties%2FRunner2.java)
-  - [Spring-properties](src%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSpring_01_AOP%2FRunner3.java)
+## A. SpringBoot
+- [01_Spring_Core.md](00_Springboot%2F01_Spring-core)
+- [01_springboot](00_Springboot%2F01_springboot)
 
 ---
 
-## B. Spring Boot
-### SB_01_AutoConfiguration
-- https://github.com/lekhrajdinkar/02-spring/tree/main/src/main/java/com/lekhraj/java/spring/SB_01_AutoConfiguration
-
-### SB_02_Security
-- https://github.com/lekhrajdinkar/02-spring/tree/main/src/main/java/com/lekhraj/java/spring/SB_99_RESTful_API/NOTES
-- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/SB_99_RESTful_API/NOTES/05_SpringSecurity_01.md
-- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/SB_99_RESTful_API/NOTES/05_SpringSecurity_02_REST.md
-- https://github.com/lekhrajdinkar/02-spring/blob/main/src/main/java/com/lekhraj/java/spring/SB_99_RESTful_API/NOTES/05_SpringSecurity_03_OAuth2.md
-
-### SB_99_RESTful_API  - `REST`
-- https://github.com/lekhrajdinkar/02-spring/tree/main/src/main/java/com/lekhraj/java/spring/SB_99_RESTful_API/NOTES
-
-### SB_99_RESTful_API - `Hibernate`
-- https://github.com/lekhrajdinkar/02-spring/tree/main/src/main/java/com/lekhraj/java/spring/SB_99_RESTful_API/NOTES
+## b. web Application
+- [02_web](00_Springboot%2F02_web)
+- [03_data-layer](00_Springboot%2F03_data-layer)
+- [04_security](00_Springboot%2F04_security)
 
 ---
 

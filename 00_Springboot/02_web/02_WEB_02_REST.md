@@ -3,6 +3,7 @@
   - https://chatgpt.com/c/7d23b0fe-a7a5-43d5-9ced-69d4a344e31a - error handling
   - https://chatgpt.com/c/f4a0c9cd-c6cb-414e-888c-605c2d50340c - ext server deploy
   - https://chatgpt.com/c/efc733ec-0a20-4be2-88da-df50535517b3 - MVC overview
+  - https://chatgpt.com/c/d7dba5ab-7f7a-4c1c-a443-f67f15ca09a2 - servlet3
 - REST
   - https://chatgpt.com/c/0471007c-7d4e-4a04-bd37-d6262d5f9aaf - kickoff
   - https://chatgpt.com/c/7fa2c12d-eada-4991-944f-cfad8d084805 - API version
