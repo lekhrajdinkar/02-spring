@@ -29,7 +29,7 @@ or
 
 <dependency>
 	<groupId>org.springdoc</groupId>
-	<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>    <<<
+	<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>    <<< worked, didnt add anything else
 	<version>2.1.0</version>
 </dependency>
 ```
@@ -54,5 +54,12 @@ public class SwaggerConfig {
 ```
 - http://localhost:8080/swagger-ui/index.html
 
+---
+
 ## Customize
 - check : [controller](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSB_99_RESTful_API%2Fcontroller)
+- Annotation:
+  - @Tag/@Api,
+  - @ApiOperation,
+  - @ApiResponse,
+  - @ApiParam.

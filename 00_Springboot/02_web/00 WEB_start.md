@@ -9,7 +9,7 @@
 
 # web
 ## 0 web request
-- idempotent
+- idempotent : PUT
 - non-idempotent
 
 ## 1 WebSocket connection - intro

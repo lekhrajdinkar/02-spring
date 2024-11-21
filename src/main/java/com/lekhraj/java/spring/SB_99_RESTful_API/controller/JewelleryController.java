@@ -15,6 +15,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -80,15 +81,15 @@ public class JewelleryController {
             HttpServletResponse response,
 
             @RequestParam(value = "ReqParam1", defaultValue = "defaultValue", required = false) String reqParam1,
-            @RequestParam Map<String,String> allRequestParams,
+            @RequestParam Map<String,String> allRequestParams, // <<<< map
 
             @PathVariable("pathVariable1") String pathVariable1,
             @PathVariable(value="pathVariable2", required = false) String pathVariable2_optional,
-            @PathVariable Map<String,String> allPathVariables,
+            @PathVariable Map<String,String> allPathVariables, // <<<< map
 
             @RequestHeader("h1") String h1,
             @RequestHeader(value="h2",required = false, defaultValue = "v2-default") String h2_Optional,
-            @RequestHeader Map<String,String> allHeader,
+            @RequestHeader Map<String,String> allHeader, // <<<< map
             @RequestHeader HttpHeaders httpHeaders
 
             , @RequestBody JewelleryDTO dto_input

@@ -12,14 +12,15 @@ import com.lekhraj.java.spring.SB_99_RESTful_API.Serializer.LocalDateTimeSeriali
 public class JacksonConfig {
 
     @Bean
-    public ObjectMapper objectMapper() {
+    public ObjectMapper objectMapper()
+    {
         JavaTimeModule module = new JavaTimeModule();
         module.addSerializer(new LocalDateTimeSerializer());  // notice : new
 
         ObjectMapper objectMapper =  new ObjectMapper()
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
-                .registerModule(module);
-        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+                .registerModule(module)
+                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         return objectMapper;
