@@ -1,8 +1,6 @@
 ## references
 - https://www.baeldung.com/rest-with-spring-series
 - web filter : https://chatgpt.com/c/34abc85f-eabb-47ac-b525-7c2c6af8023a 
-- validation
-  - 
  
 ---
 ## REST Actions
