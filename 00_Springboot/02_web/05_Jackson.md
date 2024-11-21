@@ -1,7 +1,7 @@
 # jackson
 ## reference
 - https://chatgpt.com/c/0f8b8a16-cab5-4fbb-8f0e-1c7949dd97f4 - anno 1
-- https://chatgpt.com/c/0f8b8a16-cab5-4fbb-8f0e-1c7949dd97f4 - anno 2
+- https://chatgpt.com/c/cbe3f6c3-c238-4db8-99e5-a0c9c9ddffec - anno 2
 - https://chatgpt.com/c/4334405c-e8c0-4e88-a138-a53b14ae52b5 - object mapper
 - https://www.baeldung.com/jackson
 --- 
