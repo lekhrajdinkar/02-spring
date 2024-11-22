@@ -50,7 +50,7 @@ q.getSingleResult();
 q.getResultList()/Set();
 
 ```
-### map result to custom-class/Tuple
+### Result to custom-class/Tuple
 - reference:  https://chatgpt.com/c/7a6449ba-dede-478f-9778-1c7a9a5d5d9d
 - way-1: @NamedNativeQuery(...,  **resultClass** = Result.class)
 ```
@@ -105,6 +105,22 @@ for (Tuple tuple : results) {
     System.out.println("id: " + id + ", name: " + name + ", department: " + department);
 }
 ```
+### Result mapping : summary
+1. Tuple (more like Object[],hetrogeneous)
+    - use Tuple / List<Tuple> : for single ot mutlipe result
+    - add <artifactId>javatuples</artifactId>
+        - Im-mutable : Pair, triplet - hence maintain data integrity.
+2. `class RT implements ResultTransformer`
+    - First @override transformTuple(,)
+    - then use it on any query , q.setResultTransformer(RT rt)
+    - inbuilt ResultTransformer.
+        - Transformers.TO_ARRAY
+        - Transformers.TO_LIST
+        - Transformers.ALIAS_TO_ENTITY_CLASS
+3. `@SqlResultSetMapping`
+    - columns from @NamedNativeSQL --> map to target -->  EntityClass or Tuple/Object[]
+4. pagination/sorting
+
 ---
 ## B. Pagination (query result)
 ```
@@ -164,7 +180,7 @@ List<Car> cars = session.createQuery("FROM Car", Car.class).getResultList();
 List<Vehicle> vehicles = session.createQuery("FROM Vehicle v WHERE TREAT(v AS Car).numberOfDoors > 3", Vehicle.class) .getResultList();  <<<
 ```
 ---
-## B. HQL
+## E. HQL
 ### joins
 - INNER : JOIN, 
 - OUTER : (LEFT JOIN / RIGHT JOIN)
@@ -188,37 +204,18 @@ List<Vehicle> vehicles = session.createQuery("FROM Vehicle v WHERE TREAT(v AS Ca
 - Sorting Query Results with Spring Data : https://www.baeldung.com/spring-data-sorting#sorting-with-spring-data
 
 ### DYNAMIC : Criteria API 
-- pending
+- pending / skip
 
 ---
-## C. Manipulate result Set
-1. Tuple (more like Object[],hetrogeneous)
-   - https://chatgpt.com/c/7a6449ba-dede-478f-9778-1c7a9a5d5d9d
-   - use Tuple / List<Tuple> : for single ot mutlipe result
-   - add <artifactId>javatuples</artifactId> 
-     - Im-mutable : Pair, triplet - hence maintain data integrity.
-2. `class RT implements ResultTransformer` 
-   - First @override transformTuple(,) 
-   - then use it on any query , q.setResultTransformer(RT rt)
-   - inbuilt ResultTransformer.
-     - Transformers.TO_ARRAY
-     - Transformers.TO_LIST 
-     - Transformers.ALIAS_TO_ENTITY_CLASS
-3. `@SqlResultSetMapping`
-   - columns from @NamedNativeSQL --> map to target -->  EntityClass or Tuple/Object[]
-4. pagination/sorting
+## F Batch  processing `in-progress`
+- Custom batch code. for>flush/clear after 20.
+- `hibernate.jdbc.batch_size`=20
+- `spring.jpa.properties.hibernate.jdbc.batch_size`=20
+- @BatchSize(size = 20) at Entity level for all Operations (CRUD)
+- fact:@GeneratedValue(strategy = GenerationType.IDENTITY ) will disable batch-INSERT Silently. USE SEQUENCE.
 
 ---
-## D. Write/Update
-- Batch 
-  - Custom batch code. for>flush/clear after 20.
-  - `hibernate.jdbc.batch_size`=20
-  - `spring.jpa.properties.hibernate.jdbc.batch_size`=20
-  - @BatchSize(size = 20) at Entity level for all Operations (CRUD)
-  - fact:@GeneratedValue(strategy = GenerationType.IDENTITY ) will disable batch-INSERT Silently. USE SEQUENCE.
-
----
-## pending:
+## Z.Pending:
 1. TransactionTemplate prg
 2. ScrollableResults program - when processing large dataset, (not sending large Dataset in batches to UI)
 3. Query Plan Cache
