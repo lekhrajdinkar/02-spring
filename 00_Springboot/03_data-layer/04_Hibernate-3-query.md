@@ -105,21 +105,18 @@ for (Tuple tuple : results) {
     System.out.println("id: " + id + ", name: " + name + ", department: " + department);
 }
 ```
-### Result mapping : summary
+### Result mapping : more
 1. Tuple (more like Object[],hetrogeneous)
     - use Tuple / List<Tuple> : for single ot mutlipe result
     - add <artifactId>javatuples</artifactId>
         - Im-mutable : Pair, triplet - hence maintain data integrity.
-2. `class RT implements ResultTransformer`
-    - First @override transformTuple(,)
+2. class MyClass implements **ResultTransformer** :
+    - First @override **transformTuple**(,)
     - then use it on any query , q.setResultTransformer(RT rt)
     - inbuilt ResultTransformer.
         - Transformers.TO_ARRAY
         - Transformers.TO_LIST
         - Transformers.ALIAS_TO_ENTITY_CLASS
-3. `@SqlResultSetMapping`
-    - columns from @NamedNativeSQL --> map to target -->  EntityClass or Tuple/Object[]
-4. pagination/sorting
 
 ---
 ## B. Pagination (query result)
