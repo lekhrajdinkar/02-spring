@@ -2,7 +2,8 @@
 --- 
 # hibernate 
 ## A. Query
-- parent class : Query<T> -> children : TypeQuery<T>, NamedQuery<T>, NamedNativeQuery<T>
+- parent class : Query<T> 
+- children     : TypeQuery<T>, NamedQuery<T>, NamedNativeQuery<T>
 ### TypedQuery<T> 
 - T = ResultType
 - It ensures that the query result matches a specific type, at compile time.
@@ -47,11 +48,17 @@ q.getSingleResult();
 q.getResultList()/Set();
 
 ```
-## B. Pagination
-- Hibernate : q.setFirstResult((pageNumber-1) * pageSize); //offset position
-- Hibernate : q.setMaxResults(pageSize);
-  - Another way (old): get ids and then sublist ids
-  ```
+## B. Pagination (query result)
+```
+int pageNumber = 1;
+int pageSize = 10; 
+q.setFirstResult((pageNumber-1) * pageSize);  //offset 
+q.setMaxResults(pageSize);                    // Limit
+q.getResultList();
+```
+
+- Another way (old): get ids and then sublist ids
+```
     //STEP-1 : sort ids as well / gives total count.
     Query q = entityManager.createQuery("Select f.id from Foo f order by f.id");
     List<Integer> ids = q.getResultList();
@@ -60,18 +67,29 @@ q.getResultList()/Set();
     Query query = entityManager.createQuery("Select f from Foo e where f.id in :ids");
     query.setParameter("ids", fooIds.subList(0,10));
     List<Foo> fooList = query.getResultList();
-   ```
-## C. ScrollableResults
-  - Reduce database calls.
-  - when don't want to load all data into memory at once.
-  - Also gives total count, without any additional query.
-  - ScrollableResults resultScroll = query.scroll(ScrollMode.FORWARD_ONLY);
-  - query.setFetchSize(10);
-  - ```
-    while (scrollableResults.next()) {
-       Employee employee = (Employee) scrollableResults.get(0);
-    }
-    ```
+```
+
+## C. ScrollableResults (query result)
+- hibernate feature that allows iterating through query **results** in a memory-efficient way.
+- instead of loading all rows into memory, it fetches rows in batches, making it suitable for **processing large datasets**.
+- q.scroll()
+```
+ScrollableResults resultScroll = query.scroll(ScrollMode.FORWARD_ONLY);
+query.setFetchSize(10);
+while (scrollableResults.next()) {
+     Employee employee = (Employee) scrollableResults.get(0);
+}
+
+# more navigation method: 
+
+next(): Move the cursor to the next row.
+previous(): Move the cursor to the previous row.
+first(): Move the cursor to the first row.
+last(): Move the cursor to the last row.
+scroll(int positions): Move the cursor by a specific number of rows (positive for forward, negative for backward).
+setRowNumber(int rowNumber): Jump to a specific row by its number
+
+```
 
 ---
 ## B. HQL

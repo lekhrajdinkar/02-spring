@@ -53,6 +53,23 @@
 - **problem** : `phantom read`
 - solution - range lock (SERIALIZABLE) :left_point:
 
+```
+## SUMMARY ##
+
+Isolation_Level	    Dirty_Reads	    Non-Repeatable-Reads	Phantom-Reads
+READ_UNCOMMITTED	✗	            ✗	                    ✗
+READ_COMMITTED	    ✓	            ✗	                    ✗
+REPEATABLE_READ	    ✓	            ✓	                    ✗
+SERIALIZABLE	    ✓	            ✓	                    ✓
+```
+```
+# postgres
+BEGIN TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+
+# jdbc
+Connection conn = dataSource.getConnection();
+conn.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
+```
   
 ---
 ## Durability

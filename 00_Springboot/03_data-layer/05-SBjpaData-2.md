@@ -1,9 +1,12 @@
-# persistence-with-springBoot 
-- https://www.baeldung.com/persistence-with-spring-series
-- DB-06-SpringJpaData-1 : https://chatgpt.com/c/a874b751-9880-4225-a96c-9052773037fa
-- DB-06-SpringJpaData-2 : https://chatgpt.com/c/8ace7914-f8cc-465e-873a-7b45974bb7b2
-- DB-06-SpringJpaData-3 : https://chat.openai.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009
-
+- reference:
+  - https://www.baeldung.com/persistence-with-spring-series
+  - https://www.baeldung.com/multitenancy-with-spring-data-jpa
+  - DB-06-SpringJpaData-1 : https://chatgpt.com/c/a874b751-9880-4225-a96c-9052773037fa
+  - DB-06-SpringJpaData-2 : https://chatgpt.com/c/8ace7914-f8cc-465e-873a-7b45974bb7b2
+  - DB-06-SpringJpaData-3 : https://chat.openai.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009
+  - DB-06-SpringJpaData-4 : https://chatgpt.com/c/8cdd30bb-cd6e-42dc-bb27-43e5235c8a68
+---
+# persistence-with-springBoot
 ## A. Annotations/general Notes
 -  data.sql, schema.sql, JPA-buddy-PlugIn
 - `@EnableJpaRepositories`("example.baeldung.com.repo")
@@ -30,7 +33,6 @@
     )
     // same for another set
     ```
-
 ---
 ## C. Spring JPA Data
 - Purpose
