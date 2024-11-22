@@ -15,22 +15,33 @@
 - @Transactional(attribtes=) : check below
 
 ### `propagation` 
+- purpose:
+  - define the transactional behavior between multiple transactional methods.
+  - how the transaction management system handles existing and new transactions
 - **requires_new** -> AlwaysNewT 
+  - If a transaction exists, the current method will join it
+  - If no transaction exists, a new one will be created.
 - **Required** -> t1 else t2new 
-- **mandatory** -> t1 else ex  
-- **nested** -> t1 -> inner-t1
+  - Suspends any existing transaction and starts a new one
+- **mandatory** -> t1 else ex 
+  - Requires an existing transaction
+  - If no transaction exists, an exception is thrown
+
 - **SUPPORTS** -> t1 
-  - if an active transaction exists,then use it. Else gets executed non-transactional:
-- **none**  
-- **never** -> none
-- Nested transaction is also possible
-  - Propagation.NESTED
+  - If a transaction exists, the method will participate in it.
+  - If no transaction exists, it will execute non-transactionally
+- **none**  / NOT_SUPPORTED
+  - Suspends any existing transaction and executes non-transactionally.
+- **never** ->
+  - Must execute without a transaction
+  - Throws an exception if a transaction exists
+- **Nested**
   - inner txn :  independent transaction within the context of an existing/outer transaction.
   - if inner transaction rolls back, it only rolls back the nested transaction, not the outer transaction.
   - Not all databases and transaction managers provide full support for nested transactions.
   - `transactionManager.setNestedTransactionAllowed(true);`
   - it uses Save points.
-  - 
+  
 ### `isolation` 
 - txn side effect : Dirty-read, Non-repeatable read, Phantom read.
 - protection levele: READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ and SERIALIZABLE.
@@ -48,7 +59,7 @@
 - @Transactional(`rollbackForClassName` = {"java.lang.Exception", "com.example.SpecificException"})
 - if we don't mention any rule, rollback happens on unchecked-exceptions/RuntimeException
 
-
+---
 
 ## B. programmatic : `AOP + TransactionTemplate`
 - check [StudentServiceImpl.java](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSB_99_RESTful_API%2Fservice%2FStudentServiceImpl.java)
