@@ -1,7 +1,7 @@
 - anno : - https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
 --- 
 # Hibernate
-## A. Annotation
+## Annotation
 ### Common Annotation
   - `@Entity`(name="new_entityname"),  @version feild
   - `@Basic`(fetch=FetchType.EAGER,optional=true).
@@ -15,14 +15,17 @@
   - @embedded, @embeddedId, @Embeddable
   
 ### relationship
-- @OneToOne, @OneToMany, @ManyToOne, @ManyToMany. : Add FK and create JoinTable bts.
-- `@JoinTable and @JoinColumn()`
-- `@WhereJoinTable(clause = "columnInJoinTable='value-1'")` https://www.baeldung.com/hibernate-wherejointable
-- `@OrderBy("colInManySide ASC")` Sorting Children within Each Parent
-- `@Fetch @batchSize` - use together in relation : 1-2-M,etc
+- @OneToOne, 
+- @OneToMany,  @ManyToOne, 
+  - `@JoinTable and @JoinColumn()`
+  - `@OrderBy("colInManySide ASC")` Sorting Children within Each Parent
+  - `@Fetch @batchSize` - use together in relation : 1-2-M,etc
+
+- @ManyToMany : Add FK and create JoinTable bts.
+  - `@WhereJoinTable(clause = "columnInJoinTable='value-1'")`
   
 ### Inheritance
-- `@MappedSuperclass`
+- `@MappedSuperclass` on parent class
 - `@Inheritance(strategy = InheritanceType.SINGLE_TABLE)` : on parentClass
 - `@DiscriminatorColumn(name="columnName",discriminatorType = DiscriminatorType.INTEGER)` : on parentClass
 - `@DiscriminatorValue("1")` : on ChildClass
@@ -52,14 +55,14 @@
   - @OneToMany(`fetch` = FetchType.LAZY/EAGER), etc
   - @Basic(fetch=FetchType.EAGER)
 
-### Conversion
+### Convertor (rarely used)
 - `@Convert (converter=abc.class)` 
-  - more like binder - which jackson for JSON<-->Object.
-  - converter for DB::table<-->Object/Entity
+  - more like binder - which jackson for JSON<-->Object(DTO)
+  - converter for DB::table<-->Object(Entity)
   - use case : performing encryption/decryption, data transformations, that are NOT directly supported by JPA, etc
-  - implement `AttributeConverter<entityType, dbType>`
-    - dbType convertToDatabaseColumn(entityType)
-    - entityType convertToEntityAttribute(dbType)
+  - implement **AttributeConverter<entityType, dbType>** , override:
+    - dbType **convertToDatabaseColumn**(entityType)
+    - entityType **convertToEntityAttribute**(dbType)
 - `@Lob` byte[]
 - `@Temporal(TemporalType.DATE)` private Date birthDate;
   - temporal, meaning relating to time.
@@ -96,132 +99,8 @@
 - `@Query` + `@Param`
 - `@QueryHints`({@QueryHint(name = "org.hibernate.fetchSize", value = "10")})
 -----
-## C.Common task in DB
-1. Default value
-- @Column(columnDefinition = "varchar(255) default 'John Snow'")
-- Inside Entity class :: private String firstName = "John Snow";
-
-2. Nulluble constraint
-- @Column(nullable=t/f)
-- @Basic(optional=t/f)
-- validator-@NotNull : can apply on any bean, not just entity eg:jackson.
-
-3. unique Contraint
-- @Column(unique=t/f) : Single column
-  - `@UniqueConstraint` : single/composite column
-    ```
-    @Table(uniqueConstraints = {
-       @UniqueConstraint(columnNames = { "personNumber", "isActive" }) ,
-       @UniqueConstraint(columnNames = { "personNumber" }) 
-     }, ...)
-    ```
----
-## D. Identifier : auto,identity,sequence,table,generic | composite
-`@GeneratedValue(Strategy="XXXXX")`
-  - AUTO : hibernate will choose based on dialect.
-    - Oracle, PostgreSQL    : Uses `SEQUENCE` because Oracle supports sequences.
-    - MySQL, SQL Server, H2 : Uses `IDENTITY` because MySQL supports auto-increment columns.
-  - IDENTITY : `Auto-increment`, can apply on Number types.
-  - TABLE / `@TableGenerator` :  less common, PK is generated using a "table" that holds a set of unique keys.
-  ```
-    CREATE TABLE ID_GEN (
-        GEN_NAME VARCHAR(255) NOT NULL,
-        GEN_VALUE BIGINT NOT NULL,
-        PRIMARY KEY (GEN_NAME)
-    );
-    
-  @Id
-  @GeneratedValue(strategy = GenerationType.TABLE, generator = "my_table_generator")
-  @TableGenerator(name = "my_table_generator", table = "ID_GEN", 
-                  pkColumnName    =     "GEN_NAME",
-                  valueColumnName =     "GEN_VALUE", 
-                  pkColumnValue   =     "MY_ID_GEN_1",
-                  allocationSize = 1)
-  private Long id;
-  
-  - SELECT GEN_VALUE FROM ID_GEN WHERE GEN_NAME = 'MY_ID_GEN_1';
-  - UPDATE ID_GEN SET GEN_VALUE = GEN_VALUE + 1 WHERE GEN_NAME = 'MY_ID_GEN_1';
-  ```
-  - SEQUENCE / `@SequenceGenerator` : 
-  ```
-  CREATE SEQUENCE MY_SEQUENCE START WITH 1 INCREMENT BY 1;
-  
-  @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_sequence")
-  @SequenceGenerator(name = "my_sequence", sequenceName = "MY_SEQUENCE", allocationSize = 1)
-  private Long id;
-  
-  allocationSize -  number of sequence values to allocate at a time
-  ```
-
-5. Random Sequence + generic generator
-- avoid predictable sequences for security
-- Random values can lead to fragmented indexes, which can affect performance.
-eg:
-- UUID/GUID / 128 bit - globally unique
-  - 550e8400-e29b-41d4-a716-446655440000
-  - 32 char,string, group of 5 by Hypen.
-  - incorporate TimeStamp and hardware info.
-  - use-case : DB:Pk, DistributedSystem, registry keys, etc
-  - prg:
-    - org.hibernate.annotations.GenericGenerator : 
-     ```
-      @GeneratedValue( generator = "myUUID")
-      @GenericGenerator(name = "myUUID",strategy = "org.hibernate.id.UUIDGenerator")
-     ```
-    - java.util.UUID id ;
-    - class ABC `implements IdentifierGenerator` >> generator() >> `@GenericGenerator(name = "UUID",strategy = "ABC")`
-    - generator(){  return UUID.randomUUID().toString(); }
-    - @GenericGenerator >> parameters = @Parameter(name = "prefix", value = "prod")
-    - Check : com.lekhraj.java.spring.SB_99_RESTful_API.entities.CustomIdentifier
-    
-- NanoID
-  - unique IDs that are shorter and more URL-friendly.
-  - eg: DqQrAcB9jK
-  
-- TimestampId
-```
-    @Override
-    public Serializable generate(SharedSessionContractImplementor session, Object object) {
-        long timestamp = System.currentTimeMillis();
-        int random = new Random().nextInt(999999);
-        return timestamp + "-" + random;
-    }
-```
-6. Composite Identifiers
-- https://www.baeldung.com/hibernate-identifiers
-- @Embeddable Class ABC : Also public no-agr const, define equal and hashcode
-- then inject `@EmbeddedId` ABC id;
 
 ---
-
-## D. Validator 
-- <artifactId>spring-boot-starter-validation</artifactId>
-- @Min / @Max / @DecimalMin/MAX / @Range- on numbetypes
-- @Size(min = 3, max = 15) : on String
-- @length(min = 3, max = 15) : on Collection
-- @Null/ @NotNull / @NotEmpty / @NotBlank
-- @AssertTrue / @AssertFalse
-- @Pattern(regexp = "^[0-9]{10}$") String phoneNo
-- Date:
-  - @Past
-  - @PastOrPresent
-  - @Future
-  - @FutureOrPresent
-- More (H-specific) : @URL, @email, @CreditCardNumber, @Currency, @UUID
-- ### Custom validator:
-  - create custom Annotation1 and annotate with `@Constraint(validatedBy = Validator1.class)`
-  - class Validator1 implements `ConstraintValidator`<Annotation1, String> // string:: TypeOfvalueBeingValidate 
-  - Apply @Annotation1
-
----
-## Z.More
-- Scenario-1::
-  - t1::pk=id has (1toM) t2,
-  - t2::pk=id,fk=t1_id. 
-  - can make fk unique ? I think NO. 
- 
----
-### pending
-1. program on inheritance 
-2. program on relationship
+- **pending**
+  - program on inheritance
+  - program on relationship

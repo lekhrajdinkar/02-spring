@@ -47,6 +47,8 @@
     - txn-2 will get latest from latest version
   
 ### range lock
+- **problem** : `phantom read`
+- solution - range lock
 
   
 ---
