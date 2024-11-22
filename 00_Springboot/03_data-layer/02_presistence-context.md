@@ -6,27 +6,32 @@
 - Like Spring IAC.
 - runtime environment in which entity instances and lifecycle are managed. 
 - EntityManager or Session(H) 
-  - thread not safe : meaning C R U D methods does not have sync and lock code.
+  - **thread not safe** : meaning C R U D methods does not have sync and lock code.
   - used to interact with pc
 - `@persistenceContext` Session session : inject like this.
 
 - acts as a **first-level cache**. 
   - reduce Db calls
   - improved porformance
-- manages entity life cycle
-  - New/Transient > managed > detached > removed/Deleted(markedForDelete)
+- manages entity **life cycle**
+  - states:: 
+    - `Transient`(new) > `managed`(merged()) > `detached` (detach()) 
+    - managed :: **delete**(markedForDelete)
+    - managed :: **persist**(markedForDelete)
+    - managed :: **update**(update existing managed entity)
+    - managed :: **merged&Update**(load and update entity)
   - keeps track of changes made to managed entities.
-  - flush dirty-entities to DB, on txn::commit.
+  - **flush** `dirty entities` to DB, on txn::commit
   - **session/em API** 
     - persist,merge,detach,find,remove,refresh / Flush and close
     - utility: view allManagedEntity, dirtyEntity,etc
 
 ---    
 ## B Types
-### 1 Transaction-scoped (default) **
+### 1 Transaction-scoped (default in sb) **
 - tied to the transaction.
 - It is created when the transaction starts and is closed when the transaction ends.
-- eg: Spring-boot-jpa default behaviour. @@EnableTransactionManagement
+- eg: Spring-boot-jpa -  @EnableTransactionManagement c, then @Transaction m()
 - fact:
   - used in cg maps
   - not need for micro-services arch.

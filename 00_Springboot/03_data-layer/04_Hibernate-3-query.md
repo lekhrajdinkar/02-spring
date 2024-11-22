@@ -1,4 +1,6 @@
 - NamedQuery :https://www.baeldung.com/hibernate-named-query
+- Polymorphic queries : https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
+- @SqlResultSetMapping : https://chatgpt.com/c/7a6449ba-dede-478f-9778-1c7a9a5d5d9d
 --- 
 # hibernate 
 ## A. Query
@@ -35,7 +37,7 @@ class Entity {
     - timeout = 1, 
     - fetchSize = 10, 
     - cacheable=t/f,  
-    - resultClass = result.class
+    - resultClass = Result.class
     
 #==============
 # 2 : use it
@@ -48,6 +50,62 @@ q.getSingleResult();
 q.getResultList()/Set();
 
 ```
+### map result to custom-class/Tuple
+- reference:  https://chatgpt.com/c/7a6449ba-dede-478f-9778-1c7a9a5d5d9d
+- way-1: @NamedNativeQuery(...,  **resultClass** = Result.class)
+```
+@NamedNativeQuery(
+    name = "Employee.findSummary",
+    query = "SELECT id, name, department FROM employee",
+    resultClass = Result.class
+    
+    # keep names in sync b/w query and result class           
+)
+
+List<Employee> employees = entityManager.createNamedQuery("Employee.findAll", Employee.class).getResultList();
+
+```
+- way-2: **@SqlResultSetMapping** (name=Mapping_1, ...) + @NamedNativeQuery(...)
+
+```
+@SqlResultSetMapping(
+    name = "EmployeeDTOResult",
+    classes = @ConstructorResult(
+        targetClass = EmployeeDTO.class,
+        columns = {
+            @ColumnResult(name = "id", type = Long.class),
+            @ColumnResult(name = "name", type = String.class),
+            @ColumnResult(name = "department", type = String.class)
+        }
+    )
+)
+
+@NamedNativeQuery(
+    name = "Employee.findSummary",
+    query = "SELECT id, name, department FROM employee",
+    resultClass = Result.class,            
+    resultSetMapping = "Mapping_1"         
+)
+
+List<EmployeeDTO> employees = entityManager.createNamedQuery("Employee.findSummary").getResultList();
+```
+- WAY-3 : tuple ** :point_left:
+```
+@NamedNativeQuery(
+    name = "Employee.findSummary",
+    query = "SELECT id, name, department FROM employee"
+)
+
+List<Tuple> results = entityManager.createNamedQuery("Employee.findSummary", Tuple.class).getResultList();    <<<
+
+for (Tuple tuple : results) {
+    Long id = tuple.get("id", Long.class);
+    String name = tuple.get("name", String.class);
+    String department = tuple.get("department", String.class);
+    System.out.println("id: " + id + ", name: " + name + ", department: " + department);
+}
+```
+---
 ## B. Pagination (query result)
 ```
 int pageNumber = 1;
@@ -90,7 +148,21 @@ scroll(int positions): Move the cursor by a specific number of rows (positive fo
 setRowNumber(int rowNumber): Jump to a specific row by its number
 
 ```
+---
+## D. Polymorphic queries
+- implicitly : query for parent-entity, automatically includes ALL child records --> 6 records.
+- explicitly : use **Treat**, to change this behaviour.
+- open and search : https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
+- check below queries:
+```
+List<Vehicle> vehicles = session.createQuery("FROM Vehicle", Vehicle.class).getResultList();
+// Implicit polymorphism: vehicles list will contain instances of both Car and Bike
 
+List<Car> cars = session.createQuery("FROM Car", Car.class).getResultList();
+// Explicit polymorphism: cars list will contain only instances of Car
+
+List<Vehicle> vehicles = session.createQuery("FROM Vehicle v WHERE TREAT(v AS Car).numberOfDoors > 3", Vehicle.class) .getResultList();  <<<
+```
 ---
 ## B. HQL
 ### joins

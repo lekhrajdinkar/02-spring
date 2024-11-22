@@ -7,7 +7,7 @@
 - JPA Specification --> **ORM** layer (focus)
 - interact with a **relational** database without any SQL.
 - eg: Hibernate framework
-- first/Second level Cache.
+- first/Second level Cache. :small_red_triangle:
 - **Entity**
   - lifecycle state : New/Transient > managed > detached > removed/Deleted(markedForDelete).
   - Transient - POJO which has no representation in the PC.
@@ -56,12 +56,11 @@
 ### `C1:1-2-M and C2:M-2-1(owner : many side)`
 - C1:mapperBy=propertyName mentioned in owner-class
 - more anno:
-  - `@fetch(FetchMode.SELECT/JOIN/SUBSELECT)` + @OneToMany(fetch = **FetchType.LAZY/EAGER**)
   - `@order` + `@BatchSize` + @OneToMany
-  - **@fetch()** :
+  - `@fetch(FetchMode.SELECT/JOIN/SUBSELECT)` + @OneToMany(fetch = **FetchType.LAZY/EAGER**)
+  - **@fetch()** : from Hibernate :point_left:
     - defines `how` the associated entities are fetched from the database. meaning `SQS queries`.
-    - from Hibernate :point_left:
-    - @Fetch(FetchMode.SELECT/JOIN/SUBSELECT)
+    - @Fetch(FetchMode.XXXXXX)
       - **SELECT**: Specifies that associated entities should be fetched lazily, using a separate SELECT statement.
       - **JOIN**: Specifies that associated entities should be fetched eagerly using a single JOIN query.
       - **SUBSELECT**: Specifies that associated entities should be fetched lazily using a single SELECT query with a subselect.
@@ -100,17 +99,3 @@
        - Child-1/2 class table - 2 col + FK to parent table.
   4. `MappedSuperclass` – the parent classes, can’t be entities.
 
-- **Polymorphic queries**. 
-  - https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
-  - implicit : query for parent-entity, automatically includes ALL child records --> 6 records.
-  - explicit : use **Treat**, to change this behaviour.
-
-```
-List<Vehicle> vehicles = session.createQuery("FROM Vehicle", Vehicle.class).getResultList();
-// Implicit polymorphism: vehicles list will contain instances of both Car and Bike
-
-List<Car> cars = session.createQuery("FROM Car", Car.class).getResultList();
-// Explicit polymorphism: cars list will contain only instances of Car
-
-List<Vehicle> vehicles = session.createQuery("FROM Vehicle v WHERE TREAT(v AS Car).numberOfDoors > 3", Vehicle.class) .getResultList();  <<<
-```

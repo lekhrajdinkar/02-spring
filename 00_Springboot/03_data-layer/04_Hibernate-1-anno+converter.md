@@ -12,7 +12,6 @@
     - Lenght=255, string-valued column length. / @Length
     - Precision and Scale. for decimal feild.
   - `@Transient`
-  - @embedded, @embeddedId, @Embeddable
   
 ### relationship
 - @OneToOne, 
@@ -23,6 +22,14 @@
 
 - @ManyToMany : Add FK and create JoinTable bts.
   - `@WhereJoinTable(clause = "columnInJoinTable='value-1'")`
+
+### identifier
+- @embeddedId
+- @Id
+- @GeneratedValue() `@TableGenerator`()
+- @GeneratedValue() `@SequenceGenerator`()
+- @GeneratedValue() `@GenericGenerator`()
+- check more: [04_Hibernate-2-identifier+validator.md](04_Hibernate-2-identifier%2Bvalidator.md)
   
 ### Inheritance
 - `@MappedSuperclass` on parent class

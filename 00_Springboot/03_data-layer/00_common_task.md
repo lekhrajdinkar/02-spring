@@ -1,7 +1,8 @@
 # Common task
-# Set Default value
-- @Column(columnDefinition = "varchar(255) default 'John Snow'")
-- Inside Entity class :: private String firstName = "John Snow";
+## Set Default value
+- @Column(**columnDefinition** = "varchar(255) default 'John Snow'")
+- Inside Entity class 
+  - private String firstName = "John Snow";
 
 ## constraint - `Nullable`
 - @Column(nullable=t/f)

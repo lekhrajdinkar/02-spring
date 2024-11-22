@@ -21,11 +21,14 @@
     
   @Id
   @GeneratedValue(strategy = GenerationType.TABLE, generator = "my_table_generator")  <<<
-  @TableGenerator(name = "my_table_generator", table = "ID_GEN", 
-                pkColumnName    =     "GEN_NAME",
-                valueColumnName =     "GEN_VALUE", 
-                pkColumnValue   =     "MY_ID_GEN_1",
-                allocationSize = 1)
+  @TableGenerator(
+  name                = "my_table_generator", 
+  table               = "ID_GEN",
+  pkColumnName        = "GEN_NAME",
+  valueColumnName     = "GEN_VALUE",
+  pkColumnValue       = "MY_ID_GEN_1",
+  allocationSize      = 1 
+  )
   private Long id;
   
   - SELECT GEN_VALUE FROM ID_GEN WHERE GEN_NAME = 'MY_ID_GEN_1';

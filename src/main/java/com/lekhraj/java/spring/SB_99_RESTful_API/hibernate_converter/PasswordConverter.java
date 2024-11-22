@@ -16,5 +16,5 @@ public class PasswordConverter implements AttributeConverter<String,String> {
     }
 }
 
-//Apply::
+//Apply on entity field
 //@Convert(covert="PasswordConverter")
