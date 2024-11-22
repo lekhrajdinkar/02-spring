@@ -1,15 +1,15 @@
 # Common task
-## Set Default value
+# Set Default value
 - @Column(columnDefinition = "varchar(255) default 'John Snow'")
 - Inside Entity class :: private String firstName = "John Snow";
 
-### constraint - `Nullable`
+## constraint - `Nullable`
 - @Column(nullable=t/f)
 - @Basic(optional=t/f)
 - hibernate validator - `@NotNull` 
   - can apply on any bean, not just entity eg:jackson.
 
-### Constraint - `unique` 
+## Constraint - `unique` 
 - @Column(unique=t/f) : Single column
 - unique composite key:
   ```

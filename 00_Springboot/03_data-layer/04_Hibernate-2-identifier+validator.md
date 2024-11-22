@@ -1,5 +1,5 @@
 # Hibernate
-## C. Identifier : strategies
+## Identifier : strategies
 - `@GeneratedValue(Strategy = GenerationType."XXXXX")`
 ### AUTO 
 - hibernate will choose automatically, based on dialect.
@@ -46,7 +46,7 @@
 ### GENERIC -  UUID/GUID
 -  `@GeneratedValue()  @GenericGenerator()` - from hibernate
 - Random Sequence, avoid predictable sequences for security.
-- face Random values can lead to **fragmented indexes**, which can affect performance.
+- fact:  Random values can lead to **fragmented indexes**, which can affect performance.
 - **UUID/GUID** 
   - 128 bit - globally unique
   - eg: `550e8400-e29b-41d4-a716-446655440000`

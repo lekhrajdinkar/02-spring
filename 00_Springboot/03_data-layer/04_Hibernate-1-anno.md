@@ -98,7 +98,6 @@
 - `@Transactional`
 - `@Query` + `@Param`
 - `@QueryHints`({@QueryHint(name = "org.hibernate.fetchSize", value = "10")})
------
 
 ---
 - **pending**

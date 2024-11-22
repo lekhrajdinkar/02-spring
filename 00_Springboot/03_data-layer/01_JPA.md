@@ -1,7 +1,6 @@
 - Reference
   - all topics: https://www.baeldung.com/learn-jpa-hibernate
   - inheritance : https://www.baeldung.com/hibernate-inheritance
-  - Annotation : https://chatgpt.com/c/1375c062-4b67-437d-860b-e065a2980f57
 ---
 # JPA
 ## A Intro
