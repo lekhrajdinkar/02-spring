@@ -24,9 +24,11 @@
     - `@Version` private long version;
   - ObjectOptimisticLockingFailureException
 
-4. More on Concurrency-Control / isolations (by underlying DB)
+- More on Concurrency-Control / isolations (by underlying DB)
    - optimistic. eg @Transactional::Isolation::underlyingDB mechanism
    - pessimistic. Custom Sync Code
+
+
 
 
 
