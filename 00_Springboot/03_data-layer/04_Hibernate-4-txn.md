@@ -1,9 +1,12 @@
-- https://www.baeldung.com/transaction-configuration-with-jpa-and-spring
+- https://www.baeldung.com/transaction-configuration-with-jpa-and-spring - topics
+- https://chatgpt.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009 - programmatic txn
 ---
 # Hibernate - Transaction management
 - add @Bean **PlatformTransactionManager**
 - add **@EnableTransactionManagement**, or add spring-data-*-starter dependencies
 - org.springframework.transaction = **DEBUG**
+- fact:
+  - Mixing the database I/O with other types of I/O in a transactional context isn’t a great idea.
 
 ## A. @Transactional
 - manage transaction boundaries in a **declarative** way.
@@ -12,7 +15,14 @@
 - @Transactional(attribtes=) : check below
 
 ### `propagation` 
-- requires_new-->AlwaysNewT , Required -> t1 else t2new, mandatory->t1 else ex , nested->t1->inner-t1, SUPPORTS->t1,none , never->none
+- **requires_new** -> AlwaysNewT 
+- **Required** -> t1 else t2new 
+- **mandatory** -> t1 else ex  
+- **nested** -> t1 -> inner-t1
+- **SUPPORTS** -> t1 
+  - if an active transaction exists,then use it. Else gets executed non-transactional:
+- **none**  
+- **never** -> none
 - Nested transaction is also possible
   - Propagation.NESTED
   - inner txn :  independent transaction within the context of an existing/outer transaction.
@@ -22,23 +32,23 @@
   - it uses Save points.
   - 
 ### `isolation` 
-- side-effect: Dirty-read, Non-repeatable read, Phantom read.
-- READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ and SERIALIZABLE.
+- txn side effect : Dirty-read, Non-repeatable read, Phantom read.
+- protection levele: READ_UNCOMMITTED, READ_COMMITTED, REPEATABLE_READ and SERIALIZABLE.
+- can check: [03_ACID.md](03_ACID.md)
 
 ### `timeout`
 
-### `readOnly` flag 
-– a hint for the persistence provider that the transaction should be read only. // optimize performance.
+### `readOnly` 
+– t/f 
+- just a hint for the persistence provider that the transaction should be read only. 
+- optimizes performance.
 
 ### `rollbackFor / noRollbackFor`
-- Rule-1:Rollback on Checked-Exception-1, etc
-- if we don't mention any rule, rollback happens on unchecked-exceptions/RuntimeException
 - @Transactional(`rollbackFor` = {Exception.class, SpecificException.class})
 - @Transactional(`rollbackForClassName` = {"java.lang.Exception", "com.example.SpecificException"})
+- if we don't mention any rule, rollback happens on unchecked-exceptions/RuntimeException
 
-- For SUPPORTS, if an active transaction exists,then use it. Else gets executed non-transactional:
+
 
 ## B. programmatic : `AOP + TransactionTemplate`
-    - why? : Mixing the database I/O with other types of I/O in a transactional context isn’t a great idea.
-    - https://chatgpt.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009
-    - check com.lekhraj.java.spring.SB_99_RESTful_API.service.`StudentServiceImpl`
+- check [StudentServiceImpl.java](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSB_99_RESTful_API%2Fservice%2FStudentServiceImpl.java)
