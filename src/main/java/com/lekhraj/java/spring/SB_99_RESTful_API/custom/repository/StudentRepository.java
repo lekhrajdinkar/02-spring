@@ -13,6 +13,7 @@ import java.util.UUID;
 @Repository
 public class StudentRepository {
     @Autowired
+    //@PersistenceContext
     EntityManagerFactory sessionFactory;
 
     public Student getStudent(String name){

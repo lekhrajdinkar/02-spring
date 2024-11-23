@@ -1,5 +1,5 @@
 - https://www.baeldung.com/transaction-configuration-with-jpa-and-spring - topics
-- https://chatgpt.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009 - programmatic txn
+
 ---
 # Hibernate - Transaction management
 - add @Bean **PlatformTransactionManager**
@@ -12,6 +12,8 @@
 - manage transaction boundaries in a **declarative** way.
 - Spring creates **proxies**, to inject transactional-logic, before and after the running method.
 - only **public** methods.
+- best place apply on service method 
+  - can also apply on repo methods
 - @Transactional(attribtes=) : check below
 
 ### `propagation` 
@@ -39,8 +41,17 @@
   - inner txn :  independent transaction within the context of an existing/outer transaction.
   - if inner transaction rolls back, it only rolls back the nested transaction, not the outer transaction.
   - Not all databases and transaction managers provide full support for nested transactions.
-  - `transactionManager.setNestedTransactionAllowed(true);`
   - it uses Save points.
+  - enable it:
+```
+  @Bean
+  public PlatformTransactionManager transactionManager(DataSource dataSource) 
+  {
+    DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
+    transactionManager.setNestedTransactionAllowed(true); // Enable nested transactions                   <<< 
+    return transactionManager;
+  }
+```
   
 ### `isolation` 
 - txn side effect : Dirty-read, Non-repeatable read, Phantom read.
@@ -61,5 +72,9 @@
 
 ---
 
-## B. programmatic : `AOP + TransactionTemplate`
+## B. programmatic txn 
+### intro
 - check [StudentServiceImpl.java](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSB_99_RESTful_API%2Fservice%2FStudentServiceImpl.java)
+- **TransactionTemplate** utility provided by Spring to programmatically manage transaction
+- Amix with AOP
+- open and search : https://chatgpt.com/c/7b6dd03e-ca98-44d5-87a6-73c23026a009
