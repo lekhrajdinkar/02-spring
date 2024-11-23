@@ -83,6 +83,9 @@ public class Security_01_Config
                 // addFilterAfter/Before()
                 // httpBasic -> httpBasic.authenticationEntryPoint(new DigestAuthenticationEntryPoint()
                 // .sessionManagement(s->s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                // .formLogin( x -> {} )
+                // .logout( x -> {} )
                 ;
 
         return http.build();

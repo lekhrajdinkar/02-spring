@@ -1,3 +1,10 @@
+- link1 - https://chatgpt.com/c/67417202-5748-800d-9fc5-c032961a7c5b 
+  - client credential api call, DPoP error fix
+  - multiple filters
+- link2- https://chatgpt.com/c/7db419de-fa44-4403-b587-a0e849b35ce8
+  - claims scope
+  - @PreAuthorize @postAuthorize
+--- 
 ## concepts
 - LDAP : https://chatgpt.com/c/5865254e-a777-416f-ad16-8e40df050c04 
   - DN entries
@@ -21,7 +28,7 @@
 - Authentication and access-control framework.
 - use web-filter bts
 - old: **WebSecurityConfigurerAdapter**
-- ` @EnableGlobalMethodSecurity(prePostEnabled = true)`
+- `@EnableGlobalMethodSecurity`(prePostEnabled = true)` c1
   - `@PreAuthorize`("hasAuthority('SCOPE_my.spring.app.scope')") m()
 - `Disable` auto-config
     - @SpringBootApplication(exclude = { **SecurityAutoConfiguration.class** })
@@ -36,9 +43,11 @@
     }
   ```
   - Add  **SecurityFilterChain** `bean` - `new and functional style`.
+    - notice, injecting : **HttpSecurity** http
  
   ```
   @Configuration
+  @EnableGlobalMethodSecurity`(prePostEnabled = true)
   public class SecurityConfig 
   {
     @Bean
@@ -57,13 +66,17 @@
    }
   ```
   - [Security_01_Config.java](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSB_99_RESTful_API%2Fconfiguration%2FSecurity_01_Config.java)
-    - webSecurityCustomizer-1 bean
-    - filter-1 bean, filter-2 bean
-      - create more SecurityFilterChain and chain it on filter-2
-      - addFilter(filter 3 bean)
-      - conditionally enable either one of them
+    - webSecurityCustomizer-1 bean 
+    - filter-1/2 bean - conditonally enable either.
+    
+- can have multiple filter beans. eg: :point_left:
+  - filter-1 bean  @Order(1)  for url-pattern-1, do form-login
+  - filter-2 bean  @Order(2)  for url-pattern-2, do Oauth-JWT-validation 
+    - create more SecurityFilterChain and chain it on filter-2
+    - .addFilter(filter 3 bean)
+    - check reference link1 for code.
   
-  - **claims** (payload in JWT)
+- **claims** (payload in JWT)
     ```
     {
     "sub": "1234567890",
@@ -74,9 +87,9 @@
     "exp": 1689707600
     }
     ```
-  - in SpEL, refer them like
-    - **SCOPE_** ScopeRead
-    - **ROLE_** USER_ADMIN
+- in SpEL, refer them like
+  - **SCOPE_** ScopeRead
+  - **ROLE_** USER_ADMIN
 ---
 
 ## More topic

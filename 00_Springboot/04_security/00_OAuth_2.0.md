@@ -95,6 +95,20 @@
 - Access Token is returned against these credential. (basically AuthServer validate identity.)
 - use-case : lambda, micro services.
 - https://developer.okta.com/blog/2021/05/05/client-credentials-spring-security
+- make api call in postman (POST) :
+  - url : https://your-okta-domain/oauth2/default/v1/token
+  - body: 
+    - grant_type: client_credentials
+    - scope: <your-scope>
+    - **DPoP** : ??
+  - Authorization : basic auth
+    - Username: Your Client ID
+    - Password: Your Client Secret
+- got exception: :small_red_trinagle:
+  - org.springframework.security.oauth2.core.OAuth2AuthorizationException: [invalid_dpop_proof] The **DPoP proof JWT header is missing**. 
+  - Demonstration of Proof of Possession
+  - provides an additional layer of security by requiring the client to prove possession of a private key associated.
+  - Disable it of Authorizarion-server 
 
 ### `Refresh Token` Grant
 - involves the exchange of a Refresh Token for a new Access Token.
