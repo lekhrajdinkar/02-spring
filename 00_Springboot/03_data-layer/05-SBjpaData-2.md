@@ -203,6 +203,25 @@ Pageable sortedByPriceDescNameAsc = PageRequest.of(0, 5, Sort.by("price").descen
 @Query(value = "SELECT u FROM User u WHERE u.name IN :names")
 List<User> findUserByNameList(@Param("names") Collection<String> names);    
 ``` 
+- sample Page<User> after json serialization:
+```
+
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "John",
+      "email": "john@example.com"
+    }
+  ],
+  "pageable": {
+    "pageNumber": 0,
+    "pageSize": 5
+  },
+  "totalPages": 10,
+  "totalElements": 50
+}
+```
 ---
 ## More
 - **JPA Buddy plugin** 

@@ -12,15 +12,45 @@
 - `Content Negotiation` - Support different representations : `produces/consumes` = MediaType.APPLICATION_JSON
 - `API versioning`
 - `API DOC`
-- `security` - usingOAuth
+- `security` - using OAuth2.0
 - `Validation` - using hibernate JSR validator + custom validator anno.
 - `Formatting` - using jackson - custom serialization/de-S..
 - `CORS` setup - add frontend url
+- `Pagination and Sorting` - pageable and page<E>
 
 ### 2 more actions list-2 (pending)
 - **Async Controllers**: Use @Async and CompletableFuture to handle long-running requests asynchronously :point_left:
-- Pagination and Sorting
+- 
 - HATEOS
+  - https://chatgpt.com/c/67414b1b-9018-800d-a683-8a632932177a
+  - return **EntityModel<Result>** from api.
+  - **WebMvcLinkBuilder**
+  ```
+  User user1 = new User(id, "John Doe", "john.doe@example.com"); // current api result
+  ...
+  Link allUsersLink = WebMvcLinkBuilder
+   .linkTo(
+       WebMvcLinkBuilder
+          .methodOn(UserController.class)
+          .getAllUsers())                     <<< another controller/api method
+   .withRel("all-users");
+   ...
+   return EntityModel<User>.of(user1, allUsersLink);
+  ```
+  - sample response : `_links`
+  ```
+  {
+    "id": 1,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+  
+    "_links": {
+        "all-users": {
+            "href": "http://localhost:8080/api/users"
+        }
+    }
+  }
+  ```
 
 ---
 ## A Create API
@@ -37,7 +67,6 @@
   - RequestParam
 - can make above input optional. can set default value for above input.
   - eg:  @PathVariable(value="pathVariable2", required = false) String pathVariable2_optional :
-
 
 ---
 
