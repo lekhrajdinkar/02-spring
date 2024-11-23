@@ -20,11 +20,10 @@
 
 ### 2 more actions list-2 (pending)
 - **Async Controllers**: Use @Async and CompletableFuture to handle long-running requests asynchronously :point_left:
-- 
-- HATEOS
+- **HATEOS**
   - https://chatgpt.com/c/67414b1b-9018-800d-a683-8a632932177a
-  - return **EntityModel<Result>** from api.
-  - **WebMvcLinkBuilder**
+  - return **EntityModel<Result>** from api method.
+  - use **WebMvcLinkBuilder** to create **Link**
   ```
   User user1 = new User(id, "John Doe", "john.doe@example.com"); // current api result
   ...
