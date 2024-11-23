@@ -1,9 +1,6 @@
 - link1 - https://chatgpt.com/c/67417202-5748-800d-9fc5-c032961a7c5b 
   - client credential api call, DPoP error fix
   - multiple filters
-- link2- https://chatgpt.com/c/7db419de-fa44-4403-b587-a0e849b35ce8
-  - claims scope
-  - @PreAuthorize @postAuthorize
 --- 
 ## concepts
 - LDAP : https://chatgpt.com/c/5865254e-a777-416f-ad16-8e40df050c04 

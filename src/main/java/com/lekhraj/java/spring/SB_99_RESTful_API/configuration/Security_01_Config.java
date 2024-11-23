@@ -16,6 +16,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
@@ -100,6 +102,12 @@ public class Security_01_Config
                 //.oauth2Login(); - deprecated
         ;
         return http.build();
+    }
+
+    //@Bean
+    public JwtDecoder jwtDecoder() {
+        // Configure the decoder to use Okta's public keys
+        return NimbusJwtDecoder.withJwkSetUri("https://<your-okta-domain>/oauth2/default/v1/keys").build();
     }
 
 }

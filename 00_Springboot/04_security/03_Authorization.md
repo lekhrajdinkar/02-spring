@@ -20,3 +20,24 @@
   - @PostAuthorize
   - @Secured
   - @RolesAllowed
+```
+@RestController
+public class LocationBasedAccessController 
+{
+    @GetMapping("/restricted")
+    @PreAuthorize("hasAuthority('ROLE_USER_ADMIN') and #jwt.claims['location'] == 'Irvine'")   <<<
+    public String restrictedAccess() {
+        return "Access granted for users in Irvine!";
+    }
+}
+
+{
+  "sub": "1234567890",
+  "name": "Lekhraj Dinkar",
+  "roles": ["USER_ADMIN"],
+  "location": "Irvine",  // Custom claim
+  "iat": 1689704000,
+  "exp": 1689707600
+}
+
+```
