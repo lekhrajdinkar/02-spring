@@ -6,6 +6,7 @@
 - `AuthenticationManager` and `AuthenticationManagerBuilder`
   - central point for authentication logic
   - `AuthenticationProviders`
+- InMemoryUserDetailsManager : [Security_01_Config.java](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSB_99_RESTful_API%2Fconfiguration%2FSecurity_01_Config.java)
 - Custom beans :  UserDetailsService AuthenticationProvider, Filters
 
 ## ways to do

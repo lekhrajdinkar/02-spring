@@ -66,7 +66,7 @@ public class Security_01_Config
         http.
                 authorizeHttpRequests(
                 registry -> registry
-                        .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN").anyRequest().hasAuthority("SCOPE_scope-1")
                         .requestMatchers("/security/admin/**").hasRole("ADMIN")
                         .requestMatchers("/security/user/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/**").permitAll()
@@ -75,6 +75,8 @@ public class Security_01_Config
                 )
                 .csrf(csrf->csrf.disable())
                 .httpBasic(Customizer.withDefaults())
+                //.oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                ;
                 //.exceptionHandling()
                 //.addFilter(new CustomFilter_1())
 
