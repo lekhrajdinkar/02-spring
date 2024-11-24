@@ -2,6 +2,7 @@
   - https://chatgpt.com/c/da40b952-dbd9-46a9-ad58-92c828a89118
   - https://www.youtube.com/playlist?list=PLVz2XdJiJQxybsyOxK7WFtteH42ayn5i9
   - https://kubernetes.io/docs/concepts/overview/components/
+  - https://kubernetes.io/docs/tasks/tools/
 ---
 # K8s Architecture
 ##  A. cluster
