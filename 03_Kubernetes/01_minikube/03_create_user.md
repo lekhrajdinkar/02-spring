@@ -6,7 +6,13 @@ openssl req -new -key new-user.key -out new-user.csr -subj "/CN=new-user"
 openssl x509 -req -in new-user.csr -CA C:\Users\Manisha\.minikube\ca.crt -CAkey C:\Users\Manisha\.minikube\ca.key -CAcreateserial -out new-user.crt -days 365
 
 ```
+- update kubeconfig file
+  - context
+    - user : **new-user**
+    - cluster : 
+    
 - kubectl get ClusterRoleBindings
+  - see below role :  **cluster-admin**
 ```
 NAME              ROLE
 minikube-rbac     ClusterRole/cluster-admin (existing role)
@@ -18,8 +24,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: admin-binding-1
 subjects:
-- kind: U1
-  name: new-admin-user  # Replace with the new user's name
+- kind: User
+  name: new-user                              <<<< same name used in kubeConfig
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole
