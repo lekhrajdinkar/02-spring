@@ -1,3 +1,8 @@
+- summary:
+  - LimitRange - for NS-1 (100 GB) - total for ns
+  - resourceQuota  for **all** pod inside NS-1  (1 GB max to each pod)
+    - pod>resource - individual pod
+--- 
 # Resource Requirement
 
 - by default, no limit --> any pod can use as much resource.

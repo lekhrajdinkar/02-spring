@@ -48,7 +48,7 @@
   - **Role** --> `rules`: list of [ apigroup, resources, verb, resourceName ]
     - role for **namespace scoped resource**
     - eg: pod, service, sa
-  - **RoleBinding** --> `subject/s` (user) and `roleRef`
+  - **RoleBinding** --> `subject/s` (user,sa) and `roleRef` :point_left:
   - ![img_1.png](../99_img/security/04/img_1.png)
   - ![img_2.png](../99_img/security/04/img_2.png)
 

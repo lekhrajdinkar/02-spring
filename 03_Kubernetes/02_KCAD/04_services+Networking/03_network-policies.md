@@ -10,6 +10,7 @@
     - And don't add separate egress rule.
     - eg: DB-pod <---allow---- API-pod. good. enough
     - yml definition:
+      - ingress --> from : cidr block, other pod of ns-1, etc
 ```
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
