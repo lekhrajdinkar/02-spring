@@ -68,18 +68,52 @@ users:
 - can check again: [02_OIDC+first_admin_user+new_user.md](02_OIDC%2Bfirst_admin_user%2Bnew_user.md)
 - update kube-system ns configMap - auth_map
   - add `mapUser` - no
-  - add `mapRole` - make new entry for Broad-access-role role arn of our aws acct.
+  - add `mapRole` - make new entry for **Broad-access-role** role arn of our aws acct.
   ```
+  mapRoles: |
+  - rolearn: Broad-access-role arn
+    username: aws-role-1-user       <<< notice this name, will be used in role binding
+    groups:
+      - system:masters
+      # - system:bootstrappers
+      # - system:nodes
+      # - system:node-proxier
   ```
 - authentication(username:password/token) === user-1:token-1
   - token-1 comes from - **execute aws command : aws eks get-token --cluster --region**
   - Note: aws configure with  Broad-access-role only :point_left:
   
 ### Action-3.2 : RBAC
-- create Role to access resource for namespace label with atmid.
-- create RoleBinding.
+- create ClusterRole --> **to access resource for namespace label with atmid.**
+- create ClusterRoleBinding.
 ```
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: atmid-role
+# edit rules - fine grain 
+rules:
+- apiGroups: [""]
+  resources: ["*"]
+  verbs: ["*"]
+  labelSelector
+    matchLabels:
+        atm-id: "aaaaaaa"          <<<
 
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: developer-role-1-binding
+subjects:
+- kind: Group
+  name: developer-group-1  
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: atmid-role
+  apiGroup: rbac.authorization.k8s.io
 ```
     
 ### Action-4 :
