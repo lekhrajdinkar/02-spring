@@ -1,4 +1,5 @@
-# setup - machine + k8s software
+# setup - `machine/host` + `k8s software`
+- [03_k8s-architcture+features.md](..%2F00_kickOff%2F03_k8s-architcture%2Bfeatures.md)
 - create EKS cluster
 - set up master node - control panel 
   - install kube-apiserver
@@ -17,30 +18,32 @@
   - EBS / EFS
 
 ---
-## Option - 1 :: AWS - EC2
+# Option - 1 :: AWS - EC2
 - spin up EC2 machine
 - set up VPC
 - software helps with this installation
   - `kops`
   - `kubermatics`
-
 ---
-## Option - 2 :: AWS - managed service (EKS)
+# Option - 2 :: AWS - managed service (EKS)
 - EKS is cluster architecture.
 - diff:
-  - ECS is AWS specific concept and configuration
+  - **ECS** is AWS specific concept and configuration
   - EKS follows kubernetes standards.
   - both solves same problem in similar way.
-- setup video:
+
+## 2.1 created with **terraform /HCL**
+  - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/aws-config-maps-outbound-dev2-eks/runs
+  - **kubectl cluster-info**
+  ```
+  - `master`: https://C7467B80CEF6669327EE0493423B84A5.gr7.us-west-2.eks.amazonaws.com
+  - `CoreDNS` : https://C7467B80CEF6669327EE0493423B84A5.gr7.us-west-2.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+  ```  
+## 2.2 created **manually**:\
+- reference video:
   - https://www.udemy.com/course/docker-kubernetes-the-practical-guide/learn/lecture/22628019#overview
   - https://www.udemy.com/course/docker-kubernetes-the-practical-guide/learn/lecture/22628021#overview
 
-- created with `terraform` HCL
-  - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/aws-config-maps-outbound-dev2-eks/runs 
-  - kubectl cluster-info
-  - `master`: https://C7467B80CEF6669327EE0493423B84A5.gr7.us-west-2.eks.amazonaws.com
-  - `CoreDNS` : https://C7467B80CEF6669327EE0493423B84A5.gr7.us-west-2.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-  
 ### pre work:
 - **permission** - create below roles:
   - `cluster-role-1` : 
@@ -49,9 +52,9 @@
     - container registry policy
     - worker node policy 
     - CNI policy
-- create VPC for EKS 
+- create **VPC** for EKS 
   - will get standard cloudformation template, use that for now.
-- kubeCtl > add new context in kubeconfig file.
+- kubeCtl > add new context in **kubeconfig** file.
   - **aws eks update-kubeconfig --cluster cluster-1 --region r1**
   
 ### steps
@@ -64,6 +67,9 @@
   - choose instance-type and scaling.
   - it will also install k8s software needed for **worker node**.
 - choose cluster type : **public and private**
+- READY :green_circle:
+
+### Deploy K8s Object
 - apply  deployment object.
 - apply  service(LB type) object.
   - it will add load balancer > check ALB
@@ -116,7 +122,5 @@
         volumnMounts:
           - name: 
             mountpath: /app/abc  
-          
-    
     ```
   

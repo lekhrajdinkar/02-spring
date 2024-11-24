@@ -84,7 +84,7 @@ metadata:
 # edit rules - fine grain 
 rules:
 - apiGroups: [""]
-  resources: ["*"]
+  resources: ["namespace"]
   verbs: ["*"]
   labelSelector
     matchLabels:

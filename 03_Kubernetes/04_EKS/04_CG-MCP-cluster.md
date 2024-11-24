@@ -94,7 +94,7 @@ metadata:
 # edit rules - fine grain 
 rules:
 - apiGroups: [""]
-  resources: ["*"]
+  resources: ["namespace"]
   verbs: ["*"]
   labelSelector
     matchLabels:
@@ -115,11 +115,7 @@ roleRef:
   name: atmid-role
   apiGroup: rbac.authorization.k8s.io
 ```
-    
-### Action-4 :
-
-    
-### Action-5 :  cross account access (optional)
+### Action-4 :  cross account access (optional)
 - mcp-aws::`eks-role`
   - inline-policy --> "eks:*" 
   - **trusted-policy**  : Broad-access-role role arn of our aws acct
