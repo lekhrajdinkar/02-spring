@@ -1,7 +1,5 @@
-# k8s
-- k8s - 02  Containers :  https://chatgpt.com/c/9836b4c7-2b23-497e-b06b-16885e3e18aa
-- Containers - image, runtime, orchestration (ECS,K8s).
-- https://kubernetes.io/docs/concepts/overview/
+- reference:
+  - Containers : https://chatgpt.com/c/9836b4c7-2b23-497e-b06b-16885e3e18aa
 --- 
 ## A. Containers
   - `isolated environment` : physical machine > VM > Containers(host OS)
@@ -29,45 +27,21 @@
 
 ---
 ## B. Container orchestrators
-- For Distributed System | provides deployment patterns of container.
-- platforms that automate the deployment, management, scaling, and networking of containers.
-- framework for running and managing containers at scale.
-- use case:
-  - can manually maintain a couple of containers.
-  - or write scripts to manage the lifecycle of dozens of containers
-  - orchestrators make things easier, when managing hundreds or thousands of containers.
-- eg: 
-  - ECS
+- framework for managing containers at scale at **runtime**
+- For Distributed-System (ms), provides **deployment patterns of container**.
+  - automate the deployment
+    - release - rollout / rollback
+  - scale
+  - service discovery + networking
+  - storage
+  - config + secrets
+- orchestrators make things easier, when managing hundreds or thousands of containers.
+- offerings: 
   - Docker Swarm (native)
   - Kubernetes/k8s - minikube, EKS, AKS
-  - more: marathon
+  - AWS - ECS
+  - marathon
 
-### Kubernetes features (brief theory)
-  - > can be deployed on cloud(ec2), on-prem(host), IaaS (EKS).
-  - Automate the Container deployment at `scale`
-    - Horizontal scaling : add up/down more pods.
-  - `Automated Rollouts and Rollbacks`: 
-    - Automatically roll out changes and roll them back if something goes wrong.
-  - `Service Discovery and Load Balancing`: 
-    - Automatically assigns stable IP addresses and a single DNS name() for a set of containers),
-    - to facilitate load balancing and service discovery.
-  - `Storage Orchestration`: 
-    - Automatically mounts the storage system of your choice:
-      - whether from local storage 
-      - public cloud providers 
-      - or network storage systems.
-  - `Self-Healing`: 
-    - Restarts failed containers, replaces and reschedules them, and kills containers that don’t respond to user-defined health checks.
-  - `Secret and Configuration Management`: 
-    - Securely stores and manages sensitive information such as passwords, OAuth tokens, and SSH keys.
-  - `clustered systems` adv:
-    -  increased performance, cost efficiency, reliability, workload distribution, and reduced latency.
-  - Implement policies to `secure access` to applications/MS/service running inside containers.
-  - Enable containers in a cluster to `communicate with each other` regardless of the host
-  - `scheduling`
-  - `Monitoring`
-  - `Batch Execution`.
-  - Pv4/IPv6 dual-stack
 
----
+
 
