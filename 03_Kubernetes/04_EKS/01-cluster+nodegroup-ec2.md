@@ -33,13 +33,14 @@
   - both solves same problem in similar way.
 
 ## 2.1 created with **terraform /HCL**
-  - https://app.terraform.io/app/lekhrajdinkar-org/workspaces/aws-config-maps-outbound-dev2-eks/runs
+  - HCP workspace: https://app.terraform.io/app/lekhrajdinkar-org/workspaces/aws-config-maps-outbound-dev2-eks/runs
+  - HCL config: [eks](..%2F..%2F04_terraform%2Fproject%2Faws-config-maps%2F03_outbound%2Fmodules%2Feks)
   - **kubectl cluster-info**
   ```
   - `master`: https://C7467B80CEF6669327EE0493423B84A5.gr7.us-west-2.eks.amazonaws.com
   - `CoreDNS` : https://C7467B80CEF6669327EE0493423B84A5.gr7.us-west-2.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
   ```  
-## 2.2 created **manually**:\
+## 2.2 created **manually**
 - reference video:
   - https://www.udemy.com/course/docker-kubernetes-the-practical-guide/learn/lecture/22628019#overview
   - https://www.udemy.com/course/docker-kubernetes-the-practical-guide/learn/lecture/22628021#overview

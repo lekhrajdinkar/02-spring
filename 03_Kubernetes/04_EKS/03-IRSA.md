@@ -1,4 +1,8 @@
-# IRSA
+- https://chatgpt.com/c/67240e7e-6e38-800d-8e1d-3b7f1a8fe509
+- for AWS resource permission - use IRSA
+- for K8s resource - use K8s:RBAC - role and roleBinding. :point_left:
+--- 
+# `IRSA`
 - AWS-IAM-role for k8s-service-Accounts.
 - allows assigning AWS IAM roles to Kubernetes Service Accounts on Amazon EKS clusters.
 - enables pods running in the cluster to securely access AWS resources.
@@ -11,12 +15,9 @@
 
 
 ## Steps
-- https://chatgpt.com/c/67240e7e-6e38-800d-8e1d-3b7f1a8fe509
 - Enable the OIDC Provider for Your EKS Cluster
-  - https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html
-  - check: **aws eks describe-cluster --name <your-cluster-name> --query "cluster.identity.oidc.issuer" --output text**
 - Create an IAM role - `role-1-sa-1`
-  - **permission policy**
+  - **permission policy** : add
   - **trust policy**
     - trusted principle - OIDC provider federated user.
     - serviceAccount in k8s object > authenticated by OIDC > become federated user to assume role.  :point_left:
@@ -41,10 +42,10 @@
     ]
     }
     ```
-- create sa-1
-  - add annotation : eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>:role/`role-1-sa-1`
-- Associate the Service Account with Your Pods. 
-  - serviceAccountName: sa-1
+- create sa-1 k8s object and **annotate**
+  - **eks.amazonaws.com/role-arn: arn:aws:iam::<account-id>**:role/`role-1-sa-1`
+- Associate the Service Account with Your `Pods`. 
+  - **serviceAccountName**: sa-1
 
 ## summary
 - The Kubernetes service account (sa-1) is used by a pod running in the EKS cluster.
