@@ -1,32 +1,29 @@
-# EKS OIDC provider
-## manually create OIDC-Provider
-- install `eksctl` - https://eksctl.io/installation/
-- **eksctl utils associate-iam-oidc-provider --cluster $cluster_name --approve**
-- can also create from console.
+# A. on cluster creation
+- When the EKS cluster is created, then it creates below 2 things as well:
+
+## 1 `identity provider / OIDC`
+- an OIDC provider (oidc-1) is automatically associated with it.
+- if not found manually configured it:
+  - install `eksctl` - https://eksctl.io/installation/
+  - **eksctl utils associate-iam-oidc-provider --cluster $cluster_name --approve**
+- **aws eks describe** --cluster-name xxxx : check issuer url.
 - **oidc authentication logic** for:  :point_left:
-  - `user` : must have entri in aws_auth configMAP. 
-    - good enough, don't need to know full logic
-  - `sa`: always get authenticated,  since created inside cluster only.
----
-## After EKS cluster creation
-- When the EKS cluster is created, then it creates :
-- `identity provider / OIDC`
-  - an OIDC provider (oidc-1) is automatically associated with it.
-  - if not manually configured it. [as mentioned above]
-  - aws eks describe --cluster-name xxxx : check issuer url.
-- `first admin user`
+  - user : must have entry in aws_auth configMAP.
+  - sa   : always get authenticated,  since created inside cluster only.
+  
+## 2 `first admin user`
   - **the IAM entity (user or role) that creates the cluster** is automatically granted `system:masters` permissions in the `aws-auth` ConfigMap, 
   - which provides full admin access to the cluster.
-  - later on this admin user can add more user and add permission using k8s RBAC
+  - later on, this admin user can add more user and add permission using k8s RBAC
   - **kubeconfig** has this user (federated user) only.
     - user is external entity, outside k8s, 
     - external oidc authenticated federated user
     - gets **authentication-token** from oidc.
-    - token is validated, since `aws-auth` has entity. 
+    - token is validated, since `aws-auth` has entry. 
 
 ---
-## create new user/sa
-- https://chatgpt.com/c/673940a9-d1cc-800d-a117-847107be2e53
+## B create new user/sa
+- reference : https://chatgpt.com/c/673940a9-d1cc-800d-a117-847107be2e53
 
 ### 1. create new `eks-user` (admin, token-based)
 - Note: users === outside k8s user === represent aws `IAM user` or `IAM role`
