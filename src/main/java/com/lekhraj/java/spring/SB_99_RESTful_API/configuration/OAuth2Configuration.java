@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 
-@Configuration
-public class OktaOAuth2ClientConfiguration {
+//@Configuration
+public class OAuth2Configuration {
 
     @Bean
     ClientRegistration oktaClientRegistration(
@@ -20,11 +19,13 @@ public class OktaOAuth2ClientConfiguration {
     ) {
         return ClientRegistration
                 .withRegistrationId("okta")
+
                 .tokenUri(token_uri)
                 .clientId(client_id)
                 .clientSecret(client_secret)
                 .scope(scope)
                 .authorizationGrantType(new AuthorizationGrantType(authorizationGrantType))
+
                 .build();
     }
 

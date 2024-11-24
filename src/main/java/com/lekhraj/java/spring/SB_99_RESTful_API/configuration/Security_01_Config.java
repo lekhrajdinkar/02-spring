@@ -18,8 +18,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
 import java.util.Arrays;
@@ -68,7 +71,7 @@ public class Security_01_Config
         http.
                 authorizeHttpRequests(
                 registry -> registry
-                        .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN").anyRequest().hasAuthority("SCOPE_scope-1")
+                        .requestMatchers(HttpMethod.DELETE).hasRole("ADMIN")//.hasAuthority("SCOPE_scope-1")
                         .requestMatchers("/security/admin/**").hasRole("ADMIN")
                         .requestMatchers("/security/user/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/**").permitAll()
@@ -98,8 +101,21 @@ public class Security_01_Config
     public SecurityFilterChain filterChainToken(HttpSecurity http) throws Exception
     {
         http
-                .oauth2ResourceServer(resourceServer -> resourceServer.jwt(Customizer.withDefaults()))
-                //.oauth2Login(); - deprecated
+                .authorizeHttpRequests(registry -> registry
+                    .requestMatchers("/security/oauth/**").hasAnyAuthority("SCOPE_app_read_lekhraj")
+                    .anyRequest().permitAll()
+                )
+                .oauth2ResourceServer(resourceServer ->
+                        resourceServer.jwt(Customizer.withDefaults())
+                )
+
+                // 401 coming - have to fix
+
+                /*.addFilterBefore((request, response, chain) -> {
+                    System.out.println("Authorization Header: " + request.getHeader("Authorization"));
+                    chain.doFilter(request, response);
+                   }, UsernamePasswordAuthenticationFilter.class
+                )*/
         ;
         return http.build();
     }
@@ -108,6 +124,16 @@ public class Security_01_Config
     public JwtDecoder jwtDecoder() {
         // Configure the decoder to use Okta's public keys
         return NimbusJwtDecoder.withJwkSetUri("https://<your-okta-domain>/oauth2/default/v1/keys").build();
+    }
+
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter()
+    {
+        JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        authoritiesConverter.setAuthorityPrefix("SCOPE_"); // Matches with scopes in token
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
+        return jwtAuthenticationConverter;
     }
 
 }

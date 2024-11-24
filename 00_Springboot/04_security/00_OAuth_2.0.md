@@ -4,7 +4,9 @@
 
 - AWS OKTA SAML :
   - https://saml-doc.okta.com/SAML_Docs/How-to-Configure-SAML-2.0-for-Amazon-Web-Service
-  - https://help.okta.com/en-us/content/topics/deploymentguides/aws/aws-configure-aws-app.htm
+  - https://help.okta.com/en-us/content/topics/deploymentguides/aws/aws-configure-aws-app.html
+  
+- [OktaOAuth2ClientConfiguration.java](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2FSB_99_RESTful_API%2Fconfiguration%2FOktaOAuth2ClientConfiguration.java)
 ---
 # pre-things
 ## JWT
@@ -95,20 +97,36 @@
 - Access Token is returned against these credential. (basically AuthServer validate identity.)
 - use-case : lambda, micro services.
 - https://developer.okta.com/blog/2021/05/05/client-credentials-spring-security
-- make api call in postman (POST) :
-  - url : https://your-okta-domain/oauth2/default/v1/token
-  - body: 
-    - grant_type: client_credentials
-    - scope: <your-scope>
-    - **DPoP** : ??
-  - Authorization : basic auth
-    - Username: Your Client ID
-    - Password: Your Client Secret
-- got exception: :small_red_trinagle:
+- **hands on**:
+  - created app / client https://dev-16206041-admin.okta.com/admin/app/oidc_client/instance/0oaldbk7ys8px41Gy5d7/#tab-general
+  - created auth server: https://dev-16206041-admin.okta.com/admin/oauth2/as/ausldbxlfakbwq32P5d7#
+    - add scope :  app_read_lekhraj
+    - add Access policy : allow above client
+    - **DPoP** : disable
+    - can add Trusted-servers
+  - made postman call : https://lekhrajdinkar-postman-team.postman.co/workspace/My-Workspace~355328d1-2f75-4558-8e56-e229e284f6a3/example/5083106-53c3fa91-ef5f-4f49-899f-2b1064386242
+  - created GET http://localhost:8083/spring/security/getAccessToken to do same.
+```
+    {
+  "ver": 1,
+  "jti": "AT.-DVBDB63tr7t34AlwXR_y3zT_mHZWpGPWxholPDGLfI",
+  "iss": "https://dev-16206041.okta.com/oauth2/ausldbxlfakbwq32P5d7",
+  "aud": "0oaldbk7ys8px41Gy5d7",
+  "iat": 1732406655,
+  "exp": 1732410255,
+  "cid": "0oaldbk7ys8px41Gy5d7",
+  "scp": [
+  "app_read_lekhraj"                         <<<<<<
+  ],
+  "sub": "0oaldbk7ys8px41Gy5d7"
+  }
+  
+got exception: 
   - org.springframework.security.oauth2.core.OAuth2AuthorizationException: [invalid_dpop_proof] The **DPoP proof JWT header is missing**. 
   - Demonstration of Proof of Possession
   - provides an additional layer of security by requiring the client to prove possession of a private key associated.
   - Disable it of Authorizarion-server 
+```
 
 ### `Refresh Token` Grant
 - involves the exchange of a Refresh Token for a new Access Token.

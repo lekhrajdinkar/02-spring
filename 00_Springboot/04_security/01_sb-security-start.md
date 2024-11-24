@@ -3,6 +3,7 @@
   - multiple filters
 --- 
 ## concepts
+- OAuth2 dependency :: **spring-boot-starter-oauth2-client** + **spring-security-oauth2-jose**
 - LDAP : https://chatgpt.com/c/5865254e-a777-416f-ad16-8e40df050c04 
   - DN entries
 - Authentication vs Authorization
