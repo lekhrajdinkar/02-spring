@@ -20,6 +20,8 @@
   - **cluster_info**
   - **kubeconfig** (cluster-1, user-1, context-1)
 ```
+## Example
+
 apiVersion: v1
 kind: Config
 clusters:
@@ -49,17 +51,21 @@ users:
   - mcp-im-usel-dev-ns-01
 ``` 
 
-### Action-2 : add IAM:Idenetity provider for EKS
-- **aws eks describe-cluster** --name <cluster-name> --region <region> --query "cluster.identity.oidc.issuer" --output text
-  - OIDC provider is automatically enabled when you create an EKS cluster.
-- add OIDC provider in IAM:identity provider
+### Action-2 : add IAM:Identity provider for EKS
+- **aws eks describe-cluster** 
+  - --name <cluster-name> 
+  - --region <region> 
+  - --query `"cluster.identity.oidc.issuer"` 
+  - --output text
+- add OIDC provider in IAM:identity provider of our AWS acct.
   - `issuerId` - https://oidc.eks.us-west-2.amazonaws.com/id/eks-cluster-id
-  - `audience` - sts.amazonaws.com      
+  - `audience` - **sts.amazonaws.com**      
 - note: it authenticates:
   - user-1 in kubeconfig
   - SA(pod), which developer will add later.
     
 ### action-3.1 : Authentication 
+- can check again: [02_OIDC+first_admin_user+new_user.md](02_OIDC%2Bfirst_admin_user%2Bnew_user.md)
 - update kube-system ns configMap - auth_map
   - add `mapUser` - no
   - add `mapRole` - make new entry for Broad-access-role role arn of our aws acct.

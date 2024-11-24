@@ -22,10 +22,10 @@
     - token is validated, since `aws-auth` has entry. 
 
 ---
-## B create new user/sa
+# B create new user (external OIDC / identity token based)
 - reference : https://chatgpt.com/c/673940a9-d1cc-800d-a117-847107be2e53
 
-### 1. create new `eks-user` (admin, token-based)
+## 1. create new `eks-user` (admin)
 - Note: users === outside k8s user === represent aws `IAM user` or `IAM role`
   - of same AWS account
   - or cross AWS account
@@ -46,16 +46,16 @@ mapRoles: |
       # - system:nodes
       # - system:node-proxier
 ```
-- aws configure (with aws-role-1) :point_left:
-- update **kubeconfig**
-```
-  kubectl config set-cluster new-context-1 --server=https://<eks-cluster-endpoint>
-  kubectl config set-context new-context-1 --cluster=my-cluster --user=aws-role-1-user
-  kubectl config use-context new-context-1
-```
-- new admin user got created :)
-
-### 2. create new `eks-user` (non-admin, token-based )  === cg
+- next login :
+  - aws configure (with aws-role-1) :point_left:
+  - update **kubeconfig**
+  ```
+    kubectl config set-cluster new-context-1 --server=https://<eks-cluster-endpoint>
+    kubectl config set-context new-context-1 --cluster=my-cluster --user=aws-role-1-user
+    kubectl config use-context new-context-1
+  ```
+---
+## 2. create new `eks-user` (non-admin )  === cg
 - same as above. but remove this `system:masters`
 - add RBAC for a group (say : `developer-group-1`). check below
   - create `ClusterRole` and `ClusterRoleBinding` for this group. (for cluster-level resource)
@@ -102,11 +102,8 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   
 ```
-
-### 3. create new minikube user (non-admin, certificate-based )
-- check minikube pages.
-
-### 4. create new service (non-admin)
+---
+# C  create new service Account
 - create eks object yaml, inside ns.
 - for permission to k8s-resource : `role and role-binding`
 - for permission to aws-resource : `IRSA`
