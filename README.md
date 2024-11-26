@@ -41,5 +41,5 @@
 
 ---
 
-## E. Micro services (in progress...)
-- project: https://github.com/lekhrajdinkar/02-spring/blob/main/07_micro-services
+## E. Micro services
+- [here](https://github.com/lekhrajdinkar/03-spring-cloud-v2/tree/main/Notes)
