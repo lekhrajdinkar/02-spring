@@ -1,5 +1,6 @@
 # reference
 - https://www.youtube.com/watch?v=yLQnpmkNFmk&list=PLBf0hzazHTGMJzHon4YXGscxUvsFpxrZT&index=3&ab_channel=HackerSploit
+- All topic : https://chatgpt.com/c/674528ff-dbc8-800d-9237-9e757230df84
 
 ---
 # bash
@@ -18,9 +19,12 @@
         - file_size=$(stat -c%s "/path/to/file")
         - result=$(($((5 * 10)) + 2))
         - $(seq 1 3)
-    ```    
+        - trimmed=$(echo "$str" | xargs) - trim
+    ```
+    - $() is for running and capturing the output of commands.
+    - **$(( ))** is for performing arithmetic calculations.    
 
-## variable
+## A. variable
 - https://chatgpt.com/c/6744f7b6-024c-800d-8f1e-cd0fab2299c1
 - variables are untyped, meaning they do not have a specific data type
 - All variables are treated as strings, 
@@ -30,7 +34,7 @@
 - **Associated Array** like Map
     - FRUIT_COLOR("F1")="red"
 
-## Conditional
+## B. Conditional
 - https://chatgpt.com/c/674504d4-e730-800d-b831-564a15b4b58e
 - <, > are redirection operators, dont use for comparison.
 - **help test**
@@ -52,3 +56,33 @@
 [ $a -lt $b ] : Less than.
 gt, ne, ge, le
 ```
+
+- **[[ ... ]]  vs	[ ... ]**
+  - new, prefer it in bash.
+  - Supports `wildcards`, e.g., [[ $var == a* ]]
+  - Supports =~ for **regex matching**
+  - [[ ... && ... ]] is valid	vs Requires if [ ... ] && [ ... ]
+
+## C .loop
+- while
+- until
+- break and continue
+- for (;;)
+- for in array
+
+## D .String manipulation
+- https://chatgpt.com/c/67454b39-b8f4-800d-8aaf-0eb72bcc568d
+### with awk 
+- **programming capabilities**
+- pattern scanning and text processing. 
+- You need to process **structured** data (like CSV or tabular data). 
+- Perform calculations, conditional checks, or formatting output. 
+- Extract specific fields or records.
+
+### with sed ( stream editor) 
+- You need quick `search-and-replace` 
+- text editing in `files` or `streams`.
+- Work with line-by-line text transformations.
+
+## F. file
+

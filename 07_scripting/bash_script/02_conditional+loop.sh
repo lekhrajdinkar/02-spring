@@ -17,7 +17,15 @@ name=$2
 name=${name:-lekhraj}
 # keep space around =, then its becomes equal operator. 
 # == also works
-if [ $name=="lekhraj" ] || [ $name = "lekhraj" ] ; then  
+# Single square bracker
+if [ $name == "lekhraj" ] || [ $name = "lekhraj" ] ; then
+    echo "Hello lekhraj"
+else
+    echo "you are NOT lekhraj"
+fi
+
+# double square bracker - supports wildcard, regex with =~, ||, &&, !
+if [[ $name = l*  || $name == m* ]] ; then
     echo "Hello lekhraj"
 else
     echo "you are NOT lekhraj"
@@ -36,6 +44,12 @@ case $name in
         ;;
 esac
 
+case $1 in
+  start) echo "Starting...";;
+  stop) echo "Stopping...";;
+  *) echo "Invalid option";;
+esac
+
 echo "------- #3 for loop  -------"
 for num in $(seq 1 3); do echo "Number: $num" ; done
 
@@ -44,12 +58,19 @@ for item in apple banana cherry; do
 done
 
 # Array
-arr=("apple" "banana" "cherry")
+arr=("array-item-1" "array-item-2" "array-item-3")
 arr_size=${#arr[@]}
 
-for item in "${arr[@]}"; do echo "Fruit: $item" ; done
+count=0
+for item in "${arr[@]}"; do 
+    count=$(( count + 1 ));
+    echo "item_${count} : $item" ; 
+done
 
-for ((i = 1; i <= arr_size; i++)); do echo "C-style loop, index is $i" ; done
+
+for ((i = 1; i <= arr_size; i++)); do 
+    echo "C-style loop, index is $i" 
+done
 
 # directory file
 for item in $(ls .); do
@@ -64,6 +85,8 @@ if [ -f ./items.txt ] ; then
 else
     echo "item file not present"
 fi
+
+
 
 
 

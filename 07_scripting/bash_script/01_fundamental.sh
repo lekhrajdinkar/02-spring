@@ -48,13 +48,9 @@ This is a multi-line comment.
 It can span multiple lines.
 SKIP_ME
 
-: << 'SKIP ME'
-This is a multi-line comment.
-It can span multiple lines.
-SKIP ME
 echo " multi line comment trick done."
 
-echo "------- #6 Arithmetic  -------"
+echo "------- #6 Arithmetic  $ (( ...  )) -------"
 NUM1=10
 NUM2=20
 
@@ -65,5 +61,13 @@ let SUM3_1=NUM1+NUM2
 let SUM3_2 = NUM1 + NUM2
 
 echo "Sum: $SUM1, $SUM2, $SUM3_1, $SUM3_2"
+
+# status of previous command
+if [[ $? -eq 0 ]]; then
+  echo "Success"
+else
+  echo "Failure"
+fi
+
 
 
