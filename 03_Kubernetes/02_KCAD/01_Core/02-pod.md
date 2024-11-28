@@ -11,7 +11,8 @@
   - comm : shares same name network-namespace and storage by-default.
     - no need manually setup-
     - that's one of the benefit with pod.
-
+- HPA `horizontal pod scaling` object
+  - k **autoscale** deployment  deployment-1 --max=10 --cpu-percent=70
 ```
 apiVersion
 kind

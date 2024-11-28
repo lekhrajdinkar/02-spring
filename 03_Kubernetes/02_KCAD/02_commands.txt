@@ -84,6 +84,8 @@ maps-outbound-pod   1/1     Running            0          3s
 - k rollout status deployment/deployment-1 --> status for deployment, status of each replica/pod
 - k rollout history deployment/deployment-1 --> show revision history
 - k rollout undo deployment/deployment-1 --to-revision=1
+- k autoscale deployment  deployment-1 --max=10 --cpu-percent=70 : creates HPA
+- k get hpa
 
 # edit non-editable feild in pod
 # ================================================
