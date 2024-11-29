@@ -154,6 +154,7 @@ dividing the workload between the two partitions.
 ---
 
 # Programs
+- https://chatgpt.com/c/674a1fef-5634-800d-b445-dfa969b74011
 ```
     <dependency>
         <groupId>org.springframework.kafka</groupId>
@@ -188,9 +189,8 @@ spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.Str
     - props.put("auto.offset.rest","none")
     - props.put("auto.offset.rest","latest")
     - props.put("auto.offset.rest","earliest")
-    - consumer-1 : subscribe to topic-1,topic-2
 
-- secnario-1:
+### scenario-1: generic consumer for diff schema
 ```
 kafka-topic-1 (schema : student)
 kafka-topic-2 (schema- customer)
@@ -201,5 +201,34 @@ kafka-generic-consumer-1 : subscribed to kafka-topic-1 and kafka-topic-2.
 # while consuming, Objectmapper.readObject(jsonStr, student/customer.class)
 spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
 
+```
+
+### scenario-2 : partitions < consumer
+```
+Topic: topic-1 with 2 partitions (partition-0 and partition-1).
+Consumer Group: topic-1-group-1.
+Consumers: c1, c2, c3, c4.
+
+# Partition Assignment
+partition-0: Assigned to c1.
+partition-1: Assigned to c2.
+c3 and c4 are idle because there are not enough partitions for them.
+```
+
+### scenario-3 : partitions > consumer
+```
+Topic: topic-1 with 4 partitions (partition-0, partition-1, partition-2, partition-3).
+Consumer Group: topic-1-group-1.
+Consumers: c1, c2
+
+# Partition Assignment :
+
+## --- Using RangeAssignor --- 
+c1: partition-0, partition-1.
+c2: partition-2, partition-3.
+
+## ---  Using RoundRobinAssignor --- 
+c1: partition-0, partition-2.
+c2: partition-1, partition-3.
 ```
  
