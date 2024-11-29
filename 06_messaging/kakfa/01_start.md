@@ -43,35 +43,39 @@ tutor reference:
 - ![img.png](../temp/01/img.png)
 - **broker**
   - single Kafka server
-  - java program
-  - store data in a directory on the server disk.
+  - kakfa store data in a directory on the broker disk.
   - if we connect to any broker, then can discover and connect to other broker in the same cluster
     - Every broker in the cluster has metadata about all the other brokers
     - therefore any broker in the cluster is also called a `bootstrap server`.
     - ![img_5.png](../temp/01/img_5.png)
   
   
-- **topics** 
+### **topics** 
   - roughly analogous to SQL tables (not queryable)
   - data store in binary format.
-  - eg: log topic
   - topic is broken down into a number of **partitions**
     - to achieve high throughput and scalability
     - Kafka does a good job of distributing partitions evenly among the available brokers.
+    - up to 200,000 partition (with zookepeer)
+    - without zoo kepeer - millions of partition.
   - `offset` - integer value that Kafka adds to each message as it is written into a partition. from 0.
   - data retency : 7 days (default).
   - not deleted after consumed.
-  - resilience offering - `Topic Replication Factor`  :point_left:
-    - 1 : `1 leader` + no replication
-    - 2 : `1 leader` + `1 ISR on broker-2`
-    - 3 : `1 leader` + `1 ISR on broker-2` +   `1 ISR on broker-3`
-      - For a topic replication factor of 3, topic data durability can withstand the loss of 2 brokers.
-    - ...
-    - factor = max value : no. of broker - 1
-    -  In-Sync Replicas (ISR)
+  - resilience and availability : via replication /In-Sync Replicas (ISR) of each partition on other. eg:
+    - kafka cluster with 3 broker, topic-1 has 3 partition 
+    - intially, kafka will distriube, one partition into each broker.
+    - broker-1:p1, b2:p2, b3:p3
+    - if Topic Replication Factor = 1  :point_left:
+      - for each partition: `1 leader` + no replication
+    - if Topic Replication Factor = 2
+      - for each partition: `1 leader` + `1 ISR on other broker`
+    - if Topic Replication Factor = 3 
+      - for each partition: `1 leader` + `1 ISR on other broker` +   `1 ISR on other broker`
+        - For a topic replication factor of 3, topic data durability can withstand the loss of 2 brokers.
+    - Topic Replication Factor = max value : no. of broker - 1
     - ![img_6.png](../temp/01/img_6.png)
-    
-- **producer**
+
+### **producer**
   - application - java/py with kafka client.
   - Kafka producers only write data to the **leader** broker for a partition
   - specify a level of acknowledgment `acks`
@@ -80,7 +84,7 @@ tutor reference:
     - acks=all : written successfully + acknowledged by leader + accepted by all ISR
 
 
-- **message**
+### **message**
   - `message-value` : content
   - `message-key` 
     - null : load balance , round-robin fashion into p1,p2,...
@@ -91,19 +95,34 @@ tutor reference:
     - StringSerializer
     - converts message-value/key into byte streams
 
-- **Consumer**
+### **Consumer**
   - application - java/py with kafka client.
-  - If the consumer consumes data from more than one partition, the message order is not guaranteed across multiple partitions
+  - If a consumer consumes data from multiple partition, the message order is not guaranteed across multiple partitions
   - By default, Kafka consumers will only consume data that was produced after it first connected to Kafka.
     - hence no access historic, by default.
   - can implement - `pull model`
-    - instead of having Kafka brokers continuously push data to consumers,,
+    - instead of having Kafka brokers continuously push data to consumers,
     - consumers must request data from Kafka brokers
+  - **Publish-Subscribe Behavior**
+    - when multiple consumer groups subscribe to the same topic
   - **consumer group**
-    - each topic partition is only assigned to one consumer within a consumer group
-    - ![img_2.png](../temp/01/img_2.png)
-    - ![img_3.png](../temp/01/img_3.png)
-    - ![img_4.png](../temp/01/img_4.png)
+    - each partition of topic is consumed by one consumer within a consumer group :point_left:
+    - Messages are effectively divided among the consumers.
+- ![img_2.png](../temp/01/img_2.png)
+- ![img_3.png](../temp/01/img_3.png)
+- ![img_4.png](../temp/01/img_4.png)
+- ![img.png](../temp/02/img.png)
+```
+# summary
+
+topic with 2 partition consumed by :
+- consumer-1
+- consumer-2
+- consumer-group-1 (consumer-3, sonsumer-4).
+
+Together, Consumer-3 and Consumer-4 consume all messages from the topic, 
+dividing the workload between the two partitions.
+```
     
 ### more
 - **Kafka Connect**
@@ -115,3 +134,17 @@ tutor reference:
 - **ksqlDB**
   - transform Kafka topics to SQL-like database
   - thus can perform SQL-like operation
+  
+- **Zookeeper**
+  - like master node in k8s cluter.
+  - Zookeeper is used to track cluster state, membership, and leadership.
+  - Being Eliminated from Kafka v4.x. less secure
+  - metadata management in the Kafka world
+  - perform leader elections
+  - stores configurations for topics and permissions.
+  - does NOT store consumer offsets 
+  - ensemble / Zookeeper cluster: 3,5, 7,...
+  - ![img_1.png](../temp/02/img_1.png)
+
+- **Kafka KRaft Mode**
+ 
