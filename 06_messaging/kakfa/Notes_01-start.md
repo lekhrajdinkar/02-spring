@@ -1,8 +1,9 @@
-tutor reference:
-- https://courses.datacumulus.com/
-- udemy: https://www.udemy.com/course/apache-kafka
-- github code : https://conduktor.io/apache-kafka-for-beginners
-- slides : https://learn.conduktor.io/kafka/ :point_left:
+# reference
+- project : [kafka](..%2F..%2Fsrc%2Fmain%2Fjava%2Fcom%2Flekhraj%2Fjava%2Fspring%2Fkafka)
+- udemy: 
+  - https://www.udemy.com/course/apache-kafka
+  - https://conduktor.io/apache-kafka-for-beginners
+  - slides : https://learn.conduktor.io/kafka/ :point_left:
 
 ---
 # kafka 
@@ -20,9 +21,10 @@ tutor reference:
 ## B install - conduktor
 - https://conduktor.io/get-started
 - curl -L https://releases.conduktor.io/quick-start -o docker-compose.yml && docker compose up -d --wait && echo "Conduktor started on http://localhost:8080"
-
+- http://localhost:8888/
 ---
 ## C use cases
+- https://chatgpt.com/c/6748bff9-8df8-800d-8faa-ac5244853529
 ### 1 as a data integration layer
 - producer  and consumer system/s, with diff data-format + schema, protocol
 - ![img.png](../temp/img-3.png)
@@ -38,6 +40,7 @@ tutor reference:
 
 ---
 ## D fundamental / component
+- https://chatgpt.com/c/6748c06d-048c-800d-996e-6ca852cd0329
 - `producer` --> **kafka-Cluster [ broker > topic > partition ]** --> `consumer group/s` [consumer-1,... ]
 - ![img_1.png](../temp/img_1.png)
 - ![img.png](../temp/01/img.png)
@@ -147,4 +150,56 @@ dividing the workload between the two partitions.
   - ![img_1.png](../temp/02/img_1.png)
 
 - **Kafka KRaft Mode**
+
+---
+
+# Programs
+```
+    <dependency>
+        <groupId>org.springframework.kafka</groupId>
+        <artifactId>spring-kafka</artifactId>
+    </dependency>
+    
+spring.kafka.bootstrap-servers=localhost:9092
+spring.kafka.consumer.group-id=kafka-generic-consumer-group
+spring.kafka.consumer.auto-offset-reset=earliest/latest/none
+
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+```
+
+## producer
+```
+ - @Autowired KafkaTemplate<String, String> kafkaTemplate;
+ - String message = objectMapper.writeValueAsString(student);
+ - kafkaTemplate.send("topic-1", message);
+```
+- produce
+    - sysc - send(produceRrecord)
+    - a-sync send(produceRrecord, new Callback() { @override onCompletion ... })
+- produce in batch : props.put("batch.size","400"); // key  must be null + props.put("partitioner.class","");
+- produce with key
+
+
+## consume 
+```
+ @KafkaListener(topics = {"kafka-topic-1", "kafka-topic-2"}, groupId = "kafka-generic-consumer-group") m(String s) {...}
+```
+- consume : props.groupId("group.id","")
+    - props.put("auto.offset.rest","none")
+    - props.put("auto.offset.rest","latest")
+    - props.put("auto.offset.rest","earliest")
+    - consumer-1 : subscribe to topic-1,topic-2
+
+- secnario-1:
+```
+kafka-topic-1 (schema : student)
+kafka-topic-2 (schema- customer)
+kafka-generic-consumer-1 : subscribed to kafka-topic-1 and kafka-topic-2.
+
+# producer sending json 
+# De-Serailize json to string
+# while consuming, Objectmapper.readObject(jsonStr, student/customer.class)
+spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+
+```
  

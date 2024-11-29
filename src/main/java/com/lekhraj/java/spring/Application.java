@@ -11,12 +11,15 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 
 @SpringBootApplication //(exclude = { SecurityAutoConfiguration.class })
 @EnableConfigurationProperties({Prop2Map.class})
-public class Application implements ApplicationContextAware {
+@Component("com.lekhraj.java.spring")
+public class Application implements ApplicationContextAware
+{
 	//@Autowired  // didnot work
 	private ApplicationContext applicationContext;
 	public static void main(String[] args)
