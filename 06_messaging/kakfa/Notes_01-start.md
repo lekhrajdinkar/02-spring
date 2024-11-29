@@ -185,7 +185,7 @@ spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.Str
 ```
  @KafkaListener(topics = {"kafka-topic-1", "kafka-topic-2"}, groupId = "kafka-generic-consumer-group") m(String s) {...}
 ```
-- consume : props.groupId("group.id","")
+- consume : props.groupId("group.id","") + props.put("group.instance.id","") **static consumer**
     - props.put("auto.offset.rest","none")
     - props.put("auto.offset.rest","latest")
     - props.put("auto.offset.rest","earliest")
@@ -231,4 +231,11 @@ c2: partition-2, partition-3.
 c1: partition-0, partition-2.
 c2: partition-1, partition-3.
 ```
+
+### scenario-4 : rebalance
+- whenever consume leaves/joins group, rebalance happens
+- moving partition b/w consumers.
+- if static member leave the group and joins back within **session.timeout.ms**, the gets it original partition.
+- ![img.png](../temp/03/img.png)
+- ![img_1.png](../temp/03/img_1.png)
  
