@@ -169,16 +169,14 @@
 
 ---
 ### **4 Consumer**
-- application - java/py with kafka client.
-- If a consumer consumes data from multiple partition, the message order is not guaranteed across multiple partitions
-- By default, Kafka consumers will only consume data that was produced after it first connected to Kafka.
-  - hence no access historic, by default.
-- can implement - `pull model`
-  - instead of having Kafka brokers continuously push data to consumers,
-  - consumers must request data from Kafka brokers
-- **Publish-Subscribe Behavior**
-  - when multiple consumer groups subscribe to the same topic
-- **consumer group**
+- application - java/py,etc with kafka client.
+- consumer config : **auto.offset.rest**=[earliest/latest/none] -- `latest` is default.
+  
+#### 4.1 pull model (skip)
+- instead of having Kafka brokers continuously push data to consumers,
+- consumers must request data from Kafka brokers
+
+#### **4.2 consumer group**
   - each partition of topic is consumed by one consumer within a consumer group :point_left:
   - Messages are effectively divided among the consumers.
   - static consumer in group --> having `group.instance.id` is also set. :point_left:
@@ -196,7 +194,15 @@ topic with 2 partition consumed by :
 Together, Consumer-3 and Consumer-4 consume all messages from the topic, 
 dividing the workload between the two partitions.
 ```
-- **update offset**
+#### **4.3 Publish-Subscribe Behavior**
+- topic-1{p-0, p-1,p-3} --> consumer/s:
+  - consumer-group-1(consumer-1 on p-0 ,consumer-2 on p-1,p-2 ) === `subscriber-1`
+  - consumer-group-2(consumer-1 on p-0,consumer-2 on p-0, consumer-2 on p-0, consumer-2 :: **IDLE** ) === `subscriber-2`
+  - consumer-group-2(consumer-1) === `subscriber-3`
+    - If a SINGLE consumer consumes data from multiple partition (p-0,p-1,p-3) 
+    - the message **ordering** is not guaranteed across multiple partitions. :point_left:
+  
+#### **4.4 update offset**
 ```
   ## Consumer setting to update it:
   # a. Auto 
@@ -207,20 +213,20 @@ dividing the workload between the two partitions.
   - consumer processing - A-sync or sync 
   - KafkaConsumer.CommitSync()/CommitASync();
 ```
-- **Delivery semantic** (just concept)
-  - scenario-1 :: `at most once` (max=1)
-    - consumer > poll > processing **synchronously** (will take around 2 min) 
-    - offset auto-updated by 1, after 1 min of polling.
-    - early offset update, since processing stilling going on.
-  - Scenario-2 :: `at least once` (min=1)
-   - consumer > poll > processing **synchronously** (will take around 20 sec)
-   - 2 message read, and broker crashed while processing 3rd.
-   - offset not updated.
-   - broker is up again and will consume from old offset
-   - above 2 messages will be processed again.
-   - so keep consumer `idempotent`
+#### **4.5 Delivery semantic** (just concept)
+- scenario-1 :: `at most once` (max=1)
+  - consumer > poll > processing **synchronously** (will take around 2 min) 
+  - offset auto-updated by 1, after 1 min of polling.
+  - early offset update, since processing stilling going on.
+- Scenario-2 :: `at least once` (min=1)
+  - consumer > poll > processing **synchronously** (will take around 20 sec)
+  - 2 message read, and broker crashed while processing 3rd.
+  - offset not updated.
+  - broker is up again and will consume from old offset
+  - above 2 messages will be processed again.
+  - so keep consumer `idempotent`
 
-- **rebalance**
+#### **4.6 rebalance**
   - whenever consume leaves/joins group, rebalance happens
   - moving partition b/w consumers.
   - if static member leave the group and joins back within **session.timeout.ms**, the gets it original partition.
@@ -298,9 +304,8 @@ spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.Str
  @KafkaListener(topics = {"kafka-topic-1", "kafka-topic-2"}, groupId = "kafka-generic-consumer-group") m(String s) {...}
 ```
 - consume : props.groupId("group.id","") + props.put("group.instance.id","") **static consumer**
-    - props.put("auto.offset.rest","none")
-    - props.put("auto.offset.rest","latest")
-    - props.put("auto.offset.rest","earliest")
+- props.put("auto.offset.rest","earliest")
+
 
 ### scenario-1: generic consumer for diff schema
 ```
