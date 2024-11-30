@@ -68,11 +68,15 @@
   ```
   ## Consumer setting to update it:
   # a. Auto 
-  enable.auto.commit=true + auto.commit.interval.ms=5000
+  - enable.auto.commit=true + auto.commit.interval.ms=5000
   
   # b. Manual
-  enable.auto.commit=false 
-  KafkaConsumer.CommitSync()/CommitASync();
+  - enable.auto.commit=false 
+  - KafkaConsumer.CommitSync()/CommitASync();
+  
+  # c Manaul advance
+  - skip it
+  - stores offset externally
   ```
 - **replicas** / In-Sync Replicas (ISR)
   - to achive - resilience and availability
@@ -114,7 +118,8 @@
   - delivery.timeout.md=    # max time for delivery, afterwards exception which developer has to handle.
 - **idempotent producer**  
   - use kafka 3+
-  - detects duplicate and prevent it
+  - detects duplicate and prevent it. 
+  - has retry ability with duplicate check.
   - ![img.png](../temp/01/img-99.png)
   
 - kafka 3+ sets below :point_left:
@@ -126,18 +131,23 @@
   - delivery.timeout.ms = 120000 # 2 min
   - max.in.flight.request.oer.connection=5
 ```
-- archive message:
-  - at producer level
-  - at broker level, consumes CPU cycle, performance issue.
+- **archive message**:
+  - at `producer level`
+  - at `broker level`
+    - consumes CPU cycle, thus performance issue.
   
 - **High throughput producer**:
-  - **partition class** = RoundRobin / `skicky` (looks for batch.size + linger.ms)
-  - **linger.ms = 10ms** # accumulate message for 10 ms and then send
-  - **batch.size = 16000** # accumulate message till 16 kb and then publish
-  - increase above values
-  - **compression.type=snappy** or spring.kafka.producer.properties.compression.type=`snappy`
-  - ![img.png](../temp/04/img.png)Sticky
-  - ![img_1.png](../temp/04/img_1.png)RR
+  - **partition class** 
+    - **RoundRobin** 
+      - ![img_1.png](../temp/04/img_1.png)
+    - **sticky** (looks for batch.size + linger.ms)
+      - **linger.ms = 10ms** # `accumulate` message for 10 ms and then send
+      - **batch.size = 16000** # `accumulate` message till 16 kb and then publish
+      - note: increase above values, to achieve High throughput
+      - ![img.png](../temp/04/img.png)
+  - compression (use **snappy**)
+    - compression.type=snappy
+    - spring.kafka.producer.properties.compression.type=snappy
 
 ---
 ### **3 message**
@@ -188,24 +198,25 @@ dividing the workload between the two partitions.
 ```
   ## Consumer setting to update it:
   # a. Auto 
-  enable.auto.commit=true + auto.commit.interval.ms=1000 (1 min)
+  - enable.auto.commit=true + auto.commit.interval.ms=1000 (1 min)
   
   # b. Manual
-  enable.auto.commit=false 
-  KafkaConsumer.CommitSync()/CommitASync();
+  - enable.auto.commit=false 
+  - consumer processing - A-sync or sync 
+  - KafkaConsumer.CommitSync()/CommitASync();
 ```
 - **Delivery semantic** (just concept)
   - scenario-1 :: `at most once` (max=1)
-    - consumer > poll > processing synchronously (will take around 2 min) 
+    - consumer > poll > processing **synchronously** (will take around 2 min) 
     - offset auto-updated by 1, after 1 min of polling.
     - early offset update, since processing stilling going on.
   - Scenario-2 :: `at least once` (min=1)
-   - consumer > poll > processing synchronously (will take around 20 sec)
+   - consumer > poll > processing **synchronously** (will take around 20 sec)
    - 2 message read, and broker crashed while processing 3rd.
    - offset not updated.
    - broker is up again and will consume from old offset
    - above 2 messages will be processed again.
-   - so keep consumer idempotent
+   - so keep consumer `idempotent`
   
 ---    
 ### 5 more
