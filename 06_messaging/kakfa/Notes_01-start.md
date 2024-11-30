@@ -20,8 +20,10 @@
 ---
 ## B install - conduktor
 - https://conduktor.io/get-started
-- curl -L https://releases.conduktor.io/quick-start -o docker-compose.yml && docker compose up -d --wait && echo "Conduktor started on http://localhost:8080"
-- http://localhost:8888/
+- https://releases.conduktor.io/quick-start -o docker-compose.yml
+- http://localhost:8080
+- **curl -L https://releases.conduktor.io/quick-start -o docker-compose.yml && docker compose up -d --wait && echo "Conduktor started on http://localhost:8080"**
+- https://github.com/conduktor/kafka-beginners-course/tree/main/conduktor-platform - worked
 ---
 ## C use cases
 - https://chatgpt.com/c/6748bff9-8df8-800d-8faa-ac5244853529

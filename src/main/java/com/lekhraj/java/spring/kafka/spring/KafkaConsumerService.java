@@ -1,4 +1,4 @@
-package com.lekhraj.java.spring.kafka;
+package com.lekhraj.java.spring.kafka.spring;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 public class KafkaConsumerService {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @KafkaListener(topics = {"kafka-topic-1", "kafka-topic-2"}, groupId = "kafka-generic-consumer-group")
+    @KafkaListener(topics = {"customer_student", "wikimedia"}, groupId = "kafka-generic-consumer-group")
     public void consume(String message) {
         try {
             if (message.contains("customerId")) {

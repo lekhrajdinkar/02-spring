@@ -1,4 +1,4 @@
-package com.lekhraj.java.spring.kafka;
+package com.lekhraj.java.spring.kafka.spring;
 
 
 import org.springframework.web.bind.annotation.*;
@@ -7,21 +7,29 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/kafka")
 public class KafkaProducerController {
     private final KafkaProducerService producerService;
+    String topic = "customer_student";
+    String topic_wikimedia = "wikimedia";
 
     public KafkaProducerController(KafkaProducerService producerService) {
         this.producerService = producerService;
     }
 
     @PostMapping("/student")
-    public String sendStudent(@RequestParam String topic, @RequestBody Object student) {
+    public String sendStudent( @RequestBody Student student) {
         producerService.sendStudent(topic, student);
         return "Student message sent to topic: " + topic;
     }
 
     @PostMapping("/customer")
-    public String sendCustomer(@RequestParam String topic, @RequestBody Object customer) {
+    public String sendCustomer( @RequestBody Customer customer) {
         producerService.sendCustomer(topic, customer);
         return "Customer message sent to topic: " + topic;
+    }
+
+    @PostMapping("/wikimdeia")
+    public String sendCustomer() {
+        //producerService.sendCustomer(topic_wikimedia);
+        return "wikimdeia stream sent to " + topic_wikimedia;
     }
 }
 

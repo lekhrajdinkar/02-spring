@@ -11,8 +11,7 @@ public class MyKafkaProducer
     public static void main(String[] args) {
         // Step 1: Set up the producer properties
         Properties props = new Properties();
-        // props.put("bootstrap.servers", "http://localhost:8888/gateway/v2/virtual-cluster");
-        props.put("bootstrap.servers", "http://localhost:8888");
+        props.put("bootstrap.servers", "localhost:9092");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("batch.size","400"); // null must be key

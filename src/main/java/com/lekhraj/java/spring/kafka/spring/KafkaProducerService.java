@@ -1,4 +1,4 @@
-package com.lekhraj.java.spring.kafka;
+package com.lekhraj.java.spring.kafka.spring;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
