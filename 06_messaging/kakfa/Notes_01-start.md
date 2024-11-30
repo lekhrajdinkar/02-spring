@@ -54,8 +54,8 @@
     - therefore any broker in the cluster is also called a `bootstrap server`.
     - ![img_5.png](../temp/01/img_5.png)
   
-  
-### **topics** 
+--- 
+### **1 topics** 
   - roughly analogous to SQL tables (not queryable)
   - data store in binary format.
   - topic is broken down into a number of **partitions**
@@ -80,27 +80,63 @@
     - Topic Replication Factor = max value : no. of broker - 1
     - ![img_6.png](../temp/01/img_6.png)
 
-### **producer**
-  - application - java/py with kafka client.
-  - Kafka producers only write data to the **leader** broker for a partition
-  - specify a level of acknowledgment `acks`
-    - acks=0 : written successfully
-    - acks=1 : written successfully + acknowledged by leader
-    - acks=all : written successfully + acknowledged by leader + accepted by all ISR
+---
+### **2 producer**
+- application - java/py with kafka client.
+- Kafka producers only write data to the **leader** broker for a partition
+- specify a level of acknowledgment `acks`
+  - acks=0 : written successfully
+  - acks=1 : written successfully + acknowledged by leader
+  - acks=all : written successfully + acknowledged by leader + accepted by all ISR
+- if  ack not received, the producer retries.
+  - retries : 0 - 2^32
+  - retry.backoff.ms = 100 ms (default) # retry delay
+  - delivery.timeout.md=    # max time for delivery, afterwards exception which developer has to handle.
+- **idempotent producer**  
+  - use kafka 3+
+  - detects duplicate and prevent it
+  - ![img.png](../temp/01/img-99.png)
+  
+- kafka 3+ sets below :point_left:
+```
+  - producer.idempotence = true
+  - acks=all
+  - min.insync.replicas=2 # leader + at leat one replica.
+  - reties= MAX_INT
+  - delivery.timeout.ms = 120000 # 2 min
+  - max.in.flight.request.oer.connection=5
+```
+- archive message:
+  - at producer level
+  - at broker level, consumes CPU cycle, performance issue.
+  
+- **High throughput producer**:
+  - **partition class** = RoundRobin / `skicky` (looks for batch.size + linger.ms)
+  - **linger.ms = 10ms** # accumulate message for 10 ms and then send
+  - **batch.size = 16000** # accumulate message till 16 kb and then publish
+  - increase above values
+  - **compression.type=snappy** or spring.kafka.producer.properties.compression.type=`snappy`
+  - ![img.png](../temp/04/img.png)Sticky
+  - ![img_1.png](../temp/04/img_1.png)RR
 
+---
+### **3 message**
+- `message-value` : content
+- `message-key` 
+  - **null** : load balance , round-robin fashion into p1,p2,...
+  - **non-null** :  
+    - all messages that share the same key, will always go to same partition. 
+    - true unless partition NOT chnages :point_left:
+    - uses **hashing** `murmur2 algo`
+    
+- ![img_1.png](../temp/01/img_1.png)
+- `Kafka Message Serializers` / `Kafka Message Deserializers`
+  - IntegerSerializer
+  - StringSerializer
+  - converts message-value/key into byte streams
 
-### **message**
-  - `message-value` : content
-  - `message-key` 
-    - null : load balance , round-robin fashion into p1,p2,...
-    - non-null :  all messages that share the same key, will always go to same partition. uses **hashing** `murmur2 algo`
-  - ![img_1.png](../temp/01/img_1.png)
-  - `Kafka Message Serializers` / `Kafka Message Deserializers`
-    - IntegerSerializer
-    - StringSerializer
-    - converts message-value/key into byte streams
-
-### **Consumer**
+---
+### **4 Consumer**
   - application - java/py with kafka client.
   - If a consumer consumes data from multiple partition, the message order is not guaranteed across multiple partitions
   - By default, Kafka consumers will only consume data that was produced after it first connected to Kafka.
@@ -128,20 +164,20 @@ topic with 2 partition consumed by :
 Together, Consumer-3 and Consumer-4 consume all messages from the topic, 
 dividing the workload between the two partitions.
 ```
-    
-### more
-- **Kafka Connect**
+---    
+### 5 more
+- **5.1 Kafka Connect**
   - Kafka Connect Source Connectors 
   - Kafka Connect Sink Connectors
   
-- **Schema Registry**
+- **5.2 Schema Registry**
 
-- **ksqlDB**
+- **5.3 ksqlDB**
   - transform Kafka topics to SQL-like database
   - thus can perform SQL-like operation
   
-- **Zookeeper**
-  - like master node in k8s cluter.
+- **5.4 Zookeeper**
+  - like master node in k8s cluster.
   - Zookeeper is used to track cluster state, membership, and leadership.
   - Being Eliminated from Kafka v4.x. less secure
   - metadata management in the Kafka world
@@ -151,7 +187,7 @@ dividing the workload between the two partitions.
   - ensemble / Zookeeper cluster: 3,5, 7,...
   - ![img_1.png](../temp/02/img_1.png)
 
-- **Kafka KRaft Mode**
+- **5.5 Kafka KRaft Mode**
 
 ---
 
