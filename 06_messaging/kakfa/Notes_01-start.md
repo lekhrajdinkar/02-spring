@@ -8,7 +8,7 @@
 ---
 # kafka 
 ## A intro
--  **real-time data streaming pipelines**.
+-  **real-time data streaming pipelines**. (primary task)
 - **data stream** : unbounded/endless sequence of data, with data throughput can high or low. eg:
     - Log Analysis - Log stream from multiple ms.
     - Web Analytics - modern web app measure user activity.
@@ -56,29 +56,49 @@
   
 --- 
 ### **1 topics** 
-  - roughly analogous to SQL tables (not queryable)
-  - data store in binary format.
-  - topic is broken down into a number of **partitions**
-    - to achieve high throughput and scalability
-    - Kafka does a good job of distributing partitions evenly among the available brokers.
-    - up to 200,000 partition (with zookepeer)
-    - without zoo kepeer - millions of partition.
-  - `offset` - integer value that Kafka adds to each message as it is written into a partition. from 0.
-  - data retency : 7 days (default).
-  - not deleted after consumed.
-  - resilience and availability : via replication /In-Sync Replicas (ISR) of each partition on other. eg:
-    - kafka cluster with 3 broker, topic-1 has 3 partition 
-    - intially, kafka will distriube, one partition into each broker.
-    - broker-1:p1, b2:p2, b3:p3
-    - if Topic Replication Factor = 1  :point_left:
-      - for each partition: `1 leader` + no replication
-    - if Topic Replication Factor = 2
-      - for each partition: `1 leader` + `1 ISR on other broker`
-    - if Topic Replication Factor = 3 
-      - for each partition: `1 leader` + `1 ISR on other broker` +   `1 ISR on other broker`
-        - For a topic replication factor of 3, topic data durability can withstand the loss of 2 brokers.
-    - Topic Replication Factor = max value : no. of broker - 1
-    - ![img_6.png](../temp/01/img_6.png)
+- roughly analogous to SQL tables (not queryable)
+- data store in `binary-format`
+- data retention: 7 days (default).
+- **partitions** : topic is broken down into a number of partitions
+  - to achieve high throughput and scalability + parallel consumer/s
+  - Kafka does a good job of distributing partitions evenly among the available brokers.
+  - up to 200,000 partition (with zookepeer)
+  - without zoo kepeer - millions of partition.
+- **offset** - integer value that Kafka adds to each message as it is written into a partition. from 0.
+  ```
+  ## Consumer setting to update it:
+  # a. Auto 
+  enable.auto.commit=true + auto.commit.interval.ms=5000
+  
+  # b. Manual
+  enable.auto.commit=false 
+  KafkaConsumer.CommitSync()/CommitASync();
+  ```
+- **replicas** / In-Sync Replicas (ISR)
+  - to achive - resilience and availability
+  ```
+  cluster - broker-1,  broker-2 , broker-3 (3 brokers)
+  Topic-1 - partition-1 , partition-2, partition-3
+  
+  # initial distribution (with RF=1)
+  broker-1 : [ partition-1 ]
+  broker-2 : [ partition-2 ]
+  broker-3 : [ partition-3 ]
+  
+  # add replication: RF=? 
+  - RF=2  
+    broker-1 : [ partition-1, partition-3-isr1 ]
+    broker-2 : [ partition-2, partition-1-isr1 ]
+    broker-3 : [ partition-3, partition-2-isr1 ]
+  
+  - RF=3
+    broker-1 : [ partition-1, partition-3-isr1, partition-2-isr2 ]
+    broker-2 : [ partition-2, partition-1-isr1, partition-3-isr2 ]
+    broker-3 : [ partition-3, partition-2-isr1, partition-1-isr2 ]
+  
+  - RF=4 (invalid) :  must be <= no of broker
+  ```
+- ![img_6.png](../temp/01/img_6.png)
 
 ---
 ### **2 producer**
@@ -137,33 +157,56 @@
 
 ---
 ### **4 Consumer**
-  - application - java/py with kafka client.
-  - If a consumer consumes data from multiple partition, the message order is not guaranteed across multiple partitions
-  - By default, Kafka consumers will only consume data that was produced after it first connected to Kafka.
-    - hence no access historic, by default.
-  - can implement - `pull model`
-    - instead of having Kafka brokers continuously push data to consumers,
-    - consumers must request data from Kafka brokers
-  - **Publish-Subscribe Behavior**
-    - when multiple consumer groups subscribe to the same topic
-  - **consumer group**
-    - each partition of topic is consumed by one consumer within a consumer group :point_left:
-    - Messages are effectively divided among the consumers.
+- application - java/py with kafka client.
+- If a consumer consumes data from multiple partition, the message order is not guaranteed across multiple partitions
+- By default, Kafka consumers will only consume data that was produced after it first connected to Kafka.
+  - hence no access historic, by default.
+- can implement - `pull model`
+  - instead of having Kafka brokers continuously push data to consumers,
+  - consumers must request data from Kafka brokers
+- **Publish-Subscribe Behavior**
+  - when multiple consumer groups subscribe to the same topic
+- **consumer group**
+  - each partition of topic is consumed by one consumer within a consumer group :point_left:
+  - Messages are effectively divided among the consumers.
+  - static consumer in group --> having `group.instance.id` is also set. :point_left:
 - ![img_2.png](../temp/01/img_2.png)
 - ![img_3.png](../temp/01/img_3.png)
 - ![img_4.png](../temp/01/img_4.png)
 - ![img.png](../temp/02/img.png)
 ```
-# summary
-
 topic with 2 partition consumed by :
 - consumer-1
 - consumer-2
-- consumer-group-1 (consumer-3, sonsumer-4).
+- consumer-group-1 (consumer-3, sonsumer-4(idempotent)).
+    - consumer-4 leave and comes back within thresold time, the will get same partition again. <<<
 
 Together, Consumer-3 and Consumer-4 consume all messages from the topic, 
 dividing the workload between the two partitions.
 ```
+- **update offset**
+```
+  ## Consumer setting to update it:
+  # a. Auto 
+  enable.auto.commit=true + auto.commit.interval.ms=1000 (1 min)
+  
+  # b. Manual
+  enable.auto.commit=false 
+  KafkaConsumer.CommitSync()/CommitASync();
+```
+- **Delivery semantic** (just concept)
+  - scenario-1 :: `at most once` (max=1)
+    - consumer > poll > processing synchronously (will take around 2 min) 
+    - offset auto-updated by 1, after 1 min of polling.
+    - early offset update, since processing stilling going on.
+  - Scenario-2 :: `at least once` (min=1)
+   - consumer > poll > processing synchronously (will take around 20 sec)
+   - 2 message read, and broker crashed while processing 3rd.
+   - offset not updated.
+   - broker is up again and will consume from old offset
+   - above 2 messages will be processed again.
+   - so keep consumer idempotent
+  
 ---    
 ### 5 more
 - **5.1 Kafka Connect**
