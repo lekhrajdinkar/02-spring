@@ -217,7 +217,13 @@ dividing the workload between the two partitions.
    - broker is up again and will consume from old offset
    - above 2 messages will be processed again.
    - so keep consumer `idempotent`
-  
+
+- **rebalance**
+  - whenever consume leaves/joins group, rebalance happens
+  - moving partition b/w consumers.
+  - if static member leave the group and joins back within **session.timeout.ms**, the gets it original partition.
+  - ![img.png](../temp/03/img.png)
+  - ![img_1.png](../temp/03/img_1.png)  
 ---    
 ### 5 more
 - **5.1 Kafka Connect**
@@ -266,14 +272,26 @@ spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.Str
  - String message = objectMapper.writeValueAsString(student);
  - kafkaTemplate.send("topic-1", message);
 ```
-- produce
-    - sysc - send(produceRrecord)
-    - a-sync send(produceRrecord, new Callback() { @override onCompletion ... })
-- produce in batch : props.put("batch.size","400"); // key  must be null + props.put("partitioner.class","");
-- produce with key
+### produce - sysn + async
+- **sysc** - send(produceRecord)
+- **a-sync**  - send(produceRecord, `new Callback() { @override onCompletion ... }`)
 
+### produce in batch 
+- props.put("batch.size","400"); 
+- key must be null 
+- props.put("partitioner.class","RR); // for demo purpose only.
+- consumer side 
+  - read messages in batch `poll()` 
+  - process batch `for(m:messages)` 
+  - then update offset manually
+  - keep consumer code, idempotent.
+    
+### produce with key (k1,k2,k3)
+- add consumer group with 3 consumer/s
+- check ordering :)
 
-## consume 
+---
+## consumer 
 ```
  @KafkaListener(topics = {"kafka-topic-1", "kafka-topic-2"}, groupId = "kafka-generic-consumer-group") m(String s) {...}
 ```
@@ -324,10 +342,5 @@ c1: partition-0, partition-2.
 c2: partition-1, partition-3.
 ```
 
-### scenario-4 : rebalance
-- whenever consume leaves/joins group, rebalance happens
-- moving partition b/w consumers.
-- if static member leave the group and joins back within **session.timeout.ms**, the gets it original partition.
-- ![img.png](../temp/03/img.png)
-- ![img_1.png](../temp/03/img_1.png)
+
  
