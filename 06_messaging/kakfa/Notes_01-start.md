@@ -18,12 +18,13 @@
   - scalable and fault-tolerant to node loss.
 
 ---
-## B install - conduktor
-- https://conduktor.io/get-started
-- https://releases.conduktor.io/quick-start -o docker-compose.yml
-- http://localhost:8080
-- **curl -L https://releases.conduktor.io/quick-start -o docker-compose.yml && docker compose up -d --wait && echo "Conduktor started on http://localhost:8080"**
-- https://github.com/conduktor/kafka-beginners-course/tree/main/conduktor-platform - worked
+## B install
+- 1 **curl -L https://releases.conduktor.io/quick-start -o docker-compose.yml && docker compose up -d --wait && echo "Conduktor started on http://localhost:8080"**
+- 2 https://github.com/conduktor/kafka-beginners-course/tree/main/conduktor-platform - worked(old one)
+- next:
+  - for new update: https://conduktor.io/get-started
+  - check all container: https://releases.conduktor.io/quick-start -o docker-compose.yml
+  - launch UI/conduktor : http://localhost:8080
 ---
 ## C use cases
 - https://chatgpt.com/c/6748bff9-8df8-800d-8faa-ac5244853529
@@ -40,12 +41,13 @@
 - collect logs
 - collect web user activity
 
+- ![img_1.png](../temp/img_1.png)
+- ![img.png](../temp/01/img.png)
 ---
 ## D fundamental / component
 - https://chatgpt.com/c/6748c06d-048c-800d-996e-6ca852cd0329
 - `producer` --> **kafka-Cluster [ broker > topic > partition ]** --> `consumer group/s` [consumer-1,... ]
-- ![img_1.png](../temp/img_1.png)
-- ![img.png](../temp/01/img.png)
+
 - **broker**
   - single Kafka server
   - kakfa store data in a directory on the broker disk.
