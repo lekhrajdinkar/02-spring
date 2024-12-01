@@ -172,14 +172,6 @@
 ---
 ### **4 Consumer**
 - application - java/py,etc with kafka client.
-- consumer config : **auto.offset.rest**=???? # update these for topic, for **replay** :point_left:
-  - `latest` - read latest, no history
-  - `earliest` - read from offset 0, all history
-  - `none` - throws exception no offset found.
-    - **offset.retention.minutes=**
-  - `specific-value`. eg:500
-  - `shiftby` 
-  - fact: replay has wont no impact on imdepotent-consumer
   
 #### 4.1 pull model (skip)
 - instead of having Kafka brokers continuously push data to consumers,
@@ -251,13 +243,23 @@ dividing the workload between the two partitions.
   - **max.poll.interval.ms=** 5minute(default) # keep high for Bigdata.
   - side note: if needed update **max.poll.records**
 
-#### 4.8 Advance config
+#### 4.8 replay :yellow_circle:
+- consumer config : **auto.offset.rest**=???? # update these for topic, for **replay** :point_left:
+  - `latest` - read latest, no history
+  - `earliest` - read from offset 0, all history
+  - `none` - throws exception no offset found.
+    - **offset.retention.minutes=**
+  - `specific-value`. eg:500
+  - `shiftby`
+  - fact: replay has wont no impact on imdepotent-consumer
+  
+#### 4.7 Advance config (skip)
 - long polling mechanism  --> **fetch.max.wait.ms=**
 - can read from geographically the closest replica. :point_left:
   - partition-0 (leader) : aws-region1-az1
   - partition-1 (isr) : aws-region1-az2
   - consumer runinng on az2, then can configure to read from partition-1 (isr) only.
-  - use this, if want to reduce **aws network cost** : point_left:
+  - use this, if want to reduce **aws network cost** :point_left:
   - config on consumer:
     - **rack.id=** usw2-az2
     - **replica.selcetor.class=** RackAwareReplicaSelector
