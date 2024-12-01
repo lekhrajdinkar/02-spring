@@ -48,19 +48,19 @@
 - https://chatgpt.com/c/6748c06d-048c-800d-996e-6ca852cd0329
 - `producer` --> **kafka-Cluster [ broker > topic > partition ]** --> `consumer group/s` [consumer-1,... ]
 
-- **broker**
-  - single Kafka server
-  - kakfa store data in a directory on the broker disk.
-  - if we connect to any broker, then can discover and connect to other broker in the same cluster
-    - Every broker in the cluster has metadata about all the other brokers
-    - therefore any broker in the cluster is also called a `bootstrap server`.
-    - ![img_5.png](../temp/01/img_5.png)
+### **0 broker**
+- single Kafka server
+- kakfa store data in a directory on the broker disk.
+- if we connect to any broker, then can discover and connect to other broker in the same cluster
+  - Every broker in the cluster has metadata about all the other brokers
+  - therefore any broker in the cluster is also called a `bootstrap server`.
+  - ![img_5.png](../temp/01/img_5.png)
   
 --- 
 ### **1 topics** 
 - roughly analogous to SQL tables (not queryable)
 - data store in `binary-format`
-- data retention: 7 days (default) + offset.retention.min=24*60 (default) # broker level config :point_here:
+- data retention: 7 days (default) + **offset.retention.min**=24*60 (default) #broker level config :point_left:
 - **partitions** : topic is broken down into a number of partitions
   - to achieve high throughput and scalability + parallel consumer/s
   - Kafka does a good job of distributing partitions evenly among the available brokers.
@@ -211,7 +211,7 @@ dividing the workload between the two partitions.
     - If a SINGLE consumer consumes data from multiple partition (p-0,p-1,p-3) 
     - the message **ordering** is not guaranteed across multiple partitions. :point_left:
   
-#### **4.4 commit offset**
+#### **4.4 commit offset** :green_circle:
 ```
   ## Consumer setting to update it:
   # a. Auto 
@@ -235,7 +235,7 @@ dividing the workload between the two partitions.
   - above 2 messages will be processed again.
   - so keep consumer `idempotent`
 
-#### **4.6 rebalance**
+#### **4.6 Rebalance** :green_circle:
   - whenever consume leaves/joins group, rebalance happens
   - moving partition b/w consumers.
   - if static member leave the group and joins back within **session.timeout.ms**, the gets it original partition.
