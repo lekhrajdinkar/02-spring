@@ -4,7 +4,7 @@
     - https://www.udemy.com/course/apache-kafka
     - https://conduktor.io/apache-kafka-for-beginners
     - slides : https://learn.conduktor.io/kafka/ :point_left:
-
+- https://chatgpt.com/c/674a1fef-5634-800d-b445-dfa969b74011
 ---
 # kafka
 ## A intro
