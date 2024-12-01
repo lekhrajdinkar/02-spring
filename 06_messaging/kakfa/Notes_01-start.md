@@ -60,7 +60,7 @@
 ### **1 topics** 
 - roughly analogous to SQL tables (not queryable)
 - data store in `binary-format`
-- data retention: 7 days (default).
+- data retention: 7 days (default) + offset.retention.min=24*60 (default) # broker level config :point_here:
 - **partitions** : topic is broken down into a number of partitions
   - to achieve high throughput and scalability + parallel consumer/s
   - Kafka does a good job of distributing partitions evenly among the available brokers.
@@ -68,9 +68,11 @@
   - without zoo kepeer - millions of partition.
 - **offset** - integer value that Kafka adds to each message as it is written into a partition. from 0.
   ```
-  ## Consumer setting to update it:
+  ## Consumer setting to commit offset:
   # a. Auto 
-  - enable.auto.commit=true + auto.commit.interval.ms=5000
+  - enable.auto.commit=true 
+  - auto.commit.interval.ms=5000
+  - offsets.retention.minutes --> once commited, offset will be availble for another 24 hr by default, to that consumer-group.
   
   # b. Manual
   - enable.auto.commit=false 
@@ -81,7 +83,7 @@
   - stores offset externally
   ```
 - **replicas** / In-Sync Replicas (ISR)
-  - to achive - resilience and availability
+  - to archive - resilience and availability
   ```
   cluster - broker-1,  broker-2 , broker-3 (3 brokers)
   Topic-1 - partition-1 , partition-2, partition-3
@@ -170,7 +172,14 @@
 ---
 ### **4 Consumer**
 - application - java/py,etc with kafka client.
-- consumer config : **auto.offset.rest**=[earliest/latest/none] -- `latest` is default.
+- consumer config : **auto.offset.rest**=???? # update these for topic, for **replay** :point_left:
+  - `latest` - read latest, no history
+  - `earliest` - read from offset 0, all history
+  - `none` - throws exception no offset found.
+    - **offset.retention.minutes=**
+  - `specific-value`. eg:500
+  - `shiftby` 
+  - fact: replay has wont no impact on imdepotent-consumer
   
 #### 4.1 pull model (skip)
 - instead of having Kafka brokers continuously push data to consumers,
@@ -195,14 +204,14 @@ Together, Consumer-3 and Consumer-4 consume all messages from the topic,
 dividing the workload between the two partitions.
 ```
 #### **4.3 Publish-Subscribe Behavior**
-- topic-1{p-0, p-1,p-3} --> consumer/s:
-  - consumer-group-1(consumer-1 on p-0 ,consumer-2 on p-1,p-2 ) === `subscriber-1`
-  - consumer-group-2(consumer-1 on p-0,consumer-2 on p-0, consumer-2 on p-0, consumer-2 :: **IDLE** ) === `subscriber-2`
+- topic-1{p-1, p-2,p-3} --> consumer/s:
+  - consumer-group-1(consumer-1 on p-1 ,consumer-2 on p-2,p-3 ) === `subscriber-1`
+  - consumer-group-2(consumer-1 on p-1,consumer-2 on p-2, consumer-3 on p-3, consumer-4 :: **IDLE** ) === `subscriber-2`
   - consumer-group-2(consumer-1) === `subscriber-3`
     - If a SINGLE consumer consumes data from multiple partition (p-0,p-1,p-3) 
     - the message **ordering** is not guaranteed across multiple partitions. :point_left:
   
-#### **4.4 update offset**
+#### **4.4 commit offset**
 ```
   ## Consumer setting to update it:
   # a. Auto 
