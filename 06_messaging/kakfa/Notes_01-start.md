@@ -240,7 +240,30 @@ dividing the workload between the two partitions.
   - moving partition b/w consumers.
   - if static member leave the group and joins back within **session.timeout.ms**, the gets it original partition.
   - ![img.png](../temp/03/img.png)
-  - ![img_1.png](../temp/03/img_1.png)  
+  - ![img_1.png](../temp/03/img_1.png) 
+
+#### **4.7 liveliness** :yellow_circle:
+- threads running on broker to check  of consumer/s:
+- **heartbeat thread**
+  - **heartbeat.interval.ms=**
+- **poll thread**
+  - checks time-interval b/w 2 poll() calls
+  - **max.poll.interval.ms=** 5minute(default) # keep high for Bigdata.
+  - side note: if needed update **max.poll.records**
+
+#### 4.8 Advance config
+- long polling mechanism  --> **fetch.max.wait.ms=**
+- can read from geographically the closest replica. :point_left:
+  - partition-0 (leader) : aws-region1-az1
+  - partition-1 (isr) : aws-region1-az2
+  - consumer runinng on az2, then can configure to read from partition-1 (isr) only.
+  - use this, if want to reduce **aws network cost** : point_left:
+  - config on consumer:
+    - **rack.id=** usw2-az2
+    - **replica.selcetor.class=** RackAwareReplicaSelector
+    - **client.rack=** data-center-id
+
+
 ---    
 ### 5 more
 - **5.1 Kafka Connect**
