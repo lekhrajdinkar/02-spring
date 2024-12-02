@@ -1,8 +1,11 @@
+# Postgres
+## kick off - reference/s
 - All - https://chatgpt.com/c/674bee20-d9e4-800d-a31e-8f60a5f511ab
   - core concept: https://chatgpt.com/c/674d6fa4-7e4c-800d-9d48-54f566791d8d
+  - ddl/dml : https://chatgpt.com/c/674df644-1984-800d-870c-ccee5069b8e9
+  - function: https://chatgpt.com/c/674df7ca-0ed8-800d-a8bf-9404d3ec216d
 
 ---
-# Postgres 
 ## A. Architecture
 ### Process/s
 - operates with a **process-based architecture**,
