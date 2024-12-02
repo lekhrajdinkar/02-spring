@@ -15,6 +15,7 @@ CREATE TABLE "order" (
     order_id SERIAL PRIMARY KEY,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     customer_id INT NOT NULL,
+
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
@@ -24,6 +25,7 @@ CREATE TABLE order_detail (
     product_name VARCHAR(100) NOT NULL,
     quantity INT NOT NULL CHECK (quantity > 0),
     price DECIMAL(10, 2) NOT NULL CHECK (price >= 0),
+
     FOREIGN KEY (order_id) REFERENCES "order"(order_id) ON DELETE CASCADE
 );
 
@@ -38,6 +40,7 @@ CREATE TABLE cart (
     customer_id INT NOT NULL,
     product_id INT NOT NULL,
     quantity INT NOT NULL CHECK (quantity > 0),
+
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
     FOREIGN KEY (product_id) REFERENCES product(product_id),
     UNIQUE (customer_id, product_id)

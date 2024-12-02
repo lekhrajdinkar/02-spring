@@ -12,9 +12,7 @@ import java.util.UUID;
 
 @Repository
 public class StudentRepository {
-    @Autowired
-    //@PersistenceContext
-    EntityManagerFactory sessionFactory;
+    @Autowired  EntityManagerFactory sessionFactory;
 
     public Student getStudent(String name){
         EntityManager em = sessionFactory.createEntityManager();

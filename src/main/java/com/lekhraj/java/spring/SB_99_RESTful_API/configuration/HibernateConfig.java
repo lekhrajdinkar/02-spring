@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -40,7 +41,23 @@ public class HibernateConfig
 {
     @Autowired    private org.springframework.core.env.Environment env;
 
+    // used - entityManagerFactory_for_h2
+    private Properties hibernateProperties()
+    {
+        Properties properties = new Properties();
+        properties.put("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
+        properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
+
+        //properties.put(Environment.DIALECT, env.getProperty("spring.jpa.properties.hibernate.dialect"));
+        //properties.put(Environment.SHOW_SQL, env.getProperty("spring.jpa.show-sql"));
+        //properties.put(Environment.HBM2DDL_AUTO, env.getProperty("spring.jpa.hibernate.ddl-auto"));
+
+        return properties;
+    }
+
     @Bean(name = "entityManagerFactory_for_h2") // 1. SessionFactory
+    @Primary
     public LocalSessionFactoryBean sessionFactory(
             @Qualifier("dataSource_for_h2") DataSource dataSource)
     {
@@ -77,19 +94,7 @@ public class HibernateConfig
         return new TransactionTemplate(transactionManager);
     }
 
-    // ========= Other =======
-    private Properties hibernateProperties() {
-        Properties properties = new Properties();
-        properties.put("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
-        properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
-        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
 
-        //properties.put(Environment.DIALECT, env.getProperty("spring.jpa.properties.hibernate.dialect"));
-        //properties.put(Environment.SHOW_SQL, env.getProperty("spring.jpa.show-sql"));
-        //properties.put(Environment.HBM2DDL_AUTO, env.getProperty("spring.jpa.hibernate.ddl-auto"));
-
-        return properties;
-    }
 
     // =========== JPA (not in use) =========
     //@Bean
