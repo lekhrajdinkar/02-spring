@@ -3,6 +3,7 @@ package com.lekhraj.java.spring.database;
 import com.lekhraj.java.spring.database.entities.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
@@ -25,6 +26,8 @@ public class DataInitializer_Runner
         return args -> {
              EntityManager entityManagerPostgres = entityManagerFactory_Postgres.createEntityManager();
 
+            EntityTransaction txn = entityManagerPostgres.getTransaction();
+            txn.begin();
             // Insert Customers
             Customer john = new Customer();
             john.setName("John Doe");
@@ -110,7 +113,7 @@ public class DataInitializer_Runner
 
             System.out.println("Data inserted successfully!");
 
-
+            txn.commit();
         };
     }
 }

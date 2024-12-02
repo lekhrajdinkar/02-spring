@@ -57,7 +57,8 @@ public class HibernateH2Config
     }
 
     @Bean(name = "transactionManager_for_h2") // 2. HibernateTransactionManager
-    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory)
+    public PlatformTransactionManager hibernateTransactionManager(
+            @Qualifier("entityManagerFactory_for_h2") SessionFactory sessionFactory)
     {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);
