@@ -27,10 +27,15 @@ public class Cart {
     )
     private List<Product> products;
 
+    @Column(name = "quantity")
+    private int quantity;
+
+    /*
     @ElementCollection
     @CollectionTable(name = "cart_product_quantity", joinColumns = @JoinColumn(name = "cart_id"))
     @MapKeyJoinColumn(name = "product_id")
     @Column(name = "quantity")
     private Map<Product, Integer> productQuantities;
+    */
 
 }

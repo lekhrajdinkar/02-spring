@@ -1,26 +1,30 @@
 package com.lekhraj.java.spring.database;
 
-
 import com.lekhraj.java.spring.database.entities.*;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.EntityManagerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-
-//@Component
+@Component
 public class DataInitializer_Runner
 {
-    @PersistenceContext(unitName = "entityManagerFactory_for_postgres")
-    private EntityManager entityManagerPostgres;
+    @Autowired @Qualifier("entityManagerFactory_for_postgres") private EntityManagerFactory entityManagerFactory_Postgres;
+   // @PersistenceContext(unitName = "entityManagerFactory_for_postgres") private EntityManager entityManagerPostgres;
 
     @Bean
+    @Transactional(transactionManager = "transactionManager_for_postgres")
     public CommandLineRunner insertData() {
         return args -> {
+             EntityManager entityManagerPostgres = entityManagerFactory_Postgres.createEntityManager();
+
             // Insert Customers
             Customer john = new Customer();
             john.setName("John Doe");
@@ -46,26 +50,26 @@ public class DataInitializer_Runner
             headphones.setPrice(BigDecimal.valueOf(150.00));
 
             // Insert Orders
-            Order johnOrder = new Order();
+            AppOrder johnOrder = new AppOrder();
             johnOrder.setCustomer(john);
 
-            Order janeOrder = new Order();
+            AppOrder janeOrder = new AppOrder();
             janeOrder.setCustomer(jane);
 
             // Insert Order Details
-            OrderDetail johnOrderDetail1 = new OrderDetail();
+            AppOrderDetail johnOrderDetail1 = new AppOrderDetail();
             johnOrderDetail1.setOrder(johnOrder);
             johnOrderDetail1.setProductName("Laptop");
             johnOrderDetail1.setQuantity(1);
             johnOrderDetail1.setPrice(BigDecimal.valueOf(1200.00));
 
-            OrderDetail johnOrderDetail2 = new OrderDetail();
+            AppOrderDetail johnOrderDetail2 = new AppOrderDetail();
             johnOrderDetail2.setOrder(johnOrder);
             johnOrderDetail2.setProductName("Headphones");
             johnOrderDetail2.setQuantity(2);
             johnOrderDetail2.setPrice(BigDecimal.valueOf(300.00));
 
-            OrderDetail janeOrderDetail = new OrderDetail();
+            AppOrderDetail janeOrderDetail = new AppOrderDetail();
             janeOrderDetail.setOrder(janeOrder);
             janeOrderDetail.setProductName("Smartphone");
             janeOrderDetail.setQuantity(1);
@@ -80,7 +84,7 @@ public class DataInitializer_Runner
             johnCartItems.put(laptop, 1);
             johnCartItems.put(headphones, 1);
 
-            johnCart.setProductQuantities(johnCartItems);
+            //johnCart.setProductQuantities(johnCartItems);
 
             Cart janeCart = new Cart();
             janeCart.setCustomer(jane);
@@ -88,7 +92,7 @@ public class DataInitializer_Runner
             Map<Product, Integer> janeCartItems = new HashMap<>();
             janeCartItems.put(smartphone, 1);
 
-            janeCart.setProductQuantities(janeCartItems);
+            //janeCart.setProductQuantities(janeCartItems);
 
             // Persist Data
             entityManagerPostgres.persist(john);
@@ -105,6 +109,8 @@ public class DataInitializer_Runner
             entityManagerPostgres.persist(janeCart);
 
             System.out.println("Data inserted successfully!");
+
+
         };
     }
 }

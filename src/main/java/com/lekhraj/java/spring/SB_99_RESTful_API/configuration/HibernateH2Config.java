@@ -36,14 +36,9 @@ public class HibernateH2Config
     private Properties hibernateProperties()
     {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
-        properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
-        properties.put("hibernate.hbm2ddl.auto", env.getProperty("spring.jpa.hibernate.ddl-auto"));
-
-        //properties.put(Environment.DIALECT, env.getProperty("spring.jpa.properties.hibernate.dialect"));
-        //properties.put(Environment.SHOW_SQL, env.getProperty("spring.jpa.show-sql"));
-        //properties.put(Environment.HBM2DDL_AUTO, env.getProperty("spring.jpa.hibernate.ddl-auto"));
-
+        properties.put("hibernate.dialect", env.getProperty("h2.jpa.properties.hibernate.dialect"));
+        properties.put("hibernate.show_sql", env.getProperty("h2.jpa.show-sql"));
+        properties.put("hibernate.hbm2ddl.auto", env.getProperty("h2.jpa.hibernate.ddl-auto"));
         return properties;
     }
 
@@ -73,10 +68,10 @@ public class HibernateH2Config
     public DataSource dataSource()
     {
         return DataSourceBuilder.create()
-                .driverClassName(env.getProperty("spring.datasource.driverClassName"))
-                .url(env.getProperty("spring.datasource.url"))
-                .username(env.getProperty("spring.datasource.username"))
-                .password(env.getProperty("spring.datasource.password"))
+                .driverClassName(env.getProperty("h2.datasource.driverClassName"))
+                .url(env.getProperty("h2.datasource.url"))
+                .username(env.getProperty("h2.datasource.username"))
+                .password(env.getProperty("h2.datasource.password"))
                 .build();
     }
 

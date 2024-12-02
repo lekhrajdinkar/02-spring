@@ -34,11 +34,6 @@ public class HibernatePostgresConfig
         properties.put("hibernate.dialect", env.getProperty("postgres.jpa.properties.hibernate.dialect"));
         properties.put("hibernate.show_sql", env.getProperty("postgres.jpa.show-sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("postgres.jpa.hibernate.ddl-auto"));
-
-        //properties.put(Environment.DIALECT, env.getProperty("spring.jpa.properties.hibernate.dialect"));
-        //properties.put(Environment.SHOW_SQL, env.getProperty("spring.jpa.show-sql"));
-        //properties.put(Environment.HBM2DDL_AUTO, env.getProperty("spring.jpa.hibernate.ddl-auto"));
-
         return properties;
     }
 
@@ -49,7 +44,7 @@ public class HibernatePostgresConfig
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 
             sessionFactory.setDataSource(dataSource);
-            sessionFactory.setPackagesToScan("com.lekhraj.java.spring.database.entities");
+            sessionFactory.setPackagesToScan("com.lekhraj.java.spring.database");
             sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;

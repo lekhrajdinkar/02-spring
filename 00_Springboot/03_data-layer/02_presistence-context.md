@@ -1,4 +1,5 @@
 - https://chatgpt.com/c/9a8dd8ab-71b5-49d6-bcfe-8d9b0aa31971
+- @PersistenceContext(unitName = "entityManagerFactory_for_postgres") private EntityManager entityManagerPostgres; :point_left:
 ---
 # persistenceContext / PC
 
