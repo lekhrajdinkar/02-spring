@@ -9,24 +9,24 @@ DROP SCHEMA IF EXISTS hr CASCADE;
 SET search_path TO hr;
 ```
 ---
-## B.1 Table and view
+## B Table and view
 ```
 CREATE TABLE employees (...);
 DROP TABLE employees;
 
 -- column
-ALTER TABLE employees [ ADD | DROP ] COLUMN department VARCHAR(50); - new column
-ALTER TABLE employees ALTER COLUMN name SET DATA TYPE TEXT; --datatype change
+ALTER TABLE employees [ ADD | DROP ] COLUMN department VARCHAR(50);     -- new column
+ALTER TABLE employees ALTER COLUMN name SET DATA TYPE TEXT;             -- datatype change
 ALTER TABLE employees ALTER COLUMN age SET DATA TYPE BIGINT;
 
-ALTER TABLE employees ALTER COLUMN name SET NOT NULL;
+ALTER TABLE employees ALTER COLUMN name SET NOT NULL;               -- NOT NULL
 ALTER TABLE employees ALTER COLUMN name DROP NOT NULL;
 
-ALTER TABLE employees ALTER COLUMN name SET DEFAULT 'Unknown';
+ALTER TABLE employees ALTER COLUMN name SET DEFAULT 'Unknown';      -- DEFAULT
 ALTER TABLE employees ALTER COLUMN name DROP DEFAULT;
 
 -- constraint 
-ALTER TABLE employees DROP CONSTRAINT constraint-1;
+ALTER TABLE employees DROP CONSTRAINT constraint-1;             -- DROP constarint
 
 ALTER TABLE employees ADD CONSTRAINT unique_email UNIQUE (email);                       -- unique
 ALTER TABLE employees ALTER COLUMN name SET NOT NULL;                                   -- not null
@@ -39,14 +39,31 @@ ALTER TABLE employees ADD CONSTRAINT fk_department_id FOREIGN KEY (department_id
 -- ========== VIEW ==========
 CREATE OR REPLACE VIEW active_employees AS
     SELECT id, name FROM employees WHERE active = TRUE;
+    
 DROP VIEW IF EXISTS active_employees;
 ```
 
 ---
 ## C Indexes
+- improve query performance, but take up additional disk space.
+  - **speed up** SELECT queries
+  - **slow down** INSERT, UPDATE, DELETE,  as the index must be updated whenever the data changes.
+  
+- internal `data structure` that provides quick access to rows : 
+  - `B-tree index`, 
+  - `Hash Index`, 
+  - `GIN (Generalized Inverted Index)` - useful for indexing composite types like arrays, JSONB
+  -  `GiST (Generalized Search Tree)`
+  
+- best use case:
+  - **Frequent Query Filtering**: When you regularly run queries that filter on specific columns.
+  - **Join Operations**: When you perform join queries based on indexed columns.
+  - **Range Queries**: When you frequently query for ranges (e.g., `date` ranges).
+
 ```
-CREATE INDEX idx_name ON employees(name);
-CREATE UNIQUE INDEX idx_unique_name ON employees(name);
+CREATE INDEX idx_name ON employees(name);               -- Regular Index (Non-Unique)
+CREATE UNIQUE INDEX idx_unique_name ON employees(name); -- Unique Index : adds overhead for enforcing uniqueness
+
 DROP INDEX IF EXISTS idx_name;
 ```
 
