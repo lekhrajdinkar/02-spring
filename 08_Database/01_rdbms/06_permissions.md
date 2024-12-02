@@ -1,15 +1,12 @@
 # Role and permission management
 - enabling `fine-grained control` over database access and operations.
-- **granting/revoking** `privileges` on `resource` to `role` :point_left:
-  - like allow/deny of aws iam.
+- FORMAT : **GRANT/REVOKE** `privileges` on `resource` to/from `role` :point_left:
 
-## **role**, 
-- represents to:
-  - user-1
-  - group-1(user-1, user-2, ..., another-role-1,...)
-- role has **attributes**. can alter role add/remove attribute.
+## 1 **Role/user**
+- role/user has **attributes**. 
+- can alter role add/remove attribute.
+- \du
 ```
- === Attributes ===
 LOGIN     : Enables the role to log in as a user.
 SUPERUSER : Grants all privileges.
 CREATEDB  : Allows the role to create databases.
@@ -17,30 +14,42 @@ CREATEROLE: Allows the role to create and manage other roles.
 INHERIT   : Allows a role to inherit privileges from granted roles.
 NOINHERIT   : Prevents privilege inheritance.
 REPLICATION : Grants the ability to manage streaming replication.
+PASSWORD: sets login password
 
--- example --
--- add "NO" prefix to remove, WITH is optional.
-
-ALTER ROLE admin WITH SUPERUSER;
-ALTER ROLE user_role WITH LOGIN NOINHERIT;
-ALTER ROLE user_role NOLOGIN;  
+-- add "NO" prefix to remove. eg: NOLOGIN 
+-- WITH is optional.
 ```
 - examples:
 ```
---  create role
+-->  create role
+CREATE ROLE admin SUPERUSER;
 CREATE ROLE user_role;
+
 CREATE ROLE app_r;
 CREATE ROLE app_rw;
 CREATE ROLE app_rwx;
 
---  role horarchy : inherit privelges from one role to another
--- eg: user_role inherits admin privileges
+CREATE ROLE userAsRole WITH LOGIN PASSWORD 'secure_password'; 
+
+--> create user
+CREATE USER bob WITH PASSWORD 'password456' CREATEDB CREATEROLE;
+CREATE USER alice WITH PASSWORD 'password123';
+CREATE USER admin WITH PASSWORD 'adminpassword' SUPERUSER;
+
+--> Alter attribute:
+ALTER ROLE admin WITH SUPERUSER;
+ALTER ROLE user_role WITH LOGIN NOINHERIT;
+ALTER ROLE user_role NOLOGIN;  
+
+-->  role inheritance. eg: user_role inherits admin privileges
 GRANT admin TO user_role; 
+REVOKE admin FROM user_role;
+
 ```
-## **Privileges**: 
+## 2 **Privileges**: 
 - like verbs in k8s 
 - like actions in aws iam
-- **ALTER DEFAULT PRIVILEGES** - Set privileges for future database objects.
+- 
 ```
   ALL    : Grants all privileges.
   SELECT : Permission to query data.
@@ -50,25 +59,31 @@ GRANT admin TO user_role;
   USAGE  : Grants access to schemas or sequences.
   CONNECT: Permission to connect to the database.
 ```
-## **DB Resources**: 
+## 3 **DB Resources/object**: 
 - table, schema, view, etc
-
-## examples:
+---
+## examples on permission :yellow_circle:
 ```
--- table
-GRANT ALL ON TABLE employees TO admin; --admin is role
-GRANT SELECT, INSERT ON TABLE employees TO user_role;
-REVOKE DELETE ON TABLE employees FROM user_role;
+-- db
+GRANT CONNECT ON DATABASE mydb TO alice;
 
 -- schema
 GRANT USAGE ON SCHEMA public TO user_role;
 GRANT CREATE ON SCHEMA public TO admin;
 
+-- table
+GRANT ALL ON TABLE employees TO admin; --admin is role
+GRANT SELECT, INSERT ON TABLE employees TO user_role;
+REVOKE DELETE ON TABLE employees FROM user_role;
+
 -- column level
 GRANT SELECT (salary) ON employees TO user_role;
 
--- function ;leve;
+-- function level
 GRANT EXECUTE ON FUNCTION calculate_bonus() TO admin;
 
+-- ==== IMP: privelges on future object/table ====                <<< 
+ALTER DEFAULT PRIVILEGES IN SCHEMA public  -- add this list first
+GRANT SELECT ON TABLES TO user_role;
 
 ```

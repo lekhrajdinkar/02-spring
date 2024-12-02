@@ -1,8 +1,3 @@
-## Transaction
-- BEGIN --xxxxx--- COMMIT
-- ACID
-
----
 ## CTEs (Common Table Expressions) :point_left:
 - It improves the **readability / maintainability** of SQL code.
   - Simplifies complex queries.

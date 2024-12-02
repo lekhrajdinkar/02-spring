@@ -4,24 +4,9 @@
 - ![img.png](shopping_app/er.png)
 
 ---
-## A. Architecture
-### ACID
-### Process/s
-- operates with a **process-based architecture**, 
-  - **Backend Processes** 
-    - for each `client` connection.
-    - Handles queries, transactions, and data operations.
-  - **Postmaster Process** (Main Server Process)
-    - Manages connections and spawns new backend processes for each client.
-    - Coordinates system-level activities, like `crash recovery`.
-  - **Background Processes**
-    - `WAL Writer`: Writes WAL (Write-Ahead Logging) data to disk.
-    - `Checkpointer`: Periodically writes dirty pages from shared buffers to disk.
-    - `Archiver`: Archives WAL files for point-in-time recovery (if enabled).
-    - `Stats Collector`: Gathers performance and usage statistics.
-  - **Replication Processes**
-    - WAL Sender: Streams WAL data to replicas for replication.
-    - WAL Receiver: Receives WAL data on standby servers.
+- All: https://chatgpt.com/c/674bee20-d9e4-800d-a31e-8f60a5f511ab
+  - core concept: https://chatgpt.com/c/674d6fa4-7e4c-800d-9d48-54f566791d8d
+
     
 ---
 ## B. **Constraints**

@@ -3,7 +3,8 @@
 ## outer
   - left
   - right
-
+## Cross
+## self
 ---
 # Queries
 ## recursive queries

@@ -31,8 +31,7 @@ TRUNCATE TABLE employees
 ---
 
 # B DML :green_circle:
-- Can be rolled back
-- explicit commit needed
+
 ## A. INSERT
 ```
 ```
