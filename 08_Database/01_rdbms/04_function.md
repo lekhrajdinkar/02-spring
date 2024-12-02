@@ -43,7 +43,7 @@
 
 ---
 
-## 5 Window Functions
+## 5 Window Functions (skip) :red_circle:
 | **Function**         | **Description**                      | **Usage Level** | **Example**                             |
 |-----------------------|--------------------------------------|-----------------|-----------------------------------------|
 | `ROW_NUMBER()`       | Assigns a unique row number.         | Most Used       | `ROW_NUMBER() OVER (PARTITION BY dept)` |
@@ -54,12 +54,32 @@
 ---
 
 ## 6 JSON/JSONB Functions
-| **Function**                | **Description**                     | **Usage Level** | **Example**                           |
-|------------------------------|-------------------------------------|-----------------|---------------------------------------|
-| `JSON_BUILD_OBJECT(keys, values)` | Creates JSON object.         | Most Used       | `JSON_BUILD_OBJECT('key', 'value')`  |
-| `JSONB_EXTRACT_PATH(jsonb)` | Extracts JSONB element.             | Advanced        | `JSONB_EXTRACT_PATH(data, 'key')`    |
-| `JSON_AGG(value)`           | Aggregates values into JSON array.  | Advanced        | `JSON_AGG(column)`                   |
+| **Function**                        | **Description**                                              | **Usage Level** | **Example**                                               |
+|-------------------------------------|-------------------------------------------------------------|-----------------|-----------------------------------------------------------|
+| `->`                                | Accesses a JSON object field by key.                        | Most Used       | `json_column->'key' → "value"`                           |
+| `->>`                               | Accesses a JSON object field as text.                       | Most Used       | `json_column->>'key' → value`                            |
+| `#>`                                | Accesses a JSON object using a path.                        | Advanced        | `json_column#>'{path,key}' → "value"`                    |
+| `#>>`                               | Accesses a JSON object field as text using a path.          | Advanced        | `json_column#>>'{path,key}' → value`                     |
+| `JSONB_ARRAY_ELEMENTS(jsonb)`       | Expands a JSON array to a set of rows.                      | Advanced        | `JSONB_ARRAY_ELEMENTS('[1,2,3]') → 1, 2, 3`              |
+| `JSON_BUILD_OBJECT(keys, values...)`| Builds a JSON object from key-value pairs.                  | Most Used       | `JSON_BUILD_OBJECT('a', 1, 'b', 2) → {"a":1,"b":2}`      |
+| `JSONB_BUILD_ARRAY(values...)`      | Builds a JSONB array.                                       | Most Used       | `JSONB_BUILD_ARRAY(1, 2, 'a') → [1,2,"a"]`               |
+| `JSONB_SET(jsonb, path, value)`     | Updates a JSONB object by setting a value at a path.        | Advanced        | `JSONB_SET('{"a":1}', '{a}', '2') → {"a":2}`             |
+| `JSONB_INSERT(jsonb, path, value)`  | Inserts a value into a JSONB array at a specified path.     | Rarely Used     | `JSONB_INSERT('[1,2]', '{1}', '1.5') → [1,1.5,2]`        |
+| `TO_JSON(value)`                    | Converts a SQL value to JSON.                               | Most Used       | `TO_JSON(ROW('a', 1)) → {"f1":"a","f2":1}`               |
+| `JSON_EACH(json)`                   | Expands JSON object to key-value rows.                      | Rarely Used     | `JSON_EACH('{"a":1, "b":2}') → "a", 1 and "b", 2`        |
+| `JSON_OBJECT(keys, values...)`      | Constructs a JSON object from text arrays.                  | Advanced        | `JSON_OBJECT(ARRAY['a','b'], ARRAY[1,2]) → {"a":1,"b":2}`|
 
+### Example:
+```
+ SELECT '{"name": "John", "age": 30}'::json->'name' AS result; -- "John"
+
+ SELECT '{"name": "John", "age": 30}'::json->>'age' AS result; -- "30", not 30
+ 
+ SELECT JSONB_ARRAY_ELEMENTS('[10, 20, 30]'::jsonb) AS value; -- 10 \n 20 \n 30
+ 
+ SELECT JSON_BUILD_OBJECT('name', 'Alice', 'age', 25) AS result;  -- {"name":"Alice","age":25}
+
+```
 ---
 ## 7 Array Functions
 | **Function**                | **Description**                                     | **Usage Level** | **Example**                             |
