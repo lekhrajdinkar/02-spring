@@ -7,9 +7,11 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Environment;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -29,31 +31,39 @@ import java.util.UUID;
 
 @Configuration
 @EnableTransactionManagement
-public class HibernateConfig {
+@EnableJpaRepositories(
+        basePackages = "com.lekhraj.java.spring.SB_99_RESTful_API",
+        entityManagerFactoryRef = "entityManagerFactory_for_h2",
+        transactionManagerRef = "transactionManager_for_h2"
+)
+public class HibernateConfig
+{
+    @Autowired    private org.springframework.core.env.Environment env;
 
-    @Autowired
-    private org.springframework.core.env.Environment env;
-
-    private String pck2Scan="com.lekhraj.java.spring.SB_99_RESTful_API.entities";
-
-    @Bean(name = "entityManagerFactory") // 1. SessionFactory
-    public LocalSessionFactoryBean sessionFactory() {
+    @Bean(name = "entityManagerFactory_for_h2") // 1. SessionFactory
+    public LocalSessionFactoryBean sessionFactory(
+            @Qualifier("dataSource_for_h2") DataSource dataSource)
+    {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(pck2Scan);
-        sessionFactory.setHibernateProperties(hibernateProperties());   // <<<<
+
+            sessionFactory.setDataSource(dataSource);
+            sessionFactory.setPackagesToScan("com.lekhraj.java.spring.SB_99_RESTful_API.entities");
+            sessionFactory.setHibernateProperties(hibernateProperties());
+
         return sessionFactory;
     }
 
-    @Bean // 2. HibernateTransactionManager
-    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
+    @Bean(name = "transactionManager_for_h2") // 2. HibernateTransactionManager
+    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory)
+    {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
     }
 
-    @Bean //  3. javax.sql.DataSource
-    public DataSource dataSource() {
+    @Bean(name = "dataSource_for_h2") //  3. javax.sql.DataSource
+    public DataSource dataSource()
+    {
         return DataSourceBuilder.create()
                 .driverClassName(env.getProperty("spring.datasource.driverClassName"))
                 .url(env.getProperty("spring.datasource.url"))
@@ -77,6 +87,7 @@ public class HibernateConfig {
         //properties.put(Environment.DIALECT, env.getProperty("spring.jpa.properties.hibernate.dialect"));
         //properties.put(Environment.SHOW_SQL, env.getProperty("spring.jpa.show-sql"));
         //properties.put(Environment.HBM2DDL_AUTO, env.getProperty("spring.jpa.hibernate.ddl-auto"));
+
         return properties;
     }
 
@@ -85,7 +96,7 @@ public class HibernateConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource);
-        em.setPackagesToScan(pck2Scan);
+        em.setPackagesToScan("com.lekhraj.java.spring.SB_99_RESTful_API.entities");
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setJpaProperties(hibernateProperties());
@@ -98,7 +109,6 @@ public class HibernateConfig {
         transactionManager.setEntityManagerFactory(emf);
         return transactionManager;
     }
-
 
 }
 
