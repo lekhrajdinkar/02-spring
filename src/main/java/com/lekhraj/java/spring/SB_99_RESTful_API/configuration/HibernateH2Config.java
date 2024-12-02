@@ -1,14 +1,8 @@
 package com.lekhraj.java.spring.SB_99_RESTful_API.configuration;
 
-import com.lekhraj.java.spring.SB_99_RESTful_API.entities.Student;
-import com.lekhraj.java.spring.SB_99_RESTful_API.model.GenderEnum;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -25,10 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Properties;
-import java.util.UUID;
 
 @Configuration
 @EnableTransactionManagement
@@ -37,7 +28,7 @@ import java.util.UUID;
         entityManagerFactoryRef = "entityManagerFactory_for_h2",
         transactionManagerRef = "transactionManager_for_h2"
 )
-public class HibernateConfig
+public class HibernateH2Config
 {
     @Autowired    private org.springframework.core.env.Environment env;
 
@@ -89,8 +80,10 @@ public class HibernateConfig
                 .build();
     }
 
-    @Bean
-    public TransactionTemplate transactionTemplate(PlatformTransactionManager transactionManager) {
+    @Bean(name = "PlatformTransactionManager_for_h2")
+    public TransactionTemplate transactionTemplate(
+            @Qualifier("transactionManager_for_h2") PlatformTransactionManager transactionManager)
+    {
         return new TransactionTemplate(transactionManager);
     }
 

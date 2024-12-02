@@ -11,11 +11,12 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
-//@Configuration
+@Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
         basePackages = "com.lekhraj.java.spring.database",
@@ -73,12 +74,14 @@ public class HibernatePostgresConfig
                 .build();
     }
 
-    /*
-    @Bean
-    public TransactionTemplate transactionTemplate(PlatformTransactionManager transactionManager) {
+
+    @Bean(name = "PlatformTransactionManager_for_postgres")
+    public TransactionTemplate transactionTemplate(
+            @Qualifier("transactionManager_for_postgres") PlatformTransactionManager transactionManager)
+    {
         return new TransactionTemplate(transactionManager);
     }
-    */
+
 
 }
 
