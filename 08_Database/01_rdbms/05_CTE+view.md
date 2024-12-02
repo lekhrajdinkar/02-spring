@@ -2,6 +2,7 @@
 - BEGIN --xxxxx--- COMMIT
 - ACID
 
+---
 ## CTEs (Common Table Expressions) :point_left:
 - It improves the **readability / maintainability** of SQL code.
   - Simplifies complex queries.
@@ -11,10 +12,10 @@
 ```
 # =========== Syntax ==============
 
-WITH cte_name (optional_column_names) AS (
+WITH cte_name (optional_column_names) AS (  -- explicit
     query_definition
 ),
-WITH cte_name2 (optional_column_names) AS (
+WITH cte_name2  AS (  -- Inferred from the query
     query_definition2
 )
 SELECT * FROM cte_name;
@@ -47,16 +48,12 @@ WHERE he.salary > ds.avg_salary;
 
 ```
 
-## Analyze Query 
-- EXPLAIN ANALYZE SELECT * FROM employees WHERE age > 30
-
-## Partitioning
-
-
+---
 ## Views
+### Regular
 - virtual and **recompute** their results every time query them.
 
-## Materialized Views
+### Materialized Views
 - object that contains the results of a query and **stores** them physically on disk.
 - improves performance 
 - create **indexes** on materialized views to further optimize performance
@@ -76,4 +73,11 @@ DROP MATERIALIZED VIEW view_name;
 REFRESH MATERIALIZED VIEW view_name WITH DATA;
 REFRESH MATERIALIZED VIEW view_name WITH NO DATA; --> clean up
 ```
+
+---
+## Analyze Query
+- **EXPLAIN ANALYZE** SELECT * FROM employees WHERE age > 30
+
+---
+## Partitioning
 
