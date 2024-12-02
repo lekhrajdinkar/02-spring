@@ -8,7 +8,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Table(name = "app_order")
+@Table(name = "app_order", schema = "public")
 public class AppOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

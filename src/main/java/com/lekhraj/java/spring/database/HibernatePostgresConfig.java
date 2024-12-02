@@ -38,7 +38,7 @@ public class HibernatePostgresConfig
     }
 
     @Bean(name = "entityManagerFactory_for_postgres") // 1. SessionFactory
-    public LocalSessionFactoryBean sessionFactory(
+    public LocalSessionFactoryBean sessionFactoryPostgres(
             @Qualifier("dataSource_for_postgres") DataSource dataSource)
     {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -51,7 +51,8 @@ public class HibernatePostgresConfig
     }
 
     @Bean(name = "transactionManager_for_postgres") // 2. HibernateTransactionManager
-    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory)
+    public PlatformTransactionManager hibernateTransactionManager(
+            @Qualifier("entityManagerFactory_for_postgres") SessionFactory sessionFactory)
     {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);

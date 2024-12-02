@@ -9,7 +9,7 @@ import java.util.Map;
 @Setter
 @Getter
 @Entity
-@Table(name = "cart")
+@Table(name = "cart", schema = "public")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Setter @Getter
 @Entity
-@Table(name = "app_order_detail")
+@Table(name = "app_order_detail", schema = "public")
 
 public class AppOrderDetail {
     @Id
