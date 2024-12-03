@@ -2,13 +2,19 @@
 - open-source
 - language-agnostic
 - highly efficient for `microservices` comm.
-- Built on `HTTP/2`:
-  - `binary` serialized **Protobuf** payloads  (Harder to debug)
-  - reduced latency :point_left:
-  - **bi-directional streaming** - Server streaming, client streaming, and bi-directional streaming.
-  - **multiplexing** -  multiple calls on a single connection
-  - **load balancing**
-  - built in - Authentication, compression, SSL, and retries
+- `binary` serialized **Protobuf** payloads  (Harder to debug)
+
+## gRPC over HTTP/2 (default)
+- gRPC with HTTP/1.1 (Less Common but Possible)
+- reduced latency :point_left:
+- **bi-directional streaming** - Server streaming, client streaming, and bi-directional streaming.
+- **multiplexing** -  multiple calls on a single connection
+- **load balancing**
+- built in - Authentication, compression, SSL, and retries
+
+## gRPC-Web((For Browser Clients)
+- ng/react uses 
+- gRPC-Web, which uses HTTP/1.1 or HTTP/2 in the browser to communicate with the backend gRPC services
 
 ## Steps
 - proto file : [user.proto.bkp](..%2F..%2Fsrc%2Fmain%2Fproto%2Fuser.proto.bkp)
