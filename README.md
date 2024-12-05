@@ -33,5 +33,13 @@
 - **CI/CD Pipeline** : [harness](https://github.com/lekhrajdinkar/02-spring/tree/main/05_harness)
 - **Scripting** : [BASH](https://github.com/lekhrajdinkar/02-spring/tree/main/07_scripting/bash_script)
 
+---
+```
+
+mvn archetype:generate -DgroupId=com.example -DartifactId=new-module -Dpackage=com.example.newmodule -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+```
+
+
 
   
