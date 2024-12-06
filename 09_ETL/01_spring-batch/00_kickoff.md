@@ -14,8 +14,22 @@ https://chatgpt.com/c/6752bc19-2988-800d-a0b6-b2d118c74141
 - Listeners
 - StepExecutionListener
 - Restarting jobs
-- Reusability
+- Reusability - reuse same step among several job.
 - nested jobs
+```
+
+
+job1
+    .listener(listener)                                     # event - job start,end
+    .next(step2())
+    .next(job2Reference())                                          # nested
+    .split(new SimpleAsyncTaskExecutor()).add(step3(), step4())     # parallel
+
+Step1.
+    .<InputType, OutputType>chunk(10)
+    .listener(listener)                                     # event - step start,end
+
+```
 
 ## Reading
 - chuck-oriented processing
@@ -23,6 +37,9 @@ https://chatgpt.com/c/6752bc19-2988-800d-a0b6-b2d118c74141
 - configure chuck-oriented steps
 - reading from DB (single thread)
 - reading from DB (multiple thread)
+```
+ return new JdbcCursorItemReader<>()
+```
 
 ## Writing
 - ItemWriter 
@@ -30,9 +47,13 @@ https://chatgpt.com/c/6752bc19-2988-800d-a0b6-b2d118c74141
 - Writing to a database with PreparedStatements 
 - Writing to a database with named parameters 
 - Writing a JSON file 
+```
+ return new JdbcBatchItemWriter<>();
+ FlatFileItemWriter<OutputType> writer = new FlatFileItemWriter<>();
+```
 
 ## processing Items
-- ItemProcessor 
+- ItemProcessor<InputType, OutputType> 
 - ItemProcessor Bean Validation
 - Implementing custom processor logic
 - Chaining ItemProcessors
@@ -42,5 +63,18 @@ https://chatgpt.com/c/6752bc19-2988-800d-a0b6-b2d118c74141
 - skip logic for jobs
 - retry logic for steps
 - multithreaded steps
+```
+
+Step1.
+    .skip(Exception.class)
+    .skipLimit(10)
+    
+Step1.
+    .retry(Exception.class)
+    .retryLimit(3) 
+    
+Step1.    
+    .taskExecutor(new SimpleAsyncTaskExecutor())  
+```
 
 
