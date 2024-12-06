@@ -125,15 +125,6 @@ docker run -d --hostname my-rabbit --name my-rabbit -p 5672:5672 -p 15672:15672 
 | Dead Letter           | Memory/Disk        | Optional              | No                   | Yes                |
 | Exclusive             | Memory/Disk        | No                    | No                   | Yes                |
 
-  - **Streams**: 
-    - designed for event streaming use cases.
-    - more extensive retention policies
-    - supports `multiple consumers with different offsets`.
-    - Optimized for `high-throughput` and `low-latency` messaging.
-  - `Federated Queues`: link queues across different RabbitMQ nodes
-  - `Lazy Queues` : large queues without consuming too much RAM. since it store om disk.
-  - `Priority Queues`: Suitable when message prioritization is critical.
-
 ---
 ## C Scalability
 - Supports clustering
