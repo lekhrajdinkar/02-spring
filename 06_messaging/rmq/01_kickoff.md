@@ -2,7 +2,9 @@
   - www.rabbitmq.com/tutorials
   - https://chatgpt.com/c/67532c74-a6d8-800d-8ad3-13afd07dcd8e
   - https://docs.spring.io/spring-boot/reference/messaging/amqp.html#messaging.amqp
-
+  - https://www.rabbitmq.com/tutorials/tutorial-two-java-stream - `stream`
+    - skip
+    - using Kafka
 ---
 # RabbitMQ
 - **Producer**  --> **Exchange** >> **binding** >> **Queue** --> **consumer**
