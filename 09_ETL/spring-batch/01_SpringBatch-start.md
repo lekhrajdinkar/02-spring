@@ -13,6 +13,8 @@
 - **ItemReader** : Reads data from a source.
 - **ItemProcessor** : Processes data (optional).
 - **ItemWriter** : Writes processed data to a destination.
+- **JobRepository** - 
+  - explicitly handles persistence of batch metadata, ensuring better control and compatibility with the latest versions.
 
 ---
 ## Key Features
@@ -34,3 +36,4 @@
    </dependency>
 
   ```
+  - https://github.com/spring-projects/spring-batch/blob/main/spring-batch-core/src/main/resources/org/springframework/batch/core/schema-postgresql.sql
