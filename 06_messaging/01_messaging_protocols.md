@@ -63,6 +63,7 @@
 ---
 
 ## 5. HTTP/REST (Representational State Transfer)
+- check here : [04_REST.md](../00_Springboot/02_web/04_REST.md) :point_left:
 - **Description**: A stateless, text-based protocol commonly used for APIs.
 - **Key Features**:
     - Simple request-response model using HTTP verbs (GET, POST, PUT, DELETE).
@@ -76,6 +77,7 @@
 ---
 
 ## 6. Google Protocol Buffers (gRPC)
+- check here: [08_gRPC+webflux.md](../00_Springboot/02_web/08_gRPC%2Bwebflux.md) :point_left:
 - **Description**: A high-performance, open-source RPC framework by Google.
 - **Key Features**:
     - Uses Protocol Buffers (Protobuf) for serialization.
@@ -87,8 +89,8 @@
 - **Supported by**: Google Cloud, gRPC libraries.
 
 ---
-
-## 7. OpenWire
+## 7 more (skip)
+### 7.1. OpenWire
 - **Description**: A binary protocol used by Apache ActiveMQ for efficient message communication.
 - **Key Features**:
     - Optimized for ActiveMQ brokers.
@@ -99,7 +101,7 @@
 
 ---
 
-## 8. Simple/Streaming Network Protocol (SNMP)
+### 7.2. Simple/Streaming Network Protocol (SNMP)
 - **Description**: A lightweight messaging protocol for network management.
 - **Key Features**:
     - Focused on telemetry and monitoring.
@@ -112,7 +114,7 @@
 
 ---
 
-## 9. ZeroMQ Protocol
+### 7.3. ZeroMQ Protocol
 - **Description**: A high-performance messaging library for concurrency and distributed systems.
 - **Key Features**:
     - Offers multiple messaging patterns (Pub/Sub, Req/Rep, Push/Pull).
