@@ -4,14 +4,6 @@
   - https://docs.spring.io/spring-boot/reference/messaging/amqp.html#messaging.amqp
 
 ---
-# messaging protocols 
-  - HTTP/HTTPS : RestApi messages
-  - WebSockets: full-duplex communication channels over a single TCP connection.
-  - `MQTT` (Message Queuing Telemetry Transport)
-  - `AMQP` (Advanced Message Queuing Protocol) : `RabbitMQ`
-  - `STOMP` (Simple Text Oriented Messaging Protocol)
-
----
 # RabbitMQ
 - **Producer**  --> **Exchange** >> **binding** >> **Queue** --> **consumer**
 - open-source message broker system
