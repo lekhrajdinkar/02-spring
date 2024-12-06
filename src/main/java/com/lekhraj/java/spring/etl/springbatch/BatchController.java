@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BatchController {
 
-    @Autowired    private JobLauncher jobLauncher;
+
     @Autowired    ApplicationContext ac ;
+    @Autowired BatchService batchSrv;
 
     /**
      * job_1_importUser,
@@ -31,9 +32,8 @@ public class BatchController {
                     .addLong("time", System.currentTimeMillis())
                     .toJobParameters();
             Job job = ac.getBean(jobBeanName, Job.class);
-            JobExecution jobExecution = jobLauncher.run(job, params);
-
-            return ResponseEntity.ok("Job " + jobBeanName + " started with status: " + jobExecution.getStatus());
+            batchSrv.runJob(job, params);
+            return ResponseEntity.ok("Job " + jobBeanName + " initiated..." );
         }
         catch (Exception e) {
             e.printStackTrace();

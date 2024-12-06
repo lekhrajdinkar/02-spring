@@ -24,6 +24,7 @@ import java.sql.Statement;
                 {
 
                     String ddlScript = """
+                    DROP TABLE app_user;
                     CREATE TABLE "app_user" (
                                     id SERIAL PRIMARY KEY,
                                     firstname VARCHAR(100),
