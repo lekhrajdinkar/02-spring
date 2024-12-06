@@ -1,5 +1,6 @@
 package com.lekhraj.java.spring.etl.springbatch;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -68,6 +69,7 @@ public class HibernatePostgresConfig_forBatch
                 .username(env.getProperty("postgres.datasource.username"))
                 .password(env.getProperty("postgres.datasource.password"))
                 .build();
+        // dataSource.addDataSourceProperty("currentSchema", "schema_name");
     }
 
 
