@@ -34,22 +34,36 @@
 - docker network create  --driver=bridge --subnet ... n1
 
 ---
-- `dockerfile`
-  - **ENDPOINT** : 
-    - Specifies the primary command to run inside the container
-    - always executed when the container starts
-    - any arguments provided to `docker run` will be appended to the command defined in **ENTRYPOINT**
-    - ENTRYPOINT ["python", "app-1.py"] : no argument
-  - **CMD** 
-    - Purpose: Provides **default arguments** for the command specified in ENTRYPOINT
-    - ENTRYPOINT ["python"] + CMD ["app-2.py"]
-    - CMD ["python", "app-1.py"] --> will also work
-  - **RUN**
-    - RUN apt-get update && apt-get install -y curl
-    - RUN pip install
-  - ADD
-  - WORKDIR
-  - EXPOSE 8080
-  - COPY
-  - USER userId  
-    - by default all process run the `root user` (with limited set of **capability**)
+## dockerfile
+- **ENDPOINT** : 
+  - Specifies the primary command to run inside the container
+  - always executed when the container starts
+  - any arguments provided to `docker run` will be appended to the command defined in **ENTRYPOINT**
+  - ENTRYPOINT ["python", "app-1.py"] : no argument
+- **CMD** 
+  - Purpose: Provides **default arguments** for the command specified in ENTRYPOINT
+  - ENTRYPOINT ["python"] + CMD ["app-2.py"]
+  - CMD ["python", "app-1.py"] --> will also work
+- **RUN**
+  - RUN apt-get update && apt-get install -y curl
+  - RUN pip install
+- ADD
+- WORKDIR
+- EXPOSE 8080
+- COPY
+- USER userId  
+  - by default all process run the `root user` (with limited set of **capability**)
+
+```
+### apk ###
+
+apk update
+apk add --no-cache package-name (eg: curl)
+apk del package-name
+apk search package-name
+apk info
+
+# Combine apk commands into one block to reduce image layers and improve build performance.
+# Use --no-cache to avoid storing index files and temporary data in the final image
+# rm -rf /var/cache/apk
+```
