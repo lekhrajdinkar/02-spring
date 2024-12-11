@@ -1,39 +1,31 @@
-## Summary
-  - Storage Auto-scaling (EBS volume size)
-  - backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always), 
-  - `cloning` : EBS volume - clone
-  - DR( multi-AZ or region ) : main-DB (Writer, only 1) > snapshot > restore-Standby  
-  - performance Arch: `one` Write-Instance + `many` Read-Replica/s , `RDS proxy`
-  - security: attach `Security group` on RDS instance, encryption at rest/fly, IAM 
-  - use case and scenarios: 
-    - RDBMS / OLTP 
-    - `RDS event ntf` > event catch > target : SNS, Lambda
+- **AWS RDBMS offering** 
+  - Option-1 : `on EC2`
+    - Provision Ec2
+    - install RDBMS and maintain it (os patching, security update, etc)
+  - Option-2 : AWS `Aurora`
+  - **Option-3** : AWS `RDS` 
 
 ---
-## AWS RDBMS offering 
-- Option-1 : `on EC2`
-  - Provision Ec2
-  - install RDBMS and maintain it (os patching, security update, etc)
-- Option-2 : AWS `Aurora`
-- Option-3 : AWS `RDS` 
-
----
-## RDS  (regional)
+# RDS (regional)
+- regional, run on single-AZ or mutli-az.
 - manually manage : multi-AZ:t/f ; CW>Alarm>R-replicaScale, etc
-- Automated provisioning, OS patching, just choose maintenance window, 
-### provision:
-  - choose `EBS volume type` : `gp2` or `io1`
-  - choose `RDS instance size` : compute family size
-    - no access/ssh
-    - But `RDS custom` allow to access it  only for `SQL server` and `oracle` DB.
-    - First disable automation mode, take snapshot, then access it
-    - R51DS custom, allow some customization capabilities of underlying DB and OS (limited)
-  - choose Supported engine: 6 + 1
-    - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
-    - `Aurora` (AWS Proprietary database, not Open source)
+- Automated provisioning, OS patching, just choose maintenance window.
+
+## 1 provision:
+- choose **EBS volume type**: 
+  - `gp2`  
+  - `io1`
+- choose **RDS ec2 instance s** : compute family size
+  - no access/ssh
+  - But `RDS custom` allow to access it  only for `SQL server` and `oracle` DB.
+  - First disable automation mode, take snapshot, then access it
+  - R51DS custom, allow some customization capabilities of underlying DB and OS (limited)
+- choose **Supported engine**: 6 + 1
+  - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
+  - `Aurora` (AWS Proprietary database, not open source)
   
-###  Advantages of RDS
-#### Scaling
+##  2 Advantages of RDS
+### 2.1 Scaling
 - For performance >> `Read-replica Auto-scale` : 
   - Max 15, min 1.
   -`not built-in` scaling, but can manually create CW:alarm + ASG
@@ -44,7 +36,7 @@
   - set max storage in GB/TB.
   - define `thresold`/maz-size  +  `trigger` : free space <10%, space runs last 5min, etc.
 
-#### DR
+### 2.2 DR
 -  `Point in Time Restore` : Continuous backups and restore to specific timestamp
 - **option-1**:  Stand-by replica  
   - `manually enable` Multi AZ-setup for DR, not built-in.
@@ -60,7 +52,7 @@
   - `cross-region`-read replicas, is also possible : paid
   - DR fail-over : `promote` any READ replica as main DB later.
   
-#### performance
+### 2.3 performance
 - `Main DB` + `Read replica/s` for improved read performance.
 - Up to 15 READ replica/s 
   - within a AZ, or
@@ -70,7 +62,7 @@
 - `cross-region`-read replicas, is also possible : paid
 - tip: can run `Dashboard`, `Analytics` on read replicas.
 
-#### Security
+### 2.4 Security
 - `At-rest` encryption:
   - Database master & replicas encryption using AWS KMS
   - If the master is not encrypted, the read replicas cannot be encrypted
@@ -85,7 +77,7 @@
   - `Security Groups`: Control Network access to your RDS / Aurora DB
   - No SSH available, except on RDS Custom
 
-#### RDS proxy
+### 2.5 RDS proxy
 - pools open connections.
 - reduces fail-over time by 66%
 - access privatey only
@@ -94,7 +86,7 @@
 
 --- 
 
-## demo:
+## 3. demo:
 ```
 - create single DB RDB in region-1
 - choose underlying ec2 type (memory optimzed), EBS volume
@@ -125,3 +117,14 @@
   - create read replica.
  
 ```
+---
+## 4. Summary
+- Storage Auto-scaling (EBS volume size)
+- backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always),
+- `cloning` : EBS volume - clone
+- DR( multi-AZ or region ) : main-DB (Writer, only 1) > snapshot > restore-Standby
+- performance Arch: `one` Write-Instance + `many` Read-Replica/s , `RDS proxy`
+- security: attach `Security group` on RDS instance, encryption at rest/fly, IAM
+- use case and scenarios:
+    - RDBMS / OLTP
+    - `RDS event ntf` > event catch > target : SNS, Lambda
