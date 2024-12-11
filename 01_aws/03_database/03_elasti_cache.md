@@ -14,10 +14,10 @@
 - **negative side**
   - need application code changes.
   - Data may be out of date, eventually consistent.
-  - data structured well for caching.
+  - not suited for un-structured  data.
 
-### cache use-cases
-- a. `Database`
+## A cache use-cases
+### **Database Read**
   - prg <--- DB (state)
   - prg (`code` changes to use cache ) <--- `Cache` <--- DB(Data) : for stateless Application
     - `low latency`
@@ -25,11 +25,12 @@
     - `reduce load` off of databases for read intensive workloads
     - ![img.png](../99_img/redis/img.png)
     - lazy loading(stale read) and write-through(sync cache with DB)
-- b. Maintain user Session
+### **Maintain user Session**
   - ![img_1.png](../99_img/redis/img_1.png)
 
 ---
-##  A. `Redis` 
+## B Type
+###  1 `Redis` 
 - think of RDS, similar :point_left:
 - internal: 
   - uses `Sets`(uniqness) and `SortedSets` (uniqueness + ordering)
@@ -40,7 +41,7 @@
     - Read replica-1 --> az-1
     - Read replica-2 --> az-2, etc
 
-### Redis::Demo
+#### Redis::Demo
 ```
 - Create REDIS (.rdb file)
 - Choose : Design youe own cache
@@ -60,7 +61,7 @@
     - backup/restore
 ```
 ---
-## B. `MemCache`
+### 2 `MemCache`
 - No high availability (replication)
 - `Non persistent` 
 - No backup/restore
@@ -69,7 +70,7 @@
 - Multi-node for partitioning of data (sharding) ?
 
 ---
-## c. `Memory DB for redis` : intro
+### 3 `Memory DB for redis` : intro
 ![img_4.png](../99_img/dva/00/img_4.png)
 - Ultra-fast performance with over `160 millions requests/second` :point_left:
 - **Durable in-memory data storage** 
@@ -82,7 +83,7 @@
   - …
 
 ---
-## E. strategies ( **caching design pattern** )
+## C strategies ( **caching design pattern** )
 ### 1. **Lazy Loading** or Population / Cache-Aside
 ![img.png](../99_img/dva/00/imgg.png)
 - flow for understanding:
