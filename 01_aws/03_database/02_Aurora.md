@@ -8,10 +8,10 @@
 - scale to **128TB** 
 - OLTP
 
-## A. Advantages (other than )
+## A. Advantages
 - include rds adv.
 
-###  1 Global Aurora
+###  1 Global Aurora database
 - cross `region` replicas in `less than a sec`. | single Database spans over multiple **region**.
 - 1 Primary Region (read / write)
 - Up to 5 secondary (read-only) in each region, `replication` lag is less than `1 second` :point_left:

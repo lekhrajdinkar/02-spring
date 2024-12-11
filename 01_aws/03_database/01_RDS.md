@@ -14,7 +14,7 @@
 - Automates **administrative tasks** such as database setup, patching, backups, and hardware provisioning
   - manually setup **auto-scale** :: CW>Alarm>Read-replicaScale.
   - auto **OS patching** :: just choose maintenance window
-- **provision step**
+- **provision step** (capcity planning)
   - choose single-AZ(default) or mutli-az(enable, if needed)
   - choose **Supported engine**:
     - Postgres, MySQL, MariaDB, Oracle, Microsoft SQL Server, IBM DB2
