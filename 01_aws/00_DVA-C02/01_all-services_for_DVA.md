@@ -1,3 +1,9 @@
+- S4 : IAM
+- s5 : EC2
+- s6 : EC2:storage - EBS + EFS
+- s7: [01_ELB_ASG.md](..%2F04_network%2F01_ELB_ASG.md)
+- s8 : RDS + aurora + elasticCache
+---
 ## AWS Services  for DVA
 
 ![img.png](../99_img/dva/00/img.png)

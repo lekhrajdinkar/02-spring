@@ -15,10 +15,12 @@
   - cookies: 
     - `LB generated` / Duration-based? : uses these reserved name: `AWSALB, AWSALBAPP, AWSALBTG`
     - `Application (TG) based` : MY_TG_1_COOKIE, etc
-- SSl-old/TLS-new.
+- SSl/**TLS**.
   - `X.502` === TLS certificate (private key, bodt, chain)
   - ccgg uses `digicert` as `CA`.
-  - `SNI` : resolves multiple certificate load problem.
+  - **SNI** (Server Name Indication)
+    - resolves multiple certificate load problem.
+    - allows to expose multiple HTTPS applications each with its own SSL certificate on the same listener.
   - encrypt `in-fly` traffic.
 ---
 ## B. ASG
@@ -80,6 +82,25 @@
   - instance launched with oldest version of launch-configuration/template.
   - oldest age
   - the instance(s) nearest the end of their billing hour. (like reserver period is close to end.)
+
+### Instance refresh (like k8s deploymnet )
+- update ec2-i with new launch template version.
+- **rolling Updates** : iReplaces instances incrementally to avoid downtime.
+- desired capacity is maintained : specify minimum healthy %
+- can pause, resume, or cancel an instance refresh if necessary.
+- specify **warm up time** : wait times for instance stabilization
+```
+aws autoscaling start-instance-refresh --auto-scaling-group-name <ASG-name> --preferences <json>
+
+{
+    "MinHealthyPercentage": 90,
+    "InstanceWarmup": 300
+}
+
+# monitor
+aws autoscaling describe-instance-refreshes --auto-scaling-group-name <ASG-name>
+
+```
 ---
 
 ## C. ELB (regional)
