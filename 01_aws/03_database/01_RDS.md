@@ -1,3 +1,5 @@
+- https://chatgpt.com/c/675945a8-f8b8-800d-a789-e07e6db38e8d
+--- 
 - **AWS RDBMS offering** 
   - Option-1 : `on EC2`
     - Provision Ec2
@@ -8,7 +10,7 @@
 ---
 # RDS (regional)
 ## Advantages of RDS
-### 2.1 fully managed
+### 2.1 fully managed (not serverless)
 - Automates **administrative tasks** such as database setup, patching, backups, and hardware provisioning
   - manually setup **auto-scale** :: CW>Alarm>Read-replicaScale.
   - auto **OS patching** :: just choose maintenance window
@@ -32,23 +34,24 @@
 
 
 ### 2.3 Scalability
-- **Read-replica instance**
-  -`not built-in` scaling, but can manually create CW:alarm + ASG
-  - ASG and CW alarm ( metric: conn count, cpu utilization, read traffic, etc)
-  - or, manually edit and create read replication.
-- **storage**
-  - Enable/Disable from console.
-  - good for unpredictable workloads
-  - set max storage in GB/TB.
-  - define `thresold`/maz-size  +  `trigger` : free space <10%, space runs last 5min, etc.
+- Scaling involves resizing instances, which may require downtime.
+#### **Read-replica instance**
+-`not built-in` scaling, but can manually create CW:alarm + ASG
+- ASG and CW alarm ( metric: conn count, cpu utilization, read traffic, etc)
+- or, manually edit and create read replication.
+#### **storage**
+- Enable/Disable from console.
+- good for unpredictable workloads
+- set max storage in GB/TB.
+- define `thresold`/maz-size  +  `trigger` : free space <10%, space runs last 5min, etc.
 
 ### 2.4 performance
 - Uses SSD-based storage.
 - `write instance DB` + `Read replica/s` for improved read performance.
 - **Up to 15 READ replica/s**
-    - within a AZ, or
-    - cross-AZ, or
-    - cross-region (paid replication)
+  - within AZ, or
+  - cross-AZ, or
+  - cross-region (paid replication)
 - main-DB --> `A-SYNC replication (free within region)` --> Read Replicas
 - tip: can run `Dashboard`, `Analytics` on read replicas.
 
@@ -95,9 +98,29 @@
 - IAM, Lambda, CloudWatch, and Elastic Beanstalk.
 - Simplifies building serverless or event-driven architectures
 
---- 
+### 2.9 snapshot/backup
+- for **automatic** bkp , retention 1 to 35
+- for **manual**, retention - as long we want for maul backup.
+- `on-prem` MySQL/postgres DB --> create db-dumps( using `Percona XtraBackup`) --> place in S3 --> restore.
+- cloning
+  - faster than backup > restore
+  - uses `copy-on-write` - use same volume + for new changes additional storage allocated and data copied to it.
 
-## 3. demo
+---
+## 3. RDS::pricing
+- Charged based on instance class and storage used.
+  - standby instance
+  - read replica 
+- inbound data transfer is free.
+- Outbound data transfer is charged based on the volume of data transferred outside of AWS
+### Cost Optimization Tips
+- Use Reserved Instances: Commit to a 1 or 3-year term for discounts
+- Enable Auto-Scaling.
+- Choose the Right Storage.
+- take snapshot and delete db if you dont need. later on restore from snapshot. this will save money.
+
+--- 
+## 4. demo
 ```
 - create single DB RDB in region-1
 - choose underlying ec2 type (memory optimzed), EBS volume
@@ -129,7 +152,7 @@
  
 ```
 ---
-## 4. Summary
+## 5. Summary
 - Storage Auto-scaling (EBS volume size)
 - backup/restore : dumps>s3>restore, retention policy(1-35), manual dumps(always),
 - `cloning` : EBS volume - clone

@@ -1,53 +1,49 @@
 # Aurora (rdbms, Serverless)
-- key Summary:
-  - serverless, global DB, self-healing, continous s3 backup, PITR, 128TB auto-scale, OLTP
+- engine : `Postgres` 3x  and `MySQL` 5x
+- serverless,**no capacity planning**
+- global DB, 
+- self-healing, 
+- continuous s3 backup, 
+- PITR, 
+- scale to **128TB** 
+- OLTP
 
-## Design
-- serverless, no capacity planning
-- same as RDS, but more performance, less maintenance, more flexibility.
-- engine : `Postgres` and `MySQL`
-- 20% extra cost than RDS.
-- has integration ML service : `SageMaker` and `Comprehend`
-  - > usecase : fraud detection, ads targeting, sentiment analysis, product recommendations
----    
-- `Auto`-scaling (storage and compute are separate)
-  - `storage` scaling :EBS volume - `10 GB to 128 TB`
-  - `compute` Instance --> auto-scale up/down to bigger/small `compute instances` --> type( eg: d.r3.large,etc), --RAM++, --cpu++.
-  - `Read replicas`:  (built-in, dont need to create CW + ASG, auto happens bts)
-    - can add, CW metric --> triggers --> auto up/down read replicas
----   
-- `performance`:
-  - AWS cloud optimized and claim `5x` Performance improvement.
-  - master + `6-15` Read Replica, with fast replication.
----   
-- `Availability`
-  - `6 copies` for data access 3 AZ : `cluster` ( with reader and writer endpoint)
-  - instant fail-over (<30s) + `self healing` from peer2peer replication.
-  - ![img.png](../99_img/db/img.png)
-  - ![img_2.png](../99_img/db/img_2.png)
---- 
-- `snapshot`/backup + Recovery/`restore`
-  - for `automatic` bkp , retention 1 to 35
-  - for `manual`, retention - as long we want for maul backup.
-  - `on-prem` MySQL/postgres DB --> create db-dumps( using `Percona XtraBackup`) --> place in S3 --> restore.
-  - `cloning`:
-     - faster than backup > restore
-     - uses `copy-on-write` - use same volume + for new changes additional storage allocated and data copied to it.
-    
-  - > `Trick` : take snapshot and delete db if you dont need.  later on restore from snapshot. this will `save money`
+## A. Advantages (other than )
+- include rds adv.
 
----            
-## Global Aurora 
-- cross `region` replicas in `less than a sec`. | single Database spans over multiple region.
+###  1 Global Aurora
+- cross `region` replicas in `less than a sec`. | single Database spans over multiple **region**.
 - 1 Primary Region (read / write)
-- Up to 5 secondary (read-only) in each region, `replication` lag is less than `1 second`  **
+- Up to 5 secondary (read-only) in each region, `replication` lag is less than `1 second` :point_left:
   - Up to 16 Read Replicas per secondary region
-  - RPO: less than second
-  - RTO: less than a minute
+  - **RPO**: less than second
+  - **RTO**: less than a minute
 - ![img_3.png](../99_img/db/img_3.png)
 
----
-## more: 
+###  2 integration **ML service** 
+- `SageMaker` and `Comprehend`
+- fraud detection, ads targeting, sentiment analysis, product recommendations
+
+### 3 Auto-scaling (storage and compute are separate)
+- `storage` scaling :: EBS volume - `10 GB to 128 TB`
+- `compute` Instance :: type( eg: d.r3.large,etc), --RAM++, --cpu++.
+- `Read replicas`:  (built-in, dont need to create CW + ASG, auto happens bts)
+  - can add, CW metric --> triggers --> auto up/down read replicas
+   
+### 4 performance
+- AWS cloud optimized and claim `3x` Performance improvement (on Postgres)
+- master + `6-15` Read Replica, with **fast replication**
+- uses **cloning**
+  - faster than backup > restore
+  - uses `copy-on-write` - use same volume + for new changes additional storage allocated and data copied to it.
+  
+### 5 Availability (cluster arch)
+- `6 copies` for data access 3 AZ : `cluster` ( with reader and writer endpoint)
+- instant fail-over (<30s) + `self healing` from peer2peer replication.
+- ![img.png](../99_img/db/img.png)
+- ![img_2.png](../99_img/db/img_2.png)
+
+### 6 more
   - Isolation and `security`
   - `Industry compliance`
   - Push-button `scaling`  
@@ -56,7 +52,11 @@
   - Backtrack: `restore` data at any point of time without using backups. (earliest :`5 mim ago`)
 
 ---
-- demo:
+## B pricing
+- 20% extra cost than RDS.
+
+---
+## C. demo
 ```
 - select engine
 - select versions (so many available)
