@@ -65,8 +65,10 @@
 ---
 ## reference
 - https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/19771482#overview
--  If AWS Certified Solutions Architect course then watch only : 
--  as of Dec 2024
+  - slides: https://courses.datacumulus.com/downloads/certified-developer-k92/
+  - practice paper: https://www.udemy.com/course/aws-certified-developer-associate-practice-tests-dva-c01/
+  -  If AWS Certified Solutions Architect course then watch only : 
+  -  as of Dec 2024
 ```
 Section 7 - AWS Fundamentals: ELB + ASG
     Auto Scaling Groups - Instance Refresh

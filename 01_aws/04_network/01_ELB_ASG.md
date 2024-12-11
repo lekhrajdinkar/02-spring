@@ -22,29 +22,60 @@
   - encrypt `in-fly` traffic.
 ---
 ## B. ASG
+- asg span over AZs.
 - client --> ELB(sg-lb-1) --> target-group --> ASG [ec2-i1 (sg-1), ...]
-- span over AZs
-- scaling policies/types:
-  - `Dynamic`: CloudWatch --> metric(CPU,memory,network, `custom`, `RequestCountPerTarget`) --> `alarm` --> ASG --> scale in/out
-    - `target tracking Scaling` : CPU,memory,network utilization
-    - `Simple scaling` : trigger(CW:Alarm) + single action + cooldown-period
-    - `Step scaling` : trigger(CW:Alarm) + different/many actions + cooldown-period
-  - `scheduled` : eg: scale up/down to max/min count on weekends.
-  - `predictive` : 
-    - continuously `forecast` load and schedule scaling ahead of time.
-    - Easy to create. once created ait for Week. ML will be applied on historic data.
-- `Launch template` (Preferred) : EC2 details (AMI, OS, Role, etc), more flexible.
-- `Launch Configurations` are simpler but less flexible.
-- works in conjunction with ELB. if ELB::health-check fails, ASG will terminate corresponding target instances.
-- During `cool-down effect`, ASG does not add new instances.
-- Check AWS Activity history.
-- demo : create one and link with tg. count : `desired, min, max`.
--  `immutable`, meaning you cannot modify them once they have been created.
-- ASG can have spot instance and can terminate them, on health check fail status
-- `Default Termination Policy`
-  - instance that uses the oldest launch configuration first.
-  - next, it considers oldest age.
+
+### Trigger
+  - CloudWatch --> metric(CPU,memory,network, `custom`, `RequestCountPerTarget`) --> `alarm` --> ASG --> scale in/out
+  - asg works in conjunction with `ELB`
+    - if ELB::health-check fails, ASG will terminate corresponding target instances.
+    - not scaling, but replacing unhealthy targets.
+
+### Cooldown Period
+  - pausing further scaling actions for a specified amount of time, after a previous scaling activity completes.
+  - this allows the system to **stabilize** before initiating another scaling operation.
+  - so during this time, does not add new instances.
+
+### Scaling types
+- **Dynamic**: 
+  - `Simple scaling` : create trigger(CW:Alarm) + define **single action** + set cooldown-period 
+    - demo : created one and link with tg. count : `desired, min, max`.
+  - `Step scaling` : create trigger(CW:Alarm) + define **different/many actions** + set cooldown-period
+    - more fine-tuned
+    - eg; if CPU utilization is slightly above the threshold, add one instance; if it is far above, add three instances.
+  - `target tracking Scaling` :
+    - define only **target value**. eg: 50% of CPU,memory,network utilization
+    - no need to create alarm + action
+    
+- **scheduled** : 
+  - eg: scale up/down to max/min count on weekends.
+
+- **predictive** : 
+  - continuously `forecast` load and schedule scaling ahead of time.
+  - Easy to create. once created ait for Week. 
+  - `ML` will be applied on historic data.
+
+### instance settings
+- **Launch template** 
+  - more modern and flexible way 
+  - Editable/mutable: Launch Templates allow versioning
+  - EC2 details (AMI, OS, Role, etc), 
+  - more flexible - mix of purchasing options.
+  - Configure `user data` for automation, during instance initialization.
+  
+- **Launch Configurations**
+  - Immutable - replace entire template if changes needed.
+  - simpler but less flexible -  does not multiple instance types like od, spot, etc
+
+### scale-down: `Default Termination Policy`
+- order:
+  - AZ with the most instances is selected for termination
+  - Instances in the `Standby` status
+  - instance launched with oldest version of launch-configuration/template.
+  - oldest age
+  - the instance(s) nearest the end of their billing hour. (like reserver period is close to end.)
 ---
+
 ## C. ELB
 -  offers a `synchronous` decoupling of applications.
 - `regional`, forwards traffic to multiple ec2 in `mutli-AZ`
