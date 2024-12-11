@@ -36,7 +36,7 @@
   - uses `Sets`(uniqness) and `SortedSets` (uniqueness + ordering)
   - `cluster` > `shard`(node group) > `node`(cache)
   - One primary Node (choose: ec2 intance type)
-  - select upto **5 Read Replicas** to scale reads and have high availability
+  - select upto **5 Read Replicas** to scale reads and have high availability :point_left:
   - enable/disable: `Multi AZ` with Auto-Failover, more cost.
     - Read replica-1 --> az-1
     - Read replica-2 --> az-2, etc

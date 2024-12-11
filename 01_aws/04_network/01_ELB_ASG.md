@@ -226,7 +226,14 @@ aws autoscaling describe-instance-refreshes --auto-scaling-group-name <ASG-name>
 --- 
 ## Z. Screeshots
 ### Client Stcikness with cookies
+- storing session data on ec2-i/tg
+- may create **imbalance**.
 ![img_1.png](../99_img/ec2/im-2.png)
+- **fix imbalance**:
+  - better approach is to use stores session data on `elastiCache` with TTL. [03_ElastiCache.md](../03_database/03_ElastiCache.md)
+    - dont store on DB, ebs etc (bad practice)
+  - and disable ALB sticky session.
+  - now alb will route traffic to any tg. (balanced) :)
 
 ### Cross-Zone Load Balancing
 ![img.png](../99_img/ec2/im-3.png)

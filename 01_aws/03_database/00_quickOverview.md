@@ -35,7 +35,8 @@ Relational databases are designed to handle structured data with predefined sche
     - **MySQL**
     - **PostgreSQL**
     - **MariaDB**
-    - **Oracle Database**
+    - **Oracle**
+      - Does not support : IAM Database Authentication
     - **Microsoft SQL Server**
 - Features:
     - Automated backups and snapshots.

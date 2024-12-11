@@ -30,7 +30,9 @@
 
 ### 2.2 High Availability
 - Supports Multi-AZ (Availability Zone) deployments for fault tolerance.
+  - **az-1**-db-1 <-- `SYNC` replication --> **az-2**-db-1
 - Provides **automatic failover** in case of infrastructure or hardware failures.
+- Multi-AZ keeps the same connection endpoint url. :green_small_circle:
 
 
 ### 2.3 Scalability
@@ -39,6 +41,9 @@
 -`not built-in` scaling, but can manually create CW:alarm + ASG
 - ASG and CW alarm ( metric: conn count, cpu utilization, read traffic, etc)
 - or, manually edit and create read replication.
+- each Read Replicas add **new endpoints URL**, with their own DNS name :red_small_triangle:
+- usecase: analytics application
+
 #### **storage**
 - Enable/Disable from console.
 - good for unpredictable workloads
