@@ -38,12 +38,18 @@
 
 ### Scaling types
 - **Dynamic**: 
-  - `Simple scaling` : create trigger(CW:Alarm) + define **single action** + set cooldown-period 
+  - `Simple scaling` :
+    - create trigger(CW:Alarm) + define **single action** + set cooldown-period 
     - demo : created one and link with tg. count : `desired, min, max`.
-  - `Step scaling` : create trigger(CW:Alarm) + define **different/many actions** + set cooldown-period
-    - more fine-tuned
-    - eg; if CPU utilization is slightly above the threshold, add one instance; if it is far above, add three instances.
-  - `target tracking Scaling` :
+    - single step : cpu 70 : add 3 instance.
+    
+  - `Step scaling` 
+    - create trigger(CW:Alarm) + define **different/many actions** + set cooldown-period
+    - more fine-tuned / more action:
+      - if CPU utilization is slightly above the threshold, add 1 instance; 
+      - if it is far above, add 3 instances.
+      
+  - `target tracking Scaling` 
     - define only **target value**. eg: 50% of CPU,memory,network utilization
     - no need to create alarm + action
     
@@ -55,8 +61,8 @@
   - Easy to create. once created ait for Week. 
   - `ML` will be applied on historic data.
 
-### instance settings
-- **Launch template** 
+### Instance launch settings
+- **Launch template** :point_left:
   - more modern and flexible way 
   - Editable/mutable: Launch Templates allow versioning
   - EC2 details (AMI, OS, Role, etc), 
@@ -76,44 +82,54 @@
   - the instance(s) nearest the end of their billing hour. (like reserver period is close to end.)
 ---
 
-## C. ELB
--  offers a `synchronous` decoupling of applications.
-- `regional`, forwards traffic to multiple ec2 in `mutli-AZ`
-  - with/without `Cross-Zone Load Balancing` : Enabled by default, `free`
-    - if az-1 has more instances running, most traffic must go there. 
-    - works in conjunction with `ASG`.
+## C. ELB (regional)
+- **DNS name** : `XXXX.region.elb.amazonaws.com` 
+- public IP might change :point_left:
+
+### `Proxy server` with additional feature
+- sits b/w client and backend-server. **hides** the backend server's IP address.
+- **forwards** client requests to the appropriate backend server based on configured rules in `balanced distribution way`.
+  - Content-Based Routing (url, queryparam,etc)
+- **gateway** : offers a synchronous decoupling of applications
+- client **Session** Stickiness
+  - Enforce stickiness with cookies
+- integrated with ACM, WAF to add **security**. 
+  - Termination of SSL/TLS at the ELB level
+  - allowing it to decrypt and inspect incoming traffic before forwarding it to the backend instances.
+  - separate `public-traffic` and `private-traffic`
+- also act as **reverse-proxy**
+  - it forwards client requests to backend servers and sends responses from those servers back to the clients.
+  
+### Cross-Zone Load Balancing 
+- `mutli-AZ`(span over AZs), forwards traffic to multiple ec2 in different AZs.
+- if az-1 has more instances running, most traffic must forward to az-1
+- Enabled by default, `free`
     
-- has/contains :
-  - health-check mechanism (/health) at `target-group` level
-    - `Grace Period` : helps to avoid premature health check failures.
-    - `impaired status of EC2` : Os check, n/w status failed on Ec2 - failed
-      -  marks unhealthy, and **terminate** after grace period.
-  - has `DNS` name, `XXXX.region.elb.amazonaws.com` , IP might change.
-  - Security group : sg-lb-1
-    - Also, add rule to SG of ec2 instance to allow traffic sg-lb-1
-  - integration with ACM : [cert-1 for domain-1, cert-2 for domain-2, ... ] : `SNI` helps to load single Cert.
+### more
+- **health-check mechanism** (/health) 
+  - At **tg-level**. forwards traffic to healthy tg.
+  - `Grace Period` : helps to avoid premature health check failures.
+  - `impaired status of EC2` : OS check, n/w status failed on Ec2 - failed
+    -  marks unhealthy, and **terminate** after grace period.
+
+- has **Security group** : 2 level od sg: sg-lb-1 >> sg-ec2-i1 
+- has **integration**  with:
+  - ACM : [cert-1 for domain-1, cert-2 for domain-2, ... ] : `SNI` helps to load single Cert.
+  - route-53, 
+  - ASG
+  - tg - ECS, EKS, EC2
+  - Cloudwatch
+  - WAF
+  - Global-Accelerator
   
-- Since `complex`, already configured and integrated with other AWS services.
-  - route 53, ASG, EC2, Certificate manager 
-  - ECS, EKS
-  - Cloudwatch, WAF, Global-Accelerator
-  
-- purpose:
-  - gateway | forwards traffic to healthy servers.
-  - separate `public-traffic` and `private-traffic`, can create public and private LB.
-  - provide `TLS/SSL-termination`
-    - allowing it to decrypt and inspect incoming traffic before forwarding it to the backend instances.
-    - already integrated with `ACM`.
-  - Enforce `stickiness with cookies`
-  
-- Types:
+- **Types** (3)
   - `Classic` CLB (deprecated)
   - `ALB` : operate at layer 7 : HTTP,HTTPS, websocket
   - network, `NLB` : operate at layer 4: TCP, UDP, TLS : `very low latency, fast`
   - gateway : `GWLB`, 2020 : provides advance security
 
 ---
-### C.1. ELB : ALB - Application LB (layer 7)
+### 1 ELB : ALB - Application LB (`layer 7`)
 - `client` (IP-1) --https--> `ELB` with ACM (add extra header in http : `X-forwarded-for`) --http--> `app-server`
   - notice https vs http
 - client >> ELB >> [ tg, redirect, fixed-http-response ]
@@ -150,7 +166,7 @@
   - if low like 5sec, then ec2-i will terminate fast, and all active clients session might lost,
   - and assign to new instance on subsequent req.
 ---
-### C.2. ELB : NLB - Network LB (layer 4)
+### 2 ELB : NLB - Network LB (`layer 4`)
 - operates at layer 4:  handle TCP, UDP, and TLS traffic
 - expose a fixed IP to the public web + **no sg**
 - TLS traffic: decrypt message using ACM cert.
@@ -171,7 +187,7 @@
 - Cross-Zone Load Balancing : disable by default, paid
 
 ---
-### C.3. ELB : GWLB - gateway LB (layer 3)
+### 3  ELB : GWLB - gateway LB (`layer 3`)
 - (layer 3 of OSI) IP packets.
 - all traffic --> GWLB --> TG (3rd party security instance) --> Application/ destinition
 - 3rd party `security` instance:
