@@ -116,7 +116,7 @@
   - **cache churn**: writing lot n lot of data in cache, which will be never read.
   - **cache-eviction and TTL** resolves it. next
 
-### 2. **cache-eviction**
+### 3. **cache-eviction**
 - set eviction policy by
   - **LRU** (least recently used)
-  - **TTL** (sec, hr, days)
+  - **TTL** (sec, min, hr, days)
