@@ -84,6 +84,7 @@
   - when create/modify RDS instance, configure it use custom  cname `domain-name-1`.
 - IAM Authentication: 
   - can use `IAM roles` to ec2-i, to connect to your database (instead of username/pw)
+  - or, create one time `password/token` after cluster creation
 - `Security Groups`: Control Network access to your RDS / Aurora DB
 - No SSH available, except on RDS Custom
 

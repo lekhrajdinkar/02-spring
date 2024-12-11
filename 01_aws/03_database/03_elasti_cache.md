@@ -1,39 +1,46 @@
-# ElastiCache
-
-- key Summary
-  - AWS Types/offering :  `Redis` vs `MemCache`
-  - sub ms latency.
-  - requires code change
+- https://aws.amazon.com/caching/implementationconsiderations/
 ---
-##  A. Redis 
-- think of RDS, similar.
+# ElastiCache
+- if data changing slowly, then have it. eg:
+  - `key-value` caching
+  - `aggregations-results` caching
+  - ...
+- AWS offering :  
+  - `Redis`,
+  - `MemCache`
+  - `MemoryDB` has Redis like api.
+- **advantages**:
+  - sub ms latency.
+- **negative side**
+  - need application code changes.
+  - Data may be out of date, eventually consistent.
+  - data structured well for caching.
+
+### cache use-cases
+- a. `Database`
+  - prg <--- DB (state)
+  - prg (`code` changes to use cache ) <--- `Cache` <--- DB(Data) : for stateless Application
+    - `low latency`
+    - `high performance`
+    - `reduce load` off of databases for read intensive workloads
+    - ![img.png](../99_img/redis/img.png)
+    - lazy loading(stale read) and write-through(sync cache with DB)
+- b. Maintain user Session
+  - ![img_1.png](../99_img/redis/img_1.png)
+
+---
+##  A. `Redis` 
+- think of RDS, similar :point_left:
 - internal: 
   - uses `Sets`(uniqness) and `SortedSets` (uniqueness + ordering)
   - `cluster` > `shard`(node group) > `node`(cache)
   - One primary Node (choose: ec2 intance type)
-  - select upto 5 Read `Replicas` to scale reads and have high availability
+  - select upto **5 Read Replicas** to scale reads and have high availability
   - enable/disable: `Multi AZ` with Auto-Failover, more cost.
     - Read replica-1 --> az-1
     - Read replica-2 --> az-2, etc
 
-- Backup/restore : y/n
-- Security:
-  - apply `IAM roles/policies`
-  - create `redis password/token` after cluster creation
-  - Add `sg` : which app will have acces from n/w perspective.
-  - `encryption` at rest + fly(SSL)
-
----
-## B. MemCache
-- No high availability (replication)
-- `Non persistent` 
-- No backup/restore
-- Security: `SASL` (more advance)
-- Multi-threaded architecture ?
-- Multi-node for partitioning of data (sharding) ?
-
---- 
-## C. Redis Demo:
+### Redis::Demo
 ```
 - Create REDIS (.rdb file)
 - Choose : Design youe own cache
@@ -51,17 +58,64 @@
     - primary end point
     - reader end point
     - backup/restore
-    
 ```
---- 
-## D. cache use-cases
-- a. `Database`
-  - prg <--- DB (state)
-  - prg (`code` changes to use cache ) <--- `Cache` <--- DB(Data) : for stateless Application
-    - `low latency`
-    - `high performance`
-    - `reduce load` off of databases for read intensive workloads
-    - ![img.png](../99_img/redis/img.png)
-    - lazy loading(stale read) and write-through(sync cache with DB)
-- b. Maintain user Session
-  - ![img_1.png](../99_img/redis/img_1.png)
+---
+## B. `MemCache`
+- No high availability (replication)
+- `Non persistent` 
+- No backup/restore
+- Security: `SASL` (more advance)
+- Multi-threaded architecture ?
+- Multi-node for partitioning of data (sharding) ?
+
+---
+## c. `Memory DB for redis` : intro
+![img_4.png](../99_img/dva/00/img_4.png)
+- Ultra-fast performance with over `160 millions requests/second` :point_left:
+- **Durable in-memory data storage** 
+  - with Multi-AZ, hundreds of nodes
+  - Scale seamlessly from `10s GBs` >>> `100s TBs` of storage
+- **Use cases**: 
+  - web and mobile apps, 
+  - online gaming, 
+  - media streaming,
+  - …
+
+---
+## E. strategies ( **caching design pattern** )
+### 1. **Lazy Loading** or Population / Cache-Aside
+![img.png](../99_img/dva/00/imgg.png)
+- flow for understanding:
+  - **hit-1**: read from cache : found ok
+  - not found, **hit-2**: read from db
+  - **hit-3**: set cache
+  - next:
+    - `case:1`  Data update on some other api
+      - cache will become stale / inconsistent.
+      - this is drawback. 
+      - **write-through strategy** solves it. next
+    - `case:2 ` new data-1 wrote on DB, by some other api
+      - read data-1 from cache will miss
+      - since cache was updated after write.
+      - **write-through strategy** solves it. next
+      
+- sample psuedo code for understanding:
+  - ![img_1.png](../99_img/dva/00/img_1.png)
+
+---
+
+### 2. **write-through**
+![img_2.png](../99_img/dva/00/img_2.png)
+- each write on DB, requires 2 hit:
+  - hit-1: write on DB
+  - hit-2: write on cache
+  - pseudo code:
+  - ![img_3.png](../99_img/dva/00/img_3.png)
+- drawback:
+  - **cache churn**: writing lot n lot of data in cache, which will be never read.
+  - **cache-eviction and TTL** resolves it. next
+
+### 2. **cache-eviction**
+- set eviction policy by
+  - **LRU** (least recently used)
+  - **TTL** (sec, hr, days)
