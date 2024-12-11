@@ -104,7 +104,8 @@
 - `mutli-AZ`(span over AZs), forwards traffic to multiple ec2 in different AZs.
 - if az-1 has more instances running, most traffic must forward to az-1
 - Enabled by default, `free`
-    
+
+
 ### more
 - **health-check mechanism** (/health) 
   - At **tg-level**. forwards traffic to healthy tg.
@@ -120,7 +121,7 @@
   - tg - ECS, EKS, EC2
   - Cloudwatch
   - WAF
-  - Global-Accelerator
+  - **Global-Accelerator**
   
 - **Types** (3)
   - `Classic` CLB (deprecated)
@@ -130,7 +131,7 @@
 
 ---
 ### 1 ELB : ALB - Application LB (`layer 7`)
-- `client` (IP-1) --https--> `ELB` with ACM (add extra header in http : `X-forwarded-for`) --http--> `app-server`
+- `client` (IP-1) --https--> `ELB` with ACM (add extra header in http : `X-forwarded-for`) --http--> `backend-app-server`
   - notice https vs http
 - client >> ELB >> [ tg, redirect, fixed-http-response ]
 - tg / `target groups`:
@@ -153,15 +154,18 @@
         - add Listener & Routing :  
           - Listener-1::No-contion : outside traffic on http:80  --> forward to --> `tg-1` 
           - Listener-1::consition-1 (priority-100) : path, header, queryparam, etc. [TRY] --> tg-x
-          - Listener-2::No-Condition (priority-200)  on https:443 --> forward to --> tg-2 + make sure ACM has Cert for tg-domian.
+          - Listener-2::No-Condition (priority-200)  on https:443 --> forward to --> tg-2 + make sure ACM has Cert for tg-dns name.
           - ...
           - ...  
           - Note:rule with higestest priorty win  
         - hit dns-1
         - terminate ec2-i1 and hit elb-dns-1 again.
       ```
-- `Connection Draining` / `registration delay`
-  - default 5min : allow 5 min to drains
+- **registration delay** (old name : Connection Draining)
+  - feature of load balancers that ensures `active request`s are completed before **instances** are deregistered / terminated
+  - prevents disrupting in-flight requests and ensures a smooth user experience
+  - default 300sec / 5 min : allow 5 min to drains
+  - max 3600sec / 1 hr
   - make 0 to disable
   - if low like 5sec, then ec2-i will terminate fast, and all active clients session might lost,
   - and assign to new instance on subsequent req.
@@ -169,6 +173,8 @@
 ### 2 ELB : NLB - Network LB (`layer 4`)
 - operates at layer 4:  handle TCP, UDP, and TLS traffic
 - expose a fixed IP to the public web + **no sg**
+  - so add sg to EC2-i or tg
+  - or add network access control lists (NACLs)
 - TLS traffic: decrypt message using ACM cert.
 - Similar to ELB but fast, handles `millionsOfReq/Second`. ultra-low latencies.
   - It `automatically scales` to handle the vast amounts of incoming traffic
@@ -183,8 +189,7 @@
   - EC2 instances
   - IP Addresses
 - `health-check` support multiple-protocol : `http,https,TCP`
-- demo : similar as above
-- Cross-Zone Load Balancing : disable by default, paid
+- **Cross-Zone Load Balancing** : disable by default, paid :point_left:
 
 ---
 ### 3  ELB : GWLB - gateway LB (`layer 3`)
@@ -194,13 +199,13 @@
   - `Deep packet inspection`
   - `payload manipulate`.
 - uses protocol-GENEVE, port-6081 ?
-- Cross-Zone Load Balancing : disable by default, pay
+- **Cross-Zone Load Balancing** : disable by default, paid :point_left:
+- ![img.png](../99_img/ec2/im-1.png)
 
 --- 
 ## Z. Screeshots
-> credit: https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/
-
-![img.png](../99_img/ec2/im-1.png)
+### Client Stcikness with cookies
 ![img_1.png](../99_img/ec2/im-2.png)
-![img.png](../99_img/ec2/im-3.png)
 
+### Cross-Zone Load Balancing
+![img.png](../99_img/ec2/im-3.png)
