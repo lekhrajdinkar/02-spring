@@ -29,7 +29,7 @@
   - retry:3 after 4 sec
   - retry:4 after 8 sec
 ---
-## 6 AWS CLI/SDK(java) Credentials Provider Chain :I:
+## 6 AWS CLI/SDK(java) Credentials Provider Chain :o:
 - The CLI will look for credentials in this order:
 1. **CLI option** – --profile, or
 1. SDK :: **Java system properties** – `aws.accessKeyId` and `aws.secretKey`
