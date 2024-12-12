@@ -15,7 +15,7 @@
 - Analogy with k8s.
   - `eks cluster` - **ecs cluster**
   - `worker-node` -  fargate or **ec2 nodes**.
-  - `pod`(c1) - **task**(c1) or service[task]
+  - `pod`(c1) - **task**(c1) or **service**[task]
   - `pod/rs/deployment` manifest yaml - **task definition**
   -` control panel/master node`  - ?
   - `service` - **ALB** --> tg --> asg [task-1]
@@ -24,7 +24,7 @@
   - `task schedular` - ?
 
 ---
-## B. ECS  (elastic container service)
+## C. ECS  (elastic container service)
 - For fargate launch, don't think underlying ec2-i/s
 - ECS-cluster (with launch type = ec2)
   - EC2-i1 (`docker-agent`) 
@@ -60,7 +60,7 @@
 - Step-4 : **expose** task/service 
   - create **ALB-1**
     - health check for tg
-    - listener(http:80)  --> tg-1 --> asg --> [ ec2-i1 :: task-1(c1), task-2(c2) ]
+    - listener(http:80)  --> tg-1 --> asg --> [  task-1(c1), task-2(c2) ]
     - `Auto Scaling` : scale up/down task 
       - For ec2 launch
         - option-1 (`ASG`) : CW --> metric(CPU,etc) --> `ASG`(up/down Ec2-i and task/container inside)
@@ -76,7 +76,7 @@
   - in prod, service Auto Scaling (ASG, ECS-Cluster capcity provider) will do same.
 
 ---      
-## C. screenshot
+## D. screenshot
 ### 1. launch type:
 ![img_1.png](../99_img/compute/ecs/img_1.png) 
 ![img_2.png](../99_img/compute/ecs/img_2.png)
@@ -90,13 +90,15 @@
 ![img_6.png](../99_img/compute/ecs/img_6.png)
 
 --- 
-## D. Use case / arch :
+## E. trigger ecs task
 ### 1 with eventBridge ( trigger )
 ![img_7.png](../99_img/compute/ecs/img_7.png)
 ### 2 with eventBridge ( scheduled )
 ![img_8.png](../99_img/compute/ecs/img_8.png)
 ### 3 with SQS + autoScale
 ![img_9.png](../99_img/compute/ecs/img_9.png)
-### 4 with SNS
+
+---
+## F.alerts
 ![img_10.png](../99_img/compute/ecs/img_10.png)
 
