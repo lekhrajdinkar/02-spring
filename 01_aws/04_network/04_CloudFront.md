@@ -12,7 +12,8 @@
 - Also can **invalidate** cache at any time
 - run on **edgeLoc** 
 - **side benefit**: 
-  - protect from `DDoS` :point_left:
+  - integrated with AWS-shield (firewall)
+    - protect from `DDoS` :point_left:
 ---
 ## A. Distribution
 ![img_1.png](../99_img/CF/img_1.png)
@@ -96,11 +97,11 @@
   - ...
   - so on
 ```
----
+
 ### 2. ALB as origin
-``` pending...```
 ![img.png](../99_img/CF/cf-2/img.png)
 
+---
 ## C. Pricing
 ![img_1.png](../99_img/CF/cf-2/img_1.png)
 - **price class**
@@ -109,10 +110,6 @@
   - `ALL`
 - ![img_2.png](../99_img/CF/cf-2/img_2.png)
 
----
-
-- 
-- more : 
 ---  
 
 - Choosing Between ElastiCache and CloudFront:
