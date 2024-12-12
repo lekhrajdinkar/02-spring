@@ -40,19 +40,27 @@
   - launchType : ec2 (worker nodes)
   - has **ECS-Cluster capacity provider** :point_left:
 
-#### 2 create **task-definition-1** : json metadata
+#### 2 create **task-definition-1** : `json` metadata
   - **resources** 
     - os
     - cpu, ram
-  - **task-role** : attach to ecs-agent  (permission - ecr, cw, ecs)
-  - **task-exec-role** : attach to task.
+  - **task-role(1)** : attach to ecs-agent  (permission - ecr, cw, ecs)
+  - **task-exec-role(each definition)** : attach to task.
   - **container/s**  : `max 10` :point_left:
-    - imageURI, 
-    - port mapping
+    - `image uri `
+    - `port mapping`
       - container-port
-      - host-port : if 0, then get dynamic port.  :point_left:
-    - env var , 
+      - host-port: 
+        - for ec2 launch:: if 0, then get dynamic port and alb finds it.  :point_left:
+        - for fargate launch :: not needed.
+    - `env var`
+      - hardcode
+      - read from SSM store / secret manager
+      - bulk fetch env file from s3 :o:
     - `storage` : EFS or default(21GB EBS)
+      - ec2-i storage : **bind mount** to c1,c2,etc
+      - hence common storage.
+      - for fargate use ephemeral storage. ? :red_small_triangle:
 
 #### 3 **run task**:
   - task (for job) **directly**,  
@@ -69,7 +77,8 @@
   - health check for tg
   - listener(http:80)  --> tg-1 --> [  task-1(c1), task-2(c2) ]
 - host-port : if 0, then get dynamic port and alb will find those  :point_left:
-- ![img.png](img.png)
+- ![img.png](../99_img/dva/compute/ecs/img.png)
+- ![img_1.png](../99_img/dva/compute/ecs/img_1.png)
   
 #### 5 Auto Scaling 
 - create **ASG-1** to scale up/down task 
