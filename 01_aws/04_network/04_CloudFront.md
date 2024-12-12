@@ -1,10 +1,10 @@
 # AWS cloudFront (global)
-## pictorial description
+### Pictorial description
 - ![img.png](../99_img/CF/img.png)
 - ![img_2.png](../99_img/CF/img_2.png)
 - ![img_3.png](../99_img/CF/cf-2/img_3.png)
 
-## key point
+### key point
 - CDN **content delivery network**, cache data all around the world/countries
   - `allow-list` countries
   - `black-list` countries.
