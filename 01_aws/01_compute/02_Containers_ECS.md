@@ -36,19 +36,25 @@
   - ...
   
 ### ECS Demo:(launchtype = ec2)
-- Step-1 : create **cluster-1** 
+#### 1 create **cluster-1** 
   - launchType : ec2 (worker nodes)
   - has **ECS-Cluster capacity provider** :point_left:
-- Step-2 :create **task-definition-1** :
-  - configure - os, cpu, ram, class
+
+#### 2 create **task-definition-1** : json metadata
+  - **resources** 
+    - os
+    - cpu, ram
   - **task-role** : attach to ecs-agent  (permission - ecr, cw, ecs)
   - **task-exec-role** : attach to task.
-  - **container**  
+  - **container/s**  : `max 10` :point_left:
     - imageURI, 
-    - port mapping,  
+    - port mapping
+      - container-port
+      - host-port : if 0, then get dynamic port.  :point_left:
     - env var , 
     - `storage` : EFS or default(21GB EBS)
-- Step-3 : **run task**:
+
+#### 3 **run task**:
   - task (for job) **directly**,  
   - or wrap task with **service** (for long-running web-app) : srv1:[t1,t2,t3]
     - service name - `service-1`
@@ -57,23 +63,33 @@
     - Define **networking**
       - choose `subnet/VPC`
       - create `sg` : allow traffic http,etc --> this will attach to ec2-i or `hidden-ec2-i/in-fargate`
-- Step-4 : **expose** task/service 
-  - create **ALB-1**
-    - health check for tg
-    - listener(http:80)  --> tg-1 --> asg --> [  task-1(c1), task-2(c2) ]
-    - `Auto Scaling` : scale up/down task 
-      - For ec2 launch
-        - option-1 (`ASG`) : CW --> metric(CPU,etc) --> `ASG`(up/down Ec2-i and task/container inside)
-        - option-2 (`ECS-Cluster capcity provider`): preferred to use, smart, better.
-      - For fargate: easy
-        - ASG (scale up/down containers only)
-        - `ECS-Cluster capcity provider` : intelligent to do everything.
-- step-5 : more
-  - **task placement**  
-- READY :green_circle:
-  - check cluster > task > container, logs/event,
-  - update service - manually update Desire capacity : 5
-  - in prod, service Auto Scaling (ASG, ECS-Cluster capcity provider) will do same.
+
+#### 4 **expose** task/service 
+- create **ALB-1**
+  - health check for tg
+  - listener(http:80)  --> tg-1 --> [  task-1(c1), task-2(c2) ]
+- host-port : if 0, then get dynamic port and alb will find those  :point_left:
+- ![img.png](img.png)
+  
+#### 5 Auto Scaling 
+- create **ASG-1** to scale up/down task 
+- For ec2 launch
+  - option-1 (`ASG-1`) : CW --> metric(CPU,etc) --> `ASG`(task)
+  - option-2 (`ECS-Cluster capcity provider`): preferred to use, smart, better.
+- For fargate: easy
+  - ECS-Cluster capacity provider : intelligent to do everything.
+
+#### 6 task placement
+
+####  READY :green_circle:
+- check cluster > task > container, logs/event,
+- update service - manually update Desire capacity : 5
+- in prod, service Auto Scaling (ASG, ECS-Cluster capcity provider) will do same.
+
+#### 7 update task
+- `rolling update`
+  - min healthy: 100%
+  - max : 200%
 
 ---      
 ## D. screenshot

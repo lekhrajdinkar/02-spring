@@ -96,7 +96,7 @@ Section 10 - VPC Fundamentals                               :: DONE
     VPC Cheat Sheet & Closing Comments
     Three Tier Architecture
     
-Section 11,13,14 - "S3"  :: DONE (SAA)
+Section 11,13,14 - "S3"                                 :: DONE (SAA)
 
 Section 12 - AWS CLI, SDK, IAM Roles & Policies         :: DONE
     AWS EC2 Instance Metadata
@@ -108,7 +108,7 @@ Section 12 - AWS CLI, SDK, IAM Roles & Policies         :: DONE
     AWS Credentials Provider & Chain
     AWS Signature v4 Signing
 
-Section 15 - CloudFront
+Section 15 - CloudFront                                  :: DONE
     CloudFront - Caching & Caching Policies
     CloudFront - Cache Behaviors
     CloudFront - Caching & Caching Invalidations - Hands On
