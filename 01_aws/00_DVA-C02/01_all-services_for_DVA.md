@@ -95,8 +95,10 @@ Section 10 - VPC Fundamentals                               :: DONE
     VPC Peering, Endpoints, VPN, DX
     VPC Cheat Sheet & Closing Comments
     Three Tier Architecture
+    
+Section 11,13,14 - "S3"  :: DONE (SAA)
 
-Section 12 - AWS CLI, SDK, IAM Roles & Policies
+Section 12 - AWS CLI, SDK, IAM Roles & Policies         :: DONE
     AWS EC2 Instance Metadata
     AWS EC2 Instance Metadata - Hands On
     AWS CLI Profiles

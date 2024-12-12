@@ -39,3 +39,5 @@
 5. Container credentials – for **ECS tasks**
 6. Instance profile credentials – for **EC2 Instance Profiles**
 ---
+## 7 signV4 
+![img.png](../99_img/dva/img.png)

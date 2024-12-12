@@ -1,41 +1,33 @@
-# AWS cloudFront / CDN (s:332)
-- `global `service.
-- content delivery network, cache data all around the world/`countries`
-  - can create `allow-list`
-  - `black-list` of countries.
-- `static`-content cached for TTL (eg : a day)
-- also can `invalidate` cache at any time
-- benefit: - protect from `DDoS`, cached >low `latency`,
+# AWS cloudFront (global)
+- CDN **content delivery network**, cache data all around the world/countries
+  - `allow-list` countries
+  - `black-list` countries.
+- static-content cached for **TTL** (eg : a day), thus low latency.
+- Also can **invalidate** cache at any time
+- run on **edgeLoc** 
+- **side benefit**: 
+  - protect from `DDoS` :point_left:
 
-## Key term
-- > `edgeLoc` has cloudFront distributions running >  has Local-cache ( for static Content)
-- `distribution` : cache created across the globe.
-- `origin` of CF : `s3 bucket` or  `s3(static Web), Any http backend, ALB`
-  - physically CF connected to origin with `privatelink`
-  - cf also needs access-policy to access origin
-- `origin access` :
-  - make origin `publicly` accessible.
-    - get list of Public IPs of all 400+ edge location
-    - add app level security to allow access only to above IPs.
-  - `OAC` : `Origin access control` : this allow CF to connect/access origin.
-- `origin failover feature` to help support your `data resiliency` needs.
+## A. Distribution
+### 1. origin
+- source:
+  - s3 bucket` or  `s3(static Web), 
+  - Any http backend
+  - ALB
+- distribution(edge-location) ---> **`privatelink` physical connection** ---> origin(eg:alb on us-east-1)
+    - cf also needs access-policy to access origin
+### 2. origin access
+- make origin `publicly` accessible.
+  - get list of Public IPs of all 400+ edge location
+  - add app level security to allow access only to above IPs.
+  - update sg to allow traffic.
+- **OAC - Origin access control** 
+  - policy allow CF to connect/access origin.
+### 3. origin failover 
+- to help support your `data resiliency` needs.
 
----
-## CloudFront Function
-- Run some code at CloudFrount distributon type : 
-  - `lambda@Edge` : 
-    - `nodeJs or Py`
-    - Note: regional, written in region-1, CF replicate to all edge loc.
-    - thousand/s, since lambda is heavy. 
-    - set `exec time : 5-10 sec`. forget about 900 sec.
-  - `CloudFront-Function` : 
-    - `very light weight` fun written in` js.`
-    - 10 KB pkg
-    - millionReq/Sec
-    - Max 2Mb ram
-    - 1/6 time cheap than lambda.
-  
-- `purpose`: Customise CDN content :
+### 4. CloudFront Function
+- **purpose**:
   - Website Security and Privacy
   - Dynamic Web Application at the Edge
   - Search Engine Optimization (SEO)
@@ -46,10 +38,29 @@
   - User Authentication and Authorization
   - User Prioritization
   - User Tracking and Analytics
+- **Type**:
+  - lambda@Edge
+  - CloudFront-Function
+  
+#### a. lambda@Edge 
+- nodeJs or Py
+- thousand/s, since lambda is **heavy**.
+- exec time : 5-10 sec
+- Note: regional, written in region-1, CF replicate to all edge loc.
+
+#### b. CloudFront-Function
+- js
+- very **light** weight 
+  - 10 KB pkg
+  - Max 2Mb ram
+- millionReq/Sec
+- **pricing**: 1/6 time cheaper than lambda.
+  
+---
 - ![img.png](../99_img/CF/cf-3/img.png)
 - ![img_1.png](../99_img/CF/cf-3/img_1.png)
 ---
-## Demo  
+## B. Demo  
 ### Demo-1 (s3 as origin) :
 ```
   - create CF > distribution-1
@@ -78,11 +89,11 @@
   - so on
 ```
 ---
-### Demo-1 (ALB as origin) :
+### 1 Demo-1 (ALB as origin) :
 ``` pending...```
 ![img.png](../99_img/CF/cf-2/img.png)
 
-## Pricing
+## C. Pricing
 ![img_1.png](../99_img/CF/cf-2/img_1.png)
 - price class
   - `100`
@@ -91,7 +102,7 @@
 - ![img_2.png](../99_img/CF/cf-2/img_2.png)
 
 ---
-## ScreenShot
+## D ScreenShot
 - ![img.png](../99_img/CF/img.png)
 - ![img_1.png](../99_img/CF/img_1.png)
 - ![img_2.png](../99_img/CF/img_2.png)
