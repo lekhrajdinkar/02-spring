@@ -1,8 +1,4 @@
-- S4 : IAM
-- s5 : EC2
-- s6 : EC2:storage - EBS + EFS
-- s7: [01_ELB_ASG.md](..%2F04_network%2F01_ELB_ASG.md)
-- s8 : RDS + aurora + elasticCache
+- https://aws.amazon.com/blogs/
 ---
 ## AWS Services  for DVA
 
@@ -75,18 +71,24 @@
   - practice paper: https://www.udemy.com/course/aws-certified-developer-associate-practice-tests-dva-c01/
   -  If AWS Certified Solutions Architect course then watch only : 
   -  as of Dec 2024
+
+- S4 : IAM
+- s5 : EC2
+- s6 : EC2:storage - EBS + EFS
+- s7: [01_ELB_ASG.md](..%2F04_network%2F01_ELB_ASG.md)
+
 ```
-Section 7 - AWS Fundamentals: ELB + ASG
+Section 7 - AWS Fundamentals: ELB + ASG                     :: DONE
     Auto Scaling Groups - Instance Refresh
 
-Section 8 - AWS Fundamentals: RDS + Aurora + ElastiCache
+Section 8 - AWS Fundamentals: RDS + Aurora + ElastiCache    :: DONE
     ElastiCache Strategies
     Amazon MemoryDB for Redis
 
-Section 9 - Route 53
+Section 9 - Route 53                                        :: DONE
     Routing Policy - Traffic Flow & Geoproximity Hands On
 
-Section 10 - VPC Fundamentals
+Section 10 - VPC Fundamentals                               :: DONE
     VPC Fundamentals - Section Introduction
     VPC, Subnets, IGW and NAT
     NACL, SG, VPC Flow Logs
