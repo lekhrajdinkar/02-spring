@@ -1,4 +1,8 @@
 # AWS cloudFront (global)
+- ![img.png](../99_img/CF/img.png)
+- ![img_2.png](../99_img/CF/img_2.png)
+- ![img_3.png](../99_img/CF/cf-2/img_3.png)
+---
 - CDN **content delivery network**, cache data all around the world/countries
   - `allow-list` countries
   - `black-list` countries.
@@ -7,8 +11,9 @@
 - run on **edgeLoc** 
 - **side benefit**: 
   - protect from `DDoS` :point_left:
-
+---
 ## A. Distribution
+![img_1.png](../99_img/CF/img_1.png)
 ### 1. origin
 - source:
   - s3 bucket` or  `s3(static Web), 
@@ -23,6 +28,7 @@
   - update sg to allow traffic.
 - **OAC - Origin access control** 
   - policy allow CF to connect/access origin.
+  - ![img_3.png](../99_img/CF/img_3.png)
 ### 3. origin failover 
 - to help support your `data resiliency` needs.
 
@@ -41,27 +47,27 @@
 - **Type**:
   - lambda@Edge
   - CloudFront-Function
+  - ![img_2.png](../99_img/CF/cf-3/img_2.png)  
   
 #### a. lambda@Edge 
-- nodeJs or Py
-- thousand/s, since lambda is **heavy**.
-- exec time : 5-10 sec
+- `nodeJs` or `Py`
+-  lambda is **heavy**
+- thousands/sec
+- execution time : 5-10 sec
 - Note: regional, written in region-1, CF replicate to all edge loc.
 
 #### b. CloudFront-Function
-- js
+- `js`
 - very **light** weight 
   - 10 KB pkg
   - Max 2Mb ram
-- millionReq/Sec
+- millionReq/sec
 - **pricing**: 1/6 time cheaper than lambda.
-  
----
-- ![img.png](../99_img/CF/cf-3/img.png)
+
 - ![img_1.png](../99_img/CF/cf-3/img_1.png)
 ---
 ## B. Demo  
-### Demo-1 (s3 as origin) :
+### 1. s3 as origin
 ```
   - create CF > distribution-1
     - choose default object (optional) : index.html
@@ -89,27 +95,22 @@
   - so on
 ```
 ---
-### 1 Demo-1 (ALB as origin) :
+### 2. ALB as origin
 ``` pending...```
 ![img.png](../99_img/CF/cf-2/img.png)
 
 ## C. Pricing
 ![img_1.png](../99_img/CF/cf-2/img_1.png)
-- price class
-  - `100`
-  - `200`
+- **price class**
+  - `100` - usa, europe, etc
+  - `200` - africa, asia, etc
   - `ALL`
 - ![img_2.png](../99_img/CF/cf-2/img_2.png)
 
 ---
-## D ScreenShot
-- ![img.png](../99_img/CF/img.png)
-- ![img_1.png](../99_img/CF/img_1.png)
-- ![img_2.png](../99_img/CF/img_2.png)
-- OAC-policy: add/merge to/with the bucket policy
-  - ![img_3.png](../99_img/CF/img_3.png)
-- ![img_3.png](../99_img/CF/cf-2/img_3.png)
-- more : ![img_2.png](../99_img/CF/cf-3/img_2.png)
+
+- 
+- more : 
 ---  
 
 - Choosing Between ElastiCache and CloudFront:
