@@ -53,9 +53,9 @@
   - cost - hourly `per shard`
   
 - **on-demand**
-  - scale automatically based on last 30 throughput peek history
+  - auto-scale shards based on last 30 throughput peek history
   - cost 
-    - hourly `per stream`, 
+    - hourly `per stream` :point_left: 
     - data in/out GB
   - Also, better `4000 record/sec/shard + 4 MB/sec/shard`
 
@@ -77,19 +77,15 @@
 
 ---
 ## B. Kinesis Data Firehose `KDF`
-- `Near Real-time Delivery`
-- fully managed, no administration, auto scale, serverless
-- for `delivering` real-time streaming data to `destinations` :
-  - Amazon - `S3`, `Redshift`, `Elasticsearch`
-  - 3rd party - Splunk, datadog
-  - custom - Https-endpoint
-- Supports ETL : can transform record with lambda, support compression
-- can set buffer `size 0-900Sec`
-- if delivery failed, store failed record in s3 bucket.
-- fact : `Kinesis Agent` cannot write to KDF, for which source is already set as KDS
-  - source-1: KDS --> KDF
-  - source-2: kinesis-agent --> **NOT** --> KDF
-- ![img_3.png](../99_img/decouple/img_3.png)
+- **Near Real-time Delivery**
+  - set buffer `size 0-900Sec`
+- **serverless**
+  - fully managed, 
+  - no administration, 
+  - auto scale, 
+- **destinations**:
+  - ![img_3.png](../99_img/decouple/img_3.png)
+
 ---
 ## C. Kinesis Data Analytic  `KDA`
 
