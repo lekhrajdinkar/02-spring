@@ -42,16 +42,29 @@
 - **Delivery delay**
 
 ### 2. FIFO
+- DLQ must also be a FIFO queue
 - name : has suffix `.fifo`
-- keep single consumer
-  - if having multiple consumer, then use group messages: `msgId + groupingId`
-  - group-1 ( msg1, msg-2, ...) --> consumer-1
-  - group-2 ( msg1, msg-2, ...) --> consumer-2
-- **ordered** + **no duplicate consume**. :point_left:
-- but, Limited **throughput**: 
+- **no duplicate**. :book:
+  - `content-based-de-duplication` : enable it
+  -` de-duplication interval` : say 5 min
+    - duplicate messages are for 5 min, will get refused.
+  - how to check duplicate:
+    - `de-duplication_ID` along with message
+    - `SHA-246 hash of message body`
+    - ![img.png](../99_img/dva/sqs/v1/img.png)
+- Limited **throughput**: 
   - `300 msg/s` without batch
   - `3000 msg/s` with batch
-- DLQ must also be a FIFO queue
+
+- **ordered**
+  - within group.
+  - not across groups
+  
+- **multiple consumer**
+  - use grouped messages: **MessageGroupingId** (like in kafka)
+  - group-1 ( msg1, msg-2, ...) --> consumer-1 (ordered in group-1)
+  - group-2 ( msg1, msg-2, ...) --> consumer-2 (ordered in group-1)
+  - ![img_1.png](../99_img/dva/sqs/v1/img_1.png)
 ---
 ## B. DLQ
 - ![img_3.png](../99_img/dva/sqs/img_3.png)
