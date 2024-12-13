@@ -6,21 +6,22 @@
 - max msg size : **256KB**
   - use extended-SQS, backed by s3.
   
-## A De-couple Models in AWS
+## A. De-couple Models in AWS
   - `queue` :  **SQS** 
     - coupled app (sync) 
     - de-couple app (Async)
   - `pub/sub` : SNS
   - `real time data-stream` : kinese Firehose
 ---
-## B Types
-### 1 Standard 
+## B. Types
+### 1. Standard 
 - multiple p1,p2,p3, ...  ---> [queue] ---> multiple consumers in parallel (C1,C2,C3, lambda-Consumer, ... )
 - **at least once delivery**  
   - multiple consumer can receive same message.
   - consumer handle duplicate message, has to delete message.
   - idempotent consumer, if needed.
 - **best effect ordering**
+  - order not guaranteed.
 - **retention**: 
   - max     : `14 days` 
   - default :  `4 days`
@@ -33,7 +34,7 @@
   - pattern : poll-1 API -- wait 10 sec -- poll-1 API -- wait 10 sec ...
   - long poll preferred : more gap in poll api calls, but increase **latency**
   
-### 2 FIFO
+### 2. FIFO
 - name : has suffix `.fifo`
 - keep single consumer
   - if having multiple consumer, then use group messages: `msgId + groupingId`
@@ -45,28 +46,30 @@
   - `3000 msg/s` with batch
 
 ---
-## C Security 
+## C. Security 
 ### general
 - attach iam:sqs-policy.
+  - cross queue access
+  - allow other service, etc
 - **In-flight encryption** 
-  - `HTTPS` API (SSL/TLS)
+  - `HTTPS` (with TLS)
 - **At-rest encryption** 
   - KMS keys (`sse-sqs`, `sse-kms`, `sse-c`)
   - Client-side encryption :  if the client wants to perform encryption/decryption itself.
-- `SQS bucket policy` : eg: cross queue access, allow other service, etc
+- `SQS bucket policy` : eg: 
 
 ---
-## D price (cheap)
+## D. price (cheap)
 - **number of requests** 
-  - Standard Queue : $0.40 / million requests.
-  - FIFO Queue : $0.50 /  million requests.
+  - Standard Queue : `$0.40 / million requests`.
+  - FIFO Queue : `$0.50 /  million requests`.
 - **data transfer**
   - inbound data is free
   - outbound traffic paid. ?
 - Long Polling: No extra cost for long polling.
 
 ---
-## E handson
+## E. hands on
 ```
 - create queue : queue-1
 - Type : standard ** + FIFO
@@ -89,7 +92,7 @@
 - ![img_2.png](../99_img/decouple/sqs/img_2.png)
 
 ---
-## F use-case / arch eg
+## F. use-case / arch eg
 1. `SQS:queue:logs` >> CW >> metric >> alarm --> ASG [ ... multiple consumers ec2-i... ]
   - ![img.png](../99_img/decouple/sqs/img.png)
 2. ASG [ FE-1, FE-2, ... ] ---> stage all request in Queue --- > ASG [ BE-1, BE-2, ...]
