@@ -44,7 +44,7 @@
 ### 2. FIFO
 - DLQ must also be a FIFO queue
 - name : has suffix `.fifo`
-- **no duplicate**. :book:
+- **no duplicate**. :books:
   - `content-based-de-duplication` : enable it
   -` de-duplication interval` : say 5 min
     - duplicate messages are for 5 min, will get refused.
@@ -60,7 +60,7 @@
   - within group.
   - not across groups
   
-- **multiple consumer**
+- **multiple consumer** :books:
   - use grouped messages: **MessageGroupingId** (like in kafka)
   - group-1 ( msg1, msg-2, ...) --> consumer-1 (ordered in group-1)
   - group-2 ( msg1, msg-2, ...) --> consumer-2 (ordered in group-1)
@@ -88,7 +88,6 @@
 - **At-rest encryption** 
   - KMS keys (`sse-sqs`, `sse-kms`, `sse-c`)
   - Client-side encryption :  if the client wants to perform encryption/decryption itself.
-- `SQS bucket policy` : eg: 
 
 ---
 ## D. price (cheap)
