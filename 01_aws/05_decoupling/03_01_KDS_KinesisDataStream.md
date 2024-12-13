@@ -14,9 +14,10 @@
   - configuration needed to stream data.
   
 ## 1. key feature
-- ingest data at scale 
-- real-time processing
-
+- **RealTime** (~200 ms latency)
+  - **ingest data at scale** 
+  - **processing**
+- supports **replay**
 --- 
 ## 2. Capacity planning (stream>shard)
 ### **provisioned**
