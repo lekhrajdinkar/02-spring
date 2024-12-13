@@ -46,7 +46,7 @@
 - name : has suffix `.fifo`
 - **no duplicate**. :books:
   - `content-based-de-duplication` : enable it
-  -` de-duplication interval` : say 5 min
+  - `de-duplication interval` : say 5 min
     - duplicate messages are for 5 min, will get refused.
   - how to check duplicate:
     - `de-duplication_ID` along with message
