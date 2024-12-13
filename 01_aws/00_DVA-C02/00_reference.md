@@ -1,3 +1,5 @@
+- https://github.com/ikatyang/emoji-cheat-sheet
+
 ## 01 Compute
 
 ## 02 storage

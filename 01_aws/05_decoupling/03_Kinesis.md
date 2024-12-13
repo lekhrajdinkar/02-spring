@@ -48,9 +48,9 @@
   - use the `Enhanced Fanout feature`
     - provides each consumer application with its own dedicated throughput, up to 2 MB/second.
     - Multiple consumers can simultaneously process the same data stream without affecting each other's performance.
-    - ![img_2.png](img_2.png)
+    - ![img_2.png](../99_img/dva/sqs/img_2.png)
   - S3 --> `DMS` --> kinesis
-  - ![img_1.png](img_1.png)
+  - ![img_1.png](../99_img/dva/sqs/img_1.png)
 ---
 
 ## B. Kinesis : Data Firehose 

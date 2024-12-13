@@ -3,8 +3,9 @@
 - auto-scale
 - unlimited throughput,  
 - low latency (< 10ms), 
-- max msg size : **256KB**
+- max msg size : **256KB** :books:
   - use extended-SQS, backed by s3.
+  - ![img_5.png](../99_img/dva/sqs/img_5.png)
   
 ## A. De-couple Models in AWS
   - `queue` :  **SQS** 
@@ -15,7 +16,8 @@
 ---
 ## B. Types
 ### 1. Standard 
-- multiple p1,p2,p3, ...  ---> [queue] ---> multiple consumers in parallel (C1,C2,C3, lambda-Consumer, ... )
+- **multiple producer** p1,p2,p3, ...  ---> [queue:message-1(with Attribites)] ---> **multiple consumers** (C1,C2,C3, lambda-Consumer, ... )
+  - can purge 
 - **at least once delivery**  
   - multiple consumer can receive same message.
   - consumer handle duplicate message, has to delete message.
@@ -27,13 +29,18 @@
   - default :  `4 days`
 - **visibility timeout** :o:
   - 0-12 hr
+  - consumer could call this api to get more time.
   - ![img_4.png](../99_img/decouple/sqs/img_4.png)
+  - if too low, then may get duplicate.
 - **Long polling**  :o:
   - Consumer can optionally “wait” for messages to arrive, if there are none in the queue 
   - set `message receive wait time` : (1-20 sec)
   - pattern : poll-1 API -- wait 10 sec -- poll-1 API -- wait 10 sec ...
-  - long poll preferred : more gap in poll api calls, but increase **latency**
-  
+  - long poll **preferred** : more gap in poll api calls, but increase **latency**
+    - save cpu cycle, save money.
+- DLQ must also be a standard queue
+- **Delivery delay**
+
 ### 2. FIFO
 - name : has suffix `.fifo`
 - keep single consumer
@@ -44,13 +51,25 @@
 - but, Limited **throughput**: 
   - `300 msg/s` without batch
   - `3000 msg/s` with batch
-
+- DLQ must also be a FIFO queue
+---
+## B. DLQ
+- ![img_3.png](../99_img/dva/sqs/img_3.png)
+- If a consumer fails to process a message within the Visibility Timeout…
+  - then. message goes back to the queue and consume received again.
+- After the **MaximumReceives threshold (say 3)** is exceeded,
+  - message goes into a `Dead Letter Queue `(DLQ)
+- Good to set a retention of 14 days in the DLQ
+- **re-drive** 
+  - push messages from the DLQ back into the `source queue / any other queue`
+  - ![img_4.png](../99_img/dva/sqs/img_4.png)
 ---
 ## C. Security 
 ### general
 - attach iam:sqs-policy.
-  - cross queue access
-  - allow other service, etc
+  - cross account access
+  - allow other service: 
+    - eg: S3 Event Notifications To SQS Queue
 - **In-flight encryption** 
   - `HTTPS` (with TLS)
 - **At-rest encryption** 
@@ -92,7 +111,10 @@
 - ![img_2.png](../99_img/decouple/sqs/img_2.png)
 
 ---
-## F. use-case / arch eg
+## F. API must know (for DVA) :books:
+![img_6.png](../99_img/dva/sqs/img_6.png)
+---
+## G. use-case / arch eg
 1. `SQS:queue:logs` >> CW >> metric >> alarm --> ASG [ ... multiple consumers ec2-i... ]
   - ![img.png](../99_img/decouple/sqs/img.png)
 2. ASG [ FE-1, FE-2, ... ] ---> stage all request in Queue --- > ASG [ BE-1, BE-2, ...]
