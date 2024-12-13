@@ -91,7 +91,7 @@
 
 #### 6 task placement (ec2 launch type)
 - note: ec2 instance role : add permission to pull image from ecr
-![img_1.png](../99_img/dva/compute/ecs/img_4.png)
+- ![img_1.png](../99_img/dva/compute/ecs/img_4.png)
 - statisfy:
   - **1 CPU, memory, and port requirements**
   - **2 Task Placement Strategy**
