@@ -87,8 +87,6 @@
 
 #### consumer-2: app(`KCL`)
 - Kineses Client libray, (java lib)
-  - kcl v1 (shared)
-  - kcl v2 (shared + enhanced)
 - read progress is tracked in **dynamoDB**. so add IAM role. :point_left:
 - max one KCL consumer per shard only :point_left:
   - ![img_5.png](../99_img/dva/00/kds/img_5.png)
@@ -118,13 +116,29 @@
 - **vpc endpoint** for private connection.
   - ![img_1.png](../99_img/decouple/img_1.png)
 
+--- 
+## 6. scaling
+### 6.1 shard `splitting` 
+- ![img.png](../99_img/dva/00/kds/more/img.png)
+- The old shard is closed and will be deleted once the data is expired
+- use new shard/s
+- split into 2 only in single operation.
+  - so more recursive splitting for more.
+- **increase cost**.
+
+### 6.2 shard `merging`
+- ![img_1.png](../99_img/dva/00/kds/more/img_1.png)
+- low traffic on shard-1 and shard-2. 
+  - merge them, **saves cost**.
+- merge only 2 in single operation.
+
 ---  
-## 5. more
+## 7. more
 - S3 --> `DMS` --> kinesis
   - ![img_1.png](../99_img/dva/sqs/img_1.png)
 
 ---
-## 6 hands on
+## 8 hands on
 - https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/26101790#overview
 ```
 aws kinesis create-stream \
