@@ -8,6 +8,7 @@
 - ![img_2.png](../99_img/moreSrv/analytics-2/img_2.png)
 
 ## B. Kinesis Data Analytics (Flink Application) / preferred
+- new name : **Managed service for apache Flink**
 - flink application (more advance than SQL) --> run on KDA -->  analysis/process --> `Stream`
 - Source : `KDS` + `MSK`
 - ![img_3.png](../99_img/moreSrv/analytics-2/img_3.png)
