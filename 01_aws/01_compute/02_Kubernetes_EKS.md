@@ -1,28 +1,30 @@
 # EKS
-
+## k8s
+- [03_Kubernetes](../../03_Kubernetes)
+- cloud-agnostic
 ![img.png](../99_img/compute/eks/img.png)
 ---
-- k8s (open source, cloud-agnostic)
-  - `pod` 
-  - control panel/master node` 
-  - `worker-node/s` === EC2 intance/s
-    - managed : 
+- [04_EKS](../../03_Kubernetes/04_EKS)
+- **pod** + **service** 
+- **control panel/master node** 
+- **worker-nodes**
+  - use `EKS optimized AMI` to build container image.
+  - Type:
+    - **fargate**
+    - **managed** : 
       - inbuilt `ASG` to scale nodes, register Node.
       - support od or spot
-    - self-managed : 
+    - **self-managed** : 
       - register node manually
       - support od or spot
-  - `service` 
-  - `eks cluster`
-- `on-prem(k8s)/other-cloud(k8s)` <--migrate-->  `EKS` :)
-- use `EKS optimized AMI` to build container image.
-- `Addon`:
-  - CSI, Container Storage Interface :
-      - ![img_1.png](../99_img/compute/eks/img_1.png)
-  - 
+
+- **Addon**
+  - `CSI`: Container Storage Interface :
+  - ![img_1.png](../99_img/compute/eks/img_1.png)
   
 ---
-- Demo:
+## hands on
+- [eks::terraform](../../04_terraform/project/aws-config-maps/03_outbound/modules/eks)
 ```
 1.  create cluster-1
   - choose K8s version

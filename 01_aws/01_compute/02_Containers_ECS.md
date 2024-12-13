@@ -57,10 +57,11 @@
       - hardcode
       - read from SSM store / secret manager
       - bulk fetch env file from s3 :o:
+      - ![img.png](../99_img/dva/compute/ecs/img.png)
     - `storage` : EFS or default(21GB EBS)
       - ec2-i storage : **bind mount** to c1,c2,etc
-      - hence common storage.
-      - for fargate use ephemeral storage. ? :red_small_triangle:
+      - for fargate use ephemeral storage. ? 
+      - ![img.png](../99_img/dva/compute/ecs/img_1.png)
 
 #### 3 **run task**:
   - task (for job) **directly**,  
@@ -77,8 +78,8 @@
   - health check for tg
   - listener(http:80)  --> tg-1 --> [  task-1(c1), task-2(c2) ]
 - host-port : if 0, then get dynamic port and alb will find those  :point_left:
-- ![img.png](../99_img/dva/compute/ecs/img.png)
-- ![img_1.png](../99_img/dva/compute/ecs/img_1.png)
+- ![img.png](../99_img/dva/compute/ecs/img_2.png)
+- ![img_1.png](../99_img/dva/compute/ecs/img_3.png)
   
 #### 5 Auto Scaling 
 - create **ASG-1** to scale up/down task 
@@ -88,7 +89,28 @@
 - For fargate: easy
   - ECS-Cluster capacity provider : intelligent to do everything.
 
-#### 6 task placement
+#### 6 task placement (ec2 launch type)
+- note: ec2 instance role : add permission to pull image from ecr
+![img_1.png](../99_img/dva/compute/ecs/img_4.png)
+- statisfy:
+  - **1 CPU, memory, and port requirements**
+  - **2 Task Placement Strategy**
+    - `Binpack` : fill ec2-i1 first, then ec2-i2, etc
+    - `random` 
+    - `spread` : 
+      - Tasks are placed evenly based on the specified value
+      - eg: instanceId, az, etc
+  - **3 Task Placement Constraints**
+    - `distinctInstance` : different EC2 instances
+    - `memberOf` :  member Of **expression** (`CQL` - cluster query language - advance)
+      ```
+      "placemnetConstraints :[
+            {
+                "type": "memberof"
+                "expression" : "attribute:ecs.instance-type =~ t2.*"
+            }
+      ]
+      ```
 
 ####  READY :green_circle:
 - check cluster > task > container, logs/event,
@@ -96,9 +118,15 @@
 - in prod, service Auto Scaling (ASG, ECS-Cluster capcity provider) will do same.
 
 #### 7 update task
-- `rolling update`
-  - min healthy: 100%
-  - max : 200%
+- `rolling update` 
+  - **default**:
+    - min healthy: 100%
+    - max : 200%
+- more example for understaning:
+  - **min : 50% and max: 100%**
+    - ![img.png](../99_img/dva/compute/ecs/img_10.png)
+  - **min : 100% and max: 150%**
+    - ![img_1.png](../99_img/dva/compute/ecs/img_11.png)
 
 ---      
 ## D. screenshot

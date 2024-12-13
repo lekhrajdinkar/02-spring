@@ -1,3 +1,11 @@
+## command
+**aws ecr get-login-password** --region region | 
+  - **docker login** 
+  - --username AWS
+  - --password-stdin `aws_account_id.dkr.ecr.region.amazonaws.com`
+- docker **push** `aws_account_id.dkr.ecr.region.amazonaws.com`/**app-name**:latest
+- docker **pull** `aws_account_id.dkr.ecr.region.amazonaws.com`/**app-name**:latest
+---
 ## action
 - `ecr:BatchCheckLayerAvailability`: 
   - Allows the task to check the availability of image layers in an Amazon ECR repository to determine if they already exist.
