@@ -47,7 +47,7 @@
   - consume speed : `2 MB/sec/shard`  : if 6 shards => **12MB/s**
 - order : data in each shared is ordered.
 
-### C **record**  (message)
+### C **record** === message
   - shard#,
   - `Blob`(data) 1MB-max
   - `partition-key` : msg with same key goes to same shard.
@@ -72,15 +72,18 @@
 - stand-alone java programs
 
 ### E **consumer** :books:
+- fanout consumer/s - ( multiple )
+  - **`classic` fan out consumer/s** (pull):
+    - 3 consumer on shard-1, then throughput will 2MB/sec/3 == 666KB/sec each
+    - getRecord API
+  - **`enhanced` fanout consumer/s** (push using HTTP/2)
+    - subscribe API
+    - sift limit of 5 consumer per stream.
+  - ![img_2.png](../99_img/dva/00/kds/img_2.png)
+  - ![img_2.png](../99_img/dva/sqs/img_2.png)
+
 #### consumer-1: app(`aws-sdk`) 
-- **classic fan out consumer/s** (pull): 
-  - 3 consumer on shard-1, then throughput will 2MB/sec/3 == 666KB/sec each
-  - getRecord API
-- **enhanced fanout consumer/s** (push using HTTP/2)
-  - subscribe API
-  - sift limit of 5 consumer per stream.
-- ![img_2.png](../99_img/dva/00/kds/img_2.png)
-- ![img_2.png](../99_img/dva/sqs/img_2.png)
+- support shared + enhanced
 
 #### consumer-2: app(`KCL`)
 - Kineses Client libray, (java lib)
