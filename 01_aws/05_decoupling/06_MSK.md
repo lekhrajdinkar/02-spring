@@ -16,7 +16,7 @@
     - Data stored in `EBS` (as long as paying for volume)
     - `recovery` from failure
   
-## Consumer 
+## B. Consumer 
 - **managed Service for Apache Flink**
 - **Glue**
 - **lambda** 
