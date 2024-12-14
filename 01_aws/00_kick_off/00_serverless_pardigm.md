@@ -5,7 +5,7 @@
 
 ## A. services
 ### compute
-  - AWS Lambda : [03_serverless_lambda.md](../01_compute/03_serverless_lambda.md)
+  - AWS Lambda : [03_serverless_lambda.md](../01_compute/03_lambda-saa)
   - Fargate(ECS/EKS) 
     - [02_Containers_ECS.md](../01_compute/02_Containers_ECS.md)
     - [02_Kubernetes_EKS.md](../01_compute/02_Kubernetes_EKS.md)
