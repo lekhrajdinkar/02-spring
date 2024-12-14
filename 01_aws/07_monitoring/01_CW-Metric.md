@@ -89,8 +89,10 @@ aws cloudwatch put-metric-data \
   - then use 3rd party dashboard
 
 ---
-### extra
-- metric eg:
+## extra
+### metric collected by `CW unified agent`
+- installed on on-prem/Ec2.
+- **metric** (just for idea, not for exam) :point_left:
   - **CPU** (active, guest, idle, system, user, steal)
   - **Disk metrics** (free, used, total), Disk IO (writes, reads, bytes, iops)
   - **RAM** (free, inactive, used, total, cached)

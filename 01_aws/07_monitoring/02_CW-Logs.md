@@ -1,4 +1,5 @@
 - https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/29322962#overview
+- https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/37910042#overview
 --- 
 # Cloudwatch : `logs` :books:
 - **expiration** policies
@@ -27,6 +28,8 @@
 
 ---
 ## 4 `log source`
+- `SDK`
+  - java/py app running on
 - **ECS/EKS**
   - container-agent : collect from containers
 - **AWS Lambda**
@@ -37,10 +40,12 @@
   - API Gateway
   - Elastic Beanstalk : internal-app-agent
   - CloudTrail 
-- `CloudWatch Unified Agent`
-  - **log** + **metric**(ram.cpu.etc - at `granular` level)
-- `SDK`
-  - java/py app running on **EC2 / on-prem server** 
+- **EC2 / on-prem server**
+  - but install `agent`
+    - **CloudWatch Unified Agent** : `new`
+    - **CloudWatch log Agent** : `old`
+    - ![img_1.png](../99_img/dva/monitor/img_1.png)
+    - ![img.png](../99_img/dva/monitor/img.png)
 
 ---
 ## 5 `export logs`
@@ -81,6 +86,10 @@
 
 --- 
 ## 8 `metric filter`
+- log-group > create **metric** on pattern-1
+  - `max=3` **dimension**
+- later on create alarm around this metric. [03_CW-Alarms.md](03_CW-Alarms.md)
+- ![img.png](../99_img/dva/monitor/img3.png)
 
 --- 
 ## ??
