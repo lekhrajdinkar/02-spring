@@ -21,12 +21,28 @@
     - change metric resolution to standard/high for better response :point_left:
   
 ### 2. Custom metric 
-- can DefineAndSend **custom metric** on EC2 or any other service.
+- can Define and Send **custom metric** on EC2 or any other service.
+- eg:
   - `RAM/memory utilization`
   - `disk utilization`
   - `number of logged User`
   - ...
-- **PutMetricData** API
+  - ...
+  - `log-metric-filter`
+    - search pattern1 in log and create metric around it.
+- Step-1 : Create it.
+```
+// 3. create log-metric-filter on log-group-1
+log-group-1 > metric-filter tab
+    - name: filter-1
+    - namespace: filter-namespace-1
+    - filter pattern : "error"
+    - metric value : 100
+    - so, when error found in metric will occur with value 100
+```
+    
+- Step-2 : send
+  - **PutMetricData** API
 ```
 aws cloudwatch put-metric-data \
     --namespace <namespace-1> \
@@ -60,14 +76,23 @@ aws cloudwatch put-metric-data \
 ]
 ```
 ### 3 dashboard
-- **aws dashboard**
+- **CW::dashboard**
   - check on AWS console
   - check by region for ec2 or other service
   - check by namespace
   - ![img_1.png](img_1.png)
   
-- **external dashboard**
+- **external::dashboard**
   - create custom metric
   - deliver the stream of metric data, using `KDF` to:
     - 3rd party : `datadog, splunk, dynatrace`
     - then use 3rd party dashboard
+
+---
+### extra
+- metric eg:
+  - **CPU** (active, guest, idle, system, user, steal)
+  - **Disk metrics** (free, used, total), Disk IO (writes, reads, bytes, iops)
+  - **RAM** (free, inactive, used, total, cached)
+  - **Netstat** (number of TCP and UDP connections, net packets, bytes)
+  - **Processes** (total, dead, bloqued, idle, running, sleep)
