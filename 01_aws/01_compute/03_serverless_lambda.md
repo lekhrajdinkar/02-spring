@@ -1,17 +1,3 @@
-# Serverless services in AWS
-- there is underlying server/ec2-i, but don't need to provision/manage it
-  - AWS Lambda
-  - DynamoDB
-  - AWS Cognito
-  - AWS API Gateway
-  - Amazon S3
-  - AWS SNS & SQS
-  - AWS Kinesis Data Firehose
-  - Aurora Serverless
-  - Step Functions
-  - Fargate
-- ![img.png](../99_img/compute/lambda/img.png)
---- 
 # AWS : lambda 
 ## A. Function
 - lambda initially was `FaaS`. Now serverless : `provision code/function` 

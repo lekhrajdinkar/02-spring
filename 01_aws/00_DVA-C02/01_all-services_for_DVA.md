@@ -65,7 +65,7 @@
 - Amazon Cognito
 
 ---
-## reference
+## reference :green_circle:
 - https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/19771482#overview
   - slides: https://courses.datacumulus.com/downloads/certified-developer-k92/
   - practice paper: https://www.udemy.com/course/aws-certified-developer-associate-practice-tests-dva-c01/
