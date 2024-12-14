@@ -1,9 +1,20 @@
 # Cloudwatch : `Alarm`  
-- trigger notifications for any metric
-- `state` : ok, in-alarm, insufficient-data
-- action : stop,reboot,recover ec2, asg, sns, etc.
-- `composite alarm` alarm1 AND/OR alarm2
-- alarm can be created on :
+- Trigger notifications for any **metric**
+- **states**
+  - `ok` 
+  - `in-alarm `
+  - `insufficient-data`
+  - 
+- **action** : 
+  - stop
+  - ec2 : reboot,recover 
+  - asg
+  - sns 
+  - ...
+- **composite alarm** 
+  - alarm1 AND/OR alarm2
+  
+- alarm can be created on:
   - metric
   - logs
   

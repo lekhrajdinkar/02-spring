@@ -1,3 +1,5 @@
+- https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/29322962#overview
+--- 
 # Cloudwatch : `logs` :books:
 - **expiration** policies
   - never expire
@@ -6,23 +8,22 @@
 
 ## 1 `log group`
 - for each application create a log group
+- ![img_3.png](../99_img/cw/cw-1/img_3.png)
 
 ---
 ## 2 `Log streams`
 - instance within log group
+- has **log event**
 
 ---
-## 3 `export logs`
-- **CreateExportTask** API
-- destination:
-  - **Amazon S3** : 
-    - not real time
-    - batch export 
-    - takes up to `12 hrs`
-  - KDS Kinesis Data Streams
-  - KDF Kinesis Data Firehose
-  - AWS Lambda
-  - OpenSearch
+## 3 `log insight`
+- ![img.png](../99_img/cw/cw-1/img.png)
+- **query engine**
+  - on historical logs-group on same/**cross**  aws account
+- `log query >>> get result >>> export / visualize on CW::dashboard`
+  - **purpose built query** language
+  - find common query example on console itself.
+  - fetch event, sort event, filter event, save and add to CW::dashboard.
 
 ---
 ## 4 `log source`
@@ -40,31 +41,46 @@
   - **log** + **metric**(ram.cpu.etc - at `granular` level)
 - `SDK`
   - java/py app running on **EC2 / on-prem server** 
-      
 
 ---
-## 5 `log insight`
-- ![img.png](img.png)
-- **query engine**
-  - on historical logs-group on same/**cross**  aws account
-- `log query >>> get result >>> export / visualize on CW::dashboard`
-  - **purpose built query** language
-  - find common query example on console itself.
-  - fetch event, sort event, filter event, save and add to CW::dashboard.
+## 5 `export logs`
+### via `CreateExportTask`
+- destination: **Amazon S3**
+  - not real time
+  - batch export
+  - takes up to `12 hrs`
+
+### via `log-group subscription-filter`
+- **KDS** Kinesis Data Streams
+- **KDF** Kinesis Data Firehose
+- **Lambda**
+- **OpenSearch**
+- ![img_2.png](../99_img/cw/cw-1/2/img_2.png)
 
 ---
 ## 6 `log subscription-filter`
 - can create `max=2`
-- **listener** to filtered log group.
-  - can also to listen/subscribe to multiple same/cross account's log group 
+- **subscribe** to **log group**
+  - also, can also to listen/subscribe to multiple same/cross account's log group 
   - and perform **log aggregation**:
   - ![img_2.png](../99_img/cw/cw-1/img_2.png)
+  - ignore above action, check below.
   
 - **listener action/s**:
   - do some processing with Lambda
   - deliver (KDF)
   - stream (KFS)
   - ![img_1.png](../99_img/cw/cw-1/img_1.png)
+
+--- 
+## 7 `live trail`
+- for debugging
+- select log-group > log-instance (optional) > start trail
+- 1 hr free every day
+- close after done.
+
+--- 
+## 8 `metric filter`
 
 --- 
 ## ??
