@@ -1,10 +1,10 @@
 # AWS config (regional)
 ## 1. Intro
-- record resource **auditing and Compliance** using **config-rules**.\
+- Records: aws-resource **auditing and Compliance** using **config-rules**.
 
-- on event of changes/modification on AWS resources =>  evaluate these rule 
+- On event of changes/modification on AWS resources =>  evaluate these rule, then:
   - take **remediation action**
-  - send **notification**
+  - and/or, send **notification**
 
 - cannot not deny from evaluating. :point_left:
 - for each aws-resource, on console can view :
@@ -35,11 +35,12 @@
 
 
 ## 3 Action on compliance failure
-- **SSM Automation Document**
-- **custom Automation Document**, eg:
+### 3.1. remediation action
+- **`SSM` Automation Document**
+- **`custom` Automation Document**, eg:
   - ![img_1.png](../99_img/moreSrv/aws-config/img_1.png)
   
-### 3.1 notification
+### 3.2 notification
 - use **Event-Bridge** Event
 - use **SNS** -> filter -> subscriber
 - ![img_2.png](../99_img/moreSrv/aws-config/img_2.png)  
