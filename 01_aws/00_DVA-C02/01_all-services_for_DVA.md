@@ -69,14 +69,18 @@
 - https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/19771482#overview
   - slides: https://courses.datacumulus.com/downloads/certified-developer-k92/
   - practice paper: https://www.udemy.com/course/aws-certified-developer-associate-practice-tests-dva-c01/
-  -  If AWS Certified Solutions Architect course then watch only : 
-  -  as of Dec 2024
-
-- S4 : IAM
-- s5 : EC2
-- s6 : EC2:storage - EBS + EFS
-- s7: [01_ELB_ASG.md](..%2F04_network%2F01_ELB_ASG.md)
-
+  -  If AWS Certified Solutions Architect course watched, then watch **New content** only : 
+- **common** 
+  - Section 4 : [01_IAM-1.md](../06_Security/01_IAM-1.md) | [01_IAM-2.md](../06_Security/01_IAM-2.md)
+  - Section 5 : [01_EC2.md](../01_compute/01_EC2.md)
+  - Section 6 : [01_EBS_EFS.md](../02_storage/01_EBS_EFS.md)
+  - Section 7 : [01_ELB_ASG.md](..%2F04_network%2F01_ELB_ASG.md)
+  - Section 11,13,14 - "S3" 
+    - [03_S3-1.md](../02_storage/03_S3-1.md)
+    - [03_S3-2.md](../02_storage/03_S3-2.md)
+    - [03_S3-3.md](../02_storage/03_S3-3.md)
+  
+- **New content** for DVA :books:
 ```
 Section 7 - AWS Fundamentals: ELB + ASG                     :: DONE
     Auto Scaling Groups - Instance Refresh
@@ -95,8 +99,6 @@ Section 10 - VPC Fundamentals                               :: DONE
     VPC Peering, Endpoints, VPN, DX
     VPC Cheat Sheet & Closing Comments
     Three Tier Architecture
-    
-Section 11,13,14 - "S3"                                 :: DONE (SAA)
 
 Section 12 - AWS CLI, SDK, IAM Roles & Policies         :: DONE
     AWS EC2 Instance Metadata
@@ -117,13 +119,12 @@ Section 15 - CloudFront                                  :: DONE
     CloudFront - Advanced Concepts
     CloudFront - Real Time Logs
 
-Section 16 - ECS, ECR & Fargate - Docker in AWS
+Section 16 - ECS, ECR & Fargate - Docker in AWS           :: DONE
     Amazon ECS - Rolling Updates
     Amazon ECS Task Definitions - Deep Dive
     Amazon ECS Task Definitions - Hands On
     Amazon ECS - Task Placements
     Amazon ECR - Hands On
-
-And everything from Section 17 onwards
-
 ```
+- And everything from **Section 17 onwards**
+
