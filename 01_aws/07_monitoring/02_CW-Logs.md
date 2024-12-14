@@ -1,48 +1,10 @@
-# Monitoring in AWS
-### CloudWatch
-  - **Metrics**: Collect and track key metrics
-  - **Logs**: Collect, monitor, analyze and store log files
-  - Events: Send notifications when certain events happen in your AWS
-  - **Alarms**: React in real-time to metrics / events
-### X-Ray
-  - Troubleshooting application performance and errors
-  - **Distributed tracing** of microservices
-### CloudTrail
-  - **Internal monitoring of API calls** being made
-  - **Audit** changes to AWS Resources by your users
----
-# **Cloudwatch**
-## A. Cloudwatch : `Metric`
-- `namespace-1` : 
-  - metric-1 : attribute-1, ... upto attribute-30
-  - metric-2 : attribute-1, ...
-  - ...
-- `metric` are **variable** for monitoring, eg:
-  - cpu utilization for ec2
-  - memory utilization
-  - network call
-  - DB call in app
-- can create **custom metric** on any service.
-
-### dashboard for metric
-- **option-1**
-  - create custom metric or use existing metric
-  - stream metric
-  - create dashboard
-- **option-2**
-  - create custom metric
-  - deliver stream metric data using `KDF` to:
-    - 3rd party : `datadog, splunk, dynatrace`
-    - use 3rd party dashboard
-
----  
-## B. Cloudwatch : `logs`
+# Cloudwatch : `logs`
 - **expiration** policies 
   - never expire
   - set 1 day to 10 years
 - logs are **encrypted** by KMS
 
-### log-insight 
+## log-insight 
 - **dashboard**
   - insight-rule-1 to ingest dashboard data
   - insight-rule-2
@@ -57,12 +19,14 @@
     - build from `VPC logs`. etc
     - find heaviest n/w user, urlWithMostError, IPs,
 
-### log-group
+## log-group
 - log-instance-1/2/3/...
-- create `log-metric-filter`, `Logs-streams`
+### log-metric-filter 
 - eg: log-metric-filter - search pattern1 in log, if occurs, capture some value, say 100.
+### Logs-streams
 
-### log-source
+
+## log-source
 - log:Source --> CW:log --> **send**  -->  with/without log-metric-filter --> destination --> S3, KDS, KDF, lambda, OpenSearch
   - for S3, (`CreateExportTask`, take up 12 hr, not real-time)
 
@@ -72,7 +36,7 @@
   - aggregate log streams + cross account subscription. eg:
     - aws1:log-group-1: `subscription filter-1-lg1` --> logs-stream-1  --> destination-1
     - aws1:log-group-1: `subscription filter-2-lg1` --> logs-stream-2  --> destination-1
-    - `aws2`:log-group-2: `subscription filter-1-lg2` --> logs-stream-3  --> destination-1
+    - aws2:log-group-2: `subscription filter-1-lg2` --> logs-stream-3  --> destination-1
 
 - log:Source
   - `application`: ECS/EKS, Lambda, Beanstalk (internal-app-agent - ecs/eks-container-agent, lambda-agent)
@@ -90,18 +54,6 @@
         - **RAM** (free, inactive, used, total, cached)
         - **Netstat** (number of TCP and UDP connections, net packets, bytes)
         - **Processes** (total, dead, bloqued, idle, running, sleep)
-
----
-## C. Cloudwatch : `alarm`  
-- trigger notifications for any metric
-- `state` : ok, in-alarm, insufficient-data
-- action : stop,reboot,recover ec2, asg, sns, etc.
-- `composite alarm` alarm1 AND/OR alarm2
-- alarm can be created on :
-  - metric
-  - logs
-  
-![img.png](../99_img/decouple/ct/img.png)
 
 ---
 ## D. demo
@@ -128,22 +80,7 @@ log-group-1 > metric-filter tab
     - so, when error found in metric will occur with value 100
     
 // 4 . create log-stream-1 from log-group-1 > start live tail
-
-// 5 . create alarm
-- launch ec2-i1 
-- CW > create metric-1
-  - add ec2-i1
-  - type : cpu
-  - every 5 min, 3 of 3
-  - greater than 90%
-  - state action:
-    - ok > action:
-    - in-alarrm > action : terminate ec2-i1
-    - insufficient-data > action :
-     >> manually update state from aws-cli
-    
 ...
-
 ```
 ---
 ##  Z. screenshots
