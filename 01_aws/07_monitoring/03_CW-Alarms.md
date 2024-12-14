@@ -7,14 +7,13 @@
   - `in-alarm `
   - `insufficient-data`
 - **action** : 
-  - stop
-  - ec2 : reboot,recover 
+  - ec2 : reboot,recover , stop
   - **ASG**
-  - **sns** : most common :point_left:
+  - **SNS alert** : most common :point_left:
   - ...
 - **composite alarm** 
-  - alarm1 AND/OR alarm2
-  - help to reduce noise
+  - `alarm1` AND/OR `alarm2`
+  - help to **reduce noise**
   - ![img.png](../99_img/dva/monitor/img4.png)
   
 - alarm can be created on:

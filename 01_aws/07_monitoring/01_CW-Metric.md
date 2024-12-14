@@ -23,16 +23,17 @@
 ### 2. Custom metric 
 - can Define and Send **custom metric** on EC2 or any other service (eg- cw:log-group,etc)
 - eg:
-  - `RAM/memory utilization`
-  - `disk utilization`
-  - `number of logged User`
+  - `EC2::RAM/memory utilization`
+  - `EC2::disk utilization`
+  - `??::number of logged User`
   - ...
   - ...
-  - `log > metric-filter`
+  - `CW-log::metric-filter-1`
     - search pattern1 in log and create metric around it.
-- Step-1 : Create it.
+- **Step-1** : Define/create 
 ```
-// 3. create log-metric-filter on log-group-1
+# create log-metric-filter on log-group-1
+
 log-group-1 > metric-filter tab
     - name: filter-1
     - namespace: filter-namespace-1
@@ -41,8 +42,7 @@ log-group-1 > metric-filter tab
     - so, when error found in metric will occur with value 100
 ```
     
-- Step-2 : send
-  - **PutMetricData** API
+- **Step-2** : send : **PutMetricData** API
 ```
 aws cloudwatch put-metric-data \
     --namespace <namespace-1> \
