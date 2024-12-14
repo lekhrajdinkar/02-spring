@@ -51,11 +51,9 @@
   - **purpose built query** language
   - find common query example on console itself.
   - fetch event, sort event, filter event, save and add to CW::dashboard.
-  
-
 
 ---
-## 5 `log subscription-filter`
+## 6 `log subscription-filter`
 - can create `max=2`
 - **listener** to filtered log group.
   - can also to listen/subscribe to multiple same/cross account's log group 
@@ -69,7 +67,7 @@
   - ![img_1.png](../99_img/cw/cw-1/img_1.png)
 
 --- 
-## 6. ??
+## ??
 - **dashboard**
   - insight-rule-1 to ingest dashboard data
   - insight-rule-2
