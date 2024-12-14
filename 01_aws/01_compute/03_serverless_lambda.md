@@ -1,41 +1,48 @@
-# AWS : lambda 
-## A. Function
+# AWS Lambda 
+## A. Lambda:Function
+- ![img.png](img.png)
 - lambda initially was `FaaS`. Now serverless : `provision code/function` 
-- use `lambda layer` for common code.
-- deploy code without underlying infra
-- `auto-scale with load` (parallel Lambdas, `max- 1000`)
+- connect lambda (launch in `vpc-1`) --> `RDS-proxy` : good practice
 
-- `network`:  
-  - default : run in` aws owned VPC`, launch outside out VPC-1
-  - can attach ENI with our VPC-1
+### 1 scaling
+- auto-scale with load` (parallel Lambdas, `max- 1000`)
+- ![img_4.png](../99_img/compute/lambda/img_4.png)
+
+### 2 network  
+- default: run in **aws owned VPC** :point_left:
+- can attach ENI to run inside our **VPC-1**
   
-- `cost` : per request +  compute-time(0-15 min) : `very Cheap`/`cost-efficeint`
-  - First 1M free, then `20cent/million req`
-  - First 400K GB-second free, then `$1/600K GB-second`
-- `security`: Attach IAM role.
+### 3 pricing
+- cost-efficient
+- **no of call**: First 1M free, then `20cent/million req`
+- **cpu usage**: First 400K GB-second free, then `$1/600K GB-second`
 
-- `Configuration`:
-  - RAM : `RAM 128 MB -10 GB`
-  - timeout 0-15 min `15 min` / `900 Sec`
-  - trigger :  [check integration](#b-integrated-with-services--triggers)
-  - `handler` : file.method (eg: l_function.l_handler)
-  - `runtime` : java 11, java21, etc
-  - `permission` : attach one or more role/s (already allow CW)
-  - `env var` : 4 KB
-  - disk : `/tmp` , `512 MD to 10GB`
+### 4 security
+- Attach IAM role with fine grain access.
 
-- deployment pkg size :
+### 5 programming things
+- **compute-time**: `0-15 min`
+- **resource**:
+  - RAM : `128 MB -10 GB`
+  - disk
+    - /tmp 
+    - `512 MD to 10 GB`
+- **lambda layer** for common code.
+- **handler** : file.method (eg: l_function.l_handler)
+- **language/runtime** : 
+  - node, py, java, Golang, C#/Ruby, `Custom Runtime`.
+  - java 11 or above : performance is 10x (free) - `SnapStart feature` :point_left:
+  - ![img_5.png](../99_img/compute/lambda/img_5.png)
+- **env var** : 4 KB
+- **build pkg size** :
   - `50 MB`  compressed
   - `250 MB` code+dependency
-  
--  logs : CW > log group
--  language supported : node, py, java, Golang, `C#/Ruby`, `Custom Runtime`.
-  - java 11 or above : performance is 10x (free) - `SnapStart` feature
-- `Lambda Container Image` --> run --> lambda Function
+-  **Monitor** : CW > log group
+- **Lambda Container Image** 
+  - run docker image in lambda Function
   - `base image` : lambda runtime API
-  
----
-## B. Triggers : Integrated with services 
+
+### Triggers :green_circle: 
 - API-gateway/`REST` --> lambda
 - S3, CW, DynamoDB-streams, eventBridge(trigger/schedule) > `event` > Lambda
 - SQS/SNS > `Consumer/Subscriber` > lambda1/2
@@ -45,13 +52,8 @@
 - ![img_1.png](../99_img/compute/lambda/img_1.png)
 
 ---
-## C. Use case
+## B. Architecture example
 - ![img_3.png](../99_img/compute/lambda/img_3.png)
 - ![img_2.png](../99_img/compute/lambda/img_2.png)
-- > connect lambda (launch in `vpc-1`) --> `RDS-proxy` : good practice  
-![img_6.png](../99_img/compute/lambda/img_6.png)
-
----
-## D. Screen shot:
-- `AutoScale` : ![img_4.png](../99_img/compute/lambda/img_4.png)
-- `SnapStart` : ![img_5.png](../99_img/compute/lambda/img_5.png)
+- ![img_6.png](../99_img/compute/lambda/img_6.png)
+  
