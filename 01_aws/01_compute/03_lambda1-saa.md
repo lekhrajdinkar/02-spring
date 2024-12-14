@@ -74,11 +74,13 @@ aws s3api put-bucket-notification-configuration \
   - `base image` : lambda runtime API
 
 ## B. integration with other services :green_circle: 
-- [03_lambda-dav-01.md](03_lambda-dav-01.md) for details
-- **lambda trigger** or, **Event source mapping** :point_left:
-- other service trigger lambda for their use case.
-  - note: update lambda policy
-- common eg:
+- **lambda trigger** patterns:  :point_left:
+  - **Event source mapping** 
+  - **Synchronous** 
+  - **A-synchronous**
+  - details: [03_lambda-dav-01.md](03_lambda-dva-02) for details
+
+- all common eg:
   - **API-gateway** (REST) >> lambda
   - **ALB** >> target-group-1:lambda :o:
     - ![img_1.png](../99_img/dva/l/01/img_1.png)

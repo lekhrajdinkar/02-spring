@@ -1,5 +1,5 @@
-# A. Lambda Invocations
-## A.1. `synchronous`
+# Lambda Invocations
+## A. `Synchronous`
 - below services make sync/blocking call:
   - ALB, Amazon API Gateway, CloudFront (Lambda@Edge)
   - Amazon S3-Batch
@@ -9,7 +9,8 @@
   - Amazon Alexa
   - Amazon Kinesis Data Firehose
   
-###  A.1.1 **ALB**
+---  
+###  A.1 **ALB**
 - ![img_1.png](../99_img/dva/l/01/img_1.png)
 - **Flow**
   - http/s request  comes to ELB
@@ -38,24 +39,30 @@
   - ![img_4.png](../99_img/dva/l/01/img_4.png)
 
 ---
-## A.2. `A-synchronous`
+###  A.2 **gateway**
+- soon
+
+---
+## B `A-synchronous`
 - below services make a-sync/non-blocking call:
   - s3:evnetNotification
-  - SNS, SES(email)
+  - SQS, SNS, SES(email)
   - CW:log-events||subscription-filter
   - more (not in scope of exam)
     - AWS codeCommit + codePiprline + cloudformation
     - AWS config
     - AWs IoT
 
-### A.2.1 S3:event notification :green_circle:
+---
+### B.1 S3:event notification :green_circle:
 - ![img_2.png](../99_img/dva/l/02/img_2.png)
 - ![img_3.png](../99_img/dva/l/02/img_3.png)
 - create s3 bucket > properties tab >> create s3 notification
   - set **prefix** +  s3:objectCreate event
   - set destination : lambda-1 (lambda-policy-1: allow s3)
 
-### A.2.2 SQS
+---
+### B.2 SQS :green_circle:
 - ![img.png](../99_img/dva/l/02/img.png)
 - here, call lambda asyn and wait in parallel. does not block.
 - lambda-1 >> configuration tab >> **asynchronous invocation** section. :point_left:
@@ -66,8 +73,26 @@
   - keep lambda code **Idempotent** 
   - after **reties** goes to DLQ-1
 
-### A.2.3 Eventbridge (generic pattern) :green_circle:
+---
+### B.3 Eventbridge (generic pattern) :green_circle:
 - **trigger**:
   - EventRule
   - schedular
   - ![img_1.png](../99_img/dva/l/02/img_1.png)
+
+---
+## C. `Event Source Mapping`
+-  Lambda is triggered **`synchronously` with `batch`** :point_left:
+- by **polling data** from below **poll-based services** :point_left:
+  -  `SQS`
+  -  `KDS`
+  - `DynamoDB Streams`
+- concept:
+  - ![img.png](img.png)
+
+### C.1 SQS : event-source-mapping :yellow_circle:
+
+### C.2 KDS : event-source-mapping :yellow_circle:
+
+### C.3 DynamoDB : event-source-mapping :yellow_circle:
+
