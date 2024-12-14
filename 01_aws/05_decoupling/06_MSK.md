@@ -7,7 +7,7 @@
   - resource, 
   - compute, 
   - storage,etc
-- MSK regular, we provision:
+- **MSK-regular**, we provision:
     - Cluster
     - Kafka `brokers nodes` 
     - `Zookeeper` nodes
@@ -15,7 +15,12 @@
     - Data stored in `EBS` (as long as paying for volume)
     - `recovery` from failure
   
-- `Consumer` : KDA(Flink), Glue, L, Prg( deploy on ECS,EKS,EC@)
+## Consumer 
+- **managed Service for Apache Flink**
+- **Glue**
+- **lambda** 
+- custom app
+  - ecs,eks,etc
 
 ---
 ## B. Screenshots
