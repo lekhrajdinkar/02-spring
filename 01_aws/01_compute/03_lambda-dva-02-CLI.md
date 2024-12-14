@@ -40,7 +40,7 @@ aws lambda get-function \
     --function-name <function_name>
 ```
 
-## invoke (sync + async)
+## 2. invoke (sync + async)
 ```
 #  Synchronous Invocation
 # =======================
@@ -58,7 +58,7 @@ aws lambda invoke \
     response.json
 ```
 
-## Add trigger (Event source mapping)
+## 3. Add trigger (Event source mapping)
 ```
 # update lambda policy
 # ==================
@@ -75,9 +75,18 @@ aws s3api put-bucket-notification-configuration \
     --bucket <bucket_name> \
     --notification-configuration file://notification.json
 
+# notification.json    
+{
+  "LambdaFunctionConfigurations": [
+    {
+      "LambdaFunctionArn": "arn:aws:lambda:region:account-id:function:function-name",
+      "Events": ["s3:ObjectCreated:*"]
+    }
+  ]
+}
 ```
 
-## more
+## 4. more
 ```
 aws logs filter-log-events \
     --log-group-name /aws/lambda/<function_name> \

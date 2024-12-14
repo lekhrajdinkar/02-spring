@@ -68,7 +68,7 @@
 ---
 ## B. DLQ
 - ![img_3.png](../99_img/dva/sqs/img_3.png)
-- If a consumer fails to process a message within the Visibility Timeout…
+- If a consumer fails to process a message within the Visibility Timeout or **Exception** from Consumer code.
   - then. message goes back to the queue and consume received again.
 - After the **MaximumReceives threshold (say 3)** is exceeded,
   - message goes into a `Dead Letter Queue `(DLQ)

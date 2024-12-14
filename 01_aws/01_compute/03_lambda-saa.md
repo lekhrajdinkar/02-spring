@@ -61,7 +61,7 @@ aws s3api put-bucket-notification-configuration \
   - node, py, java, Golang, C#/Ruby, `Custom Runtime - rust/golang`
   - java 11 or above : performance is 10x (free) - `SnapStart feature` :point_left:
   - ![img_5.png](../99_img/compute/lambda/img_5.png)
-- **env var** : 4 KB
+- **env var** : `4 KB`
 - **build pkg size** :
   - `50 MB`  compressed
   - `250 MB` code+dependency
@@ -74,6 +74,7 @@ aws s3api put-bucket-notification-configuration \
   - `base image` : lambda runtime API
 
 ## B. integration with other services :green_circle: 
+- [03_lambda-dav-01.md](03_lambda-dav-01.md) for details
 - **lambda trigger** or, **Event source mapping** :point_left:
 - other service trigger lambda for their use case.
   - note: update lambda policy
@@ -82,13 +83,15 @@ aws s3api put-bucket-notification-configuration \
   - **ALB** >> target-group-1:lambda :o:
     - ![img_1.png](../99_img/dva/l/01/img_1.png)
   - **S3:objectcreate,etc** >> lambda :o:
-  - **CW:loggroup-subscription-filter** >> lambda
+  - **CW:log-event||loggroup-subscription-filter** >> lambda (log-processing)
   - **DynamoDB-streams** >> lambda
   - **SQS/SNS:consumer** > Consumer/Subscriber > lambda/s :o:
   - **KDS:consumer** >> Lambda/s
   - web-client-req --> **CloudFront** ( **lambda@Edge** :customize req+some processing ) --> origin
   - **IAM:cognito** >> Lambda
-  - **other services's event** >> eventBridge(trigger/schedule) >> `react on event` >> Lambda :point_left:
+  - **other services's event** >> eventBridge(**`EventRule`**/**`cron scheduler`**)  >> Lambda :point_left:
+    - codePipeline's in-built event, say e1 > eventBridge(bus) > EventRule-1 (capture e1) > lambda-1 (process)
+    - ...
     - generic pattern :)
 - ![img_1.png](../99_img/compute/lambda/img_1.png)
 
