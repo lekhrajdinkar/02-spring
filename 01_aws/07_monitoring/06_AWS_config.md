@@ -47,8 +47,9 @@
 
 ---
 ## 4. Pricing: 
-- no free tier, $0.003 per `configuration item` recorded per region,
-- $0.001 per config rule `evaluation` per region
+- not free tier.
+- `$0.003 `per **configuration item/rule** recorded per region,
+- `$0.001` per config rule **evaluation** per region
 
 ---
 ## 5. hands on
