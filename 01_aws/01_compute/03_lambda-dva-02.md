@@ -54,7 +54,7 @@
     - AWs IoT
 
 ---
-### B.1 S3:event notification :green_circle:
+### :green_circle: B.1 S3:event notification 
 - ![img_2.png](../99_img/dva/l/02/img_2.png)
 - ![img_3.png](../99_img/dva/l/02/img_3.png)
 - create s3 bucket > properties tab >> create s3 notification
@@ -62,7 +62,7 @@
   - set destination : lambda-1 (lambda-policy-1: allow s3)
 
 ---
-### B.2 SQS :green_circle:
+### :green_circle: B.2 SQS 
 - ![img.png](../99_img/dva/l/02/img.png)
 - here, call lambda asyn and wait in parallel. does not block.
 - lambda-1 >> configuration tab >> **asynchronous invocation** section. :point_left:
@@ -74,25 +74,33 @@
   - after **reties** goes to DLQ-1
 
 ---
-### B.3 Eventbridge (generic pattern) :green_circle:
+### :green_circle: B.3 Event-bridge (generic pattern)
 - **trigger**:
   - EventRule
   - schedular
   - ![img_1.png](../99_img/dva/l/02/img_1.png)
 
 ---
-## C. `Event Source Mapping`
+## C. `Event Source Mapping` (Poller)
 -  Lambda is triggered **`synchronously` with `batch`** :point_left:
-- by **polling data** from below **poll-based services** :point_left:
-  -  `SQS`
-  -  `KDS`
-  - `DynamoDB Streams`
+- by **polling data** from below **3 poll-based services** :point_left:
+  -  Queue based: **Queue Poller**
+    - `SQS`
+  -  streams based: **Stream Poller**
+    - `KDS`
+    - `DynamoDB Streams`
+  
 - concept:
   - ![img.png](img.png)
 
-### C.1 SQS : event-source-mapping :yellow_circle:
+---
+### :yellow_circle: C.1 SQS : event-source-mapping 
 
-### C.2 KDS : event-source-mapping :yellow_circle:
+---
+### :yellow_circle: C.2 KDS : event-source-mapping 
+- ![img_1.png](img_1.png)
+- upto 10 batches per shard.
 
-### C.3 DynamoDB : event-source-mapping :yellow_circle:
+---
+### :yellow_circle: C.3 DynamoDB : event-source-mapping 
 
