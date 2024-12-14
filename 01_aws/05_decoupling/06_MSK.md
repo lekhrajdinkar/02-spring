@@ -1,4 +1,5 @@
 # MSK (Kafka)
+![img_4.png](../99_img/moreSrv/analytics-2/img_4.png)
 ## A. Intro
 - Alternative to Amazon KDS.
 - Fully managed **Apache Kafka** on AWS.
@@ -21,17 +22,7 @@
 - **lambda** 
 - custom app
   - ecs,eks,etc
+- ![img_6.png](../99_img/moreSrv/analytics-2/img_6.png)
 
----
-## B. Screenshots
-### Kafka
 
-![img_4.png](../99_img/moreSrv/analytics-2/img_4.png)
 
-### Comparison
-
-![img_5.png](../99_img/moreSrv/analytics-2/img_5.png)
-
-### Consumer
-
-![img_6.png](../99_img/moreSrv/analytics-2/img_6.png)
