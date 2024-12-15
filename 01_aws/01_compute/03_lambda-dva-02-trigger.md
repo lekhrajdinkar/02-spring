@@ -45,7 +45,7 @@
 ---
 ---
 ## B `A-synchronous`
-- below services make a-sync/non-blocking call:
+- below services(event-based) make a-sync/non-blocking call:
   - s3:evnetNotification
   - SQS, SNS, SES(email)
   - CW:log-events||subscription-filter
@@ -53,7 +53,9 @@
     - AWS codeCommit + codePiprline + cloudformation
     - AWS config
     - AWs IoT
-
+- **internal eventQueue** :o:
+  - event --> eventSQSQueue [e1,e2,...] --> LambdaService reads event and invoke lambda async.
+  - if throttleError, LambdaService will return event back to internal eventQueue.
 ---
 ### :green_circle: B.1 S3:event notification 
 - ![img_2.png](../99_img/dva/l/02/img_2.png)
@@ -94,7 +96,7 @@
 - lambda will scale out, based on active message.
 
 ---
-### :yellow_circle: C.1 SQS : event-source-mapping 
+### :yellow_circle: C.1 SQS : Queue
 - ![img_2.png](../99_img/dva/l/03/img_2.png)
 - Event Source Mapping will poll SQS (Long Polling)
 - **configuration**:
@@ -108,7 +110,7 @@
   
 
 ---
-### :yellow_circle: C.2 KDS : event-source-mapping 
+### :yellow_circle: C.2 KDS : stream
 ![img_1.png](../99_img/dva/l/03/img_1.png)
 - **parallelization**: can have upto `10 batches` per shard.
 - **in-order processing** : processing for the **affected shard** is paused, until the error is resolved
@@ -130,7 +132,7 @@
   - restrict the number of retries
 
 ---
-### :yellow_circle: C.3 DynamoDB : event-source-mapping 
+### :yellow_circle: C.3 DynamoDB : stream 
 - soon
 
 ---
@@ -147,13 +149,13 @@
   - so achieving same behaviour.
   
 ### D.1 Async invocation: `failure`
-- goes to **DLQ**  (old, only 2 service)
+- **Destination**  (condition: OnFailure)
+- **DLQ**  (old, only 2 service, we did before)
   - sqs
   - sns
-- **Destination** 
 
 ### D.2 Async invocation: `success`
-- **destination**
+- **destination** (condition: OnSuccess)
 
 ![img.png](../99_img/dva/l/05/img_2.png)
 

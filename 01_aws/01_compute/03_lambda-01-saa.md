@@ -47,26 +47,49 @@
 
 ---
 ### 5. programming things :book:
-#### **5.1. Basic**
-- **compute-time**: `0-15 min`
-- **resource**:
-  - RAM : `128 MB -10 GB` + improves network as well
-  - disk
-    - /tmp 
-    - `512 MD to 10 GB`
-- **lambda layer** for common code.
+- **create function**:
+  - [create function with x-ray tracing](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/26623428#overview)
+  - create from web-console, cli commands, terraform plan, cloudFormation template (upload zip to s3 (versioned))
+  - ![img_4.png](../99_img/dva/l/img_4.png)
+
+#### **5.0. Basic**
+- **compute-time /timeout**: 
+  - `0 - 15 min` 
+  - or, `0 - 900 sec`
+  - default : `3 seconds`
+
 - **handler** : file.method (eg: l_function.l_handler(`event`,`context`))
   - **context** - metadata about the Lambda function execution environment.
+    - re-use for multiple invocation.
+    - great for DB connection, Http client, etc
+    - **cold start**: first call will have latency to init context.
   - **event** - contains the input data for the Lambda function.
   - sample: [03_lambda-dva-03-context+event.md](03_lambda-dva-03-context%2Bevent.md)
+  
 - **language/runtime** : 
   - node, py, java, Golang, C#/Ruby, `Custom Runtime - rust/golang`
   - java 11 or above : performance is 10x (free) - `SnapStart feature` :point_left:
   - ![img_5.png](../99_img/compute/lambda/img_5.png)
+  
 - **build pkg size** :
   - `50 MB`  compressed
   - `250 MB` code+dependency
-  
+
+#### **5.1 resource**
+  - **RAM** : `128 MB -10 GB`
+    - implicitly improves network as well
+    - implicitly add more CPU credit.
+  - **disk**
+    - `/tmp`- **ephemeral storage** : 
+      - space for writing temp files. 
+      - no shared.
+    - `512 MD to 10 GB`
+    - if needed permanent space, use:
+      - `s3`,
+      - `EFS` : very fast (if running inside our vpc-1) :point_left:
+      - can be shared among lambda/s
+    - programmatically encrypt /tmp using KMS keys. generate ir first. 
+    - ![img_2.png](../99_img/dva/l/img_2.png)
 ---  
 #### **5.2. ENV var** 
 - `4 KB`
@@ -94,10 +117,36 @@
     - `AWS_XRAY_DAEMON_ADDRESS`: the X-Ray Daemon IP_ADDRESS:PORT
   - Use AWS X-Ray SDK in Code
     - use these env var and write trace.
-      
-#### **5.4. Lambda Container Image** 
+---
+#### **5.4.lambda layer** 
+![img_1.png](../99_img/dva/l/img_1.png)
+- 5 layer max
+- 250 MB total
+- aws-sdk dependency : no need to pkg in zip. :)
+
+---
+#### **5.5. Lambda Container Image**
 - run docker image in lambda Function
 - `base image` : lambda runtime API
+
+---
+#### **5.6. Concurrency**
+- set **reservedConcurrency**
+  - `max/default = 1000` 
+  - **combined** for all function/s together. :point_left:
+    - function-1 has 500 invocation
+    - function-2 has 500 invocation
+    - function-3 will get **retry** first and then give **ThrottleError (429)**
+
+- ![img_3.png](../99_img/dva/l/img_3.png)
+- **retry**:
+  - for `sync` invocation - 2 times
+  - for `a-sync` invocation: 
+    - retry attempt exponentially increases from `1 second - 5 minutes`
+    - `max 6 hrs`
+    
+- **provisioned concurrency**
+  - configure it to have **warm start**, else cold-start.
 
 ---
 ## B. integration with other services :green_circle: 
