@@ -169,6 +169,7 @@
 ---
 #### **5.8 version and alias** 
 - publish function to create version 1,2... `immutable`
+- arn:aws:lambda:us-east-1:123456789012:function:**function-1**:**alias/version**
 - current version : $LATEST - `mutable` (edit code)
 - create alias to point one specfic version
   - alias1 --> version 1,2...
@@ -178,6 +179,10 @@
     - alias1 --> 10% --> v2
 - eg:
   - ![img.png](../99_img/dva/l/02/imgV.png)
+
+---
+#### **5.9 integration with `codeDeploy`**
+![img.png](../99_img/dva/l/img-cd.png)
 
 ---
 ## B. integration with other services :green_circle: 
