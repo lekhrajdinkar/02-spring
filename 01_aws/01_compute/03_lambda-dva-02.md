@@ -64,9 +64,10 @@
 ---
 ### :green_circle: B.2 SQS 
 - ![img.png](../99_img/dva/l/02/img.png)
-- here, call lambda asyn and wait in parallel. does not block.
-- lambda-1 >> configuration tab >> **asynchronous invocation** section. :point_left:
-  - add `DLQ-1`
+- message dropped on SQS queue-1
+- sqs-event will call lambda async does (non-blocking)
+- next, lambda-1 >> configuration tab >> **asynchronous invocation** section. :point_left:
+  - add `DLQ-1` on lambda(not on queue-1)
   - set `retry attempt` = 0,1,2
   - also, update lambda-role-1: + sqsSend permission
 - if exception thrown from lambda(consumer), then lambda will retry
@@ -81,7 +82,8 @@
   - ![img_1.png](../99_img/dva/l/02/img_1.png)
 
 ---
-## C. `Event Source Mapping` (Poller)
+## C. `Event Source Mapping` (Poller) + batch
+- [udemy reference](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/19730528#overview)
 -  Lambda is triggered **`synchronously` with `batch`** :point_left:
 - by **polling data** from below **3 poll-based services** :point_left:
   -  Queue based: **Queue Poller**
@@ -89,17 +91,45 @@
   -  streams based: **Stream Poller**
     - `KDS`
     - `DynamoDB Streams`
-  
-- concept:
-  - ![img.png](img.png)
+
+![img.png](../99_img/dva/l/03/img.png)
+- lambda will scale out, based on active message.
 
 ---
 ### :yellow_circle: C.1 SQS : event-source-mapping 
+- ![img_2.png](../99_img/dva/l/03/img_2.png)
+- Event Source Mapping will poll SQS (Long Polling)
+- **configuration**:
+  - **batch size** (1-10 messages)
+  - recommended : Set the queue **visibility timeout** = 6x Lambda-1::timeout
+  - set-up **DLQ-1** on the SQS queue.
+- **more**:
+  - For **FIFO queue** : lambda supports in order processing.
+  - lambda will **delete** item, after processing. :point_left:
+  
 
 ---
 ### :yellow_circle: C.2 KDS : event-source-mapping 
-- ![img_1.png](img_1.png)
-- upto 10 batches per shard.
+- ![img_1.png](../99_img/dva/l/03/img_1.png)
+- **parallelization**: can have upto `10 batches` per shard.
+- **in-order processing** : processing for the **affected shard** is paused, until the error is resolved
+```
+- shard-1
+  - poll-1 > batch-1 > lambda-1-instance-1
+  - poll-2 > batch-2 > **lambda-1-instance-2**   <<< errored out
+  - ...
+  - ...
+  - poll-10 > batch-10 > lambda-1-instance-10
+  
+  if lambda-1-instance-2 excution error out, entire shard-1 will be on hold/paused   <<<
+  
+  And entire batch, batch-2 will be reprocessed.                                     <<<
+```
+- **Configuration**:
+  - discard old events
+    - will go to **Destination**
+  - restrict the number of retries
+  - split the batch on error (to work around Lambda timeout issues)
 
 ---
 ### :yellow_circle: C.3 DynamoDB : event-source-mapping 
