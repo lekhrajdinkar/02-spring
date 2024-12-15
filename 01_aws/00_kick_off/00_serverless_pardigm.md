@@ -16,7 +16,7 @@
 
 ### Database
   - Aurora Serverless : [02_Aurora.md](../03_database/02_Aurora.md)
-  - DynamoDB : [04_DynamoDB.md](../03_database/04_DynamoDB.md)
+  - DynamoDB : [04_DynamoDB.md](../03_database/04_DynamoDB_SSA)
 
 ### integration/core
 - AWS API Gateway [05_API_gateway.md](../04_network/05_API_gateway.md)
