@@ -1,6 +1,9 @@
 - https://github.com/ikatyang/emoji-cheat-sheet
 
 ## 01 Compute
+- [03_lambda-dva-01-CLI.md](../01_compute/03_lambda-dva-01-CLI.md)
+- [03_lambda-dva-02-trigger.md](../01_compute/03_lambda-dva-02-trigger.md)
+- [03_lambda-dva-03-context+event.md](../01_compute/03_lambda-dva-03-context%2Bevent.md)
 
 ## 02 storage
 
@@ -20,4 +23,3 @@
 
 ## 09 DR
 
-## 10 networking
