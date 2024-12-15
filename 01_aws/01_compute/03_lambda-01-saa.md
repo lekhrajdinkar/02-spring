@@ -57,6 +57,9 @@ aws s3api put-bucket-notification-configuration \
     - `512 MD to 10 GB`
 - **lambda layer** for common code.
 - **handler** : file.method (eg: l_function.l_handler(`event`,`context`))
+  - **context** - metadata about the Lambda function execution environment.
+  - **event** - contains the input data for the Lambda function.
+  - sample: [03_lambda-dva-03-context+event.md](03_lambda-dva-03-context%2Bevent.md)
 - **language/runtime** : 
   - node, py, java, Golang, C#/Ruby, `Custom Runtime - rust/golang`
   - java 11 or above : performance is 10x (free) - `SnapStart feature` :point_left:

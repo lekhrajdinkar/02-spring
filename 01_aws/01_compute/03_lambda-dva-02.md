@@ -87,9 +87,9 @@
 -  Lambda is triggered **`synchronously` with `batch`** :point_left:
 - by **polling data** from below **3 poll-based services** :point_left:
   -  Queue based: **Queue Poller**
-    - `SQS`
+    - `SQS` : ordered, if FIFO.
   -  streams based: **Stream Poller**
-    - `KDS`
+    - `KDS` : ordered
     - `DynamoDB Streams`
 
 ![img.png](../99_img/dva/l/03/img.png)
@@ -100,7 +100,7 @@
 - ![img_2.png](../99_img/dva/l/03/img_2.png)
 - Event Source Mapping will poll SQS (Long Polling)
 - **configuration**:
-  - **batch size** (1-10 messages)
+  - **batch size** 
   - recommended : Set the queue **visibility timeout** = 6x Lambda-1::timeout
   - set-up **DLQ-1** on the SQS queue.
 - **more**:
@@ -110,7 +110,7 @@
 
 ---
 ### :yellow_circle: C.2 KDS : event-source-mapping 
-- ![img_1.png](../99_img/dva/l/03/img_1.png)
+![img_1.png](../99_img/dva/l/03/img_1.png)
 - **parallelization**: can have upto `10 batches` per shard.
 - **in-order processing** : processing for the **affected shard** is paused, until the error is resolved
 ```
