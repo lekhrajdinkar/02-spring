@@ -48,7 +48,7 @@
 
 ---
 ### 5. programming things :books:
-- **create function**:
+#### **5.-1. create function**:
   - [create function with x-ray tracing](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/26623428#overview)
   - create from web-console, cli commands, terraform plan, cloudFormation template (upload zip to s3 (versioned))
   - ![img_4.png](../99_img/dva/l/img_4.png)
@@ -120,7 +120,7 @@
     - use these env var and write trace.
 
 ---
-#### **5.4.lambda layer** 
+#### **5.4. lambda layer** 
 ![img_1.png](../99_img/dva/l/img_1.png)
 - 5 layer max
 - 250 MB total
@@ -167,7 +167,7 @@
   - `AmazonCodeGuruProfilerAgentAccess` policy to your function
 
 ---
-#### **5.8 version and alias**  (java/py)
+#### **5.8 version and alias** 
 - publish function to create version 1,2... `immutable`
 - current version : $LATEST - `mutable` (edit code)
 - create alias to point one specfic version
@@ -179,6 +179,7 @@
 - eg:
   - ![img.png](../99_img/dva/l/02/imgV.png)
 
+---
 ## B. integration with other services :green_circle: 
 - **lambda trigger** patterns:  :point_left:
   - **Event source mapping** 
