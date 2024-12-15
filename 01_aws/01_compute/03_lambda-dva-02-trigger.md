@@ -43,6 +43,7 @@
 - soon
 
 ---
+---
 ## B `A-synchronous`
 - below services make a-sync/non-blocking call:
   - s3:evnetNotification
@@ -133,4 +134,25 @@
 
 ---
 ### :yellow_circle: C.3 DynamoDB : event-source-mapping 
+- soon
+
+---
+
+## C Destination (2019) :o:
+
+### c.1 Async invocation: `failure`
+- goes to **DLQ** 
+  - sqs
+  - sns
+- **Destination** (new, preferred)
+### c.2 Async invocation: `success`
+- **destination**
+
+![img.png](../99_img/dva/l/05/img.png)
+
+### c.3 Event Source mapping `discard batch`
+![img_1.png](../99_img/dva/l/05/img_1.png)
+
+
+
 

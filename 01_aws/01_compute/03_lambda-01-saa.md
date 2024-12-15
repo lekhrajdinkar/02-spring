@@ -1,3 +1,5 @@
+- https://docs.aws.amazon.com/lambda/latest/dg/welcome.html
+--- 
 # AWS Lambda 
 ## A. Lambda:Function
 - ![img.png](../99_img/dva/l/01/img.png)
@@ -81,7 +83,7 @@ aws s3api put-bucket-notification-configuration \
   - **Event source mapping** 
   - **Synchronous** 
   - **A-synchronous**
-  - details: [03_lambda-dav-01.md](03_lambda-dva-02) for details
+  - details: [03_lambda-dav-01.md](03_lambda-dva-02-trigger) for details
 
 - all common eg:
   - **API-gateway** (REST) >> lambda

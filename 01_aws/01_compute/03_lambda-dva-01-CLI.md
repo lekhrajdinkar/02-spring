@@ -58,7 +58,7 @@ aws lambda invoke \
     response.json
 ```
 
-## 3. Add trigger (Event source mapping)
+## 3. Add trigger - S3 notification
 ```
 # update lambda policy
 # ==================
