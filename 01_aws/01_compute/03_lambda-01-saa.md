@@ -165,7 +165,20 @@
   - **CodeGuruProfiler layer** to function
   - Env vars to your function
   - `AmazonCodeGuruProfilerAgentAccess` policy to your function
+
 ---
+#### **5.8 version and alias**  (java/py)
+- publish function to create version 1,2... `immutable`
+- current version : $LATEST - `mutable` (edit code)
+- create alias to point one specfic version
+  - alias1 --> version 1,2...
+  - alias1 --> :x: --> alias-2
+  - **weight alias** (`canary model`)
+    - alias1 --> 90% --> v1
+    - alias1 --> 10% --> v2
+- eg:
+  - ![img.png](../99_img/dva/l/02/imgV.png)
+
 ## B. integration with other services :green_circle: 
 - **lambda trigger** patterns:  :point_left:
   - **Event source mapping** 
