@@ -11,6 +11,7 @@
   - by services(eg: s3 trigger lambda)
   - by SDK/CLI
     - `--invocation-type Event` for making async call from cli
+- Avoid using recursive code, never have a Lambda function call itself :point_left: :point_left:
 
 ### 1. Scaling
 - auto-scale with load` (parallel Lambdas, `max- 1000`)
@@ -117,6 +118,7 @@
     - `AWS_XRAY_DAEMON_ADDRESS`: the X-Ray Daemon IP_ADDRESS:PORT
   - Use AWS X-Ray SDK in Code
     - use these env var and write trace.
+
 ---
 #### **5.4.lambda layer** 
 ![img_1.png](../99_img/dva/l/img_1.png)
@@ -135,7 +137,7 @@
 ---
 #### **5.6. Concurrency**
 - set **reservedConcurrency**
-  - `max/default = 1000` 
+  - `max/default = 1000` (can be increased on request)
   - **combined** for all function/s together. :point_left:
     - function-1 has 500 invocation
     - function-2 has 500 invocation
@@ -151,6 +153,18 @@
 - **provisioned concurrency**
   - configure it to have **warm start**, else cold-start.
 
+---
+#### **5.7 CodeGuru**  (java/py)
+- **developer tool** powered by machine learning (ML)
+  - Identifies performance bottlenecks
+  - Offers recommendations to optimize CPU and memory usage, helping to reduce costs
+  - Enforces coding standards and recommends fixes for anti-patterns
+  - Detects common security vulnerabilities
+
+- When activated, Lambda adds:
+  - **CodeGuruProfiler layer** to function
+  - Env vars to your function
+  - `AmazonCodeGuruProfilerAgentAccess` policy to your function
 ---
 ## B. integration with other services :green_circle: 
 - **lambda trigger** patterns:  :point_left:
@@ -181,4 +195,8 @@
 - ![img_3.png](../99_img/compute/lambda/img_3.png)
 - ![img_2.png](../99_img/compute/lambda/img_2.png)
 - ![img_6.png](../99_img/compute/lambda/img_6.png)
+
+## D. extra
+### 1. limit summary
+![img.png](../99_img/dva/l/01/img-limits.png)
   
