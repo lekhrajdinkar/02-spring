@@ -138,17 +138,29 @@
 
 ---
 
-## :o: D Destination (2019) 
-- usecase:
-### D.1 Async invocation: `failure`
-- goes to **DLQ** 
+## D :o: Destination (2019)
+- [udemy reference](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/19730538#overview)
+- new, preferred, 4  services
   - sqs
   - sns
-- **Destination** (new, preferred)
+  - another-lambda,
+  - event-bus
+- in ccgg
+  - lambda > java-rest-api > programmatically writing into success fifo queue.
+  - so achieving same behaviour.
+  
+### D.1 Async invocation: `failure`
+- goes to **DLQ**  (old, only 2 service)
+  - sqs
+  - sns
+- **Destination** 
+
 ### D.2 Async invocation: `success`
 - **destination**
 
 ![img.png](../99_img/dva/l/05/img_2.png)
+
+![img.png](../99_img/dva/l/05/img.png)
 
 ### D.3 Event Source mapping: `discard batch`
 ![img_1.png](../99_img/dva/l/05/img_1.png)
