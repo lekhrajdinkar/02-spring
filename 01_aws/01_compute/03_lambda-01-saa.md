@@ -12,6 +12,7 @@
   - by SDK/CLI
     - `--invocation-type Event` for making async call from cli
 - Avoid using recursive code, never have a Lambda function call itself :point_left: :point_left:
+- can create **vpce** (PrivateLink)
 
 ### 1. Scaling
 - auto-scale with load` (parallel Lambdas, `max- 1000`)
@@ -185,6 +186,19 @@
 ![img.png](../99_img/dva/l/img-cd.png)
 
 ---
+#### **5.10 Function URL**
+- expose `function-1:version-1/alias` with Dedicated **HTTP(S) endpoint**.
+  - **https://`<url-id>`.lambda-url.<region>.on.aws** (dual-stack IPv4 & IPv6)
+  - Access your function URL through the public Internet only
+  - Doesn’t support **PrivateLink** / vpce :point_left:
+- **security**:
+  - Supports Resource-based Policies
+  - CORS configurations
+  - set Throttle. eg: `seservedConcurrency=10`
+  - **AuthType== `NONE`** (allow public and unauthenticated access)
+  - **AuthType== `AWS_IAM`**
+    - ![img.png](../99_img/dva/l/img1234567890.png)
+---
 ## B. integration with other services :green_circle: 
 - **lambda trigger** patterns:  :point_left:
   - **Event source mapping** 
@@ -218,4 +232,6 @@
 ## D. extra
 ### 1. limit summary
 ![img.png](../99_img/dva/l/01/img-limits.png)
+
+
   
