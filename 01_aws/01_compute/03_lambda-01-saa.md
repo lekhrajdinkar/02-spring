@@ -4,25 +4,28 @@
 ## A. Lambda:Function
 - ![img.png](../99_img/dva/l/01/img.png)
 - lambda initially was `FaaS`. Now serverless : `provision code/function` 
+- lambda@edge - globally service. :point_left:
+  - author: us-east-1
+  - replicated to edge location from author.
 - invoke:
   - by services(eg: s3 trigger lambda)
   - by SDK/CLI
     - `--invocation-type Event` for making async call from cli
 
-### 1 scaling
+### 1. scaling
 - auto-scale with load` (parallel Lambdas, `max- 1000`)
 - ![img_4.png](../99_img/compute/lambda/img_4.png)
 
-### 2 network  
+### 2. network  
 - default: run in **aws owned VPC** :point_left:
 - can attach ENI to run inside our **VPC-1**
   
-### 3 pricing
+### 3. pricing
 - cost-efficient
 - **no of call**: First 1M free, then `20cent/million req`
 - **cpu usage**: First 400K GB-second free, then `$1/600K GB-second`
 
-### 4 security
+### 4. security
 - Attach IAM role with fine grain access to lambda. eg:
   - cw:log-group
   - sqs:poll (event source mapping)
@@ -52,9 +55,9 @@ aws s3api put-bucket-notification-configuration \
   ]
 }
 ```
-
-### 5 programming things :book:
-#### **basic**
+---
+### 5. programming things :book:
+#### **5.1. Basic**
 - **compute-time**: `0-15 min`
 - **resource**:
   - RAM : `128 MB -10 GB` + improves network as well
@@ -74,15 +77,17 @@ aws s3api put-bucket-notification-configuration \
   - `50 MB`  compressed
   - `250 MB` code+dependency
   
-#### **env var** 
+---  
+#### **5.2. ENV var** 
 - `4 KB`
 - can encrypt them as well :point_left:
 - sample py code:
   ```
   import os;
   os.getenv("ENV_VAR_1")
-  ```
-#### **Monitor** :o:
+
+---  
+#### **5.3. Monitor** :o:
 - **inbuilt metric**
   - `iterator-age`: can check **stream** iterator/offset/sequence :point_left:
   - `concurrent-execution`
@@ -100,7 +105,7 @@ aws s3api put-bucket-notification-configuration \
   - Use AWS X-Ray SDK in Code
     - use these env var and write trace.
       
-#### **Lambda Container Image** 
+#### **5.4. Lambda Container Image** 
 - run docker image in lambda Function
 - `base image` : lambda runtime API
 

@@ -55,17 +55,21 @@
 #### a. lambda@Edge 
 - `nodeJs` or `Py`
 -  lambda is **heavy**
-- thousands/sec
+- scale to `1000s of request/sec`
 - execution time : 5-10 sec
-- Note: regional, written in region-1, CF replicate to all edge loc.
+- globally service. :point_left:
+  - author: **us-east-1**
+  - replicated to edge location from author.
+- ![img_1.png](../99_img/dva/l/04/img_1.png)
 
 #### b. CloudFront-Function
 - `js`
 - very **light** weight 
   - 10 KB pkg
   - Max 2Mb ram
-- millionReq/sec
+- scale to `million of Req/sec`
 - **pricing**: 1/6 time cheaper than lambda.
+- ![img.png](../99_img/dva/l/04/img.png)
 
 - ![img_1.png](../99_img/CF/cf-3/img_1.png)
 ---
