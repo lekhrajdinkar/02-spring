@@ -5,27 +5,38 @@
 - ![img.png](../99_img/dva/l/01/img.png)
 - lambda initially was `FaaS`. Now serverless : `provision code/function` 
 - lambda@edge - globally service. :point_left:
-  - author: us-east-1
+  - author: **us-east-1**
   - replicated to edge location from author.
 - invoke:
   - by services(eg: s3 trigger lambda)
   - by SDK/CLI
     - `--invocation-type Event` for making async call from cli
 
-### 1. scaling
+### 1. Scaling
 - auto-scale with load` (parallel Lambdas, `max- 1000`)
 - ![img_4.png](../99_img/compute/lambda/img_4.png)
 
-### 2. network  
-- default: run in **aws owned VPC** :point_left:
-- can attach ENI to run inside our **VPC-1**
+### 2. Network :o:
+- default: run in **aws owned VPC** (has public internet access) 
+- run inside our **VPC-1** and subnet
+  - attach **ENI** to lambda
+    - ENI has SG
+      - define ingress/egress.
+  - deployed in `private subnet` --> don't have internet access
+  - deployed in `public subnet` (igw attached)
+    - still **don't have internet** access by-default :point_left: :point_left:
+  - Get internet access with **NAT**
+    - ![img.png](../99_img/dva/l/01/img-vpc-1.png)
+    - deploy lambda in private subnet
+    - update rtb, to route traffic 0.0.0.0.\0 traffic to NAT gateway
+    - this is the only way.
   
-### 3. pricing
+### 3. Pricing
 - cost-efficient
 - **no of call**: First 1M free, then `20cent/million req`
 - **cpu usage**: First 400K GB-second free, then `$1/600K GB-second`
 
-### 4. security
+### 4. Security
 - Attach IAM role with fine grain access to lambda. eg:
   - cw:log-group
   - sqs:poll (event source mapping)
