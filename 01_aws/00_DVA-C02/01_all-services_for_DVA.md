@@ -89,17 +89,25 @@
 
 
 ## Section 8 -  `RDS + Aurora + ElastiCache` :green_circle:
+- [01_RDS.md](../03_database/01_RDS.md)
+- [02_Aurora.md](../03_database/02_Aurora.md)
+- [03_ElastiCache.md](../03_database/03_ElastiCache.md)
 ```
     ElastiCache Strategies
     Amazon MemoryDB for Redis
 ```
 ## Section 9 - `Route 53` :green_circle:
+- [02_Rout53.md](../04_network/02_Rout53.md)
 ```
     Routing Policy - Traffic Flow & Geoproximity Hands On
 ```
 
 ## Section 10 - `VPC Fundamentals` :green_circle:
-- VPC details not needed.
+- VPC details not needed. still can check:
+  - [03_VPC-1.md](../04_network/03_VPC-1.md)
+  - [03_VPC-2.md](../04_network/03_VPC-2.md)
+  - [03_VPC-3.md](../04_network/03_VPC-3.md)
+  - [03_VPC-4.md](../04_network/03_VPC-4.md)
 - [04_CloudFront_DVA.md](../04_network/04_CloudFront_DVA.md)
 ```
     VPC Fundamentals - Section Introduction
@@ -110,6 +118,7 @@
     Three Tier Architecture
 ```
 ## Section 12 - `AWS CLI, SDK, IAM Roles & Policies` :green_circle:
+- [02_developer-things.md](02_developer-things.md)
 ```
     AWS EC2 Instance Metadata
     AWS EC2 Instance Metadata - Hands On
@@ -127,6 +136,8 @@
 - [03_S3-3.md](../02_storage/03_S3-3.md)
 
 ## Section 15 - `CloudFront` :green_circle:
+- [04_CloudFront.md](../04_network/04_CloudFront.md)
+- [04_CloudFront_DVA.md](../04_network/04_CloudFront_DVA.md)
 ```
     CloudFront - Caching & Caching Policies
     CloudFront - Cache Behaviors
@@ -138,6 +149,8 @@
 ```
 
 ## Section 16 `ECS, ECR & Fargate` :green_circle:
+- [02_Containers_ECS.md](../01_compute/02_Containers_ECS.md)
+- [02_Kubernetes_EKS.md](../01_compute/02_Kubernetes_EKS.md)
 ```
     Amazon ECS - Rolling Updates
     Amazon ECS Task Definitions - Deep Dive
