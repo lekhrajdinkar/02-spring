@@ -44,28 +44,7 @@
 - **lambda resource based policy** 
   - who can invoke the Lambda function and under what conditions 
   - eg: allow S3 bucket:
-```
-aws lambda add-permission \
-    --function-name <function_name> \
-    --action "lambda:InvokeFunction" \    <<<
-    --principal s3.amazonaws.com \
-    --source-arn arn:aws:s3:::<bucket_name> \
-    --statement-id <unique_id>
 
-aws s3api put-bucket-notification-configuration \
-    --bucket <bucket_name> \
-    --notification-configuration file://notification.json
-    
-# notification.json    
-{
-  "LambdaFunctionConfigurations": [
-    {
-      "LambdaFunctionArn": "arn:aws:lambda:region:account-id:function:function-name",
-      "Events": ["s3:ObjectCreated:*"]
-    }
-  ]
-}
-```
 ---
 ### 5. programming things :book:
 #### **5.1. Basic**
@@ -96,7 +75,7 @@ aws s3api put-bucket-notification-configuration \
   ```
   import os;
   os.getenv("ENV_VAR_1")
-
+  ```
 ---  
 #### **5.3. Monitor** :o:
 - **inbuilt metric**
@@ -126,7 +105,7 @@ aws s3api put-bucket-notification-configuration \
   - **Event source mapping** 
   - **Synchronous** 
   - **A-synchronous**
-  - details: [03_lambda-dav-01.md](03_lambda-dva-02-trigger) for details
+  - details: [03_lambda-dva-02-trigger.md](03_lambda-dva-02-trigger.md) for details
 
 - all common eg:
   - **API-gateway** (REST) >> lambda

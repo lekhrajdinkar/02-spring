@@ -87,11 +87,8 @@
 - [udemy reference](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/19730528#overview)
 -  Lambda is triggered **`synchronously` with `batch`** :point_left:
 - by **polling data** from below **3 poll-based services** :point_left:
-  -  Queue based: **Queue Poller**
-    - `SQS` : ordered, if FIFO.
-  -  streams based: **Stream Poller**
-    - `KDS` : ordered
-    - `DynamoDB Streams`
+  -  Queue based: **Queue Poller** : `SQS` : ordered, if FIFO.
+  -  streams based: **Stream Poller** : `KDS` : ordered  + `DynamoDB Streams`
 
 ![img.png](../99_img/dva/l/03/img.png)
 - lambda will scale out, based on active message.
@@ -101,9 +98,10 @@
 - ![img_2.png](../99_img/dva/l/03/img_2.png)
 - Event Source Mapping will poll SQS (Long Polling)
 - **configuration**:
-  - **batch size** 
+  - **batch size**  + **batch Window**
   - recommended : Set the queue **visibility timeout** = 6x Lambda-1::timeout
   - set-up **DLQ-1** on the SQS queue.
+  - preferred way : destination (on-failure)
 - **more**:
   - For **FIFO queue** : lambda supports in order processing.
   - lambda will **delete** item, after processing. :point_left:
@@ -127,10 +125,9 @@
   And entire batch, batch-2 will be reprocessed.                                     <<<
 ```
 - **Configuration**:
-  - discard old events
+  - discard batch
     - will go to **Destination**
   - restrict the number of retries
-  - split the batch on error (to work around Lambda timeout issues)
 
 ---
 ### :yellow_circle: C.3 DynamoDB : event-source-mapping 
