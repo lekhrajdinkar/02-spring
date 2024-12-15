@@ -161,30 +161,48 @@
 - [06_AWS_config.md](../07_monitoring/06_AWS_config.md)
 
 ## Section 21 : `lambda` :green_circle:
+- [03_lambda-01-saa.md](../01_compute/03_lambda-01-saa.md)
 - [03_lambda-dva-01-CLI.md](../01_compute/03_lambda-dva-01-CLI.md)
 - [03_lambda-dva-02-trigger.md](../01_compute/03_lambda-dva-02-trigger.md)
 - [03_lambda-dva-03-context+event.md](../01_compute/03_lambda-dva-03-context%2Bevent.md)
 
 ## Section 22 : `DynamoDB` :yellow_circle:
-- [04_DynamoDB_SSA.md](../03_database/04_DynamoDB_SSA.md)
+- [04_1_DynamoDB_SSA.md](../03_database/04_1_DynamoDB_SSA.md)
 
 ## Section 23 : `API-gateway` :yellow_circle:
+- [05_1_API_gateway_SAA.md](../04_network/05_1_API_gateway_SAA.md)
 
 ## Section 24 : `CICD` :yellow_circle:
 
 ## Section 25 : `SAM :Serverless Application Model` :yellow_circle:
+- [00_serverless_pardigm.md](../00_kick_off/00_serverless_pardigm.md)
 
 ## Section 26 : `CDK` :yellow_circle:
 
 ## Section 27 : `Cognito` :yellow_circle:
+- [02_1_cognito_SAA.md](../06_Security/02_1_cognito_SAA.md)
 
 ## Section 28 : `Step function, AppSync` :yellow_circle:
 
 ## Section 29: `Advance IAM (short)` :yellow_circle:
+- [01_IAM-1.md](../06_Security/01_IAM-1.md)
+- [01_IAM-2.md](../06_Security/01_IAM-2.md)
 
 ## Section 30 : `security: KMS,SSM` :yellow_circle:
+- [04_KMS.md](../06_Security/04_KMS.md)
+- [05_SSM-param-store.md](../06_Security/05_SSM-param-store.md)
 
 ## Section 31 : `other services` :red_circle:
+### DVA
+
+### SAA
+- [97_more-services](../97_more-services)
+- [09_DR](../09_DR)
+- [08_Analytics](../08_Analytics)
+- [10_ML](../10_ML)
+- more:
+  - [98_SAA_discussion](../98_SAA_discussion)
+  - [practice-test-SAA](../practice-test)
 
 
 

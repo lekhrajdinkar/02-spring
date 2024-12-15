@@ -12,14 +12,14 @@
   - Step Functions
 
 ### security
-  - AWS Cognito [02_cognito.md](../06_Security/02_cognito.md)
+  - AWS Cognito [02_cognito.md](../06_Security/02_1_cognito_SAA)
 
 ### Database
   - Aurora Serverless : [02_Aurora.md](../03_database/02_Aurora.md)
-  - DynamoDB : [04_DynamoDB.md](../03_database/04_DynamoDB_SSA)
+  - DynamoDB : [04_DynamoDB.md](../03_database/04_1_DynamoDB_SSA)
 
 ### integration/core
-- AWS API Gateway [05_API_gateway.md](../04_network/05_API_gateway.md)
+- AWS API Gateway [05_API_gateway.md](../04_network/05_1_API_gateway_SAA)
 - Amazon S3
   - [03_S3-1.md](../02_storage/03_S3-1.md)
   - [03_S3-2.md](../02_storage/03_S3-2.md)
