@@ -138,19 +138,19 @@
 
 ---
 
-## C Destination (2019) :o:
-
-### c.1 Async invocation: `failure`
+## :o: D Destination (2019) 
+- usecase:
+### D.1 Async invocation: `failure`
 - goes to **DLQ** 
   - sqs
   - sns
 - **Destination** (new, preferred)
-### c.2 Async invocation: `success`
+### D.2 Async invocation: `success`
 - **destination**
 
-![img.png](../99_img/dva/l/05/img.png)
+![img.png](../99_img/dva/l/05/img_2.png)
 
-### c.3 Event Source mapping `discard batch`
+### D.3 Event Source mapping: `discard batch`
 ![img_1.png](../99_img/dva/l/05/img_1.png)
 
 
