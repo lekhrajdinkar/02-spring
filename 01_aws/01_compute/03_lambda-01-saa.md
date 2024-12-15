@@ -23,8 +23,11 @@
 - **cpu usage**: First 400K GB-second free, then `$1/600K GB-second`
 
 ### 4 security
-- Attach IAM role with fine grain access to lambda
-- **lambda policy** 
+- Attach IAM role with fine grain access to lambda. eg:
+  - cw:log-group
+  - sqs:poll (event source mapping)
+  - ...
+- **lambda resource based policy** 
   - who can invoke the Lambda function and under what conditions 
   - eg: allow S3 bucket:
 ```
@@ -51,6 +54,7 @@ aws s3api put-bucket-notification-configuration \
 ```
 
 ### 5 programming things :book:
+#### **basic**
 - **compute-time**: `0-15 min`
 - **resource**:
   - RAM : `128 MB -10 GB` + improves network as well
@@ -66,18 +70,41 @@ aws s3api put-bucket-notification-configuration \
   - node, py, java, Golang, C#/Ruby, `Custom Runtime - rust/golang`
   - java 11 or above : performance is 10x (free) - `SnapStart feature` :point_left:
   - ![img_5.png](../99_img/compute/lambda/img_5.png)
-- **env var** : `4 KB`
 - **build pkg size** :
   - `50 MB`  compressed
   - `250 MB` code+dependency
--  **Monitor** : 
-  - log, metric, trace.
-  - log-group : /aws/lambda/lambda-1/
-  - each run creates new log stream.
-- **Lambda Container Image** 
-  - run docker image in lambda Function
-  - `base image` : lambda runtime API
+  
+#### **env var** 
+- `4 KB`
+- can encrypt them as well :point_left:
+- sample py code:
+  ```
+  import os;
+  os.getenv("ENV_VAR_1")
+  ```
+#### **Monitor** :o:
+- **inbuilt metric**
+  - `iterator-age`: can check **stream** iterator/offset/sequence :point_left:
+  - `concurrent-execution`
+  - `Throttle`
+  - `Async delivery failure`
+  - ...
+- **log-group** : /aws/lambda/lambda-1/
+- **traces** :point_left:
+  - Enable **Active Tracing**, to run the **X-Ray daemon**
+  - add this to Lambda-role : `AWSXRayDaemonWriteAccess`
+  - Environment variables to communicate with X-Ray
+    - `_X_AMZN_TRACE_ID`: contains the tracing header
+    - `AWS_XRAY_CONTEXT_MISSING`: by default, LOG_ERROR
+    - `AWS_XRAY_DAEMON_ADDRESS`: the X-Ray Daemon IP_ADDRESS:PORT
+  - Use AWS X-Ray SDK in Code
+    - use these env var and write trace.
+      
+#### **Lambda Container Image** 
+- run docker image in lambda Function
+- `base image` : lambda runtime API
 
+---
 ## B. integration with other services :green_circle: 
 - **lambda trigger** patterns:  :point_left:
   - **Event source mapping** 
