@@ -1,5 +1,5 @@
-# A. AWS Services  for DVA
-## Reference
+# 1. AWS Services  for DVA
+## A. Reference
 - https://aws.amazon.com/blogs/
 - https://www.udemy.com/course/aws-certified-developer-associate-dva-c01
 
@@ -69,7 +69,7 @@
 - Amazon Cognito
 
 ---
-# B. Progress :books:
+# 2. Progress :books:
 - https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/19771482#overview
   - slides: :book: https://courses.datacumulus.com/downloads/certified-developer-k92/
   - practice paper: https://www.udemy.com/course/aws-certified-developer-associate-practice-tests-dva-c01/
