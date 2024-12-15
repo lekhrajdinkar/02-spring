@@ -46,7 +46,7 @@
   - eg: allow S3 bucket:
 
 ---
-### 5. programming things :book:
+### 5. programming things :books:
 - **create function**:
   - [create function with x-ray tracing](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/26623428#overview)
   - create from web-console, cli commands, terraform plan, cloudFormation template (upload zip to s3 (versioned))
@@ -128,7 +128,10 @@
 #### **5.5. Lambda Container Image**
 - run docker image in lambda Function
 - `base image` : lambda runtime API
-
+- eg: FROM amazon/aws-lambda-nodejs:12
+- to run javacode, provides JVM runtime. 
+  - similar provide `container-d` runtime.
+- ![img.png](../99_img/dva/l/01/img-docker.png)
 ---
 #### **5.6. Concurrency**
 - set **reservedConcurrency**

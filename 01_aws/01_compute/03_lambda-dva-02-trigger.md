@@ -54,7 +54,7 @@
     - AWS config
     - AWs IoT
 - **internal eventQueue** :o:
-  - event --> eventSQSQueue [e1,e2,...] --> LambdaService reads event and invoke lambda async.
+  - event --> eventSQSQueue [e1,e2,...] --> LambdaService reads event and invoke lambda functions async.
   - if throttleError, LambdaService will return event back to internal eventQueue.
 ---
 ### :green_circle: B.1 S3:event notification 
@@ -62,7 +62,8 @@
 - ![img_3.png](../99_img/dva/l/02/img_3.png)
 - create s3 bucket > properties tab >> create s3 notification
   - set **prefix** +  s3:objectCreate event
-  - set destination : lambda-1 (lambda-policy-1: allow s3)
+  - set **target** : lambda-1 (lambda-policy-1: allow s3)
+- create DLQ or destination(OnFailure)
 
 ---
 ### :green_circle: B.2 SQS 
