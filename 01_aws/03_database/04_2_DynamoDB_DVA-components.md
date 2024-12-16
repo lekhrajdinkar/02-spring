@@ -40,21 +40,21 @@
 
 ---
 ## 6. Define **throughput** for **each table**
-### **On-Demand Mode** 
+### 6.1. **On-Demand Mode** 
 - read/write operation, automatically scale up/down upto its max, with growing workloads
   - Read **Request** Units (RRU)
   - Write **Request** Units (WRU)
 - for un-predictable workload.
 - simplified billing but `2.5 times expensive`
 
-### **Provisioned Mode** (default)
+### 6.2. **Provisioned Mode** (default)
 - for predicated workload
 - can enable optionally, enable auto-scaling of WCU/RCU
 - so we define **capacity** : RCU and WCU
 - ![img.png](../99_img/dva/db/01/02/img.png)
 - ![img_1.png](../99_img/dva/db/01/02/img_1.png)
 
-### **ThrottleError**
+### 6.3. **ThrottleError**
 - if capacity exceeded then `ProvisionedThroughputExceededException`
 - **reason**
   - `Hot Keys `– one partition key is being read too many times (e.g., popular item)
@@ -76,9 +76,9 @@
   - CLI/SDK
 
 ---
-## 8. index
+## 8. Index
 - [udemy reference](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/28646582#overview)
-### LSI
+### 8.1. `LSI` - Global Secondary Index
 - index for : query by 
   - `same` **PartitionKey**
   - `Alternative` **SortKey**
@@ -90,7 +90,7 @@
 
 ![img_2.png](../99_img/dva/db/02/img_2.png)
 
-### GLI
+### 8.2. `GSI` - Global Secondary Index
 - index for : query by
   - `Alternative`  **PartitionKey**
   - `Alternative` **SortKey**
