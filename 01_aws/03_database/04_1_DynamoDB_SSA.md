@@ -51,12 +51,13 @@
 - Number of partitions
   - ![img_1.png](../99_img/dva/db/01/img_1.png)
     
-### 3. `Global Table`
+### 3. `Global` Table
 - table-1 (R/W) is `region-1`
 - table-1 (R/W) is `region-2`
 - `2 way replication` b/w both regions.
 - ![img_3.png](../99_img/moreSrv/dynamo/img_3.png)
-- Side Note: `Enable` **DynamoDB Streams** first,  helps to replicate data across replica tables in other AWS Regions
+- **Enable DynamoDB Streams** 
+  - helps to replicate data across replica tables in other AWS Regions
 
 ---
 ## C. DynamoDB streams
