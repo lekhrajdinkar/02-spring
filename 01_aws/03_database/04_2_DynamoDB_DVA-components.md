@@ -7,6 +7,7 @@
   - `provisioned` - define **capacity** `RCU / WCU `
   - `onDemand` - uses `RRU / WRU` **requests**, internally. 2.5 times expensive.
   - can switch b/w modes, at any time :point_left:
+- created : https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#table?name=ps-games
 
 ## 1. **Record**
 - or Item
@@ -49,7 +50,7 @@
 
 ### 6.2. **Provisioned Mode** (default)
 - for predicated workload
-- can enable optionally, enable auto-scaling of WCU/RCU
+- can optionally, enable **auto-scaling** of WCU/RCU
 - so we define **capacity** : RCU and WCU
 - ![img.png](../99_img/dva/db/01/02/img.png)
 - ![img_1.png](../99_img/dva/db/01/02/img_1.png)
@@ -76,9 +77,9 @@
   - CLI/SDK
 
 ---
-## 8. Index
+## 8. Secondary Index
 - [udemy reference](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/28646582#overview)
-### 8.1. `LSI` - Global Secondary Index
+### 8.1. `LSI` - Local Secondary Index
 - index for : query by 
   - `same` **PartitionKey**
   - `Alternative` **SortKey**

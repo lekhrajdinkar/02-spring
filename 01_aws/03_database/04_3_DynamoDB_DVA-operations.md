@@ -90,3 +90,48 @@
 - error: **UnprocessedKeys** for failed read operations 
   - exponential backoff 
   - add RCU
+
+---
+#  program
+## 1. update item
+- https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/dynamodb-ps-games-operation?tab=code
+- https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#item-explorer?operation=SCAN&table=ps-games
+```
+{
+  "id": { "N": "101" },
+  "name": { "S": "The Last of Us Part II" },
+  "release_year": { "N": "2020" },
+  "genre": { "S": "Action-Adventure" },
+  "developer": { "S": "Naughty Dog" },
+  "rating": { "N": "9.5" },
+  "platforms": { "SS": ["PS4", "PS5"] },
+  "multiplayer": { "BOOL": false },
+  "file_size": { "N": "80" },
+  "version" : { "N", "1"}
+}
+
+
+import boto3
+from decimal import Decimal
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('playstation-games')
+
+# Use Decimal for numeric values
+try:
+    table.update_item(
+        Key={"id": 101, "name": "The Last of Us Part II"},
+        UpdateExpression="SET rating = :new_rating, version = version + :incr",
+        ConditionExpression="version = :expected_version",
+        ExpressionAttributeValues={
+            ":new_rating": Decimal('9.6'),  # Use Decimal instead of float
+            ":expected_version": Decimal('1'),
+            ":incr": Decimal('1')
+        }
+    )
+    print("Update successful!")
+except dynamodb.meta.client.exceptions.ConditionalCheckFailedException:
+    print("Version mismatch! Item was updated by another process.")
+
+
+```
