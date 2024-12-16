@@ -93,7 +93,7 @@
 
 ---
 #  program
-## 1. update item
+## 1. py : update item
 - https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/dynamodb-ps-games-operation?tab=code
 - https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#item-explorer?operation=SCAN&table=ps-games
 ```
@@ -110,6 +110,7 @@
   "version" : { "N", "1"}
 }
 
+======
 
 import boto3
 from decimal import Decimal
@@ -132,6 +133,21 @@ try:
     print("Update successful!")
 except dynamodb.meta.client.exceptions.ConditionalCheckFailedException:
     print("Version mismatch! Item was updated by another process.")
-
+    
+====
+aws dynamodb update-item \
+  --table-name ps-games \
+  --key '{
+      "id": {"N": "101"},
+      "name": {"S": "The Last of Us Part II"}
+  }' \
+  --update-expression "SET rating = :new_rating, version = version + :incr" \
+  --condition-expression "version = :expected_version" \
+  --expression-attribute-values '{
+      ":new_rating": {"N": "9.6"},
+      ":expected_version": {"N": "1"},
+      ":incr": {"N": "1"}
+  }' \
+  --region us-west-2
 
 ```
