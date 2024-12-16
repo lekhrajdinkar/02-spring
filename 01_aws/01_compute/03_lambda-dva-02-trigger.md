@@ -134,7 +134,7 @@
 
 ---
 ### :yellow_circle: C.3 DynamoDB : stream 
-- soon
+![img.png](../99_img/dva/db/img-syno-stream.png)- soon
 
 ---
 

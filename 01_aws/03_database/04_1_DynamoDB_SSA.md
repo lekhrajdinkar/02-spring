@@ -63,13 +63,39 @@
 
 ---
 ## C. DynamoDB streams
-- some usecase:
-    - `React` to changes in real-time by invoking `lambda`,` KCL-adaptor(Java-App) `
-    - Real-time usage `analytics` : send stream to `AmazonShift`
-    - Implement cross-region `replication`
-- ![img_1.png](../99_img/moreSrv/dynamo/img_1.png)
-- ![img_2.png](../99_img/moreSrv/dynamo/img_2.png)
+- [udemy reference](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/28646620#overview)
+- **enable it explicitly** and select one of below **kind**:
+```
+• KEYS_ONLY           – only the key attributes of the modified item
+• NEW_IMAGE           – the entire item, as it appears after it was modified
+• OLD_IMAGE           – the entire item, as it appeared before it was modified
+• NEW_AND_OLD_IMAGES  – both the new and the old images of the item
+```
+- internally has same concept of **shards**, same like in KDS :point_left:
+  - we don’t provision shards, this is automated by AWS
+  - [03_01_KDS_KinesisDataStream.md](../05_decoupling/03_01_KDS_KinesisDataStream.md)
 
+- **Ordered** stream of **item-level modifications** (create/update/delete) in a table.
+
+- has **24 hrs retention**, so process it or send it somewhere in that window , if needed.
+  - read and process by directly **`Lambda fn`**
+    - Define **event source mapping** [03_lambda-dva-02-trigger.md](../01_compute/03_lambda-dva-02-trigger.md#yellow_circle-c3-dynamodb--stream-)
+  - send to **`KDS`** using **kinesis-connectors**
+    - custom app ( aws-sdk or KCL) - read and process
+    - KDA
+    - KDF >> redshift / s3 / opensearch 
+    - lambda fn
+    
+- **stream `Use cases`**
+  - react to changes in real-time (welcome email to users)
+  - Analytics
+  - Insert into derivative tables
+  - Insert into OpenSearch Service
+  - cross-**region** replication 
+    - if not using global dynamoDB
+
+- **common architecture**
+  - ![img_2.png](../99_img/moreSrv/dynamo/img_2.png)
 ---
 ## D. Storage 
 - storage classes ( like in s3 ): 
