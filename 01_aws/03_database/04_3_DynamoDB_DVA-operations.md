@@ -33,14 +33,14 @@
   - otherwise returns an error
 - Helps with **concurrent access** to items
 - No performance impact
-- ![img.png](img.png)
+- ![img.png](../99_img/dva/db/02/img.png)
 - **conditional**
   - `attribute_exists`
   - `attribute_not_exists`
   - `attribute_type`
   - `contains` (for string)
   - `begins_with` (for string)
-  - `ProductCategory` IN (:cat1, :cat2) and Price between :low and :high
+  - ProductCategory `IN` (:cat1, :cat2) and Price `between` :low and :high
   - `size` (string length)
 
 ---

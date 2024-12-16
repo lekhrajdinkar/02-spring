@@ -74,3 +74,34 @@
   - web Console
   - **NoSQL Workbench** for DynamoDB
   - CLI/SDK
+
+---
+## 8. index
+- [udemy reference](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/28646582#overview)
+### LSI
+- index for : query by 
+  - `same` **PartitionKey**
+  - `Alternative` **SortKey**
+-  **restriction**: 
+  - `5 max`
+  - Must be defined at table creation time 
+- **Attribute Projections** :  KEYS_ONLY, INCLUDE, ALL
+- Uses the WCUs and RCUs of the main table
+
+![img_2.png](../99_img/dva/db/02/img_2.png)
+
+### GLI
+- index for : query by
+  - `Alternative`  **PartitionKey**
+  - `Alternative` **SortKey**
+- Speed up queries on non-key attributes
+- Can be added/modified after table creation
+- **Attribute Projections** :  KEYS_ONLY, INCLUDE, ALL
+
+- provision **new** WCU and RCU
+  - If the writes are throttled on the GSI,
+  - then the main table will be throttled! :point_left: :point_left:
+
+![img_1.png](../99_img/dva/db/02/img_1.png)
+
+---
