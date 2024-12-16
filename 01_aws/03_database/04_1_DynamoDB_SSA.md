@@ -91,62 +91,61 @@
 
 ---
 ## G. Developer things :books:
-### 1. fundamentals
-- **Table**
-  - PK : **partitionKey** , or
-  - PK : **partitionKey** + **Sortkey**
-  - ![img_2.png](../99_img/dva/db/01/img_2.png)
-  - also, provision RCU/WCU
+### **Table**
+- PK : **partitionKey** , or
+- PK : **partitionKey** + **Sortkey**
+- ![img_2.png](../99_img/dva/db/01/img_2.png)
+- also, provision RCU/WCU
 
-- **record**
-  - attributes (`400 KB max`)
-  
-- **Datatype**:
-  - Scalar Types – String, Number, Binary, Boolean, Null
-  - Document Types – List, Map
-  - Set Types – String Set, Number Set, Binary Set
-  
-- **TTL** 
-  - set expiration for record
-  - it will auto-delete and send event stream
-  - eg: 
-    - TTL is `2 hr`
-    - webUser --> session 2 hr --> session logout --> cleanUp his/her data after 2 hr.
+### 1. **record**
+- attributes (`400 KB max`)
 
-- **Write Capacity Units** (**WCU**)
-  - `1 WCU` == write `1 item`(`upto 1 KB`)/`sec`
-  - ![img_3.png](../99_img/dva/db/01/img_3.png)
-  
-- **Read Capacity Units** (**RCU**)
-  - **2 types of read**
-    - ConsistentRead == True
-      - 1 RCU ==  1 **`Strongly` Consistent Read** of 1 item(`upto 4 KB`)
-    - ConsistentRead == false (default)
-      - 1 RCU ==  2 **`Eventually` Consistent Read** of 1 item(`upto 4 KB`)
-  - ![img_4.png](../99_img/dva/db/01/img_4.png)
-    - because of replication lag, can be Strongly or Eventually consistent
-  - ![img_5.png](../99_img/dva/db/01/img_5.png)
+### 2. **Datatype**:
+- Scalar Types – String, Number, Binary, Boolean, Null
+- Document Types – List, Map
+- Set Types – String Set, Number Set, Binary Set
 
-- Define **throughput/capacity** for **each table**
-  - mode:
-    - **Provisioned Mode** (default)
-      - for predicated workload
-      - can enable optionally, enable auto-scaling of WCU/RCU 
-    - **On-Demand Mode** 
-      - WCU/RCU automatically scale up/down upto its max, with growing workloads
-      - for un-predictable workload.
-      - simplified billing but `2.5 times expensive`
+### 3. **TTL** 
+- set expiration for record
+- it will auto-delete and send event stream
+- eg: 
+  - TTL is `2 hr`
+  - webUser --> session 2 hr --> session logout --> cleanUp his/her data after 2 hr.
 
-- **ThrottleError**
-  - if capacity exceeded then `ProvisionedThroughputExceededException`
-  - **reason**
-    - `Hot Keys `– one partition key is being read too many times (e.g., popular item)
-    - `Hot Partitions`
-    - `Very large items`, remember RCU and WCU depends on size of items
-  - Solutions:
-    - retry with Exponential backoff when exception is encountered (already in SDK)
-    - Distribute partition keys as much as possible
-    - If RCU issue, we can use **DAX**
+### 4. **Write Capacity Units** (**WCU**)
+- `1 WCU` == write `1 item`(`upto 1 KB`)/`sec`
+- ![img_3.png](../99_img/dva/db/01/img_3.png)
+
+### 5. **Read Capacity Units** (**RCU**)
+- **2 types of read**
+  - ConsistentRead == True
+    - 1 RCU ==  1 **`Strongly` Consistent Read** of 1 item(`upto 4 KB`)
+  - ConsistentRead == false (default)
+    - 1 RCU ==  2 **`Eventually` Consistent Read** of 1 item(`upto 4 KB`)
+- ![img_4.png](../99_img/dva/db/01/img_4.png)
+  - because of replication lag, can be Strongly or Eventually consistent
+- ![img_5.png](../99_img/dva/db/01/img_5.png)
+
+### 6. Define **throughput/capacity** for **each table**
+- mode:
+  - **Provisioned Mode** (default)
+    - for predicated workload
+    - can enable optionally, enable auto-scaling of WCU/RCU 
+  - **On-Demand Mode** 
+    - WCU/RCU automatically scale up/down upto its max, with growing workloads
+    - for un-predictable workload.
+    - simplified billing but `2.5 times expensive`
+
+### 7. **ThrottleError**
+- if capacity exceeded then `ProvisionedThroughputExceededException`
+- **reason**
+  - `Hot Keys `– one partition key is being read too many times (e.g., popular item)
+  - `Hot Partitions`
+  - `Very large items`, remember RCU and WCU depends on size of items
+- Solutions:
+  - retry with Exponential backoff when exception is encountered (already in SDK)
+  - Distribute partition keys as much as possible
+  - If RCU issue, we can use **DAX**
 
 ---
 ### 99. hands
@@ -172,8 +171,3 @@
     - record-2 : add attribute1,2
     - no schema :)    
 ```
-
-
-
-
-
