@@ -19,11 +19,15 @@
 - **Set Types** – String Set, Number Set, Binary Set
 
 ## 3. **TTL** 
-- set expiration for record
+- set expiration for record / item
 - it will auto-delete and send event stream
 - eg: 
-  - TTL is `2 hr`
-  - webUser --> session 2 hr --> session logout --> cleanUp his/her data after 2 hr.
+  - enable TTL setting and give attribute name : `my_expire_on`
+  - add **attribute** : `my_expire_on ==  <timeinMillisecond>`
+  - expired after 2 hr
+  - and deleted from index - LSI and GSL 
+  - and after `48 hrs`, **permanently deleted** from main table also. (for recovery purpose)
+  - eg: webUser --> session 2 hr --> session logout --> expire his/her data after 2 hr.
 
 ## 4. **Write Capacity Units** (**WCU**)
 - `1 WCU` == write `1 item`(`upto 1 KB`)/`sec`
