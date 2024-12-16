@@ -1,6 +1,6 @@
 # A. DynamoDB - `Simple Operations` :books:
 ## 1. Read
-### GetItem
+### 1.1. GetItem
 - Read based on Primary key
 - Primary Key can be HASH or HASH+RANGE
 - Eventually Consistent Read (default)
@@ -8,6 +8,13 @@
 - **ProjectionExpression** 
   - to retrieve only certain attributes
 
+### 1.2. Scan
+- Scan the entire table and then filter out data
+  - ProjectionExpression
+  - FilterExpression
+- Consumes a lot of RCU
+- For faster performance, use **Parallel Scan**
+- can use **limit and pagination**.
 ---
 ## 2. Write
 ### 2.1 PutItem
@@ -44,15 +51,6 @@
   - Global Secondary ?
 
 ---
-## 4. Scan
-- Scan the entire table and then filter out data
-  - ProjectionExpression 
-  - FilterExpression
-- Consumes a lot of RCU
-- For faster performance, use **Parallel Scan**
-- can use **limit and pagination**.
-
----
 ## 4. Delete
 ### 4.1 DeleteItem
 - Delete an individual item
@@ -69,16 +67,16 @@
 - done in parallel for better efficiency
 
 ### 1. BatchWriteItem
-- Up to 25 PutItem and/or DeleteItem in one call
-- Up to 16 MB of data written, up to 400 KB of data per item
+- Up to `25` PutItem and/or DeleteItem in one call
+- Up to `16 MB` of data written, up to `400 KB` of data per item
 - Can’t update items (use UpdateItem)
 - error: **UnprocessedItems** for failed write operations 
   - exponential backoff 
   - add WCU
 
-### 2.BatchGetItem
+### 2. BatchGetItem
 - Return items from one or more tables
-- Up to 100 items, up to 16 MB of data
+- Up to `100 items`, up to `16 MB` of data
 - Items are retrieved in parallel to minimize latency
 - error: **UnprocessedKeys** for failed read operations 
   - exponential backoff 
