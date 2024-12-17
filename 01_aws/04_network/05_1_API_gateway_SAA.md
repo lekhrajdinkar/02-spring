@@ -14,42 +14,61 @@
       - already have pre-define API
       - from Swagger/OpenAPI
 ---
-## B. API gateway: `integration` 
-- **Backend**
-  - API-g >> **lambda** (event,context)
-    - pure serverless
-    - most common
-    - default/max timeout : `29 sec`
-    - developer things :books:
-      - check **response object** json format
-      - also, API-g passes **event** object with lots of info. use it in code.
-      - check hands-on section below.
-      - add lambda-resource-based-**role**, to allow Api-g to invoke lambda
-    ```json5
-      // same like, when lambda was integreated with as Tg for ALB.
-      {
-      "statusCode": 200,
-      "headers": {
-      "Content-Type": "application/json"
-      },
-      "body": "{\"message\":\"Success\"}",
-      "isBase64Encoded": false
-      }
-      ```
+## B. API gateway: integration 
+### B.1. **Backend**
+- API-g >> **lambda** (event,context)
+  - pure serverless
+  - most common
+  - default/max timeout : `29 sec`
+  - use **AWS_PROXY**
     
-  - API-g >> **Any HTTP backend**
-    - API-g >> **on-prem-API**
-    - API-g >> **ALB**
-      - expose ALB public directly. happening in ccgg.
-      - expose API-g >> ALB > tg [ecs/eks - `container` - ec2/fargate]
-  - API-g >> **`Any` AWS service API call.**  
-    - s3:*
-    - sqs:getMessage
-    - kds:* :point_left:
-    - ...
-  
+- API-g >> **Any HTTP backend**
+  - API-g >> **on-prem-API**
+  - API-g >> **ALB**
+    - expose ALB public directly. happening in ccgg.
+    - expose API-g >> ALB > tg [ecs/eks - `container` - ec2/fargate]
+      
+- API-g >> **`Any` AWS service API call.**  
+  - s3:*
+  - sqs:getMessage
+  - kds:* :point_left:
+  - ...
+  - note: setup **mapping template** :point_left:
+
+---    
+### B.2. **Proxy**
+
+#### B.2.1. AWS_PROXY
+- NO mapping template
+- **request/response object** has inbuilt template
+- eg: API-g <==>  AWS_PROXY  <==> lambda
+- ![img_1.png](../99_img/dva/api-g/02/img_1.png)
+
+#### B.2.2. HTTP_PROXY
+- NO mapping template
+- eg: API-g <==>  AWS_PROXY  <==> http-backend (`ALB`)
+- ![img_4.png](../99_img/dva/api-g/02/img_4.png)
+
+#### B.2.3. MOCK
+- hardcoded response
+- for dev/testing purpose
+
+#### B.2.2. NO PROXY for (HTTP / AWS)
+- set up mapping template
+  - **Content-Type** must be == application/json/xml
+- ![img_2.png](../99_img/dva/api-g/02/img_2.png)
+
+---
+### B.3.  Mapping Template
+- soon
+#### use case
+- **usecase-1**: transform SOAP response
+  - ![img_3.png](../99_img/dva/api-g/02/img_3.png)
+- **usecase-2**: tranform query response
+  - ![img_5.png](../99_img/dva/api-g/02/img_5.png)
+
 ---  
-## C. `Endpoint type`
+## C. Endpoint type
 - by **Deployment model** 
 ### 1 `regional`
 - deployed in single region eg: us-west-1
@@ -129,4 +148,4 @@
 ## Z. Architecture Example
 - ![img.png](../99_img/moreSrv/api-gateway/img.png)
 - ![img_1.png](../99_img/moreSrv/api-gateway/img_1.png)
-- ![img_1.png](../99_img/dva/api-g/img_1.png)
+- ![img_1.png](../99_img/dva/api-g/01/img_1.png)
