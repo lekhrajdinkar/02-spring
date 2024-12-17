@@ -24,6 +24,7 @@
       - check **response object** json format
       - also, API-g passes **event** object with lots of info. use it in code.
       - check hands-on section below.
+      - add lambda-resource-based-**role**, to allow Api-g to invoke lambda
     ```json5
       // same like, when lambda was integreated with as Tg for ALB.
       {
@@ -128,3 +129,4 @@
 ## Z. Architecture Example
 - ![img.png](../99_img/moreSrv/api-gateway/img.png)
 - ![img_1.png](../99_img/moreSrv/api-gateway/img_1.png)
+- ![img_1.png](../99_img/dva/api-g/img_1.png)

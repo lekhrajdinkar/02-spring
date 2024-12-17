@@ -186,6 +186,9 @@
 
 ## Section 23 : `API-gateway` :yellow_circle:
 - [05_1_API_gateway_SAA.md](../04_network/05_1_API_gateway_SAA.md)
+- [05_1_API_gateway_SAA.md](../04_network/05_1_API_gateway_SAA.md)
+- [05_2_API_gateway_DVA-more.md](../04_network/05_2_API_gateway_DVA-more.md)
+- [05_2_API_gateway_DVA-websocket.md](../04_network/05_2_API_gateway_DVA-websocket.md)
 
 ## Section 24 : `CI/CD` :yellow_circle:
 
