@@ -186,14 +186,35 @@
 - `import` (json,csv,ion) --> Dynamo DB
 - ![img_4.png](../99_img/moreSrv/dynamo/img_4.png)
 
-## G. Migration
+---
+## G. Copying DynamoDB Table (into s3)
+### 1 AWS Data pipeline (fast)
+- launches EMR bts.
+```
+"EMR" is a cloud-based big data platform that 
+simplifies the process of running large-scale distributed data processing frameworks like 
+  - Apache Hadoop
+  - Apache Spark 
+  - ...
+```
+![img_2.png](../99_img/dva/db/04/img_2.png)
+
+### 2 backup and restore
+- takes time
+
+### 3 API call
+- scan + putItem
+- BatchWriteItem
+- not recommended, but can do for small table.
+
+## H. Migration
 - use **AWS DMS** to dynamoDB from:
   - MongoDB
   - SQL database : MySQL,Oracle, etc
     - de-normalize
     - convert to item
 
-## H. Architecture example:
+## I. Architecture example:
 - use dynamoDB for indexing S3 metadata.
   - ![img_1.png](../99_img/dva/db/04/img_1.png)
   - ![img.png](../99_img/dva/db/04/img.png)

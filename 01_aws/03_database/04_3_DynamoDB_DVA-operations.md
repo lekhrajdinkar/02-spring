@@ -55,26 +55,7 @@
 - **table cleanup**
   - option-1: DeleteTable and recreate it.  `fast, cheap `
   - option-2: scan and delete individual item. `slow, consumes RCU/WCU`
----
-## 5. Copying DynamoDB Table (into s3)
-### 5.1 AWS Data pipeline (fast)
-- launches EMR bts.
-```
-"EMR" is a cloud-based big data platform that 
-simplifies the process of running large-scale distributed data processing frameworks like 
-  - Apache Hadoop
-  - Apache Spark 
-  - ...
-```
-![img_2.png](../99_img/dva/db/04/img_2.png)
 
-### 5.2 backup and restore 
-- takes time
-
-### 5.3 API call
-- scan + putItem
-- BatchWriteItem
-- not recommended, but can do for small table.
 
 ---
 # B. DynamoDB - `Batch Operations` :books:
