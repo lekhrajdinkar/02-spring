@@ -16,19 +16,19 @@
 ---
 ## B. API gateway: integration 
 ### B.1. **Backend**
-- API-g >> **lambda** (event,context)
+- API-g >> PROXY >>**lambda** (event,context)
   - pure serverless
   - most common
   - default/max timeout : `29 sec`
   - use **AWS_PROXY**
     
-- API-g >> **Any HTTP backend**
+- API-g >> PROXY >> **Any HTTP backend**
   - API-g >> **on-prem-API**
   - API-g >> **ALB**
     - expose ALB public directly. happening in ccgg.
     - expose API-g >> ALB > tg [ecs/eks - `container` - ec2/fargate]
       
-- API-g >> **`Any` AWS service API call.**  
+- API-g >> PROXY >> **`Any` AWS service API call.**  
   - s3:*
   - sqs:getMessage
   - kds:* :point_left:
@@ -37,10 +37,13 @@
 
 ---    
 ### B.2. **Proxy**
-
+- there are 3 proxy options. choose either.
 #### B.2.1. AWS_PROXY
 - NO mapping template
-- **request/response object** has inbuilt template
+- **request/response object** uses inbuilt aws-template
+- ALB <==> AWS_PROXY <==> tg:lambda
+  - use same template, remember
+  - [01_ELB_ASG.md](01_ELB_ASG.md)
 - eg: API-g <==>  AWS_PROXY  <==> lambda
 - ![img_1.png](../99_img/dva/api-g/02/img_1.png)
 
@@ -49,22 +52,27 @@
 - eg: API-g <==>  AWS_PROXY  <==> http-backend (`ALB`)
 - ![img_4.png](../99_img/dva/api-g/02/img_4.png)
 
-#### B.2.3. MOCK
-- hardcoded response
-- for dev/testing purpose
-
-#### B.2.2. NO PROXY for (HTTP / AWS)
+#### B.2.3. NO PROXY for (HTTP / AWS)
 - set up mapping template
   - **Content-Type** must be == application/json/xml
 - ![img_2.png](../99_img/dva/api-g/02/img_2.png)
 
+#### B.2.4. MOCK
+- for dev/testing purpose
+
 ---
 ### B.3.  Mapping Template
-- soon
+- response from lambda
+  - ![img.png](../99_img/dva/api-g/03/img.png)
+- create template
+  - ![img_1.png](../99_img/dva/api-g/03/img_1.png)
+- check final response
+  - ![img_2.png](../99_img/dva/api-g/03/img_2.png)
+  
 #### use case
 - **usecase-1**: transform SOAP response
   - ![img_3.png](../99_img/dva/api-g/02/img_3.png)
-- **usecase-2**: tranform query response
+- **usecase-2**: tranform query param
   - ![img_5.png](../99_img/dva/api-g/02/img_5.png)
 
 ---  
@@ -129,12 +137,12 @@
         
   - set timeout : default 30 s
   
-  - check lambda > permission > "resource based policy statemnet" (policy/statemnet auto added)
-        principle: api-gateway           <<<<
-        Action: lambda-Invoke
-        resource:   arnofLambda-1
-        effect: allow
-        condtion > sourceArn: api-gateway-1 
+  - check lambda > permission > "resource based policy statemnet" 
+    - allow invoke for agi-g          <<<<
+        
+  - proxy integration : enabled       <<<<                
+    - if not enabled
+    - then create mapping template
         
   - invoke from aws webcosole
   
