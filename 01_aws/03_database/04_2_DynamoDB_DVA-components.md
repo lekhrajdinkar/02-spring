@@ -111,6 +111,9 @@
 
 ---
 ## 9. transaction
+- DynamoDB supports transactions but 
+  - only for up to `25 items`
+  - or `4 MB` in total size
 - **ACID**
 - **Read Modes** (query/scan)
   - Eventual Consistency 

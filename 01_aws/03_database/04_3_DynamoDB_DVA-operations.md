@@ -46,15 +46,37 @@
 ---
 ## 4. Delete
 ### 4.1 DeleteItem
-- Delete an individual item
+- delete an individual item
 - Ability to perform a conditional delete
 
 ### 4.2 DeleteTable
 - Delete a whole table and all its items
 - Much quicker deletion than calling DeleteItem on all items
+- **table cleanup**
+  - option-1: DeleteTable and recreate it.  `fast, cheap `
+  - option-2: scan and delete individual item. `slow, consumes RCU/WCU`
+---
+## 5. Copying DynamoDB Table (into s3)
+### 5.1 AWS Data pipeline (fast)
+- launches EMR bts.
+```
+"EMR" is a cloud-based big data platform that 
+simplifies the process of running large-scale distributed data processing frameworks like 
+  - Apache Hadoop
+  - Apache Spark 
+  - ...
+```
+![img_2.png](../99_img/dva/db/04/img_2.png)
+
+### 5.2 backup and restore 
+- takes time
+
+### 5.3 API call
+- scan + putItem
+- BatchWriteItem
+- not recommended, but can do for small table.
 
 ---
-
 # B. DynamoDB - `Batch Operations` :books:
 - reducing the number of API calls
 - done in parallel for better efficiency
@@ -89,7 +111,6 @@
   - otherwise returns an error
 - Helps with **concurrent access** to items
 - No performance impact
-- ![img.png](../99_img/dva/db/02/img.png)
 - **use these function in conditional expression**
   - `attribute_exists()`
   - `attribute_not_exists()`

@@ -102,16 +102,78 @@
   - ![img_2.png](../99_img/moreSrv/dynamo/img_2.png)
 ---
 ## D. Storage 
+- max item size : `400 KB`
 - storage classes ( like in s3 ): 
   - **Standard**
   - **Infrequent Access (IA)** 
     - to save more cost
-
+- storing large object in dynamoDB.
+  - use **s3** to storage
+  - in table store s3 metadata.
 ---
 ## E. Security
-- Integrated with IAM for security, authorization and administration
-- encryption at rest/fly
-- Resource-based policy for table
+- encryption at rest/fly by KMS/TLS
+- **Resource-based policy** for table.
+- keep traffic inside vpc
+  - create **vpce** / gateway (privateLink)
+- Integrated with IAM
+  - use **Identity provider** 
+  - federated user
+  - Assign an **IAM Role** to federated user with a **Condition**:
+    - to limit their API access to DynamoDB
+    - **dynamodb:`LeadingKeys`** == partition_key or partition_key_prefix
+      - row level access. 
+      - user can access row with that partition_key
+    - **dynamodb:`Attributes`**
+    ```json5
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:GetItem",
+                "dynamodb:Query"
+            ],
+            "Resource": "arn:aws:dynamodb:us-west-2:123456789012:table/YourTableName",
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "dynamodb:Attributes": ["name", "email"]
+                }
+            }
+        },
+        {
+            "Effect": "Allow",
+            "Action": "dynamodb:UpdateItem",
+            "Resource": "arn:aws:dynamodb:us-west-2:123456789012:table/YourTableName",
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "dynamodb:Attributes": ["status"]
+                }
+            }
+        },
+      
+        
+        {
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem"
+            ],
+            "Resource": "arn:aws:dynamodb:us-west-2:123456789012:table/YourTableName",
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "dynamodb:LeadingKeys": "${aws:userid}"
+                    //"dynamodb:LeadingKeys": "${aws:departid}_*"
+                }
+            }
+        }
+    ]
+    }
+    ```
 
 ---
 ## F. DR
@@ -122,3 +184,15 @@
 - `export` (json,ion) data --> S3.
 - `import` (json,csv,ion) --> Dynamo DB
 - ![img_4.png](../99_img/moreSrv/dynamo/img_4.png)
+
+## G. Migration
+- use **AWS DMS** to dynamoDB from:
+  - MongoDB
+  - SQL database : MySQL,Oracle, etc
+    - de-normalize
+    - convert to item
+
+## H. Architecture example:
+- use dynamoDB for indexing S3 metadata.
+  - ![img_1.png](../99_img/dva/db/04/img_1.png)
+  - ![img.png](../99_img/dva/db/04/img.png)
