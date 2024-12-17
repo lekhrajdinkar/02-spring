@@ -20,6 +20,7 @@
   - `trillions of row`
   - `100s of TB` of storage
   - Scales to `massive workloads`
+  - It provides both provisioned (specify RCU & WCU) and on-demand (pay for what you use) capacity modes.
 
 - Allows event driven programming with **DynamoDB Streams** :point_left:
 

@@ -38,7 +38,7 @@
   - ConsistentRead == True
     - 1 RCU ==  1 **`Strongly` Consistent Read** of 1 item(`upto 4 KB`)
   - ConsistentRead == false (default)
-    - 1 RCU ==  2 **`Eventually` Consistent Read** of 1 item(`upto 4 KB`)
+    - 1/2 RCU ==  **`Eventually` Consistent Read** of 1 item(`upto 4 KB`)
 - ![img_4.png](../99_img/dva/db/01/img_4.png)
   - because of replication lag, can be Strongly or Eventually consistent
 - ![img_5.png](../99_img/dva/db/01/img_5.png)
@@ -61,6 +61,7 @@
 
 ### 6.3. **ThrottleError**
 - if capacity exceeded then `ProvisionedThroughputExceededException`
+- RCUs and WCUs are spread across all the table's partitions :point_left:
 - **reason**
   - `Hot Keys `– one partition key is being read too many times (e.g., popular item)
   - `Hot Partitions`
@@ -116,8 +117,8 @@
   - or `4 MB` in total size
 - **ACID**
 - **Read Modes** (query/scan)
-  - Eventual Consistency 
-  - Strong Consistency 
+  - Eventual Consistency 1/2 RCU
+  - Strong Consistency  1 RCU
   - `Transactional`
     - Consumes 2x RCUs :point_left:
     - `TransactGetItems`

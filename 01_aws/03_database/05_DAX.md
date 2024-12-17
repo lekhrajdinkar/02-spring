@@ -2,6 +2,10 @@
 
 ## Intro
 - in memory **cache** for DynamoDB
+  -  It caches the most frequently used data,
+  - thus offloading the heavy reads on hot keys of your DynamoDB table, 
+  - hence preventing the `ProvisionedThroughputExceededException` exception.
+-  `10x performance` improvement.
 - **micro sec latency** 
 - fully **secured**
 - DAX is compatible with DynamoDB API call
