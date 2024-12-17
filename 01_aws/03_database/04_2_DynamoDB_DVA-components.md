@@ -110,3 +110,20 @@
 ![img_1.png](../99_img/dva/db/02/img_1.png)
 
 ---
+## 9. transaction
+- **ACID**
+- **Read Modes** (query/scan)
+  - Eventual Consistency 
+  - Strong Consistency 
+  - `Transactional`
+    - Consumes 2x RCUs :point_left:
+    - `TransactGetItems`
+- **Write Modes**  ((add/update/delete))
+  - Standard 
+  - `Transactional` :point_left:
+    - Consumes 2x WCUs
+    - `TransactWriteItems`
+
+![img.png](../99_img/dva/db/img-txn.png)
+
+---
