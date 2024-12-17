@@ -1,50 +1,62 @@
 # API gateway (Serverless)
+## A. Intro
+- **REST API** ( protocol : `http` + `websocket`), with other benefit:
+  - **caching**
+  - API **versioning**
+  - API **documentation** / specification ?
+  - **interceptor** : transform req/resp
+  - more:
+    - **No infrastructure** to manage. :)
+    - create **environment**  - dev,qa,prod
+    - **throttling** - rate limiting
+    - **security** - so many things. check below.
+    - **import**
+      - already have pre-define API
+      - from Swagger/OpenAPI
+---
+## B. API gateway: **Backend**
+- API-g >> **VPC endPoint**
+- API-g >> **lambda** 
+  - pure serverless
+  - most common
+- API-g >> **ALB**
+  - expose ALB public directly. happening in ccgg.
+  - expose API-g >> ALB > tg [ecs/eks - `container` - ec2/fargate]
+- API-g >> **ALL AWS service API call.**  
+  - s3:*
+  - sqs:getMessage
+  - ...
+- API-g >> **on-prem-API**
 
-- > Client --> cname/alias(in R53) --> API gateway (Http/s,webSocket) --> XXXXX
-  - lambda
-  - on premAPI-API
-  - ALB
-  - `ALL AWS service API call`.  eg: S3::GETObject,SQS::PUBLISH, etc
-  - `VPC endPoint` ( access AWS service from VPC )
   
 ---  
-## A. deployment model
-  - `edge-optimized` (default)
-    - deployed in many edge location/s
-    - backed by : cloudFront distribution.
-    - for global user
-  - `regional`
-    - deployed in single region eg: us-west-1
-  - `private`
-    - in private VPC
-    - Also, VPC endpoint(interface) --> API gateway --> XXXXX
-  - `regional with CloudFont`
-    - set-1: for us-west-1
-    - UNION
-    - Set-2 : create CF distribution-1 (CF) : whiteList - europe user + india user
+## C. Deployment model
+### `edge-optimized` (default)
+- deployed in many edge location/s
+- backed by : cloudFront distribution.
+- for global user
+### `regional`
+- deployed in single region eg: us-west-1
+### `private`
+- in private VPC
+- Also, VPC endpoint(interface) --> API gateway --> XXXXX
+### `regional with CloudFont`
+- set-1: for us-west-1
+- UNION
+- Set-2 : create CF distribution-1 (CF) : whiteList - europe user + india user
 ---
-## B. Security:
-- IAM role, OIDC and OAuth2
-- `cognito`
+
+## B. Security :point_left:
+- IAM role
+- OIDC and OAuth2
+- integrate with cognito
 - https/TCL with ACM 
   - keep certificate it `us-east-1` for global deployment model.
----
-## C. Key feature
-- `import` from Swagger/OpenAPI to define API.
-- `transform` req/resp
-- `cache` response <<< IMP
-- API versioning
-- diff env support ?
-- `rate limiting` , `throttling`
+
+
 
 ---
-## D. Use case
-- QnA: throttles requests in case of sudden traffic spikes.
-- ![img.png](../99_img/moreSrv/api-gateway/img.png)
-- ![img_1.png](../99_img/moreSrv/api-gateway/img_1.png)
-
----
-## E. Demo
+## Y. hands on
 ```
 - create (4) : api-gateway-1
     - HTTP API , REST API ** , REST API (Private),  Web-scoketAPI, 
@@ -69,3 +81,8 @@
         - will get invoke URL
 ```
 ![img_2.png](../99_img/moreSrv/api-gateway/img_2.png)
+
+---
+## Z. Architecture Example
+- ![img.png](../99_img/moreSrv/api-gateway/img.png)
+- ![img_1.png](../99_img/moreSrv/api-gateway/img_1.png)
