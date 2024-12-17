@@ -1,6 +1,7 @@
 - https://aws.amazon.com/caching/implementationconsiderations/
 ---
 # ElastiCache
+- key-value
 - if data changing slowly, then have it. eg:
   - `key-value` caching
   - `aggregations-results` caching

@@ -27,22 +27,6 @@
 - or adds a new item if it doesn’t exist
 - use **Atomic Counters**
 
-### 2.3 conditional Write
-- Accept a `write/update/delete` only 
-  - if conditions are met, 
-  - otherwise returns an error
-- Helps with **concurrent access** to items
-- No performance impact
-- ![img.png](../99_img/dva/db/02/img.png)
-- **conditional**
-  - `attribute_exists`
-  - `attribute_not_exists`
-  - `attribute_type`
-  - `contains` (for string)
-  - `begins_with` (for string)
-  - ProductCategory `IN` (:cat1, :cat2) and Price `between` :low and :high
-  - `size` (string length)
-
 ---
 ## 3. Query
 - returns Item/s based on below **expression**:
@@ -91,9 +75,32 @@
   - exponential backoff 
   - add RCU
 
+# C. Types  of write (4)
+![img_1.png](../99_img/dva/db/03/img_1.png)
+##  1. concurrent write 
+
+##  2. Atomic write 
+
+##  3. batch Write
+
+##  4. conditional Write (optimistic locking)
+- Accept a `write/update/delete` only
+  - if conditions are met,
+  - otherwise returns an error
+- Helps with **concurrent access** to items
+- No performance impact
+- ![img.png](../99_img/dva/db/02/img.png)
+- **use these function in conditional expression**
+  - `attribute_exists()`
+  - `attribute_not_exists()`
+  - `attribute_type()`
+  - `contains()` (for string)
+  - `begins_with()` (for string)
+  - ProductCategory `IN` (:cat1, :cat2) and Price `between` :low and :high
+  - `size()` (string length)
 ---
 #  program
-## 1. py : update item
+## 1. py : conditional write ( optimistic locking)
 - https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/dynamodb-ps-games-operation?tab=code
 - https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#item-explorer?operation=SCAN&table=ps-games
 

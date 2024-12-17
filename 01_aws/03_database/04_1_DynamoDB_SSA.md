@@ -35,8 +35,12 @@
 - table data stored in multiple partitions.
 - **hashing algorithm**( on PartitionKey) ==> decides which partition  to go.
 - **partitionKey**
-    - `unique`
-    - `diverse`, to distribute data evenly on partition.  :point_left:
+  - `unique`
+  - `diverse`, to distribute data evenly on partition.  :point_left:
+    - add **suffix** to partition key to make it more n more diverse.
+    - this is called **write sharding**.
+    - so use random. calculated suffix.
+    - ![img.png](../99_img/dva/db/03/img.png)
   
 #### Partition
 - ![img.png](../99_img/dva/db/01/img.png)
