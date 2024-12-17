@@ -28,17 +28,31 @@
           - set lambda-alias: v10
 ```
 ### 1.2 Configuration
-- **`cache` setting**
+#### **`cache` setting**
   - cache request/response
-  - provision **size**
+  - define at stage level
+  - provision **size** : `0.5 GB` to `237 GB`
   - set cache object **TTL**
-- **`throttle` setting**
+    - default: `5 min / 300 sec`
+    - max: `1 hr / 3600 sec`
+  - optionally encrypt.
+
+  - **cache Invalidation** :point_left:
+    - from console
+    - any client without/with iam:permission can do it
+      - header: **cache-control:max-age = 0**
+      - iam permission : **execute-api:InvalidateCache**
+
+
+#### **`throttle` setting**
   - set **rate** (no.of req per seconds make be made)
   - set **burst** (no of concurrent request)
-- **`firewall` setting**
+
+#### **`firewall` setting**
   - set WAF
   - set certificate
-- **`logs/trace/metric` setting**
+
+#### **`logs/trace/metric` setting**
   - `CW:logs` : enable/disable
     - error only
     - error + info
@@ -55,12 +69,10 @@
   - set above configuration.
 
 ---
-## 2. documentation
-
----
-## 3. use `OpenAPI spec` for **schema validation**
+## 2. supports `OpenAPI`
 - export:
   - ![img.png](../99_img/dva/api-g/01/img-openAPI.png)
+  - this is API document which client can refer.
 - generate SDK
   - for client to consume API
 - [api-gateway-open-api-1.json](api-gateway-open-api-1.json)
@@ -68,9 +80,7 @@
   - Replace `{lambda-arn}` with the ARN of the Lambda function handling the request.
   - check **schema**. :point_left:
   - import this into api-gateway
-
----
-## 4. caching
+  - **schema validation**
 
 ---
 ## 6. usage plan and API keys
