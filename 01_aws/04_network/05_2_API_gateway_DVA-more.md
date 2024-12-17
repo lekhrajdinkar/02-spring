@@ -58,13 +58,19 @@
 ## 2. documentation
 
 ---
-## 3. integration
+## 3. use `OpenAPI spec` for **schema validation**
+- export:
+  - ![img.png](../99_img/dva/api-g/01/img-openAPI.png)
+- generate SDK
+  - for client to consume API
+- [api-gateway-open-api-1.json](api-gateway-open-api-1.json)
+  - Replace `{region}` with your AWS region
+  - Replace `{lambda-arn}` with the ARN of the Lambda function handling the request.
+  - check **schema**. :point_left:
+  - import this into api-gateway
 
 ---
-## 4. Open API
-
----
-## 5. caching
+## 4. caching
 
 ---
 ## 6. usage plan and API keys

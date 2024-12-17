@@ -50,7 +50,7 @@
 
 #### B.2.2. HTTP_PROXY
 - NO mapping template
-- eg: API-g <==>  AWS_PROXY  <==> http-backend (`ALB`)
+- eg: **API-g <==>  AWS_PROXY  <==> http-backend (`ALB`)**
 - ![img_4.png](../99_img/dva/api-g/02/img_4.png)
 
 #### B.2.3. NO PROXY for (HTTP / AWS)
@@ -70,10 +70,10 @@
 - check final response
   - ![img_2.png](../99_img/dva/api-g/03/img_2.png)
   
-#### use case
-- **usecase-1**: transform SOAP response
+#### Use-cases
+- **use-case-1**: transform SOAP response
   - ![img_3.png](../99_img/dva/api-g/02/img_3.png)
-- **usecase-2**: tranform query param
+- **use-case-2**: tranform query param
   - ![img_5.png](../99_img/dva/api-g/02/img_5.png)
 
 ---  
