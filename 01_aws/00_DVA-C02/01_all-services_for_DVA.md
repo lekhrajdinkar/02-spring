@@ -87,7 +87,6 @@
 ## Section 7 : `ELB_ASG` :green_circle:
 - [01_ELB_ASG.md](..%2F04_network%2F01_ELB_ASG.md)
 
-
 ## Section 8 -  `RDS + Aurora + ElastiCache` :green_circle:
 - [01_RDS.md](../03_database/01_RDS.md)
 - [02_Aurora.md](../03_database/02_Aurora.md)
@@ -179,13 +178,16 @@
 - [03_lambda-dva-02-trigger.md](../01_compute/03_lambda-dva-02-trigger.md)
 - [03_lambda-dva-03-context+event.md](../01_compute/03_lambda-dva-03-context%2Bevent.md)
 
-## Section 22 : `DynamoDB` :yellow_circle:
+## Section 22 : `DynamoDB` :green_circle:
 - [04_1_DynamoDB_SSA.md](../03_database/04_1_DynamoDB_SSA.md)
+- [04_2_DynamoDB_DVA-components.md](../03_database/04_2_DynamoDB_DVA-components.md)
+- [04_3_DynamoDB_DVA-operations.md](../03_database/04_3_DynamoDB_DVA-operations.md)
+- [04_4_DynamoDB_DVA-cli.md](../03_database/04_4_DynamoDB_DVA-cli.md)
 
 ## Section 23 : `API-gateway` :yellow_circle:
 - [05_1_API_gateway_SAA.md](../04_network/05_1_API_gateway_SAA.md)
 
-## Section 24 : `CICD` :yellow_circle:
+## Section 24 : `CI/CD` :yellow_circle:
 
 ## Section 25 : `SAM :Serverless Application Model` :yellow_circle:
 - [00_serverless_pardigm.md](../00_kick_off/00_serverless_pardigm.md)

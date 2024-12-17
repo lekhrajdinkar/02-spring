@@ -16,9 +16,26 @@
 ---
 ## B. API gateway: `integration` 
 - **Backend**
-  - API-g >> **lambda** 
+  - API-g >> **lambda** (event,context)
     - pure serverless
     - most common
+    - default/max timeout : `29 sec`
+    - developer things :books:
+      - check **response object** json format
+      - also, API-g passes **event** object with lots of info. use it in code.
+      - check hands-on section below.
+    ```json5
+      // same like, when lambda was integreated with as Tg for ALB.
+      {
+      "statusCode": 200,
+      "headers": {
+      "Content-Type": "application/json"
+      },
+      "body": "{\"message\":\"Success\"}",
+      "isBase64Encoded": false
+      }
+      ```
+    
   - API-g >> **Any HTTP backend**
     - API-g >> **on-prem-API**
     - API-g >> **ALB**
@@ -67,6 +84,8 @@
   - keep certificate it `us-east-1` for edge-optimized endpoint.
   - certificate with backend server domain name.
 
+### CORS
+- soon
 ---
 ## C. pricing
 
@@ -87,18 +106,23 @@
         - region : us-east-1
   - integration Type: lambda
         - choose method: lambda-fn-1
+        
   - set timeout : default 30 s
+  
   - check lambda > permission > "resource based policy statemnet" (policy/statemnet auto added)
-        principle:api-gateway
-        Action:lambda-Invoke
-        resource:arnofLambda-1
-        effect:allow
+        principle: api-gateway           <<<<
+        Action: lambda-Invoke
+        resource:   arnofLambda-1
+        effect: allow
         condtion > sourceArn: api-gateway-1 
-  - test from UI
+        
+  - invoke from aws webcosole
+  
   - Deploy API
-        - will get invoke URL
+      - choose stage - dev,qa, prod
+      - will get invoke URL
+      - try on BROWSER
 ```
-![img_2.png](../99_img/moreSrv/api-gateway/img_2.png)
 
 ---
 ## Z. Architecture Example
