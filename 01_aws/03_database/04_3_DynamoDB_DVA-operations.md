@@ -96,7 +96,8 @@
 ## 1. py : update item
 - https://us-west-2.console.aws.amazon.com/lambda/home?region=us-west-2#/functions/dynamodb-ps-games-operation?tab=code
 - https://us-west-2.console.aws.amazon.com/dynamodbv2/home?region=us-west-2#item-explorer?operation=SCAN&table=ps-games
-```
+
+```json5
 {
   "id": { "N": "101" },
   "name": { "S": "The Last of Us Part II" },
@@ -109,9 +110,8 @@
   "file_size": { "N": "80" },
   "version" : { "N", "1"}
 }
-
-======
-
+```
+```python
 import boto3
 from decimal import Decimal
 
@@ -133,8 +133,8 @@ try:
     print("Update successful!")
 except dynamodb.meta.client.exceptions.ConditionalCheckFailedException:
     print("Version mismatch! Item was updated by another process.")
-    
-====
+```
+```bash
 aws dynamodb update-item \
   --table-name ps-games \
   --key '{
