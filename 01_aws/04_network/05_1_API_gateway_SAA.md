@@ -14,7 +14,7 @@
       - already have pre-define API
       - from Swagger/OpenAPI
 ---
-## B. API gateway: integration 
+## B. API gateway: integration :books:
 ### B.1. **Backend**
 - API-g >> PROXY >>**lambda** (event,context)
   - pure serverless
@@ -41,11 +41,12 @@
 #### B.2.1. AWS_PROXY
 - NO mapping template
 - **request/response object** uses inbuilt aws-template
-- ALB <==> AWS_PROXY <==> tg:lambda
+- eg: **API-g <==>    `AWS_PROXY`  <==> lambda**
+- ![img_1.png](../99_img/dva/api-g/02/img_1.png)
+- Note: 
+  - **ALB <==>         `AWS_PROXY` <==> tg:lambda**
   - use same template, remember
   - [01_ELB_ASG.md](01_ELB_ASG.md)
-- eg: API-g <==>  AWS_PROXY  <==> lambda
-- ![img_1.png](../99_img/dva/api-g/02/img_1.png)
 
 #### B.2.2. HTTP_PROXY
 - NO mapping template
