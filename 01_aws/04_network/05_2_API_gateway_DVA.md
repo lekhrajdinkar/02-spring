@@ -111,4 +111,44 @@
   - associate **stages and methods**
 
 ---
-# D. API-gateway : web socket
+# D. Other 2 API gateway
+- so far working on REST API
+## D.1. HTTP gateway
+- `low-latency | cost-effective` just more simple
+- native support for **OIDC and OAuth 2.0** + **CORS**
+- **Always proxy**
+  - HTTP proxy
+  - Lambda proxy
+  - NO_PROXY :x:
+    - hence cannot define any **mapping template**
+- usage-plans and API-keys :x:
+
+---
+## D.2. websocket gateway
+- **websocket**
+  - Two-way interactive communication between a user’s browser and a server : **persistent connection**
+    - Server can push information to the client
+    - This enables **stateful application** use cases
+  - use-case : **realtime applications**
+    - chat applications, 
+    - collaboration platforms,
+    - multiplayer games,
+    - financial trading platforms.
+    - ...
+
+- **WebSocket URL**
+ - wss://[some-uniqueid].execute-api.[region].amazonaws.com/[stage-name]
+- Communication (`connection-id` reused)
+  - **client ==> server**
+    - ![img_1.png](../99_img/dva/api-g/05/img_1.png)
+  - **server ==> client**
+    - ![img_2.png](../99_img/dva/api-g/05/img_2.png)
+    - operations by server on client:
+      - **POST** : Sends a message from the Server to the connected WS Client :point_left:
+      - GET : Gets the latest connection status of the connected WS Client
+      - DELETE : Disconnect the connected Client from the WS connection
+
+- websocket gateway : **backend**:
+  - `lambda`
+  - `DynamoDB`
+  - `Any Http backend`

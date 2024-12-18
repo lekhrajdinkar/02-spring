@@ -2,7 +2,7 @@
 --- 
 # API gateway (Serverless)
 ## A. Intro
-- **REST API** ( protocol : `http/s` + `websocket`), with other benefit:
+- **API** ( `REST API`** , `http API` ,`websocket API`), with other benefit:
   - **caching**
   - API **versioning**
   - API **documentation** / specification ?
@@ -40,7 +40,7 @@
 ---    
 ### B.2. **Proxy**
 - there are 3 proxy options. choose either.
-#### B.2.1. AWS_PROXY
+#### B.2.1. AWS_PROXY 
 - NO mapping template
 - **request/response object** uses inbuilt aws-template
 - eg: **API-g <==>    `AWS_PROXY`  <==> lambda**
@@ -100,7 +100,10 @@
 - API-g >> **VPC endPoint**
 
 ---
-## B. Security
+## B. Security : REST API-gateway
+- no native support for openIDConnect/OAuth - `REST API-gateway`
+- but `Http API-gateway` has it.
+
 ### 1. Authentication + Authorization
 #### 1.1. API keys
 - **Authentication**
@@ -206,3 +209,5 @@
 - ![img.png](../99_img/moreSrv/api-gateway/img.png)
 - ![img_1.png](../99_img/moreSrv/api-gateway/img_1.png)
 - ![img_1.png](../99_img/dva/api-g/01/img_1.png)
+### microservice (gateway)
+![img.png](../99_img/dva/api-g/05/img.png)
