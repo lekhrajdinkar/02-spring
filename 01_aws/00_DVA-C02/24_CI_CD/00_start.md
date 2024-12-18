@@ -43,11 +43,11 @@
 
 ---    
 ## 2. CodeDeploy
-- deploy to container(ecs/eks),beanstalk infa, etc
-- add `appsec.yaml`
+- deploy to ec2, lambda, ECS
+- add `appsec.yaml` (root)
 - **CodeDeploy Agent** on the target instances
-  - on ecs/ec2 already present
-  - on-prem, install it.
+  - on ecs already present
+  - ec2/on-prem, install it.
 - **deployment speed**:
   - ![img_5.png](../../99_img/dva/ci_cd/01/img_5.png)
 ```
@@ -56,15 +56,41 @@
 • OneAtATime: slowest, lowest availability impact
 • Custom: define your %
 ```
+- **Deploy on ASG** :books:
+  - **in-place deployment**
+    - replace old instance with new version
+    - downtime
+  - **blue-green deployment** (no downtime)
+    - old ASG(blue)
+    - create new ASG (green) : and deploy new version.
+    - ![img_3.png](../../99_img/dva/ci_cd/01/img_3.png)
+    - then use below **traffic routing**  strategies to shift traffic to green ASG :point_left:
+      - **Linear**: grow traffic every N minutes until 100%
+      - **Canary**: try X percent then 100%
+      - **AllAtOnce**: immediate
+    - once all shift turn off blue ASG
+    - ![img_4.png](../../99_img/dva/ci_cd/01/img_4.png)
 
-### blue-green deployment
-- ![img_3.png](../../99_img/dva/ci_cd/01/img_3.png)
-- use codeDeploy strategies for **traffic shifting** :point_left:
-  - **Linear**: grow traffic every N minutes until 100%
-  - **Canary**: try X percent then 100%
-  - **AllAtOnce**: immediate
-- ![img_4.png](../../99_img/dva/ci_cd/01/img_4.png)
+- **Rollback**
+  - enable automatic rollback option.
+  - if deployment fails
+  - then make new deployment with last know good revision.
+  
+### hands on (ECS) :point_left:
+- application-1
+  - deployment-group-1
+    - role-1 (permission to access targets)
+    - choose cluster
+    - choose ALB and tg
+    - choose deployment type : inplace + blue/green
+      - traffic routing strategy (allAtOnce, linear, canary)
+- appsec.yaml ?
+      
+### hands on (EC2)
+- https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/11851340#overview
 
+### hands on (lambda)
+- soon
 ---
 ## 3. AWS CodeStar 
 – manage software development activities in one place
