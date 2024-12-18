@@ -1,4 +1,4 @@
-# A. **Directory Service** :blue_circle:
+# A. **Directory Service**
 ## 1. Simple AD
 ![img_5.png](../99_img/security/org-2/img_5.png)
 - aws managed AD, users present only in this AD
@@ -14,7 +14,7 @@
 - `AWS AD` create trust with `on-prem AD`
 
 ---
-# B. SSO or **Identity provider** :blue_circle:
+# B. SSO or **Identity provider** 
 - use case:
     - sso for all account in [aws org](./03_AWS_org.md)
     - sso for all ec2 instance in an aws account

@@ -29,9 +29,9 @@
     - 1-2-1
     - delete principle, also delete inline policy.
 
-### am:PassRole and iam:GetRole      
-- Broad-access-role / pipeline role has these on all roles
-- that's why we are able to add role on lambda,ecs,etc
+### Iam:PassRole and iam:GetRole      
+- Broad-access-role / pipeline role has these action on all resource(role type)
+- that's why Broad-access-role, able to add any-role on lambda,ecs,etc
   
 ### **Audit**
 - check below Reports
@@ -67,7 +67,7 @@
 ---
 ## 3. Resource Policy :green_circle:
 - has **principle**
-- who amd what are allowed to access : point_left:
+- who amd what are allowed to access :point_left:
 - eg:
   - s3 policy
   - sqs policy
@@ -85,7 +85,7 @@
 - apply on: :point_left:
   - IAM `roles` 
   - IAM `users`
-  - IAM groups - NO :o:
+  - IAM groups - N :o:
 
 ```json5
 // example:
@@ -107,11 +107,6 @@ boundary-1 : allow  `ecs,lambda,s3` only
 - get aws accessID,key,token,etc with MFA token
 - add condition -> `aws:MultiFactorAuthPresent:true`
 
-### sts:assumeRoleWithSAML
-
-### sts:assumeRoleWithSAML
-
-### sts:assumeRoleWithSAML
 ---
 ## 6. scenarios
 ### 6.1. cross account access

@@ -4,7 +4,7 @@
 - `serverless database` to authentication+authorize outside user
 
 ---
-## Cognito : user pool
+## A. Cognito : user pool
 - web/mobile user (`out-Side` AWS) --> `signIn user`.
   - simple login. 
   - password-reset, email/phone confirmation, MFA
@@ -15,7 +15,7 @@
   - ![img_3.png](../99_img/moreSrv/api-gateway/img_3.png)
 
 ---
-## Cognito : Identity pool
+## B. Cognito : Identity pool
 - help to provide `temp AWS credential ( with fine grain permission)`, so outside user access aws resource directly.
 - once user is signed-in with `Cognito : user pool` or `3rd party login`
 - then, they exchange `auth token` with `AWS credential` 
