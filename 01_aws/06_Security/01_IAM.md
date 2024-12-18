@@ -2,27 +2,49 @@
 ---
 # A. IAM
 ## 1. intro
-- root user + MFA
+- AWS CLI / SDK
+  - signed API call with **SigV4**
+  - Access keys ID + secret Access key
+  
+### User / group
 - **IAM user** 
 - **federated user** 
   - outside AWS user
   - authenticated by an external identity provider (okta,google,fb) using SAML,OIDC, OAUTH2.0
   - external identity provider, is register with AWS account
 - **IAM Group**
-- **policies** 
-  - permission, JSON document 
-  - Type: 
-    - `AWS managed policies` (fullSQSaccess, fulls3access, etc)
-    - `customer managed polices`
-    - `inline polices`
-      - attach to principle: IAM user, IAM group
-      - attach to IAM role **
-- AWS CLI / SDK 
-  - signed API call with **SigV4**
-  - Access keys ID + secret Access key
-- **Audit**: check below Reports
+
+### **policies** 
+- permission, JSON document 
+- leverage special **policy variable** eg: ${aws:username}
+- attach to many principle: IAM user, IAM group, IAM role
+- Type: 
+  - `AWS managed policies` (fullSQSaccess, fulls3access, etc)
+  - `customer managed polices`
+    - Version Controlled 
+    - rollback
+    - attach to **many principle**: IAM user, IAM group, IAM role
+  - `inline polices` **
+    - attach to **single principle**: IAM user, IAM group, IAM role
+    - 1-2-1
+    - delete principle, also delete inline policy.
+
+### am:PassRole and iam:GetRole      
+- Broad-access-role / pipeline role has these on all roles
+- that's why we are able to add role on lambda,ecs,etc
+  
+### **Audit**
+- check below Reports
   - user level : **access advisor**, etc
   - account level : **credential report**, etc
+  
+### **good practice**
+  - Monitor API calls made by a user in CloudTrail
+  - root user + MFA
+  - Grant Least Privilege
+  - don't store IAM key credentials on EC2
+  - On premise server must call STS to obtain temporary security credentials.
+  - dont reuse role, create separate.
 ---
 ## 2. IAM role :green_circle:
 - Designed to provide temporary security credentials by **trusted entities/principle** :
@@ -35,7 +57,7 @@
     - which principals (trusted entities) are allowed to assume the role.
 - **use case**
   - service to service communication.
-  - lambda role --> s3,sqs,etc
+  - lambda role --> s3,sqs,ec2,etc
   - ecs/eks --> s3,sqs,etc
   - federated user, assumes role - Broad-access-role
   - service account in k8s assumes role (IRSA)
@@ -112,7 +134,9 @@ boundary-1 : allow  `ecs,lambda,s3` only
 
 ---
 ## 7. Evaluation logic :yellow_circle:
-![img_2.png](../99_img/security/org-2/img_2.png)
+- ![img.png](../99_img/security/org-2/im.png)
+- ![img_2.png](../99_img/security/org-2/img_2.png)
+
 
 ---
 ## 8. Advance Polices example

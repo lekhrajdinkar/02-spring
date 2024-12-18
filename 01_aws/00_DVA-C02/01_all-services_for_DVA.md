@@ -201,8 +201,8 @@
 ## Section 28 : `Step function, AppSync` :yellow_circle:
 
 ## Section 29: `Advance IAM (short)` :green_circle:
-- [01_IAM-1.md](../06_Security/01_IAM)
-- [01_IAM-2.md](../06_Security/01_SSO+DirectoryService)
+- [01_IAM.md](../06_Security/01_IAM.md)
+- [01_SSO+DirectoryService.md](../06_Security/01_SSO%2BDirectoryService.md)
 
 ## Section 30 : `security: KMS,SSM` :yellow_circle:
 - [04_KMS.md](../06_Security/04_KMS.md)
