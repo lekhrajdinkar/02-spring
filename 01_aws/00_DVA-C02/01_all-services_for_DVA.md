@@ -75,8 +75,8 @@
   - practice paper: https://www.udemy.com/course/aws-certified-developer-associate-practice-tests-dva-c01/
 
 ## Section 4 `IAM` :green_circle:
-- [01_IAM-1.md](../06_Security/01_IAM-1.md) 
-- [01_IAM-2.md](../06_Security/01_IAM-2.md)
+- [01_IAM-1.md](../06_Security/01_IAM) 
+- [01_IAM-2.md](../06_Security/01_SSO+DirectoryService)
 
 ## Section 5 `EC2` :green_circle:
 - [01_EC2.md](../01_compute/01_EC2.md)
@@ -201,8 +201,8 @@
 ## Section 28 : `Step function, AppSync` :yellow_circle:
 
 ## Section 29: `Advance IAM (short)` :green_circle:
-- [01_IAM-1.md](../06_Security/01_IAM-1.md)
-- [01_IAM-2.md](../06_Security/01_IAM-2.md)
+- [01_IAM-1.md](../06_Security/01_IAM)
+- [01_IAM-2.md](../06_Security/01_SSO+DirectoryService)
 
 ## Section 30 : `security: KMS,SSM` :yellow_circle:
 - [04_KMS.md](../06_Security/04_KMS.md)
