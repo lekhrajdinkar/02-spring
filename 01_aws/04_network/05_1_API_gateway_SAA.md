@@ -115,6 +115,15 @@
 
 ### CORS
 - soon
+
+### **`throttle` setting** for stage
+- set **rate** (no.of req per seconds make be made)
+- set **burst** (no of concurrent request)
+
+### **`firewall` setting** for stage
+- set WAF
+- set certificate
+
 ---
 ## C. pricing
 
