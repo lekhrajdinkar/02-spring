@@ -94,16 +94,16 @@
     - 502 bad gateway
 
 ---
-# B. API key 
+# B. API-gateway : API key 
 - **purpose**:
   - authentication 
-  - usage tracking
-- create **API keys** to identify API clients
+  - **usage tracking**
+- create **API keys** to identify API clients/customer
     - Ex: WBjHxNtoAb4WPKBC7cGm64CBibIb24b4jt8jJHo9
-    - httpheader: **x-api-key**=<your-api-key>
+    - httpheader: **x-api-key**=your-api-key
 
 ---
-# C. usage plan
+# C. API-gateway : usage plan
 - create plan at **API key level**.
 - eg: set:
   - **Throttling limits** 
@@ -111,4 +111,4 @@
   - associate **stages and methods**
 
 ---
-# D. web socket
+# D. API-gateway : web socket

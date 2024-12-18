@@ -40,4 +40,5 @@
 6. Instance profile credentials – for **EC2 Instance Profiles**
 ---
 ## 7 signV4 
-![img.png](../99_img/dva/img.png)
+- ![img.png](../99_img/dva/img.png)
+- **AWS SDKs** and **AWS CLI** handle SigV4 signing automatically

@@ -99,15 +99,41 @@
 
 ---
 ## B. Security
-- **API keys** for authentication.
-
-### 1. Authentication/Authorization
-- for global user: 
-  - integrate with **cognito**
-- internal security
-  - **IAM role**
-  - custom Authorizer using **Lambda**
+### 1. Authentication + Authorization
+#### 1.1. API keys
+- **Authentication**
+  - pass`x-api-key` header
+- **Authorization**
+  - API-gateway **resource iam policy** === for
+  - who and what, they access on API-gateway. same like s3 policy, sqs policy, lambda resource policy, etc.
+  - principle/who:
+    - use for **cross account id**
+    - ...
+    
+#### 1.2 IAM
+- ![img_1.png](../99_img/dva/api-g/04/img_1.png)
+- for IAM user
+- **Authentication** 
+  - **IAM-based SigV4 signing** 
+  - AWS SDKs and AWS CLI handle SignatureV4 signing automatically.
+- **Authorization**
+  - same, IAM policy
   
+#### 1.3 Cognito
+- for global user
+- **Authentication**
+  - integrate with 3rd party ID provider.
+  - ![img_2.png](../99_img/dva/api-g/04/img_2.png)
+- **Authorization**
+  - set at API method.
+  - API-g >> proxy >> lambda (resource policy for authorization) : point_left:
+  
+#### 1.4 Lambda Authorizer
+![img_3.png](../99_img/dva/api-g/04/img_3.png)
+- Great for 3rd party tokens
+- Handle Authentication verification + Authorization in the Lambda function
+
+--- 
 ### 2 SSL
 - export certificate to **ACM**
 - create **R53** entry (cname/alias)
@@ -118,7 +144,7 @@
 ### 3 CORS
 - CORS can be enabled on api gateway
 - eg:
-  - ![img.png](img.png)
+  - ![img.png](../99_img/dva/api-g/04/img.png)
 
 ### 4 **`throttle` setting** for stage
 - set **rate** (no.of req per seconds make be made)
