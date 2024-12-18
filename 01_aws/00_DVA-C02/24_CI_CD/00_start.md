@@ -87,7 +87,7 @@
 - appsec.yaml ?
       
 ### hands on (EC2)
-- https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/11851340#overview
+- [here](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/11851340#overview)
 
 ### hands on (lambda)
 - soon
@@ -97,8 +97,39 @@
 
 ---
 ## 4. AWS CodeArtifact 
-– store, publish, and share software packages
+- repository-1
+  - package-1
+  - package-2
+  - ...
+- store, publish, and share software packages
+- using **nexus repo** :point_left:
+  - proxy to maven, pip, Nuget, npm, yarm, Gradle
+
+- security: create **repo policy**
+
+![img.png](../../99_img/dva/ci_cd/02/img.png)
+
+![img_1.png](../../99_img/dva/ci_cd/02/img_1.png)
+
+![img_2.png](../../99_img/dva/ci_cd/02/img_2.png)
+
+- [handon](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/36528108#overview)
 
 ---
-## 5. AWS CodeGuru 
-– automated code **reviews** using Machine Learning
+## 5. AWS CodeGuru : just intro
+- **reviewer** : looks for every commit and gives recommendation
+- **profiler** : looks for dynamic metric and gives recommendation
+- using **synk scan** :point_left:
+
+![img_3.png](../../99_img/dva/ci_cd/02/img_3.png)
+
+---
+## extra: 
+- CodeGuruAgent **config** 
+```
+• MaxStackDepth 
+• MemoryUsageLimitPercent 
+• MinimumTimeForReportingInMilliseconds 
+• SamplingIntervalInMilliseconds 
+• MinimumTimeForReportingInMilliseconds
+```
