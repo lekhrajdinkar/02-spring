@@ -1,3 +1,5 @@
+- https://chatgpt.com/c/6761df7b-aa90-800d-b11f-c0e411c511fe
+--- 
 # API gateway (Serverless)
 ## A. Intro
 - **REST API** ( protocol : `http/s` + `websocket`), with other benefit:
@@ -110,24 +112,26 @@
     - use for **cross account id**
     - ...
     
+---    
 #### 1.2 IAM
 - ![img_1.png](../99_img/dva/api-g/04/img_1.png)
-- for IAM user
+- for IAM user / roles
 - **Authentication** 
   - **IAM-based SigV4 signing** 
   - AWS SDKs and AWS CLI handle SignatureV4 signing automatically.
 - **Authorization**
   - same, IAM policy
   
+---  
 #### 1.3 Cognito
 - for global user
 - **Authentication**
   - integrate with 3rd party ID provider.
   - ![img_2.png](../99_img/dva/api-g/04/img_2.png)
 - **Authorization**
-  - set at API method.
   - API-g >> proxy >> lambda (resource policy for authorization) : point_left:
   
+---  
 #### 1.4 Lambda Authorizer
 ![img_3.png](../99_img/dva/api-g/04/img_3.png)
 - Great for 3rd party tokens
