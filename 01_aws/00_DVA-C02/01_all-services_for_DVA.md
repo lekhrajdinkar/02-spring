@@ -184,7 +184,7 @@
 - [04_3_DynamoDB_DVA-operations.md](../03_database/04_3_DynamoDB_DVA-operations.md)
 - [04_4_DynamoDB_DVA-cli.md](../03_database/04_4_DynamoDB_DVA-cli.md)
 
-## Section 23 : `API-gateway` :yellow_circle:
+## Section 23 : `API-gateway` :green_circle:
 - [05_1_API_gateway_SAA.md](../04_network/05_1_API_gateway_SAA.md)
 - [05_2_API_gateway_DVA.md](../04_network/05_2_API_gateway_DVA.md)
 
@@ -200,7 +200,7 @@
 
 ## Section 28 : `Step function, AppSync` :yellow_circle:
 
-## Section 29: `Advance IAM (short)` :yellow_circle:
+## Section 29: `Advance IAM (short)` :green_circle:
 - [01_IAM-1.md](../06_Security/01_IAM-1.md)
 - [01_IAM-2.md](../06_Security/01_IAM-2.md)
 
