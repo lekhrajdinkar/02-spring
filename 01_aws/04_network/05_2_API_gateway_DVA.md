@@ -1,4 +1,4 @@
-# API-gateway - Stage :books:
+# A. API-gateway - Stage :books:
 ## 1. Intro
 ![img.png](../99_img/dva/api-g/01/img.png)
 - once created API-g, need to deploy it on **stages**
@@ -69,13 +69,46 @@
   - **schema validation**
 
 ---
-## 4. usage plan and API keys
+## 5. Monitor
+### `CW:logs` :
+- enable/disable
+- set log level
+  - error only
+  - error + info
+  - full req + response log
+### `CW:x-rays` 
+- enable/disable
+- give full picture
+
+### `CW:metric` :point_left:
+- enable/disable below metrics
+  - **CacheHitCount** 
+  - **CacheMissCount**: efficiency of the cache
+  - **IntegrationLatency** (backend latency, latency from lambda)
+  - **latency** (overall : backenf + gateway itself)
+  - **4XXError** (client-side) 
+    - `429` throttleError
+  - **5XXError** (server-side)
+    - 504 server timeout
+    - 503 service not available
+    - 502 bad gateway
 
 ---
-## 5. Monitor
-- `CW:logs` : enable/disable
-    - error only
-    - error + info
-    - full req + response log
-- `CW:x-rays` : enable/disable
-- `CW:metric` : enable/disable
+# B. API key 
+- **purpose**:
+  - authentication 
+  - usage tracking
+- create **API keys** to identify API clients
+    - Ex: WBjHxNtoAb4WPKBC7cGm64CBibIb24b4jt8jJHo9
+    - httpheader: **x-api-key**=<your-api-key>
+
+---
+# C. usage plan
+- create plan at **API key level**.
+- eg: set:
+  - **Throttling limits** 
+  - **Quotas limits** is the overall number of maximum requests
+  - associate **stages and methods**
+
+---
+# D. web socket

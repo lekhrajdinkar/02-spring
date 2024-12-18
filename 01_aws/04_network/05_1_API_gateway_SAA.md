@@ -99,30 +99,39 @@
 
 ---
 ## B. Security
-### Authentication/Authorization
+- **API keys** for authentication.
+
+### 1. Authentication/Authorization
 - for global user: 
   - integrate with **cognito**
 - internal security
   - **IAM role**
   - custom Authorizer using **Lambda**
   
-### SSL
+### 2 SSL
 - export certificate to **ACM**
 - create **R53** entry (cname/alias)
   - integrated with ACM
   - keep certificate it `us-east-1` for edge-optimized endpoint.
   - certificate with backend server domain name.
 
-### CORS
-- soon
+### 3 CORS
+- CORS can be enabled on api gateway
+- eg:
+  - ![img.png](img.png)
 
-### **`throttle` setting** for stage
+### 4 **`throttle` setting** for stage
 - set **rate** (no.of req per seconds make be made)
+  - `10000 rps `across all APIs :point_left:
+  - set limit for stage. :point_left:
+  - else one api/stage will consume all and impact other
 - set **burst** (no of concurrent request)
 
-### **`firewall` setting** for stage
+### 5 **`firewall` setting** for stage
 - set WAF
 - set certificate
+
+### 6. create usage plan
 
 ---
 ## C. pricing
