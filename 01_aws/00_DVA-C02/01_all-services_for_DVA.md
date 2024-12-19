@@ -188,14 +188,14 @@
 - [05_1_API_gateway_SAA.md](../04_network/05_1_API_gateway_SAA.md)
 - [05_2_API_gateway_DVA.md](../04_network/05_2_API_gateway_DVA.md)
 
-## Section 24 : `CI/CD` :greenSPRIN_circle:
+## Section 24 : `CI/CD` :green_circle:
 
-## Section 25 : `SAM :Serverless Application Model` :yellow_circle:
+## Section 25 : `SAM :Serverless Application Model` :green_circle:
 - [00_serverless_pardigm.md](../00_kick_off/00_serverless_pardigm.md)
 - [00_start.md](25_SAM/00_start.md)
 - [project](25_SAM/project)
 
-## Section 26 : `CDK` :yellow_circle:
+## Section 26 : `CDK` :green_circle:
 
 ## Section 27 : `Cognito` :yellow_circle:
 - [02_1_cognito_SAA.md](../06_Security/02_1_cognito_SAA.md)

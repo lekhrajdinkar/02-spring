@@ -153,6 +153,7 @@ Resources:
 - Locally build, test, and debug your serverless applications that are defined using AWS SAM templates
 
 - **sam local start-lambda** + **sam local invoke**
+  - sam local invoke –t MyCDKStack.template.json myFunction-1
 - **sam local start-api**
 - **sam local generate-event**
 
