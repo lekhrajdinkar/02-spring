@@ -30,7 +30,7 @@
 
 ---
 ## C. Hands ON
-### 1. Deploy lambda function with API-gateway
+### 1. Deploy lambda function-v1 with API-gateway
 - added **env var** from template
 - added **polices** from template
 ![img_2.png](../../99_img/dva/sam/01/img_2.png)
@@ -66,6 +66,11 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+            StageName: prod
+            Cors:
+              AllowMethods: "'GET,POST'"
+              AllowHeaders: "'Content-Type'"
+              AllowOrigin: "'*'"
 ```
 ---
 
@@ -87,3 +92,57 @@ Resources:
 ![img.png](../../99_img/dva/sam/01/img_4.png)
 ---
 
+### 3. Deploy lambda function-v2 using codeDeploy(blue/green)
+- Steps:
+  - update template:
+    - add **DeploymentPreference** - `Canary10Percent10Minutes`
+    - sam will codeDeploy :point_left:
+  - update lambda code
+    - **sam build**
+    - **sam deploy -guided**
+  
+- **codeDeploy** : [00_start.md](../24_CI_CD/00_start.md)
+  - deployment type
+    - **in-place**
+    - **blue/green** :point_left:
+      - **traffic routing**:
+        - `canary`
+        - `linear`
+        - `allAtOnce`
+      - **traffic hook** (optional)
+        - pre-traffic hook - lambda-hook-fn-1 
+        - post-traffic hook - lambda-hook-fn-2
+- Also, configure **cloudwatch alarm** for deploymnet failure
+
+![img.png](../../99_img/dva/sam/02/img.png)
+
+```yaml
+  # update lamda
+  AutoPublishAlias: live  
+  DeploymentPreference:
+      Type: Canary10Percent10Minutes
+      Alarms:
+        - !Ref DeploymentFailureAlarm
+
+  # Another resource
+  DeploymentFailureAlarm:
+    Type: AWS::CloudWatch::Alarm
+    Properties:
+      AlarmName: DeploymentFailureAlarm
+      MetricName: Errors
+      Namespace: AWS/Lambda
+      Statistic: Sum
+      Period: 60
+      EvaluationPeriods: 1
+      Threshold: 1
+      ComparisonOperator: GreaterThanOrEqualToThreshold
+      Dimensions:
+        - Name: FunctionName
+          Value: !Ref HelloWorldFunction
+        - Name: Resource
+          Value: !Join ["", [!Ref HelloWorldFunction, ":", "live"]] 
+```
+
+![img_1.png](../../99_img/dva/sam/02/img_1.png)
+
+![img_2.png](../../99_img/dva/sam/02/img_2.png)
