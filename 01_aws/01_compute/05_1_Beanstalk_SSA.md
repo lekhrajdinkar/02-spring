@@ -1,3 +1,5 @@
+- https://chatgpt.com/c/6763df4d-2998-800d-aea7-4430e4d96fc5
+--- 
 # Elastic Beanstalk 
 ## A. Common **Web** Architecture
 ![img.png](img.png)
@@ -14,7 +16,9 @@
     
   - **Deploying Code**
     - into multiple env, 
-    - compute: EC2/ECS/Lambda
+    - compute: 
+      - primarly EC2 
+      - ECS under the hood for container App
     
 - Basically from central place, dealing with all these services, being used commonly for web development. :point_left:
   - **developer focus on code**

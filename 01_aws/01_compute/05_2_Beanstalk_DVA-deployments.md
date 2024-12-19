@@ -1,5 +1,5 @@
-# A. Elastic Beanstalk : deployments
-
+# A. Elastic Beanstalk : `deployments`
+- mode of deployments:
 ## 1. All at once 
 - deploy all in one go 
 - fastest
@@ -20,3 +20,18 @@
 ## 4 Blue Green
 - create a new environment and switch over when ready
 - Traffic Splitting: canary testing – send a small % of traffic to new deployment
+
+---
+# B. Elastic Beanstalk : `CLI`
+
+---
+# C. Elastic Beanstalk : `lifecycle`
+
+---
+# D. Elastic Beanstalk : `Extension`
+
+---
+# E. Elastic Beanstalk : `cloning`
+
+---
+# F. Elastic Beanstalk : `Migration`
