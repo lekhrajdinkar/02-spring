@@ -188,10 +188,12 @@
 - [05_1_API_gateway_SAA.md](../04_network/05_1_API_gateway_SAA.md)
 - [05_2_API_gateway_DVA.md](../04_network/05_2_API_gateway_DVA.md)
 
-## Section 24 : `CI/CD` :yellow_circle:
+## Section 24 : `CI/CD` :greenSPRIN_circle:
 
 ## Section 25 : `SAM :Serverless Application Model` :yellow_circle:
 - [00_serverless_pardigm.md](../00_kick_off/00_serverless_pardigm.md)
+- [00_start.md](25_SAM/00_start.md)
+- [project](25_SAM/project)
 
 ## Section 26 : `CDK` :yellow_circle:
 
