@@ -20,7 +20,7 @@
   - `--template-file` 
   - `--output-template-file` 
   - `--s3-bucket`
-    - lambda code will be uploaded to s3
+    - zip and upload (template and code) to s3
 
 - **sam deploy**  : deploy cf stack
   - use **CodeDeploy** to deploy Lambda functions
@@ -30,5 +30,60 @@
 
 ---
 ## C. Hands ON
-### 1. Deploy lambda function
+### 1. Deploy lambda function with API-gateway
+- added **env var** from template
+- added **polices** from template
 ![img_2.png](../../99_img/dva/sam/01/img_2.png)
+```yaml
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: A simple AWS SAM example
+
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: app.lambda_handler
+      Runtime: python3.11
+      CodeUri: lambda/
+      
+      # Environmnet var
+      Environment:
+        Variables:
+          # TABLE_NAME: HelloWorldTable
+          TABLE_NAME: !Ref HelloWorldTable
+          REGION_NAME: !Ref AWS::Region
+      
+      # polices to perform CRUD on table    
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref HelloWorldTable
+      
+      # expose as API gateway      
+      Events:
+        HelloWorldApi:
+          Type: AWS::Serverless::Api
+          Properties:
+            Path: /hello
+            Method: get
+```
+---
+
+### 2. add DynamoDB table
+```yaml
+
+Resources:  
+  HelloWorldTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: HelloWorldTable
+      PrimaryKey:
+        Name: id
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+```
+![img.png](../../99_img/dva/sam/01/img_4.png)
+---
+

@@ -9,9 +9,33 @@ Resources:
       Handler: app.lambda_handler
       Runtime: python3.11
       CodeUri: lambda/
+      Environment:
+        Variables:
+          # TABLE_NAME: HelloWorldTable
+          TABLE_NAME: !Ref HelloWorldTable
+          REGION_NAME: !Ref AWS::Region
+
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref HelloWorldTable
+
       Events:
         HelloWorldApi:
           Type: Api
           Properties:
             Path: /hello
             Method: get
+
+  HelloWorldTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: HelloWorldTable
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
