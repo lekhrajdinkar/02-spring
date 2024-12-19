@@ -6,9 +6,9 @@
 - Managed services, deals with:
   - **Managing infrastructure**
     - databases, `RDS`
-    - load balancers, `ELB`
+    - load balancers, `ELB` + networking
     - scaling concerns, `ASG`
-    - App health monitoring
+    - Monitoring
     - ...
     - note:create cloudFormation template bts for infra.
     
@@ -25,48 +25,57 @@
 - but pay for underlying infra.
 
 ## D. Elastic Beanstalk : `Application`
-### **configuration**
-- deployment Mode: single instance | high Availability
-- ...
+### D.1 **configuration**
+- **deployment Mode**: 
+  - **single instance** (with/without using spot)
+  - **High availability** (with/without using spot+od)
+  - ![img_1.png](../99_img/compute/img_1.png)
+  
+- **Networking**
+- **Database**
+- **Monitoring**
 
-### **Application version** 
-- code,v1
-- code, v2
-- ...
+### D.2 **Application version** 
+- define **platform** - language and runtime
+- upload code
+  - code, v1
+  - code, v2
+  - ...
 
-### **Environment/s** 
+### D.3 **Environment/s** 
 - create multiple `dev, prod, qa`
 - it represents infra which are running our application version.
 - Type/tier:
   - **web-server**  Environment
     - can send traffic to worker
   - **worker** Environment
+    - for long-running task,jobs,scheduledJobs
   - ![img.png](../99_img/compute/img.png)
       
----    
-## E. Deployment Modes
-![img_1.png](../99_img/compute/img_1.png)
-
 ---
 ## Z. Hands on
+```yaml
 - Create Application
-  - create environment
-    - choose tier : web* or worker
-  - choose platform : language,runtime,etc - java,etc
-  - code : upload
-  - Configuration preset
-    - deployment mode - single, high ava
-    - custom
-      - ...
-  - role
-    - add pre created policies : 
+  - create environment : dev
+    - choose type/tier: web | worker(job,long-running-task)
+  - choose platform : language, runtime,etc 
+  - code: upload it.
+  - deployment mode:
+    - single EC2 with ASG 
+    - high availabilty - multiple EC2 with ASG
+  - iam role for permission:
       - `AWSElasticBeanStalkWebTier`,
       - `AWSElasticBeanStalkWorkerTier`, 
       - `AWSElasticBeanStalkMultiContainerDocker`
       - ...
-      
-- it creates `cloudFormation template`
-  - view the template in appl-composer.
+  - Skipped and using default
+    - Networking
+    - Database
+    - Monitoring
+  
+# === DONE === 
+  
+- check cloudFormation stack (composer UI)
 
 - get domain url and use it.
 - upload new code, seamlessly.
@@ -74,3 +83,5 @@
 - Check `configuration` link on left
   - show all the configs for env
   - edit them
+
+```
