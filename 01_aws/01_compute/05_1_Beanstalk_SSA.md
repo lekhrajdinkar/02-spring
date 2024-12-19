@@ -25,24 +25,7 @@
 - but pay for underlying infra.
 
 ## D. Elastic Beanstalk : `Application`
-### D.1 **configuration**
-- **deployment Mode**: 
-  - **single instance** (with/without using spot)
-  - **High availability** (with/without using spot+od)
-  - ![img_1.png](../99_img/compute/img_1.png)
-  
-- **Networking**
-- **Database**
-- **Monitoring**
-
-### D.2 **Application version** 
-- define **platform** - language and runtime
-- upload code
-  - code, v1
-  - code, v2
-  - ...
-
-### D.3 **Environment/s** 
+### D.1 **Environment/s**
 - create multiple `dev, prod, qa`
 - it represents infra which are running our application version.
 - Type/tier:
@@ -51,6 +34,42 @@
   - **worker** Environment
     - for long-running task,jobs,scheduledJobs
   - ![img.png](../99_img/compute/img.png)
+  
+### D.2 **configuration (for env)**
+- **deployment** 
+  - **deployment mode**:
+    - [05_2_Beanstalk_DVA-deployments.md](05_2_Beanstalk_DVA-deployments.md)
+    
+  - **availability**:
+    - **single instance** (with/without using spot)
+    - **High availability** (with/without using spot+od)
+    - ![img_1.png](../99_img/compute/img_1.png)
+  
+- **Networking**
+  - choose VPC and subnet
+  - public IP for ec2.
+    - `enable` for single ec2
+    - `disable` for multiple, since we wil ALB to expose.
+  - ELB 
+    - can be shared with all env, to save some cost. :point_left:
+    - security groups
+  - ASG - min, max, trigger(metric,alarm)
+  
+- **Database**
+  - DB will get link with beanstalk env lifecycle.
+  - if env is deleted, database will be deleted too. :point_left:
+  
+- **Monitoring**
+  - X-ray
+  - logs
+  - metrics
+
+### D.3 **Application version** 
+- define **platform** - language and runtime
+- upload code
+  - code, v1
+  - code, v2
+  - ...
       
 ---
 ## Z. Hands on
