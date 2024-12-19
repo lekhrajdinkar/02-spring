@@ -3,70 +3,7 @@
 - https://aws.amazon.com/blogs/
 - https://www.udemy.com/course/aws-certified-developer-associate-dva-c01
 
----
-## B. Services
-
 ![img.png](../99_img/dva/00/img.png)
-
-### Compute
-- Amazon EC2
-- AWS Lambda
-- AWS Elastic Beanstalk
-- Amazon ECS
-- AWS Fargate
-- Amazon Auto Scaling
-
-### Containers
-- Amazon ECS
-- Amazon ECR
-- AWS Fargate
-
-### Storage
-- Amazon S3
-- Amazon Elastic File System (EFS)
-- Amazon ElastiCache
-
-### Databases
-- Amazon RDS
-- Amazon DynamoDB
-- Amazon ElastiCache
-
-### Networking & Content Delivery
-- Elastic Load Balancing
-- Amazon CloudFront
-- Amazon Route 53
-
-### Developer Tools
-- AWS CodeCommit
-- AWS CodeDeploy
-- AWS CodeBuild
-- AWS CodePipeline
-
-### Monitoring & Observability
-- Amazon CloudWatch
-- AWS X-Ray
-
-### Security, Identity, and Compliance
-- AWS Identity and Access Management (IAM)
-- AWS Key Management Service (KMS)
-
-### Management & Governance
-- AWS CloudFormation
-- AWS CloudTrail
-- Amazon EC2 Systems Manager
-
-### Application Integration
-- Amazon Simple Queue Service (SQS)
-- Amazon Simple Notification Service (SNS)
-- Amazon Simple Email Service (SES)
-- Amazon API Gateway
-- AWS Step Functions
-
-### Analytics
-- Amazon Kinesis
-
-### Customer Engagement
-- Amazon Cognito
 
 ---
 # 2. Progress :books:
@@ -221,6 +158,68 @@
 - more:
   - [98_SAA_discussion](../98_SAA_discussion)
   - [practice-test-SAA](../practice-test)
+
+---
+## services
+### Compute
+- Amazon EC2
+- AWS Lambda
+- AWS Elastic Beanstalk
+- Amazon ECS
+- AWS Fargate
+- Amazon Auto Scaling
+
+### Containers
+- Amazon ECS
+- Amazon ECR
+- AWS Fargate
+
+### Storage
+- Amazon S3
+- Amazon Elastic File System (EFS)
+- Amazon ElastiCache
+
+### Databases
+- Amazon RDS
+- Amazon DynamoDB
+- Amazon ElastiCache
+
+### Networking & Content Delivery
+- Elastic Load Balancing
+- Amazon CloudFront
+- Amazon Route 53
+
+### Developer Tools
+- AWS CodeCommit
+- AWS CodeDeploy
+- AWS CodeBuild
+- AWS CodePipeline
+
+### Monitoring & Observability
+- Amazon CloudWatch
+- AWS X-Ray
+
+### Security, Identity, and Compliance
+- AWS Identity and Access Management (IAM)
+- AWS Key Management Service (KMS)
+
+### Management & Governance
+- AWS CloudFormation
+- AWS CloudTrail
+- Amazon EC2 Systems Manager
+
+### Application Integration
+- Amazon Simple Queue Service (SQS)
+- Amazon Simple Notification Service (SNS)
+- Amazon Simple Email Service (SES)
+- Amazon API Gateway
+- AWS Step Functions
+
+### Analytics
+- Amazon Kinesis
+
+### Customer Engagement
+- Amazon Cognito
 
 
 
