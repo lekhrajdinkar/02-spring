@@ -92,17 +92,21 @@ Resources:
 ![img.png](../../99_img/dva/sam/01/img_4.png)
 ---
 
-### 3. Deploy lambda function-v2 using codeDeploy(blue/green)
-- Steps:
-  - update template:
-    - add **DeploymentPreference** - `Canary10Percent10Minutes`
-    - sam will use codeDeploy :point_left:
-  - update lambda code, then deploy again with sam
-    - **sam build**
-    - **sam deploy -guided**
+### 3. Deploy lambda function-v2 using `codeDeploy`(blue/green) :point_left:
+- update lambda code
+- update template
+  ```yaml
+  AutoPublishAlias: live  
+  DeploymentPreference:
+      Type: Canary10Percent10Minutes # sam will use codeDeploy
+      Alarms:
+        - !Ref DeploymentFailureAlarm # configure **cloudwatch alarm**
+  ```
+- **sam build**
+- **sam deploy -guided**
   
-- **codeDeploy** : [00_start.md](../24_CI_CD/00_start.md)
-  - deployment type
+- sam will automatically update CF template with **codeDeploy**.
+  - deployment type (quick revision again) [00_start.md](../24_CI_CD/00_start.md)
     - **in-place**
     - **blue/green** :point_left:
       - **traffic routing**:
@@ -112,7 +116,6 @@ Resources:
       - **traffic hook** (optional)
         - pre-traffic hook - lambda-hook-fn-1 
         - post-traffic hook - lambda-hook-fn-2
-- Also, configure **cloudwatch alarm** for deploymnet failure
 
 ![img.png](../../99_img/dva/sam/02/img.png)
 
@@ -149,14 +152,16 @@ Resources:
 
 ---
 ## D. sam **`local`** 
+- install **AWSToolkit** as well
 - Provides a lambda-like execution environment locally
 - Locally build, test, and debug your serverless applications that are defined using AWS SAM templates
 
 - **sam local start-lambda** + **sam local invoke**
-  - sam local invoke –t MyCDKStack.template.json myFunction-1
+  - `sam local invoke    –t MyCDKStack.template.json         myFunction-1`
 - **sam local start-api**
 - **sam local generate-event**
 
 ---
 ## D. sam **`environment`** 
+
 ![img.png](../../99_img/dva/sam/02/img99.png)

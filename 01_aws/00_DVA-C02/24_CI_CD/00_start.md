@@ -87,10 +87,10 @@
 - appsec.yaml ?
       
 ### hands on (EC2)
-- [here](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/11851340#overview)
+- [udemy reference video](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/11851340#overview)
 
 ### hands on (lambda)
-- [here](https://github.com/lekhrajdinkar/02-backend-java-spring/blob/main/01_aws/00_DVA-C02/25_SAM/00_start.md#c-hands-on)
+- [25_SAM/00_start#c-hands-on](./../25_SAM/00_start.md#3-deploy-lambda-function-v2-using-codedeploybluegreen)
 ---
 ## 3. AWS CodeStar 
 – manage software development activities in one place
