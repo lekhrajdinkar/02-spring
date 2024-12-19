@@ -12,8 +12,9 @@
   - practice paper: https://www.udemy.com/course/aws-certified-developer-associate-practice-tests-dva-c01/
 
 ## Section 4 `IAM` :green_circle:
-- [01_IAM-1.md](../06_Security/01_IAM) 
-- [01_IAM-2.md](../06_Security/01_SSO+DirectoryService)
+- [01_IAM.md](../06_Security/01_IAM.md)
+- Directory service:
+  - [01_SSO+DirectoryService.md](../06_Security/01_SSO%2BDirectoryService.md)
 
 ## Section 5 `EC2` :green_circle:
 - [01_EC2.md](../01_compute/01_EC2.md)
@@ -53,7 +54,7 @@
     VPC Cheat Sheet & Closing Comments
     Three Tier Architecture
 ```
-## Section 12 - `AWS CLI, SDK, IAM Roles & Policies` :green_circle:
+## Section 12 - `AWS CLI, SDK` :green_circle:
 - [02_developer-things.md](02_developer-things.md)
 ```
     AWS EC2 Instance Metadata
@@ -126,6 +127,7 @@
 - [05_2_API_gateway_DVA.md](../04_network/05_2_API_gateway_DVA.md)
 
 ## Section 24 : `CI/CD` :green_circle:
+- [24_CI_CD](24_CI_CD)
 
 ## Section 25 : `SAM :Serverless Application Model` :green_circle:
 - [00_serverless_pardigm.md](../00_kick_off/00_serverless_pardigm.md)
@@ -133,6 +135,7 @@
 - [project](25_SAM/project)
 
 ## Section 26 : `CDK` :green_circle:
+- [26_CDK](26_CDK)
 
 ## Section 27 : `Cognito` :yellow_circle:
 - [02_1_cognito_SAA.md](../06_Security/02_1_cognito_SAA.md)

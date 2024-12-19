@@ -1,32 +1,36 @@
 # Elastic Beanstalk 
-- Most web apps have the same architecture (ALB + ASG), etc
-- All the developers want is for their code to run, across different applications and environments.
-- and, don't want to deal with :
-  - Managing infrastructure
-  - Deploying Code
-  - Configuring all the databases, load balancers, etc
-  - Scaling concerns.
-- Managed services, uses all the components - EC2, ASG, ELB, RDS, etc
-- free, but pay for underlying infra.
+## A. Common **Web** Architecture
+![img.png](img.png)
 
-## Components:
-- `Application` : appl version + env + configuration
-- `configuration`
-- `Application version` : code/s
-- `Environment`/s :  dev, prod, qa
-  - AWS resource running application.
-  - `Tier`
-    - `web server env`
-    - `worker env`
-    - ![img.png](../99_img/compute/img.png)  
-- Notice : same AWS acct, all env.
+## B. Intro
+- Managed services, deals with:
+  - **Managing infrastructure**
+    - databases
+    - load balancers
+    - ASG
+  - **Deploying Code**
+  
+## C. pricing
+- free 
+- but pay for underlying infra.
 
+## D. Components:
+- **Application** 
+  - **configuration**
+  - **Application version** 
+  - **Environment/s** :  `dev, prod, qa`
+    - AWS resource running application.
+    - Tier
+      - web server env
+      - worker env
+      - ![img.png](../99_img/compute/img.png)  
+      
 ---    
-## Deployment Modes
+## E. Deployment Modes
 ![img_1.png](../99_img/compute/img_1.png)
 
 ---
-## demo
+## hands on
 - Create Application
   - create environmnet
     - choose tier : web* or worker
