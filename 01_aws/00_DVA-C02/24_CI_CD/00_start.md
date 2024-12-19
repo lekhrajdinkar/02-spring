@@ -90,7 +90,7 @@
 - [here](https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/lecture/11851340#overview)
 
 ### hands on (lambda)
-- soon
+- [here](https://github.com/lekhrajdinkar/02-backend-java-spring/blob/main/01_aws/00_DVA-C02/25_SAM/00_start.md#c-hands-on)
 ---
 ## 3. AWS CodeStar 
 – manage software development activities in one place
