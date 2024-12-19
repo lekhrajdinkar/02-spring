@@ -2,7 +2,7 @@
 - https://github.com/aws/aws-sam-cli-app-templates
 ---
 # SAM (Serverless Application Model)
-- serverless : Lambda, API Gateway, DynamoDB, step function
+- serverless : Lambda, API Gateway, DynamoDB, step function, eventbridge,CW, etc
 
 ## A. Intro
 ![img.png](../../99_img/dva/sam/01/img.png)
@@ -96,8 +96,8 @@ Resources:
 - Steps:
   - update template:
     - add **DeploymentPreference** - `Canary10Percent10Minutes`
-    - sam will codeDeploy :point_left:
-  - update lambda code
+    - sam will use codeDeploy :point_left:
+  - update lambda code, then deploy again with sam
     - **sam build**
     - **sam deploy -guided**
   
@@ -146,3 +146,16 @@ Resources:
 ![img_1.png](../../99_img/dva/sam/02/img_1.png)
 
 ![img_2.png](../../99_img/dva/sam/02/img_2.png)
+
+---
+## D. sam **`local`** 
+- Provides a lambda-like execution environment locally
+- Locally build, test, and debug your serverless applications that are defined using AWS SAM templates
+
+- **sam local start-lambda** + **sam local invoke**
+- **sam local start-api**
+- **sam local generate-event**
+
+---
+## D. sam **`environment`** 
+![img.png](../../99_img/dva/sam/02/img99.png)
